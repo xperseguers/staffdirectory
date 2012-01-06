@@ -1,0 +1,26 @@
+plugin.tx_staffdirectory {
+		# comma-separated list of storage folders
+	pidList =
+
+		# 0=selected page / 1-4=number of levels / 250=infinite
+	recursive = 1
+
+		# uid of the detail page for a staff
+	targets.staff =
+
+		# uid of the detail page for a person
+	targets.person =
+
+	templates {
+		list      = EXT:staffdirectory/Resources/Private/Templates/Pi1/List.html
+		staff     = EXT:staffdirectory/Resources/Private/Templates/Pi1/Staff.html
+		person    = EXT:staffdirectory/Resources/Private/Templates/Pi1/Person.html
+		directory = EXT:staffdirectory/Resources/Private/Templates/Pi1/Directory.html
+	}
+
+	staff_member.photo.width = 90c
+	staff_member.photo.height = 124c
+
+	person_member.photo.width = 179c
+	person_member.photo.height = 247c
+}

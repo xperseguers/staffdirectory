@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.sheet_general</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<displayMode>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.displayMode</label>
+							<onChange>reload</onChange>
+							<config>
+								<type>select</type>
+								<items>
+									<numIndex index="0" type="array">
+										<numIndex index="0"></numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.displayMode.LIST</numIndex>
+										<numIndex index="1">LIST</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.displayMode.STAFF</numIndex>
+										<numIndex index="1">STAFF</numIndex>
+									</numIndex>
+									<numIndex index="3" type="array">
+										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.displayMode.PERSON</numIndex>
+										<numIndex index="1">PERSON</numIndex>
+									</numIndex>
+									<numIndex index="4" type="array">
+										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.displayMode.DIRECTORY</numIndex>
+										<numIndex index="1">DIRECTORY</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</displayMode>
+					<staffs>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.staffs</label>
+							<displayCond><![CDATA[FIELD:displayMode:!=:PERSON]]></displayCond>
+							<config>
+								<type>select</type>
+								<foreign_table>tx_staffdirectory_staffs</foreign_table>
+								<foreign_table_where>ORDER BY tx_staffdirectory_staffs.staff_name</foreign_table_where>
+								<size>8</size>
+								<maxitems>99</maxitems>
+								<multiple>0</multiple>
+							</config>
+						</TCEforms>
+					</staffs>
+					<person>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.person</label>
+							<displayCond><![CDATA[FIELD:displayMode:=:PERSON]]></displayCond>
+							<config>
+								<type>select</type>
+								<items>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.displayMode.PERSON.dynamic</numIndex>
+										<numIndex index="1">0</numIndex>
+									</numIndex>
+								</items>
+								<foreign_table>fe_users</foreign_table>
+								<foreign_table_where>ORDER BY fe_users.last_name</foreign_table_where>
+								<size>1</size>
+								<maxitems>1</maxitems>
+								<multiple>0</multiple>
+							</config>
+						</TCEforms>
+					</person>
+					<myTS>
+						<TCEforms>
+							<displayCond>HIDE_FOR_NON_ADMINS</displayCond>
+							<exclude>1</exclude>
+							<label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.tsconfig</label>
+							<config>
+								<type>text</type>
+								<cols>80</cols>
+								<rows>10</rows>
+							</config>
+						</TCEforms>
+					</myTS>
+				</el>
+			</ROOT>
+		</sDEF>
+	</sheets>
+</T3DataStructure>

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>STAFF template for extension 'staffdirectory'</title>
+	<meta name="svn-id" content="$Id$" />
+</head>
+<body>
+
+<!-- ###STAFF### [begin] -->
+
+<!--<h2>###NAME###</h2>-->
+
+###DESCRIPTION###
+
+<ol class="tx-staffdirectory-pi1-departments">
+	<!-- ###DEPARTMENT### [begin] -->
+	<li>
+		<h3>###NAME###</h3>
+		<!-- ###IF_DESCRIPTION### --><p>###DESCRIPTION###</p><!-- ###IF_DESCRIPTION### -->
+
+		<ol class="tx-staffdirectory-pi1-members">
+			<!-- ###MEMBER### [begin] -->
+			<li>
+				<div class="tx-staffdirectory-pi1-photo">###PHOTO###</div>
+				<div><!-- ###LINK_DETAILS### -->###FIRST_NAME### ###LAST_NAME###<!-- ###LINK_DETAILS### --></div>
+				<!-- ###IF_POSITION_FUNCTION### --><div>###POSITION_FUNCTION###</div><!-- ###IF_POSITION_FUNCTION### -->
+				<!-- ###IF_TELEPHONE### --><div>###TELEPHONE###</div><!-- ###IF_TELEPHONE### -->
+				<!-- ###IF_MOBILE_PHONE### --><div>###MOBILE_PHONE###</div><!-- ###IF_MOBILE_PHONE### -->
+				<!-- ###IF_EMAIL### --><div>###EMAIL###</div><!-- ###IF_EMAIL### -->
+				<div style="clear:left;"></div>
+			</li>
+			<!-- ###MEMBER### [end] -->
+		</ol>
+	</li>
+	<!-- ###DEPARTMENT### [end] -->
+</ol>
+
+<!-- ###IF_BACK### -->
+<div class="tx-staffdirectory-pi1-back">
+	<!-- ###LINK_BACK### -->###LABEL_BACK###<!-- ###LINK_BACK### -->
+</div>
+<!-- ###IF_BACK### -->
+
+<!-- ###STAFF### [end] -->
+
+</body>
+</html>
