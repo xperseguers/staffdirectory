@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>PERSON template for extension 'staffdirectory'</title>
+	<meta name="svn-id" content="$Id$" />
+</head>
+<body>
+
+<!-- ###PERSON### [begin] -->
+
+<div href="[foaf:Person]" rel="rdf:type" about="$foaf:Person$">
+	<h2><span property="foaf:givenName">###FIRST_NAME###</span> <span property="foaf:familyName">###LAST_NAME###</span></h2>
+
+	<div class="tx-staffdirectory-pi1-photo">###PHOTO###</div>
+
+	<div style="float:left;">
+		<div class="tx-staffdirectory-pi1-fieldLabel">###LABEL_MEMBER_STAFFS###</div>
+		<div class="tx-staffdirectory-pi1-fieldValue">
+			<ul class="tx-staffdirectory-pi1-staffs">
+				<!-- ###STAFF### [begin] -->
+				<li>
+					<!-- ###LINK_DETAILS### -->###NAME###<!-- ###LINK_DETAILS### -->
+				</li>
+				<!-- ###STAFF### [end] -->
+			</ul>
+		</div>
+
+		<h3 style="clear:left;">###LABEL_CONTACT###</h3>
+
+		<!-- ###IF_ADDRESS### -->
+		<div class="tx-staffdirectory-pi1-fieldLabel">###LABEL_MEMBER_ADDRESS###</div>
+		<div class="tx-staffdirectory-pi1-fieldValue">###ADDRESS###<br />###POSTAL_CODE### ###CITY###</div>
+		<!-- ###IF_ADDRESS### -->
+		<!-- ###IF_TELEPHONE### -->
+		<div class="tx-staffdirectory-pi1-fieldLabel">###LABEL_MEMBER_TELEPHONE###</div>
+		<div class="tx-staffdirectory-pi1-fieldValue" property="foaf:phone">###TELEPHONE###</div>
+		<!-- ###IF_TELEPHONE### -->
+		<!-- ###IF_MOBILE_PHONE### -->
+		<div class="tx-staffdirectory-pi1-fieldLabel">###LABEL_MEMBER_MOBILE_PHONE###</div>
+		<div class="tx-staffdirectory-pi1-fieldValue" property="foaf:phone">###MOBILE_PHONE###</div>
+		<!-- ###IF_MOBILE_PHONE### -->
+		<!-- ###IF_FAX### -->
+		<div class="tx-staffdirectory-pi1-fieldLabel">###LABEL_MEMBER_FAX###</div>
+		<div class="tx-staffdirectory-pi1-fieldValue">###FAX###</div>
+		<!-- ###IF_FAX### -->
+		<!-- ###IF_EMAIL### -->
+		<div class="tx-staffdirectory-pi1-fieldLabel">###LABEL_MEMBER_EMAIL###</div>
+		<div class="tx-staffdirectory-pi1-fieldValue">
+			###EMAIL###
+			<span style="display:none" property="foaf:mbox_sha1sum">###EMAIL_SHA1###</span>
+		</div>
+		<!-- ###IF_EMAIL### -->
+
+	</div>
+</div>
+
+<div style="clear:left;"></div>
+
+<!-- ###IF_BACK### -->
+<div class="tx-staffdirectory-pi1-back">
+	<!-- ###LINK_BACK### -->###LABEL_BACK###<!-- ###LINK_BACK### -->
+</div>
+<!-- ###IF_BACK### -->
+
+<!-- ###PERSON### [end] -->
+
+</body>
+</html>

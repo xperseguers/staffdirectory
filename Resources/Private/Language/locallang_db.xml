@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'staffdirectory'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tt_content.list_type_pi1">Staff Directory</label>
+			<label index="fe_users.tx_staffdirectory_mobilephone">Mobile Phone :</label>
+			<label index="fe_users.tx_staffdirectory_gender.I.0">Mr</label>
+			<label index="fe_users.tx_staffdirectory_gender.I.1">Ms</label>
+			<label index="fe_users.tx_staffdirectory_gender">Mr/Ms:</label>
+			<label index="tx_staffdirectory_staffs">Group</label>
+			<label index="tx_staffdirectory_staffs.staff_name">Group name:</label>
+			<label index="tx_staffdirectory_staffs.description">Description:</label>
+			<label index="tx_staffdirectory_staffs.departments">Departments:</label>
+			<label index="tx_staffdirectory_staffs.parent_staff">Parent Group:</label>
+			<label index="tx_staffdirectory_departments">Department</label>
+			<label index="tx_staffdirectory_departments.position_title">Title:</label>
+			<label index="tx_staffdirectory_departments.position_description">Description:</label>
+			<label index="tx_staffdirectory_departments.members">Members:</label>
+			<label index="tx_staffdirectory_members">Member</label>
+			<label index="tx_staffdirectory_members.position_function">Function:</label>
+			<label index="tx_staffdirectory_members.feuser_id">Person:</label>
+
+			<label index="tabs.departments">Departments</label>
+		</languageKey>
+		<languageKey index="fr" type="array">
+			<label index="tt_content.list_type_pi1">Répertoire d'équipes</label>
+			<label index="fe_users.tx_staffdirectory_mobilephone">Téléphone portable :</label>
+			<label index="fe_users.tx_staffdirectory_gender.I.0">M</label>
+			<label index="fe_users.tx_staffdirectory_gender.I.1">Mme</label>
+			<label index="fe_users.tx_staffdirectory_gender">M./Mme :</label>
+			<label index="tx_staffdirectory_staffs">Groupe</label>
+			<label index="tx_staffdirectory_staffs.staff_name">Nom du groupe :</label>
+			<label index="tx_staffdirectory_staffs.description">Description :</label>
+			<label index="tx_staffdirectory_staffs.departments">Départements :</label>
+			<label index="tx_staffdirectory_staffs.parent_staff">Groupe parent :</label>
+			<label index="tx_staffdirectory_departments">Département</label>
+			<label index="tx_staffdirectory_departments.position_title">Titre :</label>
+			<label index="tx_staffdirectory_departments.position_description">Description :</label>
+			<label index="tx_staffdirectory_departments.members">Membres :</label>
+			<label index="tx_staffdirectory_members">Membre</label>
+			<label index="tx_staffdirectory_members.position_function">Fonction :</label>
+			<label index="tx_staffdirectory_members.feuser_id">Personne :</label>
+
+			<label index="tabs.departments">Départements</label>
+		</languageKey>
+	</data>
+</T3locallang>
