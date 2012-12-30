@@ -8,8 +8,8 @@
 
 <!-- ###PERSON### [begin] -->
 
-<div href="[foaf:Person]" rel="rdf:type" about="$foaf:Person$">
-	<h2><span property="foaf:givenName">###FIRST_NAME###</span> <span property="foaf:familyName">###LAST_NAME###</span></h2>
+<div class="vcard" href="[foaf:Person]" rel="rdf:type" about="$foaf:Person$">
+	<h2 class="n"><span class="given-name" property="foaf:givenName">###FIRST_NAME###</span> <span class="family-name" property="foaf:familyName">###LAST_NAME###</span></h2>
 
 	<div class="tx-staffdirectory-pi1-photo">###PHOTO###</div>
 
@@ -29,15 +29,18 @@
 
 		<!-- ###IF_ADDRESS### -->
 		<div class="tx-staffdirectory-pi1-fieldLabel">###LABEL_MEMBER_ADDRESS###</div>
-		<div class="tx-staffdirectory-pi1-fieldValue">###ADDRESS###<br />###POSTAL_CODE### ###CITY###</div>
+		<div class="adr tx-staffdirectory-pi1-fieldValue">
+			<span class="street-address">###ADDRESS###</span><br />
+			<span class="postal-code">###POSTAL_CODE###</span> <span class="locality">###CITY###</span>
+		</div>
 		<!-- ###IF_ADDRESS### -->
 		<!-- ###IF_TELEPHONE### -->
 		<div class="tx-staffdirectory-pi1-fieldLabel">###LABEL_MEMBER_TELEPHONE###</div>
-		<div class="tx-staffdirectory-pi1-fieldValue" property="foaf:phone">###TELEPHONE###</div>
+		<div class="tel tx-staffdirectory-pi1-fieldValue" property="foaf:phone">###TELEPHONE###</div>
 		<!-- ###IF_TELEPHONE### -->
 		<!-- ###IF_MOBILE_PHONE### -->
 		<div class="tx-staffdirectory-pi1-fieldLabel">###LABEL_MEMBER_MOBILE_PHONE###</div>
-		<div class="tx-staffdirectory-pi1-fieldValue" property="foaf:phone">###MOBILE_PHONE###</div>
+		<div class="tel tx-staffdirectory-pi1-fieldValue" property="foaf:phone">###MOBILE_PHONE###</div>
 		<!-- ###IF_MOBILE_PHONE### -->
 		<!-- ###IF_FAX### -->
 		<div class="tx-staffdirectory-pi1-fieldLabel">###LABEL_MEMBER_FAX###</div>

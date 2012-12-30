@@ -21,12 +21,12 @@
 
 			<ol class="tx-staffdirectory-pi1-members">
 				<!-- ###MEMBER### [begin] -->
-				<li property="foaf:Person">
+				<li class="vcard" property="foaf:Person">
 					<div class="tx-staffdirectory-pi1-photo">###PHOTO###</div>
-					<div><!-- ###LINK_DETAILS### --><span property="foaf:givenName">###FIRST_NAME###</span> <span property="foaf:familyName">###LAST_NAME###</span><!-- ###LINK_DETAILS### --></div>
-					<!-- ###IF_POSITION_FUNCTION### --><div>###POSITION_FUNCTION###</div><!-- ###IF_POSITION_FUNCTION### -->
-					<!-- ###IF_TELEPHONE### --><div property="foaf:phone">###TELEPHONE###</div><!-- ###IF_TELEPHONE### -->
-					<!-- ###IF_MOBILE_PHONE### --><div property="foaf:phone">###MOBILE_PHONE###</div><!-- ###IF_MOBILE_PHONE### -->
+					<div class="n"><!-- ###LINK_DETAILS### --><span class="given-name" property="foaf:givenName">###FIRST_NAME###</span> <span class="family-name" property="foaf:familyName">###LAST_NAME###</span><!-- ###LINK_DETAILS### --></div>
+					<!-- ###IF_POSITION_FUNCTION### --><div class="role note">###POSITION_FUNCTION###</div><!-- ###IF_POSITION_FUNCTION### -->
+					<!-- ###IF_TELEPHONE### --><div class="tel" property="foaf:phone">###TELEPHONE###</div><!-- ###IF_TELEPHONE### -->
+					<!-- ###IF_MOBILE_PHONE### --><div class="tel" property="foaf:phone">###MOBILE_PHONE###</div><!-- ###IF_MOBILE_PHONE### -->
 					<!-- ###IF_EMAIL### --><div>
 						###EMAIL###
 						<span style="display:none" property="foaf:mbox_sha1sum">###EMAIL_SHA1###</span>

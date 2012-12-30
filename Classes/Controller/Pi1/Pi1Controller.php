@@ -160,6 +160,7 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 	 * STAFF action.
 	 *
 	 * @return void
+	 * @throws RuntimeException
 	 */
 	protected function staffAction() {
 		$uid = isset($this->parameters['staff']) ? $this->parameters['staff'] : 0;
@@ -199,6 +200,7 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 	 * PERSON action.
 	 *
 	 * @return void
+	 * @throws RuntimeException
 	 */
 	protected function personAction() {
 		/** @var $memberRepository Tx_StaffDirectory_Domain_Repository_MemberRepository */
@@ -291,6 +293,7 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 	 * @param tslib_cObj $contentObj
 	 * @param boolean $showBackLink
 	 * @return string
+	 * @throws RuntimeException
 	 */
 	protected function renderStaff($template, Tx_StaffDirectory_Domain_Model_Staff $staff = NULL, tslib_cObj $contentObj, $showBackLink = TRUE) {
 		if ($staff === NULL) {
@@ -336,6 +339,7 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 	 * @param Tx_StaffDirectory_Domain_Model_Department $department
 	 * @param tslib_cObj $contentObj
 	 * @return string
+	 * @throws RuntimeException
 	 */
 	protected function renderDepartment($context, $template, Tx_StaffDirectory_Domain_Model_Department $department = NULL, tslib_cObj $contentObj) {
 		if ($department === NULL) {
@@ -378,6 +382,7 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 	 * @param Tx_StaffDirectory_Domain_Model_Member $member
 	 * @param tslib_cObj $contentObj
 	 * @return string
+	 * @throws RuntimeException
 	 */
 	protected function renderMember($context, $template, Tx_StaffDirectory_Domain_Model_Staff $staff = NULL, Tx_StaffDirectory_Domain_Model_Member $member = NULL, tslib_cObj $contentObj) {
 		static $renderedPersons = array();
