@@ -54,13 +54,13 @@ plugin.tx_staffdirectory_pi1 {
 
 					0 = IMAGE
 					0 {
-						file = EXT:staffdirectory/Resources/Public/images/photoblank.gif
+						file = EXT:staffdirectory/Resources/Public/Images/photoblank.gif
 						file.width = {$plugin.tx_staffdirectory.staff_member.photo.width}
 						file.height = {$plugin.tx_staffdirectory.staff_member.photo.height}
 						altText.field = name
 					}
 					1 < .0
-					1.file = EXT:staffdirectory/Resources/Public/images/photoblank_f.gif
+					1.file = EXT:staffdirectory/Resources/Public/Images/photoblank_f.gif
 					default < .0
 				}
 			}
