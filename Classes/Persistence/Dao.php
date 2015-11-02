@@ -31,9 +31,8 @@
  * @author      Xavier Perseguers <xavier@causal.ch>
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
- */
-class Tx_StaffDirectory_Persistence_Dao implements t3lib_Singleton {
+  */
+class Tx_StaffDirectory_Persistence_Dao implements \TYPO3\CMS\Core\SingletonInterface {
 
 	/**
 	 * @var array
@@ -55,9 +54,9 @@ class Tx_StaffDirectory_Persistence_Dao implements t3lib_Singleton {
 	 * Default constructor.
 	 *
 	 * @param array $settings
-	 * @param \tslib_cObj $cObj
+	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj
 	 */
-	public function __construct(array $settings, tslib_cObj $cObj) {
+	public function __construct(array $settings, \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj) {
 		$this->settings = $settings;
 		$this->cObj = $cObj;
 		$this->t = array(
@@ -76,7 +75,7 @@ class Tx_StaffDirectory_Persistence_Dao implements t3lib_Singleton {
 	}
 
 	/**
-	 * @return tslib_cObj
+	 * @return \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
 	 */
 	public function getContentObject() {
 		return $this->cObj;
@@ -184,7 +183,7 @@ class Tx_StaffDirectory_Persistence_Dao implements t3lib_Singleton {
 				. $this->getFields(
 					$this->t['person'],
 					'uid AS person_id,name,first_name,last_name,image,address,zip,city,country,telephone,fax,email,www,'
-						. 'tx_staffdirectory_gender,tx_staffdirectory_mobilephone'
+						. 'tx_staffdirectory_gender,tx_staffdirectory_mobilephone,tx_staffdirectory_email2'
 				),
 			$this->t['member']
 				. ' INNER JOIN ' . $this->t['person'] . ' ON ' . $this->t['person'] . '.uid=' . $this->t['member'] . '.feuser_id',
@@ -218,7 +217,7 @@ class Tx_StaffDirectory_Persistence_Dao implements t3lib_Singleton {
 				. $this->getFields(
 					$this->t['person'],
 					'uid AS person_id,name,first_name,last_name,image,address,zip,city,country,telephone,fax,email,www,'
-						. 'tx_staffdirectory_gender,tx_staffdirectory_mobilephone'
+						. 'tx_staffdirectory_gender,tx_staffdirectory_mobilephone,tx_staffdirectory_email2'
 				),
 			$this->t['member']
 				. ' INNER JOIN ' . $this->t['person'] . ' ON ' . $this->t['person'] . '.uid=' . $this->t['member'] . '.feuser_id',
@@ -245,7 +244,7 @@ class Tx_StaffDirectory_Persistence_Dao implements t3lib_Singleton {
 				. $this->getFields(
 					$this->t['person'],
 					'uid AS person_id,name,first_name,last_name,image,address,zip,city,country,telephone,fax,email,www,'
-						. 'tx_staffdirectory_gender,tx_staffdirectory_mobilephone'
+						. 'tx_staffdirectory_gender,tx_staffdirectory_mobilephone,tx_staffdirectory_email2'
 				),
 			$this->t['member']
 				. ' INNER JOIN ' . $this->t['person'] . ' ON ' . $this->t['person'] . '.uid=' . $this->t['member'] . '.feuser_id',
@@ -271,7 +270,7 @@ class Tx_StaffDirectory_Persistence_Dao implements t3lib_Singleton {
 				. $this->getFields(
 					$this->t['person'],
 					'uid AS person_id,name,first_name,last_name,image,address,zip,city,country,telephone,fax,email,www,'
-						. 'tx_staffdirectory_gender,tx_staffdirectory_mobilephone'
+						. 'tx_staffdirectory_gender,tx_staffdirectory_mobilephone,tx_staffdirectory_email2'
 				),
 			$this->t['member']
 				. ' INNER JOIN ' . $this->t['person'] . ' ON ' . $this->t['person'] . '.uid=' . $this->t['member'] . '.feuser_id'
@@ -308,7 +307,7 @@ class Tx_StaffDirectory_Persistence_Dao implements t3lib_Singleton {
 				. $this->getFields(
 					$this->t['person'],
 					'uid AS person_id,name,first_name,last_name,image,address,zip,city,country,telephone,fax,email,www,'
-						. 'tx_staffdirectory_gender,tx_staffdirectory_mobilephone'
+						. 'tx_staffdirectory_gender,tx_staffdirectory_mobilephone,tx_staffdirectory_email2'
 				),
 			$this->t['member']
 				. ' INNER JOIN ' . $this->t['person'] . ' ON ' . $this->t['person'] . '.uid=' . $this->t['member'] . '.feuser_id',
@@ -358,10 +357,3 @@ class Tx_StaffDirectory_Persistence_Dao implements t3lib_Singleton {
 	}
 
 }
-
-
-if (defined('TYPO3_MODE') && isset($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/staffdirectory/Classes/Persistence/Dao.php'])) {
-	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/staffdirectory/Classes/Persistence/Dao.php']);
-}
-
-?>

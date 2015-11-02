@@ -137,7 +137,8 @@ class Tx_StaffDirectory_Domain_Repository_MemberRepository extends Tx_StaffDirec
 				->setEmail($data['email'])
 				->setWebsite($data['www'])
 				->setGender($data['tx_staffdirectory_gender'])
-				->setMobilePhone($data['tx_staffdirectory_mobilephone']);
+				->setMobilePhone($data['tx_staffdirectory_mobilephone'])
+				->setEmail2($data['tx_staffdirectory_email2']);
 			$ret[] = $member;
 		}
 		return $ret;

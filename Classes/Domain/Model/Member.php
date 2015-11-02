@@ -31,8 +31,7 @@
  * @author      Xavier Perseguers <xavier@causal.ch>
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
- */
+  */
 class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Model_AbstractEntity {
 
 	/**
@@ -99,6 +98,11 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 	 * @var string
 	 */
 	protected $email;
+
+	/**
+	 * @var string
+	 */
+	protected $email2;
 
 	/**
 	 * @var string
@@ -335,6 +339,22 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 	 */
 	public function setEmail($email) {
 		$this->email = $email;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getEmail2() {
+		return $this->email2;
+	}
+
+	/**
+	 * @param string $email2
+	 * @return $this
+	 */
+	public function setEmail2($email2) {
+		$this->email2 = $email2;
 		return $this;
 	}
 

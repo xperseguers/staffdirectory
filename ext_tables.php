@@ -1,7 +1,6 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-	die ('Access denied.');
-}
+defined('TYPO3_MODE') || die ('Access denied.');
+
 $tempColumns = array(
 	'tx_staffdirectory_mobilephone' => array(
 		'exclude' => 0,
@@ -26,15 +25,25 @@ $tempColumns = array(
 			'maxitems' => 1,
 		)
 	),
+	'tx_staffdirectory_email2' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.email',
+			'config' => array(
+					'type' => 'input',
+					'size' => '20',
+					'eval' => 'trim',
+					'max' => '255'
+			)
+	),
 );
 
 
-t3lib_div::loadTCA('fe_users');
-t3lib_extMgm::addTCAcolumns('fe_users', $tempColumns, 1);
-t3lib_extMgm::addToAllTCAtypes('fe_users','tx_staffdirectory_gender', '', 'before:address');
-t3lib_extMgm::addToAllTCAtypes('fe_users', 'tx_staffdirectory_mobilephone', '', 'after:telephone');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tempColumns, 1);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users','tx_staffdirectory_gender', '', 'before:address');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'tx_staffdirectory_mobilephone', '', 'after:telephone');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'tx_staffdirectory_email2', '', 'after:email');
 
-$TCA['tx_staffdirectory_staffs'] = array(
+$GLOBALS['TCA']['tx_staffdirectory_staffs'] = array(
 	'ctrl' => array(
 		'title' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_staffs',
 		'label' => 'staff_name',
@@ -52,12 +61,12 @@ $TCA['tx_staffdirectory_staffs'] = array(
 		'enablecolumns' => array(
 			'disabled' => 'hidden',
 		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Staff.php',
-		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_staffdirectory_staffs.gif',
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Staff.php',
+		'iconfile'          => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_staffdirectory_staffs.gif',
 	),
 );
 
-$TCA['tx_staffdirectory_departments'] = array(
+$GLOBALS['TCA']['tx_staffdirectory_departments'] = array(
 	'ctrl' => array(
 		'title' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_departments',
 		'label' => 'position_title',
@@ -80,12 +89,12 @@ $TCA['tx_staffdirectory_departments'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Department.php',
-		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_staffdirectory_departments.gif',
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Department.php',
+		'iconfile'          => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_staffdirectory_departments.gif',
 	),
 );
 
-$TCA['tx_staffdirectory_members'] = array(
+$GLOBALS['TCA']['tx_staffdirectory_members'] = array(
 	'ctrl' => array(
 		'title' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_members',
 		'label' => 'feuser_id',
@@ -105,25 +114,21 @@ $TCA['tx_staffdirectory_members'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Member.php',
-		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_staffdirectory_members.gif',
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Member.php',
+		'iconfile'          => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/icon_tx_staffdirectory_members.gif',
 	),
 );
 
-t3lib_div::loadTCA('tt_content');
-
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY . '_pi1'] = 'layout,select_key';
-t3lib_extMgm::addPlugin(array(
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY . '_pi1'] = 'layout,select_key';
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(array(
 	'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tt_content.list_type_pi1',
 	$_EXTKEY . '_pi1',
-	t3lib_extMgm::extRelPath($_EXTKEY) . 'ext_icon.gif'
+		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'ext_icon.gif'
 ), 'list_type');
 
 // Register the FlexForms
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY . '_pi1'] = 'pi_flexform';
-t3lib_extMgm::addPiFlexFormValue($_EXTKEY . '_pi1', 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/Pi1.xml');
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY . '_pi1'] = 'pi_flexform';
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY . '_pi1', 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/Pi1.xml');
 
 // Initialize static extension templates
-t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Staff Directory');
-
-?>
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Staff Directory');

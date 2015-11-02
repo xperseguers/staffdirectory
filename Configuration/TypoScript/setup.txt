@@ -75,6 +75,13 @@ plugin.tx_staffdirectory_pi1 {
 				typolink.parameter.field = email
 				typolink.parameter.wrap = mailto:|
 			}
+
+			email2 = TEXT
+			email2 {
+				field = email2
+				typolink.parameter.field = email2
+				typolink.parameter.wrap = mailto:|
+			}
 		}
 
 		person_member < .staff_member

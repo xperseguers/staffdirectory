@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 Xavier Perseguers <xavier@causal.ch>
+*  (c) 2011-2015 Xavier Perseguers <xavier@causal.ch>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -31,7 +31,6 @@
  * @author      Xavier Perseguers <xavier@causal.ch>
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
  */
 class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractController {
 
@@ -405,6 +404,7 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 		$subparts['###IF_FAX###'] = !$member->getFax() ? '' : array('', '');
 		$subparts['###IF_MOBILE_PHONE###'] = !$member->getMobilePhone() ? '' : array('', '');
 		$subparts['###IF_EMAIL###'] = !$member->getEmail() ? '' : array('', '');
+		$subparts['###IF_EMAIL2###'] = !$member->getEmail2() ? '' : array('', '');
 		$subparts['###IF_WEBSITE###'] = !$member->getWebsite() ? '' : array('', '');
 
 		if ($templateStaff) {

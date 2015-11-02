@@ -1,5 +1,5 @@
 <?php
-$extensionClassesPath = t3lib_extMgm::extPath('staffdirectory') . 'Classes/';
+$extensionClassesPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('staffdirectory') . 'Classes/';
 return array(
 	'tx_staffdirectory_controller_abstractcontroller' => $extensionClassesPath . 'Controller/AbstractController.php',
 	'tx_staffdirectory_persistence_dao' => $extensionClassesPath . 'Persistence/Dao.php',
@@ -14,4 +14,3 @@ return array(
 	'tx_staffdirectory_domain_repository_staffrepository' => $extensionClassesPath . 'Domain/Repository/StaffRepository.php',
 	'tx_staffdirectory_utility_typoscript' => $extensionClassesPath . 'Utility/TypoScript.php',
 );
-?>
