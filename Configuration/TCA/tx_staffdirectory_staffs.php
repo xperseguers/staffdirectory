@@ -1,10 +1,24 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die ('Access denied.');
-}
-
-$TCA['tx_staffdirectory_staffs'] = [
-    'ctrl' => $TCA['tx_staffdirectory_staffs']['ctrl'],
+return [
+    'ctrl' => [
+        'title' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_staffs',
+        'label' => 'staff_name',
+        'tstamp' => 'tstamp',
+        'crdate' => 'crdate',
+        'cruser_id' => 'cruser_id',
+        'dividers2tabs' => TRUE,
+        'versioningWS' => TRUE,
+        'origUid' => 't3_origuid',
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',
+        'default_sortby' => 'ORDER BY staff_name',
+        'delete' => 'deleted',
+        'enablecolumns' => [
+            'disabled' => 'hidden',
+        ],
+        'iconfile' => 'EXT:staffdirectory/Resources/Public/Icons/icon_tx_staffdirectory_staffs.gif',
+    ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,staff_name,description,departments,parent_staff'
     ],

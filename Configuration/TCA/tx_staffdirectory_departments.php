@@ -1,18 +1,37 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die ('Access denied.');
-}
-
-$TCA['tx_staffdirectory_members'] = [
-    'ctrl' => $TCA['tx_staffdirectory_members']['ctrl'],
+return [
+    'ctrl' => [
+        'title' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_departments',
+        'label' => 'position_title',
+        'tstamp' => 'tstamp',
+        'crdate' => 'crdate',
+        'cruser_id' => 'cruser_id',
+        'dividers2tabs' => TRUE,
+        'versioningWS' => TRUE,
+        'origUid' => 't3_origuid',
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',
+        'default_sortby' => 'ORDER BY staff, position_title',
+        // DO NOT EVER USE sortby here, moreover if different than IRRE's foreign_sortby
+        // http://forge.typo3.org/issues/29893
+        //'sortby' => 'staff',
+        'delete' => 'deleted',
+        'enablecolumns' => [
+            'disabled' => 'hidden',
+            'starttime' => 'starttime',
+            'endtime' => 'endtime',
+        ],
+        'iconfile' => 'EXT:staffdirectory/Resources/Public/Icons/icon_tx_staffdirectory_departments.gif',
+    ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,starttime,endtime,feuser_id,position_function'
+        'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,starttime,endtime,position_title,position_description,members'
     ],
     'types' => [
         '1' => [
             'showitem' => /*'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource,*/
                 '
-					feuser_id, position_function,
+					position_title, position_description, members,
 				--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,
 					hidden;;1, starttime, endtime'
         ],
@@ -51,8 +70,8 @@ $TCA['tx_staffdirectory_members'] = [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_staffdirectory_members',
-                'foreign_table_where' => 'AND tx_staffdirectory_members.pid=###CURRENT_PID### AND tx_staffdirectory_members.sys_language_uid IN (-1,0)',
+                'foreign_table' => 'tx_staffdirectory_departments',
+                'foreign_table_where' => 'AND tx_staffdirectory_departments.pid=###CURRENT_PID### AND tx_staffdirectory_departments.sys_language_uid IN (-1,0)',
             ]
         ],
         'l10n_diffsource' => [
@@ -96,55 +115,42 @@ $TCA['tx_staffdirectory_members'] = [
                 ]
             ]
         ],
-        'feuser_id' => [
+        'position_title' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_members.feuser_id',
-            'config' => [
-                'type' => 'select',
-                'items' => [
-                    ['', 0],
-                ],
-                'foreign_table' => 'fe_users',
-                'foreign_table_where' => 'AND fe_users.pid=###STORAGE_PID### ORDER BY fe_users.last_name, fe_users.first_name',
-                'size' => 1,
-                'minitems' => 0,
-                'maxitems' => 1,
-                'wizards' => [
-                    '_PADDING' => 2,
-                    '_VERTICAL' => 1,
-                    'add' => [
-                        'type' => 'script',
-                        'title' => 'Create new record',
-                        'icon' => 'add.gif',
-                        'params' => [
-                            'table' => 'fe_users',
-                            'pid' => '###CURRENT_PID###',
-                            'setValue' => 'prepend'
-                        ],
-                        'script' => 'wizard_add.php',
-                    ],
-                    'edit' => [
-                        'type' => 'popup',
-                        'title' => 'Edit',
-                        'script' => 'wizard_edit.php',
-                        'popup_onlyOpenIfSelected' => 1,
-                        'icon' => 'edit2.gif',
-                        'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-                    ],
-                ],
-            ]
-        ],
-        'position_function' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_members.position_function',
+            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_departments.position_title',
             'config' => [
                 'type' => 'input',
                 'size' => '30',
-                'max' => '255',
-                'eval' => 'trim',
+                'max' => '50',
+                'eval' => 'required,trim',
             ]
         ],
-        'department' => [
+        'position_description' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_departments.position_description',
+            'config' => [
+                'type' => 'text',
+                'cols' => '30',
+                'rows' => '2',
+            ]
+        ],
+        'members' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_departments.members',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_staffdirectory_members',
+                'foreign_field' => 'department',
+                'foreign_sortby' => 'sorting',
+                'maxitems' => 999,
+                'appearance' => [
+                    'collapse' => 0,
+                    'useSortable' => 1,
+                    'newRecordLinkPosition' => 'both',
+                ],
+            ]
+        ],
+        'staff' => [
             'config' => [
                 'type' => 'passthrough',
             ]
