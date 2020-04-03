@@ -22,6 +22,11 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+namespace Causal\Staffdirectory\Persistence;
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+
 /**
  * DAO.
  *
@@ -32,7 +37,7 @@
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
   */
-class Tx_StaffDirectory_Persistence_Dao implements \TYPO3\CMS\Core\SingletonInterface {
+class Dao implements \TYPO3\CMS\Core\SingletonInterface {
 
 	/**
 	 * @var array
@@ -40,7 +45,7 @@ class Tx_StaffDirectory_Persistence_Dao implements \TYPO3\CMS\Core\SingletonInte
 	protected $settings;
 
 	/**
-	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+	 * @var ContentObjectRenderer
 	 */
 	protected $cObj;
 
@@ -54,9 +59,9 @@ class Tx_StaffDirectory_Persistence_Dao implements \TYPO3\CMS\Core\SingletonInte
 	 * Default constructor.
 	 *
 	 * @param array $settings
-	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj
+	 * @param ContentObjectRenderer $cObj
 	 */
-	public function __construct(array $settings, \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj) {
+	public function __construct(array $settings, ContentObjectRenderer $cObj) {
 		$this->settings = $settings;
 		$this->cObj = $cObj;
 		$this->t = array(
@@ -75,7 +80,7 @@ class Tx_StaffDirectory_Persistence_Dao implements \TYPO3\CMS\Core\SingletonInte
 	}
 
 	/**
-	 * @return \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+	 * @return ContentObjectRenderer
 	 */
 	public function getContentObject() {
 		return $this->cObj;
@@ -330,7 +335,7 @@ class Tx_StaffDirectory_Persistence_Dao implements \TYPO3\CMS\Core\SingletonInte
 	 * @return string
 	 */
 	protected function getFields($table, $fields) {
-		$fields = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $fields);
+		$fields = GeneralUtility::trimExplode(',', $fields);
 		$fqFields = array();
 		foreach ($fields as $field) {
 			$fqFields[] = $table . '.' . $field;

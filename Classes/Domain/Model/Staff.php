@@ -22,6 +22,8 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+namespace Causal\Staffdirectory\Domain\Model;
+
 /**
  * Staff.
  *
@@ -31,9 +33,8 @@
  * @author      Xavier Perseguers <xavier@causal.ch>
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
  */
-class Tx_StaffDirectory_Domain_Model_Staff extends \Tx_StaffDirectory_Domain_Model_AbstractEntity {
+class Staff extends AbstractEntity {
 
 	/**
 	 * @var string
@@ -46,7 +47,7 @@ class Tx_StaffDirectory_Domain_Model_Staff extends \Tx_StaffDirectory_Domain_Mod
 	protected $description;
 
 	/**
-	 * @var \Tx_StaffDirectory_Domain_Model_Department[]
+	 * @var Department[]
 	 */
 	protected $departments;
 
@@ -69,7 +70,7 @@ class Tx_StaffDirectory_Domain_Model_Staff extends \Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $name
-	 * @return \Tx_StaffDirectory_Domain_Model_Staff
+	 * @return Staff
 	 */
 	public function setName($name) {
 		$this->name = $name;
@@ -85,7 +86,7 @@ class Tx_StaffDirectory_Domain_Model_Staff extends \Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $description
-	 * @return \Tx_StaffDirectory_Domain_Model_Staff
+	 * @return Staff
 	 */
 	public function setDescription($description) {
 		$this->description = $description;
@@ -93,20 +94,20 @@ class Tx_StaffDirectory_Domain_Model_Staff extends \Tx_StaffDirectory_Domain_Mod
 	}
 
 	/**
-	 * @return \Tx_StaffDirectory_Domain_Model_Department[]
+	 * @return Department[]
 	 */
 	public function getDepartments() {
 		if ($this->departments === NULL) {
-			/** @var \Tx_StaffDirectory_Domain_Repository_StaffRepository $staffRepository */
-			$staffDirectoryRepository = \Tx_StaffDirectory_Domain_Repository_Factory::getRepository('Staff');
+			/** @var \Causal\Staffdirectory\Domain\Repository\StaffRepository $staffRepository */
+			$staffDirectoryRepository = \Causal\Staffdirectory\Domain\Repository\Factory::getRepository('Staff');
 			$staffDirectoryRepository->loadDepartments($this);
 		}
 		return $this->departments;
 	}
 
 	/**
-	 * @param \Tx_StaffDirectory_Domain_Model_Department[] $departments
-	 * @return \Tx_StaffDirectory_Domain_Model_Staff
+	 * @param Department[] $departments
+	 * @return Staff
 	 */
 	public function setDepartments(array $departments) {
 		$this->departments = $departments;

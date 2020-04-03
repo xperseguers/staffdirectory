@@ -22,6 +22,12 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+namespace Causal\Staffdirectory\Domain\Repository;
+
+use Causal\Staffdirectory\Domain\Model\Department;
+use Causal\Staffdirectory\Domain\Model\Member;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Member repository.
  *
@@ -31,14 +37,13 @@
  * @author      Xavier Perseguers <xavier@causal.ch>
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
  */
-class Tx_StaffDirectory_Domain_Repository_MemberRepository extends \Tx_StaffDirectory_Domain_Repository_AbstractRepository {
+class MemberRepository extends AbstractRepository {
 
 	/**
 	 * Finds all members (without including duplicated persons).
 	 *
-	 * @return \Tx_StaffDirectory_Domain_Model_Member[]
+	 * @return Member[]
 	 */
 	public function findAll() {
 		$membersDao = $this->dao->getMembers();
@@ -49,7 +54,7 @@ class Tx_StaffDirectory_Domain_Repository_MemberRepository extends \Tx_StaffDire
 	 * Finds a member by its uid.
 	 *
 	 * @param integer $uid
-	 * @return \Tx_StaffDirectory_Domain_Model_Member
+	 * @return Member
 	 */
 	public function findByUid($uid) {
 		$memberDao = $this->dao->getMemberByUid($uid);
@@ -64,7 +69,7 @@ class Tx_StaffDirectory_Domain_Repository_MemberRepository extends \Tx_StaffDire
 	 * Finds a member by an underlying person uid.
 	 *
 	 * @param integer $uid
-	 * @return \Tx_StaffDirectory_Domain_Model_Member
+	 * @return Member
 	 */
 	public function findOneByPersonUid($uid) {
 		$membersDao = $this->dao->getMemberByPersonUid($uid);
@@ -79,7 +84,7 @@ class Tx_StaffDirectory_Domain_Repository_MemberRepository extends \Tx_StaffDire
 	 * Finds all members of a given list of staffs.
 	 *
 	 * @param string $staffs comma-separated list of staffs
-	 * @return \Tx_StaffDirectory_Domain_Model_Member[]
+	 * @return Member[]
 	 */
 	public function findByStaffs($staffs) {
 		$membersDao = $this->dao->getMembersByStaffs($staffs);
@@ -89,10 +94,10 @@ class Tx_StaffDirectory_Domain_Repository_MemberRepository extends \Tx_StaffDire
 	/**
 	 * Finds all members of a given department.
 	 *
-	 * @param \Tx_StaffDirectory_Domain_Model_Department $department
-	 * @return \Tx_StaffDirectory_Domain_Model_Member[]
+	 * @param Department $department
+	 * @return Member[]
 	 */
-	public function findByDepartment(\Tx_StaffDirectory_Domain_Model_Department $department) {
+	public function findByDepartment(Department $department) {
 		$membersDao = $this->dao->getMembersByDepartment($department->getUid());
 		return $this->dao2business($membersDao);
 	}
@@ -100,12 +105,12 @@ class Tx_StaffDirectory_Domain_Repository_MemberRepository extends \Tx_StaffDire
 	/**
 	 * Loads the staffs of a given member.
 	 *
-	 * @param \Tx_StaffDirectory_Domain_Model_Member $member
+	 * @param Member $member
 	 * @return void
 	 */
-	public function loadStaffs(\Tx_StaffDirectory_Domain_Model_Member $member) {
-		/** @var \Tx_StaffDirectory_Domain_Repository_StaffRepository $staffRepository */
-		$staffRepository = \Tx_StaffDirectory_Domain_Repository_Factory::getRepository('Staff');
+	public function loadStaffs(Member $member) {
+		/** @var StaffRepository $staffRepository */
+		$staffRepository = Factory::getRepository('Staff');
 		$staffs = $staffRepository->findByPerson($member);
 		$member->setStaffs($staffs);
 	}
@@ -114,13 +119,13 @@ class Tx_StaffDirectory_Domain_Repository_MemberRepository extends \Tx_StaffDire
 	 * Converts DAO members into business objects.
 	 *
 	 * @param array $dao
-	 * @return \Tx_StaffDirectory_Domain_Model_Member[]
+	 * @return Member[]
 	 */
 	protected function dao2business(array $dao) {
 		$ret = array();
 		foreach ($dao as $data) {
-			/** @var \Tx_StaffDirectory_Domain_Model_Member $member */
-			$member = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_StaffDirectory_Domain_Model_Member', $data['uid']);
+			/** @var Member $member */
+			$member = GeneralUtility::makeInstance(Member::class, $data['uid']);
 			$member
 				->setPersonUid($data['person_id'])
 				->setPositionFunction($data['position_function'])

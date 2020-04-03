@@ -22,6 +22,8 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+namespace Causal\Staffdirectory\Domain\Model;
+
 /**
  * Base class for entities.
  *
@@ -31,9 +33,8 @@
  * @author      Xavier Perseguers <xavier@causal.ch>
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
  */
-abstract class Tx_StaffDirectory_Domain_Model_AbstractEntity {
+abstract class AbstractEntity {
 
 	/**
 	 * @var integer
@@ -72,7 +73,7 @@ abstract class Tx_StaffDirectory_Domain_Model_AbstractEntity {
 
 	/**
 	 * @param integer $pid
-	 * @return \Tx_StaffDirectory_Domain_Model_AbstractEntity
+	 * @return AbstractEntity
 	 */
 	public function setPid($pid) {
 		$this->pid = intval($pid);

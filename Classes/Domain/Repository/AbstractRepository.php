@@ -22,6 +22,11 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+namespace Causal\Staffdirectory\Domain\Repository;
+
+use Causal\Staffdirectory\Persistence\Dao;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Base class for repositories.
  *
@@ -31,9 +36,8 @@
  * @author      Xavier Perseguers <xavier@causal.ch>
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
  */
-abstract class Tx_StaffDirectory_Domain_Repository_AbstractRepository implements \TYPO3\CMS\Core\SingletonInterface {
+abstract class AbstractRepository implements \TYPO3\CMS\Core\SingletonInterface {
 
 	/**
 	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
@@ -41,7 +45,7 @@ abstract class Tx_StaffDirectory_Domain_Repository_AbstractRepository implements
 	protected $cObj;
 
 	/**
-	 * @var \Tx_StaffDirectory_Persistence_Dao
+	 * @var Dao
 	 */
 	protected $dao;
 
@@ -53,23 +57,24 @@ abstract class Tx_StaffDirectory_Domain_Repository_AbstractRepository implements
 	/**
 	 * Injects the DAO.
 	 *
-	 * @param \Tx_StaffDirectory_Persistence_Dao $dao
+	 * @param Dao $dao
 	 * @return void
 	 */
-	public function injectDao(\Tx_StaffDirectory_Persistence_Dao $dao = NULL) {
+	public function injectDao(Dao $dao = NULL) {
 		$this->dao = $dao;
-		$this->cObj = $dao ? $dao->getContentObject() : \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class);
+		$this->cObj = $dao ? $dao->getContentObject() : GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class);
 		$this->settings = $dao ? $dao->getSettings() : array();
 	}
 
 	/**
-	 * Will process the input string with the parseFunc function from tslib_cObj based on configuration set in "lib.parseFunc_RTE" in the current TypoScript template.
+	 * Will process the input string with the parseFunc function from \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+     * based on configuration set in "lib.parseFunc_RTE" in the current TypoScript template.
 	 * This is useful for rendering of content in RTE fields where the transformation mode is set to "ts_css" or so.
 	 * Notice that this requires the use of "css_styled_content" to work right.
 	 *
 	 * @param string The input text string to process
 	 * @return string The processed string
-	 * @see tslib_cObj::parseFunc()
+	 * @see \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::parseFunc()
 	 */
 	protected function RTEcssText($str) {
 		$parseFunc = $GLOBALS['TSFE']->tmpl->setup['lib.']['parseFunc_RTE.'];

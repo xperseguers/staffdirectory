@@ -22,6 +22,10 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+namespace Causal\Staffdirectory\Controller;
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Abstract class for the shows extension plugins.
  *
@@ -31,9 +35,8 @@
  * @author      Xavier Perseguers <xavier@causal.ch>
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
  */
-abstract class Tx_StaffDirectory_Controller_AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
+abstract class AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 
 	/**
 	 * @var string
@@ -129,9 +132,9 @@ abstract class Tx_StaffDirectory_Controller_AbstractController extends \TYPO3\CM
 			$basePath = 'EXT:' . $this->extKey . '/Resources/Private/Language/locallang.xml';
 
 				// Read the strings in the required charset (since TYPO3 4.2)
-			$this->LOCAL_LANG = \TYPO3\CMS\Core\Utility\GeneralUtility::readLLfile($basePath, $this->LLkey, $GLOBALS['TSFE']->renderCharset);
+			$this->LOCAL_LANG = GeneralUtility::readLLfile($basePath, $this->LLkey, $GLOBALS['TSFE']->renderCharset);
 			if ($this->altLLkey) {
-				$tempLOCAL_LANG = \TYPO3\CMS\Core\Utility\GeneralUtility::readLLfile($basePath, $this->altLLkey);
+				$tempLOCAL_LANG = GeneralUtility::readLLfile($basePath, $this->altLLkey);
 				$this->LOCAL_LANG = array_merge(is_array($this->LOCAL_LANG) ? $this->LOCAL_LANG : array(), $tempLOCAL_LANG);
 			}
 

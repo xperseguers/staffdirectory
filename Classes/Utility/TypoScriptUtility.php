@@ -22,6 +22,12 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+namespace Causal\Staffdirectory\Utility;
+
+use TYPO3\CMS\Core\TypoScript\Parser\TypoScriptParser;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+
 /**
  * Helper functions for TypoScript.
  *
@@ -31,18 +37,17 @@
  * @author      Xavier Perseguers <xavier@causal.ch>
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
  */
-class Tx_StaffDirectory_Utility_TypoScript {
+class TypoScriptUtility {
 
 	/**
 	 * Processes the global parameters by applying stdWrap if needed.
 	 *
-	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj
+	 * @param ContentObjectRenderer $cObj
 	 * @param array $settings
 	 * @return array
 	 */
-	public static function preprocessConfiguration(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj, array $settings) {
+	public static function preprocessConfiguration(ContentObjectRenderer $cObj, array $settings) {
 
 			// Pre-process global parameters
 		$globalParameters = array(
@@ -73,13 +78,13 @@ class Tx_StaffDirectory_Utility_TypoScript {
 	/**
 	 * Applies stdWrap to settings.
 	 *
-	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj
+	 * @param ContentObjectRenderer $cObj
 	 * @param array $settings
 	 * @param string $key
 	 * @param string|array $parameter
 	 * @return void
 	 */
-	public static function applyStdWrap(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj, array &$settings, $key, $parameter) {
+	public static function applyStdWrap(ContentObjectRenderer $cObj, array &$settings, $key, $parameter) {
 		if (is_array($parameter)) {
 			foreach ($parameter as $k => $p) {
 				if (isset($settings[$key])) {
@@ -118,8 +123,8 @@ class Tx_StaffDirectory_Utility_TypoScript {
 		$flexFormTypoScript = $settings['myTS'];
 		unset($settings['myTS']);
 		if ($flexFormTypoScript) {
-			/** @var \TYPO3\CMS\Core\TypoScript\Parser\TypoScriptParser $tsparser */
-			$tsparser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\TypoScript\Parser\TypoScriptParser::class);
+			/** @var TypoScriptParser $tsparser */
+			$tsparser = GeneralUtility::makeInstance(TypoScriptParser::class);
 
 			// WITH GLOBAL CONTEXT [begin]
 			/*

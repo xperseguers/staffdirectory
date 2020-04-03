@@ -22,6 +22,11 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+namespace Causal\Staffdirectory\Domain\Repository;
+
+use Causal\Staffdirectory\Persistence\Dao;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Factory for repositories.
  *
@@ -31,22 +36,21 @@
  * @author      Xavier Perseguers <xavier@causal.ch>
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
- * @version     SVN: $Id$
  */
-class Tx_StaffDirectory_Domain_Repository_Factory {
+class Factory {
 
 	/**
-	 * @var \Tx_StaffDirectory_Persistence_Dao
+	 * @var Dao
 	 */
 	protected static $dao;
 
 	/**
 	 * Injects DAO.
 	 *
-	 * @param \Tx_StaffDirectory_Persistence_Dao $dao
+	 * @param Dao $dao
 	 * @return void
 	 */
-	public static function injectDao(\Tx_StaffDirectory_Persistence_Dao $dao) {
+	public static function injectDao(Dao $dao) {
 		self::$dao = $dao;
 	}
 
@@ -54,13 +58,13 @@ class Tx_StaffDirectory_Domain_Repository_Factory {
 	 * Returns a repository.
 	 *
 	 * @param string $name
-	 * @return \Tx_StaffDirectory_Domain_Repository_AbstractRepository
+	 * @return AbstractRepository
 	 */
 	public static function getRepository($name) {
-		$classPattern = 'Tx_StaffDirectory_Domain_Repository_%sRepository';
+		$classPattern = 'Causal\\Staffdirectory\\Domain\\Repository\\%sRepository';
 
-		/** @var \Tx_StaffDirectory_Domain_Repository_AbstractRepository $repository */
-		$repository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(sprintf($classPattern, $name));
+		/** @var AbstractRepository $repository */
+		$repository = GeneralUtility::makeInstance(sprintf($classPattern, $name));
 		$repository->injectDao(self::$dao);
 
 		return $repository;
