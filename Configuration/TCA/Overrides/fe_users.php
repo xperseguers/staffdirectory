@@ -1,4 +1,6 @@
 <?php
+defined('TYPO3_MODE') or die();
+
 $tempColumns = [
     'tx_staffdirectory_mobilephone' => [
         'exclude' => 0,
@@ -26,7 +28,7 @@ $tempColumns = [
     ],
     'tx_staffdirectory_email2' => [
         'exclude' => 1,
-        'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.email',
+        'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.email',
         'config' => [
             'type' => 'input',
             'size' => '20',

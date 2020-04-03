@@ -7,8 +7,6 @@ CREATE TABLE fe_users (
 	tx_staffdirectory_email2 varchar(255) DEFAULT '' NOT NULL
 );
 
-
-
 #
 # Table structure for table 'tx_staffdirectory_staffs'
 #
@@ -44,8 +42,6 @@ CREATE TABLE tx_staffdirectory_staffs (
 	KEY parent (pid),
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid)
 ) ENGINE=InnoDB;
-
-
 
 #
 # Table structure for table 'tx_staffdirectory_departments'
@@ -85,8 +81,6 @@ CREATE TABLE tx_staffdirectory_departments (
 	KEY parent (pid),
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid)
 ) ENGINE=InnoDB;
-
-
 
 #
 # Table structure for table 'tx_staffdirectory_members'
