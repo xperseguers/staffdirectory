@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 Xavier Perseguers <xavier@causal.ch>
+*  (c) 2011-2020 Xavier Perseguers <xavier@causal.ch>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -33,7 +33,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_StaffDirectory_Domain_Model_Staff extends Tx_StaffDirectory_Domain_Model_AbstractEntity {
+class Tx_StaffDirectory_Domain_Model_Staff extends \Tx_StaffDirectory_Domain_Model_AbstractEntity {
 
 	/**
 	 * @var string
@@ -46,7 +46,7 @@ class Tx_StaffDirectory_Domain_Model_Staff extends Tx_StaffDirectory_Domain_Mode
 	protected $description;
 
 	/**
-	 * @var Tx_StaffDirectory_Domain_Model_Department[]
+	 * @var \Tx_StaffDirectory_Domain_Model_Department[]
 	 */
 	protected $departments;
 
@@ -69,7 +69,7 @@ class Tx_StaffDirectory_Domain_Model_Staff extends Tx_StaffDirectory_Domain_Mode
 
 	/**
 	 * @param string $name
-	 * @return Tx_StaffDirectory_Domain_Model_Staff
+	 * @return \Tx_StaffDirectory_Domain_Model_Staff
 	 */
 	public function setName($name) {
 		$this->name = $name;
@@ -85,7 +85,7 @@ class Tx_StaffDirectory_Domain_Model_Staff extends Tx_StaffDirectory_Domain_Mode
 
 	/**
 	 * @param string $description
-	 * @return Tx_StaffDirectory_Domain_Model_Staff
+	 * @return \Tx_StaffDirectory_Domain_Model_Staff
 	 */
 	public function setDescription($description) {
 		$this->description = $description;
@@ -93,20 +93,20 @@ class Tx_StaffDirectory_Domain_Model_Staff extends Tx_StaffDirectory_Domain_Mode
 	}
 
 	/**
-	 * @return Tx_StaffDirectory_Domain_Model_Department[]
+	 * @return \Tx_StaffDirectory_Domain_Model_Department[]
 	 */
 	public function getDepartments() {
 		if ($this->departments === NULL) {
-			/** @var $staffRepository Tx_StaffDirectory_Domain_Repository_StaffRepository */
-			$staffDirectoryRepository = tx_StaffDirectory_Domain_Repository_Factory::getRepository('Staff');
+			/** @var \Tx_StaffDirectory_Domain_Repository_StaffRepository $staffRepository */
+			$staffDirectoryRepository = \Tx_StaffDirectory_Domain_Repository_Factory::getRepository('Staff');
 			$staffDirectoryRepository->loadDepartments($this);
 		}
 		return $this->departments;
 	}
 
 	/**
-	 * @param Tx_StaffDirectory_Domain_Model_Department[] $departments
-	 * @return Tx_StaffDirectory_Domain_Model_Staff
+	 * @param \Tx_StaffDirectory_Domain_Model_Department[] $departments
+	 * @return \Tx_StaffDirectory_Domain_Model_Staff
 	 */
 	public function setDepartments(array $departments) {
 		$this->departments = $departments;
@@ -121,10 +121,3 @@ class Tx_StaffDirectory_Domain_Model_Staff extends Tx_StaffDirectory_Domain_Mode
 	}
 
 }
-
-
-if (defined('TYPO3_MODE') && isset($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/staffdirectory/Classes/Domain/Model/Staff.php'])) {
-	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/staffdirectory/Classes/Domain/Model/Staff.php']);
-}
-
-?>

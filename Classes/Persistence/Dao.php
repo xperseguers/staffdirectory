@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 Xavier Perseguers <xavier@causal.ch>
+*  (c) 2011-2020 Xavier Perseguers <xavier@causal.ch>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -40,7 +40,7 @@ class Tx_StaffDirectory_Persistence_Dao implements \TYPO3\CMS\Core\SingletonInte
 	protected $settings;
 
 	/**
-	 * @var \tslib_cObj
+	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
 	 */
 	protected $cObj;
 
@@ -330,7 +330,7 @@ class Tx_StaffDirectory_Persistence_Dao implements \TYPO3\CMS\Core\SingletonInte
 	 * @return string
 	 */
 	protected function getFields($table, $fields) {
-		$fields = t3lib_div::trimExplode(',', $fields);
+		$fields = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $fields);
 		$fqFields = array();
 		foreach ($fields as $field) {
 			$fqFields[] = $table . '.' . $field;

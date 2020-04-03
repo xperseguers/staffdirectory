@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 Xavier Perseguers <xavier@causal.ch>
+*  (c) 2011-2020 Xavier Perseguers <xavier@causal.ch>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -36,17 +36,17 @@
 class Tx_StaffDirectory_Domain_Repository_Factory {
 
 	/**
-	 * @var tx_StaffDirectory_Persistence_Dao
+	 * @var \Tx_StaffDirectory_Persistence_Dao
 	 */
 	protected static $dao;
 
 	/**
 	 * Injects DAO.
 	 *
-	 * @param Tx_StaffDirectory_Persistence_Dao $dao
+	 * @param \Tx_StaffDirectory_Persistence_Dao $dao
 	 * @return void
 	 */
-	public static function injectDao(Tx_StaffDirectory_Persistence_Dao $dao) {
+	public static function injectDao(\Tx_StaffDirectory_Persistence_Dao $dao) {
 		self::$dao = $dao;
 	}
 
@@ -54,18 +54,16 @@ class Tx_StaffDirectory_Domain_Repository_Factory {
 	 * Returns a repository.
 	 *
 	 * @param string $name
-	 * @return Tx_StaffDirectory_Domain_Repository_AbstractRepository
+	 * @return \Tx_StaffDirectory_Domain_Repository_AbstractRepository
 	 */
 	public static function getRepository($name) {
 		$classPattern = 'Tx_StaffDirectory_Domain_Repository_%sRepository';
 
-		/** @var $repository Tx_StaffDirectory_Domain_Repository_AbstractRepository */
-		$repository = t3lib_div::makeInstance(sprintf($classPattern, $name));
+		/** @var \Tx_StaffDirectory_Domain_Repository_AbstractRepository $repository */
+		$repository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(sprintf($classPattern, $name));
 		$repository->injectDao(self::$dao);
 
 		return $repository;
 	}
 
 }
-
-?>

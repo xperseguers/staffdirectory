@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 Xavier Perseguers <xavier@causal.ch>
+*  (c) 2011-2020 Xavier Perseguers <xavier@causal.ch>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -33,10 +33,10 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_StaffDirectory_Domain_Model_Department extends Tx_StaffDirectory_Domain_Model_AbstractEntity {
+class Tx_StaffDirectory_Domain_Model_Department extends \Tx_StaffDirectory_Domain_Model_AbstractEntity {
 
 	/**
-	 * @var Tx_StaffDirectory_Domain_Model_Staff
+	 * @var \Tx_StaffDirectory_Domain_Model_Staff
 	 */
 	protected $staff;
 
@@ -51,7 +51,7 @@ class Tx_StaffDirectory_Domain_Model_Department extends Tx_StaffDirectory_Domain
 	protected $description;
 
 	/**
-	 * @var Tx_StaffDirectory_Domain_Model_Member[]
+	 * @var \Tx_StaffDirectory_Domain_Model_Member[]
 	 */
 	protected $members;
 
@@ -67,17 +67,17 @@ class Tx_StaffDirectory_Domain_Model_Department extends Tx_StaffDirectory_Domain
 	}
 
 	/**
-	 * @return Tx_StaffDirectory_Domain_Model_Staff
+	 * @return \Tx_StaffDirectory_Domain_Model_Staff
 	 */
 	public function getStaff() {
 		return $this->staff;
 	}
 
 	/**
-	 * @param Tx_StaffDirectory_Domain_Model_Staff $staff
-	 * @return Tx_StaffDirectory_Domain_Model_Department
+	 * @param \Tx_StaffDirectory_Domain_Model_Staff $staff
+	 * @return \Tx_StaffDirectory_Domain_Model_Department
 	 */
-	public function setStaff(Tx_StaffDirectory_Domain_Model_Staff $staff) {
+	public function setStaff(\Tx_StaffDirectory_Domain_Model_Staff $staff) {
 		$this->staff = $staff;
 		return $this;
 	}
@@ -91,7 +91,7 @@ class Tx_StaffDirectory_Domain_Model_Department extends Tx_StaffDirectory_Domain
 
 	/**
 	 * @param string $name
-	 * @return Tx_StaffDirectory_Domain_Model_Department
+	 * @return \Tx_StaffDirectory_Domain_Model_Department
 	 */
 	public function setName($name) {
 		$this->name = $name;
@@ -107,7 +107,7 @@ class Tx_StaffDirectory_Domain_Model_Department extends Tx_StaffDirectory_Domain
 
 	/**
 	 * @param string $description
-	 * @return Tx_StaffDirectory_Domain_Model_Department
+	 * @return \Tx_StaffDirectory_Domain_Model_Department
 	 */
 	public function setDescription($description) {
 		$this->description = $description;
@@ -115,20 +115,20 @@ class Tx_StaffDirectory_Domain_Model_Department extends Tx_StaffDirectory_Domain
 	}
 
 	/**
-	 * @return Tx_StaffDirectory_Domain_Model_Member[]
+	 * @return \Tx_StaffDirectory_Domain_Model_Member[]
 	 */
 	public function getMembers() {
 		if ($this->members === NULL) {
-			/** @var $departmentRepository Tx_StaffDirectory_Domain_Repository_DepartmentRepository */
-			$departmentDirectoryRepository = tx_StaffDirectory_Domain_Repository_Factory::getRepository('Department');
+			/** @var \Tx_StaffDirectory_Domain_Repository_DepartmentRepository $departmentRepository */
+			$departmentDirectoryRepository = \Tx_StaffDirectory_Domain_Repository_Factory::getRepository('Department');
 			$departmentDirectoryRepository->loadMembers($this);
 		}
 		return $this->members;
 	}
 
 	/**
-	 * @param Tx_StaffDirectory_Domain_Model_Member[] $members
-	 * @return Tx_StaffDirectory_Domain_Model_Department
+	 * @param \Tx_StaffDirectory_Domain_Model_Member[] $members
+	 * @return \Tx_StaffDirectory_Domain_Model_Department
 	 */
 	public function setMembers(array $members) {
 		$this->members = $members;
@@ -143,10 +143,3 @@ class Tx_StaffDirectory_Domain_Model_Department extends Tx_StaffDirectory_Domain
 	}
 
 }
-
-
-if (defined('TYPO3_MODE') && isset($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/staffdirectory/Classes/Domain/Model/Department.php'])) {
-	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/staffdirectory/Classes/Domain/Model/Department.php']);
-}
-
-?>

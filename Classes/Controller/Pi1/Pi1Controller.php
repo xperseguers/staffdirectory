@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011-2015 Xavier Perseguers <xavier@causal.ch>
+*  (c) 2011-2020 Xavier Perseguers <xavier@causal.ch>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -32,7 +32,7 @@
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
-class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractController {
+class tx_staffdirectory_pi1 extends \Tx_StaffDirectory_Controller_AbstractController {
 
 	public $prefixId      = 'tx_staffdirectory_pi1';
 	public $scriptRelPath = 'Classes/Controller/Pi1/Pi1Controller.php';
@@ -124,11 +124,11 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 		$emptyTemplate = $this->cObj->getSubpart($this->template, '###LIST_EMPTY###');
 		$this->template = $this->cObj->getSubpart($this->template, '###LIST###');
 
-		/** @var $staffRepository Tx_StaffDirectory_Domain_Repository_StaffRepository */
-		$staffRepository = Tx_StaffDirectory_Domain_Repository_Factory::getRepository('Staff');
+		/** @var \Tx_StaffDirectory_Domain_Repository_StaffRepository $staffRepository */
+		$staffRepository = \Tx_StaffDirectory_Domain_Repository_Factory::getRepository('Staff');
 
 		if ($this->conf['staffs']) {
-			$uids = t3lib_div::intExplode(',', $this->conf['staffs']);
+			$uids = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $this->conf['staffs']);
 			$staffs = array();
 			foreach ($uids as $uid) {
 				$staffs[] = $staffRepository->findByUid($uid);
@@ -142,8 +142,8 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 			$this->addLabelMarkers($markers);
 			$this->content .= $this->render($emptyTemplate, array(), $this->cObj, array(), $markers);
 		} else {
-			/** @var $contentObj tslib_cObj */
-			$contentObj = t3lib_div::makeInstance('tslib_cObj');
+			/** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObj */
+			$contentObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class);
 			$template = $this->cObj->getSubpart($this->template, '###STAFF###');
 
 			$out = '';
@@ -159,21 +159,21 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 	 * STAFF action.
 	 *
 	 * @return void
-	 * @throws RuntimeException
+	 * @throws \RuntimeException
 	 */
 	protected function staffAction() {
 		$uid = isset($this->parameters['staff']) ? $this->parameters['staff'] : 0;
 		if (!$uid) {
 				// Get first selected staff in the list
-			$uids = t3lib_div::intExplode(',', $this->conf['staffs']);
+			$uids = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $this->conf['staffs']);
 			$uid = count($uids) > 0 ? $uids[0] : 0;
 		}
 		if (!$uid) {
 			throw new RuntimeException('No staff selected', 1316088274);
 		}
 
-		/** @var $staffRepository Tx_StaffDirectory_Domain_Repository_StaffRepository */
-		$staffRepository = Tx_StaffDirectory_Domain_Repository_Factory::getRepository('Staff');
+		/** @var \Tx_StaffDirectory_Domain_Repository_StaffRepository $staffRepository */
+		$staffRepository = \Tx_StaffDirectory_Domain_Repository_Factory::getRepository('Staff');
 		$staff = $staffRepository->findByUid($uid);
 
 		if ($this->format !== 'rdf') {
@@ -190,8 +190,8 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 		$this->template = $this->cObj->fileResource($templateFile);
 		$template = $this->cObj->getSubpart($this->template, '###STAFF###');
 
-		/** @var $contentObj tslib_cObj */
-		$contentObj = t3lib_div::makeInstance('tslib_cObj');
+		/** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObj */
+		$contentObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class);
 		$this->content .= $this->renderStaff($template, $staff, $contentObj);
 	}
 
@@ -199,11 +199,11 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 	 * PERSON action.
 	 *
 	 * @return void
-	 * @throws RuntimeException
+	 * @throws \RuntimeException
 	 */
 	protected function personAction() {
-		/** @var $memberRepository Tx_StaffDirectory_Domain_Repository_MemberRepository */
-		$memberRepository = Tx_StaffDirectory_Domain_Repository_Factory::getRepository('Member');
+		/** @var \Tx_StaffDirectory_Domain_Repository_MemberRepository $memberRepository */
+		$memberRepository = \Tx_StaffDirectory_Domain_Repository_Factory::getRepository('Member');
 		$member = NULL;
 
 		if (isset($this->conf['person']) && $this->conf['person'] > 0) {
@@ -212,7 +212,7 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 			$member = $memberRepository->findByUid($this->parameters['member']);
 		}
 		if (!$member) {
-			throw new RuntimeException('No person selected', 1316103052);
+			throw new \RuntimeException('No person selected', 1316103052);
 		}
 
 		if ($this->format !== 'rdf') {
@@ -229,8 +229,8 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 		$this->template = $this->cObj->fileResource($templateFile);
 		$template = $this->cObj->getSubpart($this->template, '###PERSON###');
 
-		/** @var $contentObj tslib_cObj */
-		$contentObj = t3lib_div::makeInstance('tslib_cObj');
+		/** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObj */
+		$contentObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class);
 
 		$this->content .= $this->renderMember('person', $template, NULL, $member, $contentObj);
 	}
@@ -248,11 +248,11 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 
 		$subparts = array();
 
-		/** @var $contentObj tslib_cObj */
-		$contentObj = t3lib_div::makeInstance('tslib_cObj');
+		/** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObj */
+		$contentObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class);
 
-		/** @var $memberRepository Tx_StaffDirectory_Domain_Repository_MemberRepository */
-		$memberRepository = Tx_StaffDirectory_Domain_Repository_Factory::getRepository('Member');
+		/** @var \Tx_StaffDirectory_Domain_Repository_MemberRepository $memberRepository */
+		$memberRepository = \Tx_StaffDirectory_Domain_Repository_Factory::getRepository('Member');
 
 		if (isset($this->conf['staffs']) && $this->conf['staffs']) {
 			$members = $memberRepository->findByStaffs($this->conf['staffs']);
@@ -288,15 +288,15 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 	 * Renders a staff in a given HTML template.
 	 *
 	 * @param string $template
-	 * @param Tx_StaffDirectory_Domain_Model_Staff $staff
-	 * @param tslib_cObj $contentObj
+	 * @param \Tx_StaffDirectory_Domain_Model_Staff $staff
+	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObj
 	 * @param boolean $showBackLink
 	 * @return string
-	 * @throws RuntimeException
+	 * @throws \RuntimeException
 	 */
-	protected function renderStaff($template, Tx_StaffDirectory_Domain_Model_Staff $staff = NULL, tslib_cObj $contentObj, $showBackLink = TRUE) {
+	protected function renderStaff($template, \Tx_StaffDirectory_Domain_Model_Staff $staff = NULL, \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObj, $showBackLink = TRUE) {
 		if ($staff === NULL) {
-			throw new RuntimeException('Invalid staff', 1316087275);
+			throw new \RuntimeException('Invalid staff', 1316087275);
 		}
 		$subparts = array();
 
@@ -335,14 +335,14 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 	 *
 	 * @param string $context
 	 * @param string $template
-	 * @param Tx_StaffDirectory_Domain_Model_Department $department
-	 * @param tslib_cObj $contentObj
+	 * @param \Tx_StaffDirectory_Domain_Model_Department $department
+	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObj
 	 * @return string
-	 * @throws RuntimeException
+	 * @throws \RuntimeException
 	 */
-	protected function renderDepartment($context, $template, Tx_StaffDirectory_Domain_Model_Department $department = NULL, tslib_cObj $contentObj) {
+	protected function renderDepartment($context, $template, \Tx_StaffDirectory_Domain_Model_Department $department = NULL, \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObj) {
 		if ($department === NULL) {
-			throw new RuntimeException('Invalid department', 1316089173);
+			throw new \RuntimeException('Invalid department', 1316089173);
 		}
 		$subparts = array();
 
@@ -377,16 +377,16 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 	 *
 	 * @param string $context
 	 * @param string $template
-	 * @param Tx_StaffDirectory_Domain_Model_Staff $staff
-	 * @param Tx_StaffDirectory_Domain_Model_Member $member
-	 * @param tslib_cObj $contentObj
+	 * @param \Tx_StaffDirectory_Domain_Model_Staff $staff
+	 * @param \Tx_StaffDirectory_Domain_Model_Member $member
+	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObj
 	 * @return string
-	 * @throws RuntimeException
+	 * @throws \RuntimeException
 	 */
-	protected function renderMember($context, $template, Tx_StaffDirectory_Domain_Model_Staff $staff = NULL, Tx_StaffDirectory_Domain_Model_Member $member = NULL, tslib_cObj $contentObj) {
+	protected function renderMember($context, $template, \Tx_StaffDirectory_Domain_Model_Staff $staff = NULL, \Tx_StaffDirectory_Domain_Model_Member $member = NULL, \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObj) {
 		static $renderedPersons = array();
 		if ($member === NULL) {
-			throw new RuntimeException('Invalid member', 1316091823);
+			throw new \RuntimeException('Invalid member', 1316091823);
 		}
 
 		if ($this->format === 'rdf' && in_array($member->getPersonUid(), $renderedPersons)) {
@@ -464,7 +464,7 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 			'parameter' => $uid,
 			'useCacheHash' => 1,
 			'no_cache' => 0,
-			'additionalParams' => t3lib_div::implodeArrayForUrl($this->prefixId, $params, '', TRUE),
+			'additionalParams' => \TYPO3\CMS\Core\Utility\GeneralUtility::implodeArrayForUrl($this->prefixId, $params, '', TRUE),
 		);
 		return $conf;
 	}
@@ -472,14 +472,14 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 	/**
 	 * Gets the detail link for a given staff.
 	 *
-	 * @param tx_StaffDirectory_Domain_Model_Staff $staff
+	 * @param \Tx_StaffDirectory_Domain_Model_Staff $staff
 	 * @param boolean $showBackLink
 	 * @return array
 	 * @throws RuntimeException
 	 */
-	protected function getLinkStaff(tx_StaffDirectory_Domain_Model_Staff $staff, $showBackLink = TRUE) {
+	protected function getLinkStaff(\Tx_StaffDirectory_Domain_Model_Staff $staff, $showBackLink = TRUE) {
 		if (!$this->conf['targets.']['staff']) {
-			throw new RuntimeException('plugin.' . $this->prefixId . '.targets.staff is not properly set', 1316087308);
+			throw new \RuntimeException('plugin.' . $this->prefixId . '.targets.staff is not properly set', 1316087308);
 		}
 
 		// TODO: make back link work in cascade
@@ -494,14 +494,14 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 	/**
 	 * Gets the detail link for a given member.
 	 *
-	 * @param tx_StaffDirectory_Domain_Model_Member $member
-	 * @param Tx_StaffDirectory_Domain_Model_Staff $staff
+	 * @param \Tx_StaffDirectory_Domain_Model_Member $member
+	 * @param \Tx_StaffDirectory_Domain_Model_Staff $staff
 	 * @return array
-	 * @throws RuntimeException
+	 * @throws \RuntimeException
 	 */
-	protected function getLinkPerson(tx_StaffDirectory_Domain_Model_Member $member, Tx_StaffDirectory_Domain_Model_Staff $staff = NULL) {
+	protected function getLinkPerson(\Tx_StaffDirectory_Domain_Model_Member $member, \Tx_StaffDirectory_Domain_Model_Staff $staff = NULL) {
 		if (!$this->conf['targets.']['person']) {
-			throw new RuntimeException('plugin.' . $this->prefixId . '.targets.person is not properly set', 1316101961);
+			throw new \RuntimeException('plugin.' . $this->prefixId . '.targets.person is not properly set', 1316101961);
 		}
 
 		// TODO: make back link work in cascade
@@ -558,8 +558,8 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 	protected function clientExpectsRdf() {
 		$rdf = FALSE;
 		if (isset($_SERVER['HTTP_ACCEPT'])) {
-			$accept = t3lib_div::trimExplode(',', $_SERVER['HTTP_ACCEPT']);
-			$accept = t3lib_div::trimExplode(';', $accept[0]);
+			$accept = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $_SERVER['HTTP_ACCEPT']);
+			$accept = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(';', $accept[0]);
 
 			$rdf = ($accept[0] === 'application/rdf+xml');
 		}
@@ -572,7 +572,7 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 	 *
 	 * @param array $settings: Plugin configuration, as received by the main() method
 	 * @return void
-	 * @throws RuntimeException
+	 * @throws \RuntimeException
 	 */
 	protected function init(array $settings) {
 			// Initialize default values based on extension TS
@@ -582,10 +582,10 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 		}
 
 			// Base configuration is equal to the plugin's TS setup
-		$this->conf = t3lib_div::array_merge_recursive_overrule($this->conf, $settings, FALSE, FALSE);
+        $this->conf = array_merge_recursive($this->conf, $settings);
 
 			// Basically process stdWrap over all global parameters
-		$this->conf = Tx_StaffDirectory_Utility_TypoScript::preprocessConfiguration($this->cObj, $this->conf);
+		$this->conf = \Tx_StaffDirectory_Utility_TypoScript::preprocessConfiguration($this->cObj, $this->conf);
 
 		if ($this->cObj->data['recursive']) {
 			$this->conf['recursive'] = $this->cObj->data['recursive'];
@@ -629,7 +629,7 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 			}
 		}
 
-		$this->parameters = t3lib_div::_GET($this->prefixId);
+		$this->parameters = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET($this->prefixId);
 		if (!is_array($this->parameters)) {
 			$this->parameters = array();
 		}
@@ -640,23 +640,16 @@ class tx_staffdirectory_pi1 extends Tx_StaffDirectory_Controller_AbstractControl
 		));
 
 			// Merge configuration with business logic and local override TypoScript (myTS)
-		$this->conf = Tx_StaffDirectory_Utility_TypoScript::getMergedConfiguration($this->conf, $this->parameters, $GLOBALS['TSFE']->tmpl->setup);
+		$this->conf = \Tx_StaffDirectory_Utility_TypoScript::getMergedConfiguration($this->conf, $this->parameters, $GLOBALS['TSFE']->tmpl->setup);
 
 			// Expand the list of record storage pages
 		$this->conf['pidList'] = $this->pi_getPidList($this->conf['pidList'], $this->conf['recursive']);
 
 		$this->debug = $this->conf['debug'];
 
-		/** @var $dao Tx_StaffDirectory_Persistence_Dao */
-		$dao = t3lib_div::makeInstance('Tx_StaffDirectory_Persistence_Dao', $this->conf, $this->cObj);
-		Tx_StaffDirectory_Domain_Repository_Factory::injectDao($dao);
+		/** @var $dao \Tx_StaffDirectory_Persistence_Dao */
+		$dao = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_StaffDirectory_Persistence_Dao', $this->conf, $this->cObj);
+		\Tx_StaffDirectory_Domain_Repository_Factory::injectDao($dao);
 	}
 
 }
-
-
-if (defined('TYPO3_MODE') && isset($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/staffdirectory/Classes/Controller/Pi1/Pi1Controller.php'])) {
-	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/staffdirectory/Classes/Controller/Pi1/Pi1Controller.php']);
-}
-
-?>

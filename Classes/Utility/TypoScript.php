@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2011 Xavier Perseguers <xavier@causal.ch>
+ *  (c) 2011-2020 Xavier Perseguers <xavier@causal.ch>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -38,11 +38,11 @@ class Tx_StaffDirectory_Utility_TypoScript {
 	/**
 	 * Processes the global parameters by applying stdWrap if needed.
 	 *
-	 * @param tslib_cObj $cObj
+	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj
 	 * @param array $settings
 	 * @return array
 	 */
-	public static function preprocessConfiguration(tslib_cObj $cObj, array $settings) {
+	public static function preprocessConfiguration(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj, array $settings) {
 
 			// Pre-process global parameters
 		$globalParameters = array(
@@ -73,13 +73,13 @@ class Tx_StaffDirectory_Utility_TypoScript {
 	/**
 	 * Applies stdWrap to settings.
 	 *
-	 * @param tslib_cObj $cObj
+	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj
 	 * @param array $settings
 	 * @param string $key
 	 * @param string|array $parameter
 	 * @return void
 	 */
-	public static function applyStdWrap(tslib_cObj $cObj, array &$settings, $key, $parameter) {
+	public static function applyStdWrap(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj, array &$settings, $key, $parameter) {
 		if (is_array($parameter)) {
 			foreach ($parameter as $k => $p) {
 				if (isset($settings[$key])) {
@@ -118,9 +118,8 @@ class Tx_StaffDirectory_Utility_TypoScript {
 		$flexFormTypoScript = $settings['myTS'];
 		unset($settings['myTS']);
 		if ($flexFormTypoScript) {
-			require_once(PATH_t3lib . 'class.t3lib_tsparser.php');
-			/** @var t3lib_tsparser $tsparser */
-			$tsparser = t3lib_div::makeInstance('t3lib_tsparser');
+			/** @var \TYPO3\CMS\Core\TypoScript\Parser\TypoScriptParser $tsparser */
+			$tsparser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\TypoScript\Parser\TypoScriptParser::class);
 
 			// WITH GLOBAL CONTEXT [begin]
 			/*
@@ -148,5 +147,3 @@ class Tx_StaffDirectory_Utility_TypoScript {
 	}
 
 }
-
-?>

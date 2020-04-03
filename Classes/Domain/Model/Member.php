@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 Xavier Perseguers <xavier@causal.ch>
+*  (c) 2011-2020 Xavier Perseguers <xavier@causal.ch>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -32,7 +32,7 @@
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
   */
-class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Model_AbstractEntity {
+class Tx_StaffDirectory_Domain_Model_Member extends \Tx_StaffDirectory_Domain_Model_AbstractEntity {
 
 	/**
 	 * @var integer
@@ -120,7 +120,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 	protected $mobile_phone;
 
 	/**
-	 * @var Tx_StaffDirectory_Domain_Model_Staff[]
+	 * @var \Tx_StaffDirectory_Domain_Model_Staff[]
 	 */
 	protected $staffs;
 
@@ -143,7 +143,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param integer $person_uid
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setPersonUid($person_uid) {
 		$this->person_uid = intval($person_uid);
@@ -159,7 +159,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $position_function
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setPositionFunction($position_function) {
 		$this->position_function = $position_function;
@@ -175,7 +175,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $name
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setName($name) {
 		$this->name = $name;
@@ -191,7 +191,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $first_name
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setFirstName($first_name) {
 		$this->first_name = $first_name;
@@ -207,7 +207,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $last_name
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setLastName($last_name) {
 		$this->last_name = $last_name;
@@ -223,7 +223,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $image
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setImage($image) {
 		$this->image = $image;
@@ -239,7 +239,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $address
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setAddress($address) {
 		$this->address = $address;
@@ -255,7 +255,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $postal_code
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setPostalCode($postal_code) {
 		$this->postal_code = $postal_code;
@@ -271,7 +271,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $city
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setCity($city) {
 		$this->city = $city;
@@ -287,7 +287,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $country
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setCountry($country) {
 		$this->country = $country;
@@ -303,7 +303,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $telephone
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setTelephone($telephone) {
 		$this->telephone = $telephone;
@@ -319,7 +319,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $fax
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setFax($fax) {
 		$this->fax = $fax;
@@ -335,7 +335,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $email
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setEmail($email) {
 		$this->email = $email;
@@ -367,7 +367,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $website
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setWebsite($website) {
 		$this->website = $website;
@@ -383,7 +383,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $gender
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setGender($gender) {
 		$this->gender = intval($gender);
@@ -399,7 +399,7 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 
 	/**
 	 * @param string $mobile_phone
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setMobilePhone($mobile_phone) {
 		$this->mobile_phone = $mobile_phone;
@@ -407,20 +407,20 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 	}
 
 	/**
-	 * @return Tx_StaffDirectory_Domain_Model_Staff[]
+	 * @return \Tx_StaffDirectory_Domain_Model_Staff[]
 	 */
 	public function getStaffs() {
 		if ($this->staffs === NULL) {
-			/** @var $memberRepository Tx_StaffDirectory_Domain_Repository_MemberRepository */
-			$memberDirectoryRepository = tx_StaffDirectory_Domain_Repository_Factory::getRepository('Member');
+			/** @var \Tx_StaffDirectory_Domain_Repository_MemberRepository $memberRepository */
+			$memberDirectoryRepository = \Tx_StaffDirectory_Domain_Repository_Factory::getRepository('Member');
 			$memberDirectoryRepository->loadStaffs($this);
 		}
 		return $this->staffs;
 	}
 
 	/**
-	 * @param Tx_StaffDirectory_Domain_Model_Staff[] $staffs
-	 * @return Tx_StaffDirectory_Domain_Model_Member
+	 * @param \Tx_StaffDirectory_Domain_Model_Staff[] $staffs
+	 * @return \Tx_StaffDirectory_Domain_Model_Member
 	 */
 	public function setStaffs(array $staffs) {
 		$this->staffs = $staffs;
@@ -435,10 +435,3 @@ class Tx_StaffDirectory_Domain_Model_Member extends Tx_StaffDirectory_Domain_Mod
 	}
 
 }
-
-
-if (defined('TYPO3_MODE') && isset($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/staffdirectory/Classes/Domain/Model/Member.php'])) {
-	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/staffdirectory/Classes/Domain/Model/Member.php']);
-}
-
-?>

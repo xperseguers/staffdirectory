@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 Xavier Perseguers <xavier@causal.ch>
+*  (c) 2011-2020 Xavier Perseguers <xavier@causal.ch>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -33,12 +33,12 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-class Tx_StaffDirectory_Domain_Repository_StaffRepository extends Tx_StaffDirectory_Domain_Repository_AbstractRepository {
+class Tx_StaffDirectory_Domain_Repository_StaffRepository extends \Tx_StaffDirectory_Domain_Repository_AbstractRepository {
 
 	/**
 	 * Finds all locations.
 	 *
-	 * @return Tx_StaffDirectory_Domain_Model_Staff[]
+	 * @return \Tx_StaffDirectory_Domain_Model_Staff[]
 	 */
 	public function findAll() {
 		$staffsDao = $this->dao->getStaffs();
@@ -49,7 +49,7 @@ class Tx_StaffDirectory_Domain_Repository_StaffRepository extends Tx_StaffDirect
 	 * Finds a staff by its uid.
 	 *
 	 * @param integer $uid
-	 * @return Tx_StaffDirectory_Domain_Model_Staff
+	 * @return \Tx_StaffDirectory_Domain_Model_Staff
 	 */
 	public function findByUid($uid) {
 		$staffDao = $this->dao->getStaffByUid($uid);
@@ -63,8 +63,8 @@ class Tx_StaffDirectory_Domain_Repository_StaffRepository extends Tx_StaffDirect
 	/**
 	 * Finds all staffs of a given person.
 	 *
-	 * @param Tx_StaffDirectory_Domain_Model_Member $member
-	 * @return Tx_StaffDirectory_Domain_Model_Staff[]
+	 * @param \Tx_StaffDirectory_Domain_Model_Member $member
+	 * @return \Tx_StaffDirectory_Domain_Model_Staff[]
 	 */
 	public function findByPerson(Tx_StaffDirectory_Domain_Model_Member $member) {
 		$staffsDao = $this->dao->getStaffsByPerson($member->getUid());
@@ -74,12 +74,12 @@ class Tx_StaffDirectory_Domain_Repository_StaffRepository extends Tx_StaffDirect
 	/**
 	 * Loads the departments of a given staff.
 	 *
-	 * @param Tx_StaffDirectory_Domain_Model_Staff $staff
+	 * @param \Tx_StaffDirectory_Domain_Model_Staff $staff
 	 * @return void
 	 */
-	public function loadDepartments(Tx_StaffDirectory_Domain_Model_Staff $staff) {
-		/** @var $departmentRepository Tx_StaffDirectory_Domain_Repository_DepartmentRepository */
-		$departmentRepository = Tx_StaffDirectory_Domain_Repository_Factory::getRepository('Department');
+	public function loadDepartments(\Tx_StaffDirectory_Domain_Model_Staff $staff) {
+		/** @var \Tx_StaffDirectory_Domain_Repository_DepartmentRepository $departmentRepository */
+		$departmentRepository = \Tx_StaffDirectory_Domain_Repository_Factory::getRepository('Department');
 		$departments = $departmentRepository->findByStaff($staff);
 		$staff->setDepartments($departments);
 	}
@@ -88,13 +88,13 @@ class Tx_StaffDirectory_Domain_Repository_StaffRepository extends Tx_StaffDirect
 	 * Converts DAO staffs into business objects.
 	 *
 	 * @param array $dao
-	 * @return Tx_StaffDirectory_Domain_Model_Staff[]
+	 * @return \Tx_StaffDirectory_Domain_Model_Staff[]
 	 */
 	protected function dao2business(array $dao) {
 		$ret = array();
 		foreach ($dao as $data) {
-			/** @var $staff Tx_StaffDirectory_Domain_Model_Staff */
-			$staff = t3lib_div::makeInstance('Tx_StaffDirectory_Domain_Model_Staff', $data['uid']);
+			/** @var \Tx_StaffDirectory_Domain_Model_Staff $staff */
+			$staff = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Tx_StaffDirectory_Domain_Model_Staff', $data['uid']);
 			$staff
 				->setName($data['staff_name'])
 				->setDescription($this->RTEcssText($data['description']));
@@ -104,10 +104,3 @@ class Tx_StaffDirectory_Domain_Repository_StaffRepository extends Tx_StaffDirect
 	}
 
 }
-
-
-if (defined('TYPO3_MODE') && isset($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/staffdirectory/Classes/Domain/Repository/StaffRepository.php'])) {
-	include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/staffdirectory/Classes/Domain/Repository/StaffRepository.php']);
-}
-
-?>

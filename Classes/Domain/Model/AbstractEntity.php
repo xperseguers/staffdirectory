@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 Xavier Perseguers <xavier@causal.ch>
+*  (c) 2011-2020 Xavier Perseguers <xavier@causal.ch>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -72,7 +72,7 @@ abstract class Tx_StaffDirectory_Domain_Model_AbstractEntity {
 
 	/**
 	 * @param integer $pid
-	 * @return tx_StaffDirectory_Domain_Model_AbstractEntity
+	 * @return \Tx_StaffDirectory_Domain_Model_AbstractEntity
 	 */
 	public function setPid($pid) {
 		$this->pid = intval($pid);
@@ -85,36 +85,17 @@ abstract class Tx_StaffDirectory_Domain_Model_AbstractEntity {
 	 * @return array
 	 */
 	public function toArray() {
-		$reflect = new ReflectionClass($this);
-		$properties = $reflect->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED);
+		$reflect = new \ReflectionClass($this);
+		$properties = $reflect->getProperties(\ReflectionProperty::IS_PUBLIC | \ReflectionProperty::IS_PROTECTED);
 
 		$ret = array();
 		foreach ($properties as $property) {
-			if (version_compare(phpversion(), '5.3.0', '<')) {
-				$propertyName = $property->getName();
-				$name = t3lib_div::underscoredToUpperCamelCase($propertyName);
-				$prefixes = array('get', 'is', 'has');
-				$getter = '';
-				$value = '__COULD_NOT_BE_RETRIEVED__';
-				foreach ($prefixes as $prefix) {
-					$getter = $prefix . $name;
-					if (method_exists($this, $getter)) {
-						break;
-					} else {
-						$getter = '';
-					}
-				}
-				if ($getter) {
-					$value = call_user_func(array($this, $getter));
-				}
-			} else {
-				$property->setAccessible(TRUE);
-				$value = $property->getValue($this);
-			}
+            $property->setAccessible(TRUE);
+            $value = $property->getValue($this);
 			if (!is_array($value)) {
 				$ret[$property->getName()] = (string) $value;
 			}
-			if ($value instanceof tx_StaffDirectory_Domain_Model_AbstractEntity) {
+			if ($value instanceof \Tx_StaffDirectory_Domain_Model_AbstractEntity) {
 				$ret[$property->getName() . '_uid'] = $value->getUid();
 			}
 		}
@@ -131,5 +112,3 @@ abstract class Tx_StaffDirectory_Domain_Model_AbstractEntity {
 	}
 
 }
-
-?>

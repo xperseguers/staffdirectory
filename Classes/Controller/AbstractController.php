@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2011 Xavier Perseguers <xavier@causal.ch>
+ *  (c) 2011-2020 Xavier Perseguers <xavier@causal.ch>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -33,7 +33,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-abstract class Tx_StaffDirectory_Controller_AbstractController extends tslib_pibase {
+abstract class Tx_StaffDirectory_Controller_AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 
 	/**
 	 * @var string
@@ -57,13 +57,13 @@ abstract class Tx_StaffDirectory_Controller_AbstractController extends tslib_pib
 	 *
 	 * @param string $template
 	 * @param array $data Take keys as markers
-	 * @param tslib_cObj $contentObj
+	 * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObj
 	 * @param array $tsConfig
 	 * @param array $markers Additional markers (overrides keys from $data)
 	 * @param array $subparts Subparts
 	 * @return string
 	 */
-	protected function render($template, array $data, tslib_cObj $contentObj, array $tsConfig = array(), array $markers = array(), array $subparts = array()) {
+	protected function render($template, array $data, \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObj, array $tsConfig = array(), array $markers = array(), array $subparts = array()) {
 		if ($this->debug) {
 			$this->showDebug($data, 'data');
 		}
@@ -120,17 +120,6 @@ abstract class Tx_StaffDirectory_Controller_AbstractController extends tslib_pib
 	}
 
 	/**
-	 * Returns the current TYPO3 version.
-	 *
-	 * @return integer
-	 */
-	protected function getVersion() {
-		return class_exists('t3lib_utility_VersionNumber')
-				? t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version)
-				: t3lib_div::int_from_ver(TYPO3_version);
-	}
-
-	/**
 	 * Loads the locallang file.
 	 *
 	 * @return	void
@@ -140,9 +129,9 @@ abstract class Tx_StaffDirectory_Controller_AbstractController extends tslib_pib
 			$basePath = 'EXT:' . $this->extKey . '/Resources/Private/Language/locallang.xml';
 
 				// Read the strings in the required charset (since TYPO3 4.2)
-			$this->LOCAL_LANG = t3lib_div::readLLfile($basePath, $this->LLkey, $GLOBALS['TSFE']->renderCharset);
+			$this->LOCAL_LANG = \TYPO3\CMS\Core\Utility\GeneralUtility::readLLfile($basePath, $this->LLkey, $GLOBALS['TSFE']->renderCharset);
 			if ($this->altLLkey) {
-				$tempLOCAL_LANG = t3lib_div::readLLfile($basePath, $this->altLLkey);
+				$tempLOCAL_LANG = \TYPO3\CMS\Core\Utility\GeneralUtility::readLLfile($basePath, $this->altLLkey);
 				$this->LOCAL_LANG = array_merge(is_array($this->LOCAL_LANG) ? $this->LOCAL_LANG : array(), $tempLOCAL_LANG);
 			}
 
@@ -174,11 +163,7 @@ abstract class Tx_StaffDirectory_Controller_AbstractController extends tslib_pib
 	 * @return void
 	 */
 	protected function showDebug($var, $header = '') {
-		if ($this->getVersion() < 4005000) {
-			t3lib_div::debug($var, $header);
-		} else {
-			t3lib_utility_Debug::debug($var, $header);
-		}
+        \TYPO3\CMS\Core\Utility\DebugUtility::debug($var, $header);
 	}
 
 	/**
@@ -187,7 +172,7 @@ abstract class Tx_StaffDirectory_Controller_AbstractController extends tslib_pib
 	 *
 	 * @param array $types
 	 * @return void
-	 * @throws RuntimeException
+	 * @throws \RuntimeException
 	 */
 	protected function sanitizeParameters(array $types) {
 		foreach ($types as $key => $type) {
@@ -197,25 +182,17 @@ abstract class Tx_StaffDirectory_Controller_AbstractController extends tslib_pib
 						  && (string)((bool)$this->parameters[$key] ? 1 : 0) === $this->parameters[$key];
 					break;
 				case $type === 'int':
-					if ($this->getVersion() < 4006000) {
-						$OK = t3lib_div::testInt($this->parameters[$key]);
-					} else {
-						$OK = t3lib_utility_Math::canBeInterpretedAsInteger($this->parameters[$key]);
-					}
+                    $OK = \TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($this->parameters[$key]);
 					break;
 				case $type === 'int+':
-					if ($this->getVersion() < 4006000) {
-						$OK = t3lib_div::testInt($this->parameters[$key]);
-					} else {
-						$OK = t3lib_utility_Math::canBeInterpretedAsInteger($this->parameters[$key]);
-					}
+                    $OK = \TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($this->parameters[$key]);
 					$OK &= intval($this->parameters[$key] > 0);
 					break;
 				case substr($type, 0, 10) === 'preg_match':
 					$OK = preg_match(substr($type, 11), $this->parameters[$key]);
 					break;
 				default:
-					throw new RuntimeException(sprintf('Invalid type "%s"', $type), 1311761749);
+					throw new \RuntimeException(sprintf('Invalid type "%s"', $type), 1311761749);
 			}
 			if (!$OK) {
 				unset($this->parameters[$key]);
@@ -224,5 +201,3 @@ abstract class Tx_StaffDirectory_Controller_AbstractController extends tslib_pib
 	}
 
 }
-
-?>

@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 Xavier Perseguers <xavier@causal.ch>
+*  (c) 2011-2020 Xavier Perseguers <xavier@causal.ch>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -33,15 +33,15 @@
  * @license     http://www.gnu.org/copyleft/gpl.html
  * @version     SVN: $Id$
  */
-abstract class Tx_StaffDirectory_Domain_Repository_AbstractRepository implements t3lib_Singleton {
+abstract class Tx_StaffDirectory_Domain_Repository_AbstractRepository implements \TYPO3\CMS\Core\SingletonInterface {
 
 	/**
-	 * @var \tslib_cObj
+	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
 	 */
 	protected $cObj;
 
 	/**
-	 * @var Tx_StaffDirectory_Persistence_Dao
+	 * @var \Tx_StaffDirectory_Persistence_Dao
 	 */
 	protected $dao;
 
@@ -53,12 +53,12 @@ abstract class Tx_StaffDirectory_Domain_Repository_AbstractRepository implements
 	/**
 	 * Injects the DAO.
 	 *
-	 * @param Tx_StaffDirectory_Persistence_Dao $dao
+	 * @param \Tx_StaffDirectory_Persistence_Dao $dao
 	 * @return void
 	 */
-	public function injectDao(Tx_StaffDirectory_Persistence_Dao $dao = NULL) {
+	public function injectDao(\Tx_StaffDirectory_Persistence_Dao $dao = NULL) {
 		$this->dao = $dao;
-		$this->cObj = $dao ? $dao->getContentObject() : t3lib_div::makeInstance('tslib_cObj');
+		$this->cObj = $dao ? $dao->getContentObject() : \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class);
 		$this->settings = $dao ? $dao->getSettings() : array();
 	}
 
@@ -80,5 +80,3 @@ abstract class Tx_StaffDirectory_Domain_Repository_AbstractRepository implements
 	}
 
 }
-
-?>

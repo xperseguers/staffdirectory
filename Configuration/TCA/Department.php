@@ -137,4 +137,3 @@ $TCA['tx_staffdirectory_departments'] = array(
 		),
 	),
 );
-?>

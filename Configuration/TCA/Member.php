@@ -150,4 +150,3 @@ $TCA['tx_staffdirectory_members'] = array(
 		),
 	),
 );
-?>
