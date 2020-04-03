@@ -46,7 +46,7 @@ class MemberRepository extends AbstractRepository
      *
      * @return Member[]
      */
-    public function findAll()
+    public function findAll(): array
     {
         $membersDao = $this->dao->getMembers();
         return $this->dao2business($membersDao);
@@ -55,10 +55,10 @@ class MemberRepository extends AbstractRepository
     /**
      * Finds a member by its uid.
      *
-     * @param integer $uid
-     * @return Member
+     * @param int $uid
+     * @return Member|null
      */
-    public function findByUid($uid)
+    public function findByUid(int $uid): ?Member
     {
         $memberDao = $this->dao->getMemberByUid($uid);
         if ($memberDao) {
@@ -71,10 +71,10 @@ class MemberRepository extends AbstractRepository
     /**
      * Finds a member by an underlying person uid.
      *
-     * @param integer $uid
-     * @return Member
+     * @param int $uid
+     * @return Member|null
      */
-    public function findOneByPersonUid($uid)
+    public function findOneByPersonUid(int $uid): ?Member
     {
         $membersDao = $this->dao->getMemberByPersonUid($uid);
         if ($membersDao) {
@@ -90,7 +90,7 @@ class MemberRepository extends AbstractRepository
      * @param string $staffs comma-separated list of staffs
      * @return Member[]
      */
-    public function findByStaffs($staffs)
+    public function findByStaffs(string $staffs): array
     {
         $membersDao = $this->dao->getMembersByStaffs($staffs);
         return $this->dao2business($membersDao);
@@ -102,7 +102,7 @@ class MemberRepository extends AbstractRepository
      * @param Department $department
      * @return Member[]
      */
-    public function findByDepartment(Department $department)
+    public function findByDepartment(Department $department): array
     {
         $membersDao = $this->dao->getMembersByDepartment($department->getUid());
         return $this->dao2business($membersDao);
@@ -114,7 +114,7 @@ class MemberRepository extends AbstractRepository
      * @param Member $member
      * @return void
      */
-    public function loadStaffs(Member $member)
+    public function loadStaffs(Member $member): void
     {
         /** @var StaffRepository $staffRepository */
         $staffRepository = Factory::getRepository('Staff');
@@ -128,7 +128,7 @@ class MemberRepository extends AbstractRepository
      * @param array $dao
      * @return Member[]
      */
-    protected function dao2business(array $dao)
+    protected function dao2business(array $dao): array
     {
         $ret = [];
         foreach ($dao as $data) {

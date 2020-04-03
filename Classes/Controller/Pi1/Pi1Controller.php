@@ -30,6 +30,7 @@ use Causal\Staffdirectory\Domain\Repository\MemberRepository;
 use Causal\Staffdirectory\Domain\Repository\StaffRepository;
 use Causal\Staffdirectory\Persistence\Dao;
 use Causal\Staffdirectory\Utility\TypoScriptUtility;
+use TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -49,11 +50,6 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
     public $prefixId = 'tx_staffdirectory_pi1';
     public $scriptRelPath = 'Classes/Controller/Pi1/Pi1Controller.php';
     public $pi_checkCHash = true;
-
-    /**
-     * @var boolean
-     */
-    protected $isCachable = true;
 
     /**
      * @var string
@@ -131,12 +127,13 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      *
      * @return void
      */
-    protected function listAction()
+    protected function listAction(): void
     {
         $templateFile = $this->conf['templates.']['list'];
-        $this->template = $this->cObj->fileResource($templateFile);
-        $emptyTemplate = $this->cObj->getSubpart($this->template, '###LIST_EMPTY###');
-        $this->template = $this->cObj->getSubpart($this->template, '###LIST###');
+        $markerBaseTemplateService = $this->getMarkerBaseTemplateService();
+        $this->template = GeneralUtility::getFileAbsFileName($templateFile)
+        $emptyTemplate = $markerBaseTemplateService->getSubpart($this->template, '###LIST_EMPTY###');
+        $this->template = $markerBaseTemplateService->getSubpart($this->template, '###LIST###');
 
         /** @var StaffRepository $staffRepository */
         $staffRepository = Factory::getRepository('Staff');
@@ -156,16 +153,16 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
             $this->addLabelMarkers($markers);
             $this->content .= $this->render($emptyTemplate, [], $this->cObj, [], $markers);
         } else {
+            $template = $markerBaseTemplateService->getSubpart($this->template, '###STAFF###');
+
             /** @var ContentObjectRenderer $contentObj */
             $contentObj = GeneralUtility::makeInstance(ContentObjectRenderer::class);
-            $template = $this->cObj->getSubpart($this->template, '###STAFF###');
-
             $out = '';
             foreach ($staffs as $staff) {
                 $out .= $this->renderStaff($template, $staff, $contentObj);
             }
 
-            $this->content .= $this->cObj->substituteSubpart($this->template, '###STAFF###', $out);
+            $this->content .= $markerBaseTemplateService->substituteSubpart($this->template, '###STAFF###', $out);
         }
     }
 
@@ -184,7 +181,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
             $uid = count($uids) > 0 ? $uids[0] : 0;
         }
         if (!$uid) {
-            throw new RuntimeException('No staff selected', 1316088274);
+            throw new \RuntimeException('No staff selected', 1316088274);
         }
 
         /** @var StaffRepository $staffRepository */
@@ -202,8 +199,9 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
         } else {
             $templateFile = $this->conf['templates.']['rdf_staff'];
         }
-        $this->template = $this->cObj->fileResource($templateFile);
-        $template = $this->cObj->getSubpart($this->template, '###STAFF###');
+        $this->template = GeneralUtility::getFileAbsFileName($templateFile);
+        $markerBaseTemplateService = $this->getMarkerBaseTemplateService();
+        $template = $markerBaseTemplateService->getSubpart($this->template, '###STAFF###');
 
         /** @var ContentObjectRenderer $contentObj */
         $contentObj = GeneralUtility::makeInstance(ContentObjectRenderer::class);
@@ -216,7 +214,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      * @return void
      * @throws \RuntimeException
      */
-    protected function personAction()
+    protected function personAction(): void
     {
         /** @var MemberRepository $memberRepository */
         $memberRepository = Factory::getRepository('Member');
@@ -242,8 +240,9 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
         } else {
             $templateFile = $this->conf['templates.']['rdf_person'];
         }
-        $this->template = $this->cObj->fileResource($templateFile);
-        $template = $this->cObj->getSubpart($this->template, '###PERSON###');
+        $this->template = GeneralUtility::getFileAbsFileName($templateFile);
+        $markerBaseTemplateService = $this->getMarkerBaseTemplateService();
+        $template = $markerBaseTemplateService->getSubpart($this->template, '###PERSON###');
 
         /** @var ContentObjectRenderer $contentObj */
         $contentObj = GeneralUtility::makeInstance(ContentObjectRenderer::class);
@@ -256,12 +255,13 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      *
      * @return void
      */
-    protected function directoryAction()
+    protected function directoryAction(): void
     {
         $templateFile = $this->conf['templates.']['directory'];
-        $this->template = $this->cObj->fileResource($templateFile);
-        $emptyTemplate = $this->cObj->getSubpart($this->template, '###DIRECTORY_EMPTY###');
-        $template = $this->cObj->getSubpart($this->template, '###DIRECTORY###');
+        $this->template = GeneralUtility::getFileAbsFileName($templateFile);
+        $markerBaseTemplateService = $this->getMarkerBaseTemplateService();
+        $emptyTemplate = $markerBaseTemplateService->getSubpart($this->template, '###DIRECTORY_EMPTY###');
+        $template = $markerBaseTemplateService->getSubpart($this->template, '###DIRECTORY###');
 
         $subparts = [];
 
@@ -282,7 +282,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
             $this->addLabelMarkers($markers);
             $this->content .= $this->render($emptyTemplate, [], $this->cObj, [], $markers);
         } else {
-            $templateMember = $this->cObj->getSubpart($template, '###MEMBER###');
+            $templateMember = $markerBaseTemplateService->getSubpart($template, '###MEMBER###');
             $out = '';
             foreach ($members as $member) {
                 $out .= $this->renderMember('directory', $templateMember, null, $member, $contentObj);
@@ -307,18 +307,19 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      * @param string $template
      * @param Staff $staff
      * @param ContentObjectRenderer $contentObj
-     * @param boolean $showBackLink
+     * @param bool $showBackLink
      * @return string
      * @throws \RuntimeException
      */
-    protected function renderStaff($template, Staff $staff = null, ContentObjectRenderer $contentObj, $showBackLink = true)
+    protected function renderStaff(string $template, Staff $staff = null, ContentObjectRenderer $contentObj, $showBackLink = true): string
     {
         if ($staff === null) {
             throw new \RuntimeException('Invalid staff', 1316087275);
         }
         $subparts = [];
 
-        $templateDepartment = $this->cObj->getSubpart($template, '###DEPARTMENT###');
+        $markerBaseTemplateService = $this->getMarkerBaseTemplateService();
+        $templateDepartment = $markerBaseTemplateService->getSubpart($template, '###DEPARTMENT###');
 
         // Render the departments
         if ($templateDepartment) {
@@ -330,7 +331,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
             $subparts['###DEPARTMENT###'] = $out;
         }
 
-        if ($this->cObj->getSubpart($template, '###LINK_DETAILS###')) {
+        if ($markerBaseTemplateService->getSubpart($template, '###LINK_DETAILS###')) {
             $subparts['###LINK_DETAILS###'] = $this->getLinkStaff($staff, $showBackLink);
         }
 
@@ -358,7 +359,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      * @return string
      * @throws \RuntimeException
      */
-    protected function renderDepartment($context, $template, Department $department = null, ContentObjectRenderer $contentObj)
+    protected function renderDepartment(string $context, string $template, Department $department = null, ContentObjectRenderer $contentObj): string
     {
         if ($department === null) {
             throw new \RuntimeException('Invalid department', 1316089173);
@@ -368,7 +369,8 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
         // Hide presentation parts if empty
         $subparts['###IF_DESCRIPTION###'] = !$department->getDescription() ? '' : ['', ''];
 
-        $templateMember = $this->cObj->getSubpart($template, '###MEMBER###');
+        $markerBaseTemplateService = $this->getMarkerBaseTemplateService();
+        $templateMember = $markerBaseTemplateService->getSubpart($template, '###MEMBER###');
 
         // Render the departments
         if ($templateMember) {
@@ -402,7 +404,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      * @return string
      * @throws \RuntimeException
      */
-    protected function renderMember($context, $template, Staff $staff = null, Member $member = null, ContentObjectRenderer $contentObj)
+    protected function renderMember(string $context, string $template, Staff $staff = null, Member $member = null, ContentObjectRenderer $contentObj): string
     {
         static $renderedPersons = [];
         if ($member === null) {
@@ -414,7 +416,8 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
             return '';
         }
 
-        $templateStaff = $this->cObj->getSubpart($template, '###STAFF###');
+        $markerBaseTemplateService = $this->getMarkerBaseTemplateService();
+        $templateStaff = $markerBaseTemplateService->getSubpart($template, '###STAFF###');
         $subparts = [];
 
         // Hide presentation parts if empty
@@ -435,7 +438,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
             $subparts['###STAFF###'] = $out;
         }
 
-        if ($this->cObj->getSubpart($template, '###LINK_DETAILS###')) {
+        if ($markerBaseTemplateService->getSubpart($template, '###LINK_DETAILS###')) {
             $subparts['###LINK_DETAILS###'] = $this->getLinkPerson($member, $staff);
         }
         $subparts['###LINK_BACK###'] = $this->getLinkBack();
@@ -462,8 +465,9 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
         }
         $subparts['###IF_MAIN_PHONE###'] = !$data['main_phone'] ? '' : ['', ''];
         if ($member->getImage()) {
+            // TODO: migrate to FAL
             $images = GeneralUtility::trimExplode(',', $member->getImage(), true);
-            $data['photo_url'] = 'http://' . GeneralUtility::getIndpEnv('HTTP_HOST') . '/uploads/pics/' . $images[0];
+            $data['photo_url'] = 'https://' . GeneralUtility::getIndpEnv('HTTP_HOST') . '/uploads/pics/' . $images[0];
         } else {
             $data['photo_url'] = '';
         }
@@ -475,11 +479,11 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
     /**
      * Returns the typolink configuration.
      *
-     * @param integer $uid
+     * @param int $uid
      * @param array $params
      * @return array
      */
-    protected function getTypolinkConf($uid, array $params)
+    protected function getTypolinkConf(int $uid, array $params): array
     {
         $conf = [
             'parameter' => $uid,
@@ -494,11 +498,11 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      * Gets the detail link for a given staff.
      *
      * @param Staff $staff
-     * @param boolean $showBackLink
+     * @param bool $showBackLink
      * @return array
      * @throws RuntimeException
      */
-    protected function getLinkStaff(Staff $staff, $showBackLink = true)
+    protected function getLinkStaff(Staff $staff, bool $showBackLink = true): array
     {
         if (!$this->conf['targets.']['staff']) {
             throw new \RuntimeException('plugin.' . $this->prefixId . '.targets.staff is not properly set', 1316087308);
@@ -521,7 +525,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      * @return array
      * @throws \RuntimeException
      */
-    protected function getLinkPerson(Member $member, Staff $staff = null)
+    protected function getLinkPerson(Member $member, Staff $staff = null): array
     {
         if (!$this->conf['targets.']['person']) {
             throw new \RuntimeException('plugin.' . $this->prefixId . '.targets.person is not properly set', 1316101961);
@@ -533,7 +537,8 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
             $additionalParams['staff'] = $staff->getUid();
         }
         $conf = $this->getTypolinkConf($this->conf['targets.']['person'], $additionalParams);
-        return $this->cObj->typolinkWrap($conf);
+        $k = md5(microtime());
+        return explode($k, $this->cObj->typoLink($k, $conf));
     }
 
     /**
@@ -541,7 +546,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      *
      * @return array
      */
-    public function getLinkBack()
+    public function getLinkBack(): array
     {
         if (isset($this->parameters['back'])) {
             $additionalParams = [];
@@ -549,7 +554,8 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
                 $additionalParams['staff'] = $this->parameters['staff'];
             }
             $conf = $this->getTypolinkConf($this->parameters['back'], $additionalParams);
-            return $this->cObj->typolinkWrap($conf);
+            $k = md5(microtime());
+            return explode($k, $this->cObj->typoLink($k, $conf));
         } else {
             return null;
         }
@@ -561,7 +567,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      * @param array $additionalParams
      * @return void
      */
-    public function addRdfMeta(array $additionalParams)
+    public function addRdfMeta(array $additionalParams): void
     {
         if (!isset($GLOBALS['TSFE']->additionalHeaderData[$this->prefixId . 'foaf'])) {
             // Include the explicit RDF output for client not fair enough to request application/rdf+xml
@@ -578,9 +584,9 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
     /**
      * Checks if client expects an RDF output.
      *
-     * @return boolean
+     * @return bool
      */
-    protected function clientExpectsRdf()
+    protected function clientExpectsRdf(): bool
     {
         $rdf = false;
         if (isset($_SERVER['HTTP_ACCEPT'])) {
@@ -600,13 +606,10 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      * @return void
      * @throws \RuntimeException
      */
-    protected function init(array $settings)
+    protected function init(array $settings): void
     {
         // Initialize default values based on extension TS
-        $this->conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey]);
-        if (!is_array($this->conf)) {
-            $this->conf = [];
-        }
+        $this->conf = $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS'][$this->extKey] ?? [];
 
         // Base configuration is equal to the plugin's TS setup
         $this->conf = array_merge_recursive($this->conf, $settings);

@@ -26,6 +26,7 @@ namespace Causal\Staffdirectory\Domain\Repository;
 
 use Causal\Staffdirectory\Persistence\Dao;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer as ContentObjectRendererAlias;
 
 /**
  * Base class for repositories.
@@ -41,7 +42,7 @@ abstract class AbstractRepository implements \TYPO3\CMS\Core\SingletonInterface
 {
 
     /**
-     * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+     * @var ContentObjectRendererAlias
      */
     protected $cObj;
 
@@ -61,10 +62,10 @@ abstract class AbstractRepository implements \TYPO3\CMS\Core\SingletonInterface
      * @param Dao $dao
      * @return void
      */
-    public function injectDao(Dao $dao = null)
+    public function injectDao(Dao $dao = null): void
     {
         $this->dao = $dao;
-        $this->cObj = $dao ? $dao->getContentObject() : GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class);
+        $this->cObj = $dao ? $dao->getContentObject() : GeneralUtility::makeInstance(ContentObjectRendererAlias::class);
         $this->settings = $dao ? $dao->getSettings() : [];
     }
 
@@ -78,7 +79,7 @@ abstract class AbstractRepository implements \TYPO3\CMS\Core\SingletonInterface
      * @return string The processed string
      * @see \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::parseFunc()
      */
-    protected function RTEcssText($str)
+    protected function RTEcssText(string $str): string
     {
         $parseFunc = $GLOBALS['TSFE']->tmpl->setup['lib.']['parseFunc_RTE.'];
         if (is_array($parseFunc)) {

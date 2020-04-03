@@ -24,7 +24,9 @@
 
 namespace Causal\Staffdirectory\Controller;
 
+use TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Abstract class for the shows extension plugins.
@@ -53,7 +55,7 @@ abstract class AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlu
     /** @var string */
     protected $template;
 
-    /** @var boolean */
+    /** @var bool */
     protected $debug = false;
 
     /**
@@ -61,13 +63,13 @@ abstract class AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlu
      *
      * @param string $template
      * @param array $data Take keys as markers
-     * @param \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObj
+     * @param ContentObjectRenderer $contentObj
      * @param array $tsConfig
      * @param array $markers Additional markers (overrides keys from $data)
      * @param array $subparts Subparts
      * @return string
      */
-    protected function render($template, array $data, \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObj, array $tsConfig = [], array $markers = [], array $subparts = [])
+    protected function render($template, array $data, ContentObjectRenderer $contentObj, array $tsConfig = [], array $markers = [], array $subparts = [])
     {
         if ($this->debug) {
             $this->showDebug($data, 'data');
@@ -104,8 +106,10 @@ abstract class AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlu
             $markers[strtoupper($key)] = $contentObj->cObjGetSingle($config, $tsConfig[$key . '.']);
         }
 
-        $out = $contentObj->substituteMarkerArray($template, $markers, '###|###');
-        $out = $contentObj->substituteSubpartArray($out, $subparts);
+        $markerBaseTemplateService = $this->getMarkerBaseTemplateService();
+        $out = $markerBaseTemplateService->substituteMarkerArray($template, $markers, '###|###');
+        $out = $markerBaseTemplateService->substituteSubpartArray($out, $subparts);
+
         return $out;
     }
 
@@ -132,34 +136,7 @@ abstract class AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlu
      */
     public function pi_loadLL()
     {
-        if (!$this->LOCAL_LANG_loaded) {
-            $basePath = 'EXT:' . $this->extKey . '/Resources/Private/Language/locallang.xlf';
-
-            // Read the strings in the required charset (since TYPO3 4.2)
-            $this->LOCAL_LANG = GeneralUtility::readLLfile($basePath, $this->LLkey, $GLOBALS['TSFE']->renderCharset);
-            if ($this->altLLkey) {
-                $tempLOCAL_LANG = GeneralUtility::readLLfile($basePath, $this->altLLkey);
-                $this->LOCAL_LANG = array_merge(is_array($this->LOCAL_LANG) ? $this->LOCAL_LANG : [], $tempLOCAL_LANG);
-            }
-
-            // Overlaying labels from TypoScript (including fictitious language keys for non-system languages!):
-            $confLL = $this->conf['_LOCAL_LANG.'];
-            if (is_array($confLL)) {
-                foreach ($confLL as $k => $lA) {
-                    if (is_array($lA)) {
-                        $k = substr($k, 0, -1);
-                        foreach ($lA as $llK => $llV) {
-                            if (!is_array($llV)) {
-                                $this->LOCAL_LANG[$k][$llK] = $llV;
-                                // For labels coming from the TypoScript (database) the charset is assumed to be "forceCharset" and if that is not set, assumed to be that of the individual system languages
-                                $this->LOCAL_LANG_charset[$k][$llK] = $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] ? $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'] : $GLOBALS['TSFE']->csConvObj->charSetArray[$k];
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        $this->LOCAL_LANG_loaded = 1;
+        return parent::pi_loadLL('EXT:' . $this->extKey . '/Resources/Private/Language/locallang.xlf');
     }
 
     /**
@@ -169,7 +146,7 @@ abstract class AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlu
      * @param string $header
      * @return void
      */
-    protected function showDebug($var, $header = '')
+    protected function showDebug($var, string $header = ''): void
     {
         \TYPO3\CMS\Core\Utility\DebugUtility::debug($var, $header);
     }
@@ -182,7 +159,7 @@ abstract class AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlu
      * @return void
      * @throws \RuntimeException
      */
-    protected function sanitizeParameters(array $types)
+    protected function sanitizeParameters(array $types): void
     {
         foreach ($types as $key => $type) {
             switch (true) {
@@ -207,6 +184,14 @@ abstract class AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlu
                 unset($this->parameters[$key]);
             }
         }
+    }
+
+    /**
+     * @return MarkerBasedTemplateService
+     */
+    protected function getMarkerBaseTemplateService(): MarkerBasedTemplateService
+    {
+        return GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
     }
 
 }

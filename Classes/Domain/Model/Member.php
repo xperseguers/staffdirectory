@@ -38,7 +38,7 @@ class Member extends AbstractEntity
 {
 
     /**
-     * @var integer
+     * @var int
      */
     protected $person_uid;
 
@@ -113,7 +113,7 @@ class Member extends AbstractEntity
     protected $website;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $gender;
 
@@ -130,36 +130,36 @@ class Member extends AbstractEntity
     /**
      * Default constructor.
      *
-     * @param integer $uid
+     * @param int $uid
      */
-    public function __construct($uid)
+    public function __construct(int $uid)
     {
         parent::__construct($uid);
         $this->staffs = null;
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getPersonUid()
+    public function getPersonUid(): int
     {
         return $this->person_uid;
     }
 
     /**
-     * @param integer $person_uid
+     * @param int $person_uid
      * @return Member
      */
-    public function setPersonUid($person_uid)
+    public function setPersonUid(int $person_uid): Member
     {
-        $this->person_uid = intval($person_uid);
+        $this->person_uid = $person_uid;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getPositionFunction()
+    public function getPositionFunction(): string
     {
         return $this->position_function;
     }
@@ -168,7 +168,7 @@ class Member extends AbstractEntity
      * @param string $position_function
      * @return Member
      */
-    public function setPositionFunction($position_function)
+    public function setPositionFunction(string $position_function): Member
     {
         $this->position_function = $position_function;
         return $this;
@@ -177,7 +177,7 @@ class Member extends AbstractEntity
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -186,7 +186,7 @@ class Member extends AbstractEntity
      * @param string $name
      * @return Member
      */
-    public function setName($name)
+    public function setName(string $name): Member
     {
         $this->name = $name;
         return $this;
@@ -195,7 +195,7 @@ class Member extends AbstractEntity
     /**
      * @return string
      */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->first_name;
     }
@@ -204,7 +204,7 @@ class Member extends AbstractEntity
      * @param string $first_name
      * @return Member
      */
-    public function setFirstName($first_name)
+    public function setFirstName(string $first_name): Member
     {
         $this->first_name = $first_name;
         return $this;
@@ -213,7 +213,7 @@ class Member extends AbstractEntity
     /**
      * @return string
      */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->last_name;
     }
@@ -222,7 +222,7 @@ class Member extends AbstractEntity
      * @param string $last_name
      * @return Member
      */
-    public function setLastName($last_name)
+    public function setLastName(string $last_name): Member
     {
         $this->last_name = $last_name;
         return $this;
@@ -231,7 +231,7 @@ class Member extends AbstractEntity
     /**
      * @return string
      */
-    public function getImage()
+    public function getImage(): string
     {
         return $this->image;
     }
@@ -240,7 +240,7 @@ class Member extends AbstractEntity
      * @param string $image
      * @return Member
      */
-    public function setImage($image)
+    public function setImage(string $image): Member
     {
         $this->image = $image;
         return $this;
@@ -249,7 +249,7 @@ class Member extends AbstractEntity
     /**
      * @return string
      */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->address;
     }
@@ -258,7 +258,7 @@ class Member extends AbstractEntity
      * @param string $address
      * @return Member
      */
-    public function setAddress($address)
+    public function setAddress(string $address): Member
     {
         $this->address = $address;
         return $this;
@@ -267,7 +267,7 @@ class Member extends AbstractEntity
     /**
      * @return string
      */
-    public function getPostalCode()
+    public function getPostalCode(): string
     {
         return $this->postal_code;
     }
@@ -276,7 +276,7 @@ class Member extends AbstractEntity
      * @param string $postal_code
      * @return Member
      */
-    public function setPostalCode($postal_code)
+    public function setPostalCode(string $postal_code): Member
     {
         $this->postal_code = $postal_code;
         return $this;
@@ -285,7 +285,7 @@ class Member extends AbstractEntity
     /**
      * @return string
      */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
@@ -294,7 +294,7 @@ class Member extends AbstractEntity
      * @param string $city
      * @return Member
      */
-    public function setCity($city)
+    public function setCity(string $city): Member
     {
         $this->city = $city;
         return $this;
@@ -303,7 +303,7 @@ class Member extends AbstractEntity
     /**
      * @return string
      */
-    public function getCountry()
+    public function getCountry(): string
     {
         return $this->country;
     }
@@ -312,7 +312,7 @@ class Member extends AbstractEntity
      * @param string $country
      * @return Member
      */
-    public function setCountry($country)
+    public function setCountry(string $country): Member
     {
         $this->country = $country;
         return $this;
@@ -321,7 +321,7 @@ class Member extends AbstractEntity
     /**
      * @return string
      */
-    public function getTelephone()
+    public function getTelephone(): string
     {
         return $this->telephone;
     }
@@ -330,7 +330,7 @@ class Member extends AbstractEntity
      * @param string $telephone
      * @return Member
      */
-    public function setTelephone($telephone)
+    public function setTelephone(string $telephone): Member
     {
         $this->telephone = $telephone;
         return $this;
@@ -339,7 +339,7 @@ class Member extends AbstractEntity
     /**
      * @return string
      */
-    public function getFax()
+    public function getFax(): string
     {
         return $this->fax;
     }
@@ -348,7 +348,7 @@ class Member extends AbstractEntity
      * @param string $fax
      * @return Member
      */
-    public function setFax($fax)
+    public function setFax(string $fax): Member
     {
         $this->fax = $fax;
         return $this;
@@ -357,7 +357,7 @@ class Member extends AbstractEntity
     /**
      * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -366,7 +366,7 @@ class Member extends AbstractEntity
      * @param string $email
      * @return Member
      */
-    public function setEmail($email)
+    public function setEmail(string $email): Member
     {
         $this->email = $email;
         return $this;
@@ -375,16 +375,16 @@ class Member extends AbstractEntity
     /**
      * @return string
      */
-    public function getEmail2()
+    public function getEmail2(): string
     {
         return $this->email2;
     }
 
     /**
      * @param string $email2
-     * @return $this
+     * @return Member
      */
-    public function setEmail2($email2)
+    public function setEmail2(string $email2): Member
     {
         $this->email2 = $email2;
         return $this;
@@ -393,7 +393,7 @@ class Member extends AbstractEntity
     /**
      * @return string
      */
-    public function getWebsite()
+    public function getWebsite(): string
     {
         return $this->website;
     }
@@ -402,34 +402,34 @@ class Member extends AbstractEntity
      * @param string $website
      * @return Member
      */
-    public function setWebsite($website)
+    public function setWebsite(string $website): Member
     {
         $this->website = $website;
         return $this;
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getGender()
+    public function getGender(): int
     {
         return $this->gender;
     }
 
     /**
-     * @param string $gender
+     * @param int $gender
      * @return Member
      */
-    public function setGender($gender)
+    public function setGender(int $gender): Member
     {
-        $this->gender = intval($gender);
+        $this->gender = $gender;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getMobilePhone()
+    public function getMobilePhone(): string
     {
         return $this->mobile_phone;
     }
@@ -438,7 +438,7 @@ class Member extends AbstractEntity
      * @param string $mobile_phone
      * @return Member
      */
-    public function setMobilePhone($mobile_phone)
+    public function setMobilePhone(string $mobile_phone): Member
     {
         $this->mobile_phone = $mobile_phone;
         return $this;
@@ -447,7 +447,7 @@ class Member extends AbstractEntity
     /**
      * @return Staff[]
      */
-    public function getStaffs()
+    public function getStaffs(): array
     {
         if ($this->staffs === null) {
             /** @var \Causal\Staffdirectory\Domain\Repository\MemberRepository $memberRepository */
@@ -461,7 +461,7 @@ class Member extends AbstractEntity
      * @param Staff[] $staffs
      * @return Member
      */
-    public function setStaffs(array $staffs)
+    public function setStaffs(array $staffs): Member
     {
         $this->staffs = $staffs;
         return $this;
@@ -470,7 +470,7 @@ class Member extends AbstractEntity
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name;
     }

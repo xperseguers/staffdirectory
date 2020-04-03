@@ -55,9 +55,9 @@ class Staff extends AbstractEntity
     /**
      * Default constructor.
      *
-     * @param integer $uid
+     * @param int $uid
      */
-    public function __construct($uid)
+    public function __construct(int $uid)
     {
         parent::__construct($uid);
         $this->departments = null;
@@ -66,7 +66,7 @@ class Staff extends AbstractEntity
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -75,7 +75,7 @@ class Staff extends AbstractEntity
      * @param string $name
      * @return Staff
      */
-    public function setName($name)
+    public function setName(string $name): Staff
     {
         $this->name = $name;
         return $this;
@@ -84,7 +84,7 @@ class Staff extends AbstractEntity
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -93,7 +93,7 @@ class Staff extends AbstractEntity
      * @param string $description
      * @return Staff
      */
-    public function setDescription($description)
+    public function setDescription(string $description): Staff
     {
         $this->description = $description;
         return $this;
@@ -102,7 +102,7 @@ class Staff extends AbstractEntity
     /**
      * @return Department[]
      */
-    public function getDepartments()
+    public function getDepartments(): array
     {
         if ($this->departments === null) {
             /** @var \Causal\Staffdirectory\Domain\Repository\StaffRepository $staffRepository */
@@ -116,7 +116,7 @@ class Staff extends AbstractEntity
      * @param Department[] $departments
      * @return Staff
      */
-    public function setDepartments(array $departments)
+    public function setDepartments(array $departments): Staff
     {
         $this->departments = $departments;
         return $this;
@@ -125,7 +125,7 @@ class Staff extends AbstractEntity
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name;
     }

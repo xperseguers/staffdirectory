@@ -47,7 +47,7 @@ class DepartmentRepository extends AbstractRepository
      * @param Staff $staff
      * @return Department[]
      */
-    public function findByStaff(Staff $staff)
+    public function findByStaff(Staff $staff): array
     {
         $departmentsDao = $this->dao->getDepartmentsByStaff($staff->getUid());
         return $this->dao2business($departmentsDao, $staff);
@@ -59,7 +59,7 @@ class DepartmentRepository extends AbstractRepository
      * @param Department $department
      * @return void
      */
-    public function loadMembers(Department $department)
+    public function loadMembers(Department $department): void
     {
         /** @var MemberRepository $memberRepository */
         $memberRepository = Factory::getRepository('Member');
@@ -74,7 +74,7 @@ class DepartmentRepository extends AbstractRepository
      * @param Staff $staff
      * @return Department[]
      */
-    protected function dao2business(array $dao, Staff $staff)
+    protected function dao2business(array $dao, Staff $staff): array
     {
         $ret = [];
         foreach ($dao as $data) {

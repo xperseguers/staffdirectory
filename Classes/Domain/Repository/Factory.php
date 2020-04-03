@@ -51,7 +51,7 @@ class Factory
      * @param Dao $dao
      * @return void
      */
-    public static function injectDao(Dao $dao)
+    public static function injectDao(Dao $dao): void
     {
         self::$dao = $dao;
     }
@@ -62,7 +62,7 @@ class Factory
      * @param string $name
      * @return AbstractRepository
      */
-    public static function getRepository($name)
+    public static function getRepository(string $name): AbstractRepository
     {
         $classPattern = 'Causal\\Staffdirectory\\Domain\\Repository\\%sRepository';
 

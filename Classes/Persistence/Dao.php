@@ -79,7 +79,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * @return array
      */
-    public function getSettings()
+    public function getSettings(): array
     {
         return $this->settings;
     }
@@ -87,7 +87,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * @return ContentObjectRenderer
      */
-    public function getContentObject()
+    public function getContentObject(): ContentObjectRenderer
     {
         return $this->cObj;
     }

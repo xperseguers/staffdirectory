@@ -60,9 +60,9 @@ class Department extends AbstractEntity
     /**
      * Default constructor.
      *
-     * @param integer $uid
+     * @param int $uid
      */
-    public function __construct($uid)
+    public function __construct(int $uid)
     {
         parent::__construct($uid);
         $this->staff = null;
@@ -72,7 +72,7 @@ class Department extends AbstractEntity
     /**
      * @return Staff
      */
-    public function getStaff()
+    public function getStaff(): ?Staff
     {
         return $this->staff;
     }
@@ -81,7 +81,7 @@ class Department extends AbstractEntity
      * @param Staff $staff
      * @return Department
      */
-    public function setStaff(Staff $staff)
+    public function setStaff(Staff $staff): Department
     {
         $this->staff = $staff;
         return $this;
@@ -90,7 +90,7 @@ class Department extends AbstractEntity
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -99,7 +99,7 @@ class Department extends AbstractEntity
      * @param string $name
      * @return Department
      */
-    public function setName($name)
+    public function setName(string $name): Department
     {
         $this->name = $name;
         return $this;
@@ -108,7 +108,7 @@ class Department extends AbstractEntity
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -117,7 +117,7 @@ class Department extends AbstractEntity
      * @param string $description
      * @return Department
      */
-    public function setDescription($description)
+    public function setDescription(string $description): Department
     {
         $this->description = $description;
         return $this;
@@ -126,7 +126,7 @@ class Department extends AbstractEntity
     /**
      * @return Member[]
      */
-    public function getMembers()
+    public function getMembers(): array
     {
         if ($this->members === null) {
             /** @var \Causal\Staffdirectory\Domain\Repository\DepartmentRepository $departmentRepository */
@@ -140,7 +140,7 @@ class Department extends AbstractEntity
      * @param Member[] $members
      * @return Department
      */
-    public function setMembers(array $members)
+    public function setMembers(array $members): Department
     {
         $this->members = $members;
         return $this;
@@ -149,7 +149,7 @@ class Department extends AbstractEntity
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name;
     }

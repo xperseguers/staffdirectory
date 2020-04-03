@@ -38,50 +38,50 @@ abstract class AbstractEntity
 {
 
     /**
-     * @var integer
+     * @var int
      */
     protected $uid;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $pid;
 
     /**
      * Default constructor.
      *
-     * @param integer $uid
+     * @param int $uid
      */
-    public function __construct($uid)
+    public function __construct(int $uid)
     {
-        $this->uid = intval($uid);
+        $this->uid = $uid;
     }
 
     /**
      * Gets the uid.
      *
-     * @return integer
+     * @return int
      */
-    public function getUid()
+    public function getUid(): int
     {
         return $this->uid;
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getPid()
+    public function getPid(): int
     {
         return $this->pid;
     }
 
     /**
-     * @param integer $pid
+     * @param int $pid
      * @return AbstractEntity
      */
-    public function setPid($pid)
+    public function setPid(int $pid): AbstractEntity
     {
-        $this->pid = intval($pid);
+        $this->pid = $pid;
         return $this;
     }
 
@@ -89,8 +89,9 @@ abstract class AbstractEntity
      * Converts this entity as an array of its properties.
      *
      * @return array
+     * @throws \ReflectionException
      */
-    public function toArray()
+    public function toArray(): array
     {
         $reflect = new \ReflectionClass($this);
         $properties = $reflect->getProperties(\ReflectionProperty::IS_PUBLIC | \ReflectionProperty::IS_PROTECTED);
@@ -102,7 +103,7 @@ abstract class AbstractEntity
             if (!is_array($value)) {
                 $ret[$property->getName()] = (string)$value;
             }
-            if ($value instanceof \Tx_StaffDirectory_Domain_Model_AbstractEntity) {
+            if ($value instanceof AbstractEntity) {
                 $ret[$property->getName() . '_uid'] = $value->getUid();
             }
         }
@@ -114,7 +115,7 @@ abstract class AbstractEntity
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return strtoupper(get_class($this));
     }

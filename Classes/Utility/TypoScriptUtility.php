@@ -48,9 +48,8 @@ class TypoScriptUtility
      * @param array $settings
      * @return array
      */
-    public static function preprocessConfiguration(ContentObjectRenderer $cObj, array $settings)
+    public static function preprocessConfiguration(ContentObjectRenderer $cObj, array $settings): array
     {
-
         // Pre-process global parameters
         $globalParameters = [
             0 => 'displayMode',
@@ -86,7 +85,7 @@ class TypoScriptUtility
      * @param string|array $parameter
      * @return void
      */
-    public static function applyStdWrap(ContentObjectRenderer $cObj, array &$settings, $key, $parameter)
+    public static function applyStdWrap(ContentObjectRenderer $cObj, array &$settings, string $key, $parameter): void
     {
         if (is_array($parameter)) {
             foreach ($parameter as $k => $p) {
@@ -114,7 +113,7 @@ class TypoScriptUtility
      * @param array $globalSetup
      * @return array
      */
-    public static function getMergedConfiguration(array $settings, array $parameters, array $globalSetup)
+    public static function getMergedConfiguration(array $settings, array $parameters, array $globalSetup): array
     {
         // Business processing of configuration
         //$settings = self::processSHOW($settings);
