@@ -64,12 +64,12 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface {
 	public function __construct(array $settings, ContentObjectRenderer $cObj) {
 		$this->settings = $settings;
 		$this->cObj = $cObj;
-		$this->t = array(
+		$this->t = [
 			'staff'      => 'tx_staffdirectory_staffs',
 			'department' => 'tx_staffdirectory_departments',
 			'member'     => 'tx_staffdirectory_members',
 			'person'     => 'fe_users',
-		);
+        ];
 	}
 
 	/**
@@ -121,7 +121,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface {
 		);
 
 		$rows = $this->getRecordsOverlays($this->t['staff'], $rows);
-		return (count($rows) > 0) ? $rows[0] : array();
+		return (count($rows) > 0) ? $rows[0] : [];
 	}
 
 	/**
@@ -200,7 +200,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface {
 		);
 
 			// Remove duplicate persons
-		$temp = array();
+		$temp = [];
 		foreach ($rows as $row) {
 			$temp[$row['person_id']] = $row;
 		}
@@ -233,7 +233,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface {
 		);
 
 		$rows = $this->getRecordsOverlays($this->t['member'], $rows);
-		return (count($rows) > 0) ? $rows[0] : array();
+		return (count($rows) > 0) ? $rows[0] : [];
 	}
 
 	/**
@@ -290,7 +290,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface {
 		);
 
 			// Remove duplicated persons
-		$temp = array();
+		$temp = [];
 		foreach ($rows as $row) {
 			$temp[$row['person_id']] = $row;
 		}
@@ -336,7 +336,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface {
 	 */
 	protected function getFields($table, $fields) {
 		$fields = GeneralUtility::trimExplode(',', $fields);
-		$fqFields = array();
+		$fqFields = [];
 		foreach ($fields as $field) {
 			$fqFields[] = $table . '.' . $field;
 		}

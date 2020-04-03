@@ -50,7 +50,7 @@ class TypoScriptUtility {
 	public static function preprocessConfiguration(ContentObjectRenderer $cObj, array $settings) {
 
 			// Pre-process global parameters
-		$globalParameters = array(
+		$globalParameters = [
 			0 => 'displayMode',
 			1 => 'enableRdf',
 			2 => 'staffs',
@@ -60,13 +60,13 @@ class TypoScriptUtility {
 			98 => 'debug',
 			99 => 'showRenderTime',
 
-			'targets.' => array(
+			'targets.' => [
 				'staff', 'person'
-			),
-			'templates.' => array(
+            ],
+			'templates.' => [
 				'list', 'staff', 'person'
-			),
-		);
+            ],
+        ];
 
 		foreach ($globalParameters as $key => $parameter) {
 			self::applyStdWrap($cObj, $settings, $key, $parameter);

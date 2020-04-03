@@ -89,7 +89,7 @@ abstract class AbstractEntity {
 		$reflect = new \ReflectionClass($this);
 		$properties = $reflect->getProperties(\ReflectionProperty::IS_PUBLIC | \ReflectionProperty::IS_PROTECTED);
 
-		$ret = array();
+		$ret = [];
 		foreach ($properties as $property) {
             $property->setAccessible(TRUE);
             $value = $property->getValue($this);

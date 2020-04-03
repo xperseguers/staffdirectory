@@ -140,7 +140,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 
 		if ($this->conf['staffs']) {
 			$uids = GeneralUtility::intExplode(',', $this->conf['staffs']);
-			$staffs = array();
+			$staffs = [];
 			foreach ($uids as $uid) {
 				$staffs[] = $staffRepository->findByUid($uid);
 			}
@@ -149,9 +149,9 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 		}
 
 		if (count($staffs) == 0) {
-			$markers = array();
+			$markers = [];
 			$this->addLabelMarkers($markers);
-			$this->content .= $this->render($emptyTemplate, array(), $this->cObj, array(), $markers);
+			$this->content .= $this->render($emptyTemplate, [], $this->cObj, [], $markers);
 		} else {
 			/** @var ContentObjectRenderer $contentObj */
 			$contentObj = GeneralUtility::makeInstance(ContentObjectRenderer::class);
@@ -189,9 +189,9 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 
 		if ($this->format !== 'rdf') {
 			if ($this->conf['enableRdf']) {
-				$this->addRdfMeta(array(
+				$this->addRdfMeta([
 					'staff' => $staff->getUid(),
-				));
+                ]);
 			}
 
 			$templateFile = $this->conf['templates.']['staff'];
@@ -228,9 +228,9 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 
 		if ($this->format !== 'rdf') {
 			if ($this->conf['enableRdf']) {
-				$this->addRdfMeta(array(
+				$this->addRdfMeta([
 					'member' => $member->getUid(),
-				));
+                ]);
 			}
 
 			$templateFile = $this->conf['templates.']['person'];
@@ -257,7 +257,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 		$emptyTemplate = $this->cObj->getSubpart($this->template, '###DIRECTORY_EMPTY###');
 		$template = $this->cObj->getSubpart($this->template, '###DIRECTORY###');
 
-		$subparts = array();
+		$subparts = [];
 
 		/** @var ContentObjectRenderer $contentObj */
 		$contentObj = GeneralUtility::makeInstance(ContentObjectRenderer::class);
@@ -272,9 +272,9 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 		}
 
 		if (count($members) == 0) {
-			$markers = array();
+			$markers = [];
 			$this->addLabelMarkers($markers);
-			$this->content .= $this->render($emptyTemplate, array(), $this->cObj, array(), $markers);
+			$this->content .= $this->render($emptyTemplate, [], $this->cObj, [], $markers);
 		} else {
 			$templateMember = $this->cObj->getSubpart($template, '###MEMBER###');
 			$out = '';
@@ -283,15 +283,15 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 			}
 			$subparts['###MEMBER###'] = $out;
 
-			$markers = array();
+			$markers = [];
 			$this->addLabelMarkers($markers);
 
 			$tsConfig = isset($this->conf['render.']['staff.']) ? $this->conf['render.']['staff.'] : '';
 			if (!is_array($tsConfig)) {
-				$tsConfig = array();
+				$tsConfig = [];
 			}
 
-			$this->content .= $this->render($template, array(), $contentObj, $tsConfig, $markers, $subparts);
+			$this->content .= $this->render($template, [], $contentObj, $tsConfig, $markers, $subparts);
 		}
 	}
 
@@ -309,7 +309,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 		if ($staff === NULL) {
 			throw new \RuntimeException('Invalid staff', 1316087275);
 		}
-		$subparts = array();
+		$subparts = [];
 
 		$templateDepartment = $this->cObj->getSubpart($template, '###DEPARTMENT###');
 
@@ -328,14 +328,14 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 		}
 
 		$subparts['###LINK_BACK###'] = $this->getLinkBack();
-		$subparts['###IF_BACK###'] = !$subparts['###LINK_BACK###'] ? '' : array('', '');
+		$subparts['###IF_BACK###'] = !$subparts['###LINK_BACK###'] ? '' : ['', ''];
 
-		$markers = array();
+		$markers = [];
 		$this->addLabelMarkers($markers);
 
 		$tsConfig = isset($this->conf['render.']['staff.']) ? $this->conf['render.']['staff.'] : '';
 		if (!is_array($tsConfig)) {
-			$tsConfig = array();
+			$tsConfig = [];
 		}
 
 		return $this->render($template, $staff->toArray(), $contentObj, $tsConfig, $markers, $subparts);
@@ -355,10 +355,10 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 		if ($department === NULL) {
 			throw new \RuntimeException('Invalid department', 1316089173);
 		}
-		$subparts = array();
+		$subparts = [];
 
 			// Hide presentation parts if empty
-		$subparts['###IF_DESCRIPTION###'] = !$department->getDescription() ? '' : array('', '');
+		$subparts['###IF_DESCRIPTION###'] = !$department->getDescription() ? '' : ['', ''];
 
 		$templateMember = $this->cObj->getSubpart($template, '###MEMBER###');
 
@@ -372,12 +372,12 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 			$subparts['###MEMBER###'] = $out;
 		}
 
-		$markers = array();
+		$markers = [];
 		$this->addLabelMarkers($markers);
 
 		$tsConfig = isset($this->conf['render.']['department.']) ? $this->conf['render.']['department.'] : '';
 		if (!is_array($tsConfig)) {
-			$tsConfig = array();
+			$tsConfig = [];
 		}
 
 		return $this->render($template, $department->toArray(), $contentObj, $tsConfig, $markers, $subparts);
@@ -395,7 +395,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 	 * @throws \RuntimeException
 	 */
 	protected function renderMember($context, $template, Staff $staff = NULL, Member $member = NULL, ContentObjectRenderer $contentObj) {
-		static $renderedPersons = array();
+		static $renderedPersons = [];
 		if ($member === NULL) {
 			throw new \RuntimeException('Invalid member', 1316091823);
 		}
@@ -406,17 +406,17 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 		}
 
 		$templateStaff = $this->cObj->getSubpart($template, '###STAFF###');
-		$subparts = array();
+		$subparts = [];
 
 			// Hide presentation parts if empty
-		$subparts['###IF_POSITION_FUNCTION###'] = !$member->getPositionFunction() ? '' : array('', '');
-		$subparts['###IF_ADDRESS###'] = !$member->getAddress() ? '' : array('', '');
-		$subparts['###IF_TELEPHONE###'] = !$member->getTelephone() ? '' : array('', '');
-		$subparts['###IF_FAX###'] = !$member->getFax() ? '' : array('', '');
-		$subparts['###IF_MOBILE_PHONE###'] = !$member->getMobilePhone() ? '' : array('', '');
-		$subparts['###IF_EMAIL###'] = !$member->getEmail() ? '' : array('', '');
-		$subparts['###IF_EMAIL2###'] = !$member->getEmail2() ? '' : array('', '');
-		$subparts['###IF_WEBSITE###'] = !$member->getWebsite() ? '' : array('', '');
+		$subparts['###IF_POSITION_FUNCTION###'] = !$member->getPositionFunction() ? '' : ['', ''];
+		$subparts['###IF_ADDRESS###'] = !$member->getAddress() ? '' : ['', ''];
+		$subparts['###IF_TELEPHONE###'] = !$member->getTelephone() ? '' : ['', ''];
+		$subparts['###IF_FAX###'] = !$member->getFax() ? '' : ['', ''];
+		$subparts['###IF_MOBILE_PHONE###'] = !$member->getMobilePhone() ? '' : ['', ''];
+		$subparts['###IF_EMAIL###'] = !$member->getEmail() ? '' : ['', ''];
+		$subparts['###IF_EMAIL2###'] = !$member->getEmail2() ? '' : ['', ''];
+		$subparts['###IF_WEBSITE###'] = !$member->getWebsite() ? '' : ['', ''];
 
 		if ($templateStaff) {
 			$out = '';
@@ -430,14 +430,14 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 			$subparts['###LINK_DETAILS###'] = $this->getLinkPerson($member, $staff);
 		}
 		$subparts['###LINK_BACK###'] = $this->getLinkBack();
-		$subparts['###IF_BACK###'] = !$subparts['###LINK_BACK###'] ? '' : array('', '');
+		$subparts['###IF_BACK###'] = !$subparts['###LINK_BACK###'] ? '' : ['', ''];
 
-		$markers = array();
+		$markers = [];
 		$this->addLabelMarkers($markers);
 
 		$tsConfig = isset($this->conf['render.'][$context . '_member.']) ? $this->conf['render.'][$context . '_member.'] : '';
 		if (!is_array($tsConfig)) {
-			$tsConfig = array();
+			$tsConfig = [];
 		}
 
 		$renderedPersons[] = $member->getPersonUid();
@@ -451,14 +451,14 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 		} else {
 			$data['main_phone'] = '';
 		}
-		$subparts['###IF_MAIN_PHONE###'] = !$data['main_phone'] ? '' : array('', '');
+		$subparts['###IF_MAIN_PHONE###'] = !$data['main_phone'] ? '' : ['', ''];
 		if ($member->getImage()) {
 			$images = t3lib_div::trimExplode(',', $member->getImage(), TRUE);
 			$data['photo_url'] = 'http://' . t3lib_div::getIndpEnv('HTTP_HOST') . '/uploads/pics/' . $images[0];
 		} else {
 			$data['photo_url'] = '';
 		}
-		$subparts['###IF_PHOTO_URL###'] = !$data['photo_url'] ? '' : array('', '');
+		$subparts['###IF_PHOTO_URL###'] = !$data['photo_url'] ? '' : ['', ''];
 
 		return $this->render($template, $data, $contentObj, $tsConfig, $markers, $subparts);
 	}
@@ -471,12 +471,12 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 	 * @return array
 	 */
 	protected function getTypolinkConf($uid, array $params) {
-		$conf = array(
+		$conf = [
 			'parameter' => $uid,
 			'useCacheHash' => 1,
 			'no_cache' => 0,
 			'additionalParams' => GeneralUtility::implodeArrayForUrl($this->prefixId, $params, '', TRUE),
-		);
+        ];
 		return $conf;
 	}
 
@@ -494,7 +494,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 		}
 
 		// TODO: make back link work in cascade
-		$additionalParams = array('staff' => $staff->getUid());
+		$additionalParams = ['staff' => $staff->getUid()];
 		if ($showBackLink) {
 			$additionalParams['back'] = $GLOBALS['TSFE']->id;
 		}
@@ -516,7 +516,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 		}
 
 		// TODO: make back link work in cascade
-		$additionalParams = array('member' => $member->getUid(), 'back' => $GLOBALS['TSFE']->id);
+		$additionalParams = ['member' => $member->getUid(), 'back' => $GLOBALS['TSFE']->id];
 		if ($staff) {
 			$additionalParams['staff'] = $staff->getUid();
 		}
@@ -531,7 +531,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 	 */
 	public function getLinkBack() {
 		if (isset($this->parameters['back'])) {
-			$additionalParams = array();
+			$additionalParams = [];
 			if (isset($this->parameters['staff'])) {
 				$additionalParams['staff'] = $this->parameters['staff'];
 			}
@@ -589,7 +589,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 			// Initialize default values based on extension TS
 		$this->conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey]);
 		if (!is_array($this->conf)) {
-			$this->conf = array();
+			$this->conf = [];
 		}
 
 			// Base configuration is equal to the plugin's TS setup
@@ -614,7 +614,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 		$piFlexForm = $this->cObj->data['pi_flexform'];
 
 		if (is_array($piFlexForm['data'])) {
-			$multiValueKeys = array();
+			$multiValueKeys = [];
 				// Traverse the entire array based on the language
 				// and assign each configuration option to $this->settings array...
 			foreach ($piFlexForm['data'] as $sheet => $data) {
@@ -625,7 +625,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 							// Funny, FF contains a comma-separated list of key|value and
 							// we only want to have key...
 							$tempValues = explode(',', $value);
-							$tempKeys = array();
+							$tempKeys = [];
 							foreach ($tempValues as $tempValue) {
 								list($k, $v) = explode('|', $tempValue);
 								$tempKeys[] = $k;
@@ -642,13 +642,13 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 
 		$this->parameters = GeneralUtility::_GET($this->prefixId);
 		if (!is_array($this->parameters)) {
-			$this->parameters = array();
+			$this->parameters = [];
 		}
-		$this->sanitizeParameters(array(
+		$this->sanitizeParameters([
 			'staff' => 'int+',
 			'member' => 'int+',
 			'back' => 'int+',
-		));
+        ]);
 
 			// Merge configuration with business logic and local override TypoScript (myTS)
 		$this->conf = TypoScriptUtility::getMergedConfiguration($this->conf, $this->parameters, $GLOBALS['TSFE']->tmpl->setup);

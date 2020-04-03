@@ -59,7 +59,7 @@ class MemberRepository extends AbstractRepository {
 	public function findByUid($uid) {
 		$memberDao = $this->dao->getMemberByUid($uid);
 		if ($memberDao) {
-			$members = $this->dao2business(array($memberDao));
+			$members = $this->dao2business([$memberDao]);
 			return $members[0];
 		}
 		return NULL;
@@ -122,7 +122,7 @@ class MemberRepository extends AbstractRepository {
 	 * @return Member[]
 	 */
 	protected function dao2business(array $dao) {
-		$ret = array();
+		$ret = [];
 		foreach ($dao as $data) {
 			/** @var Member $member */
 			$member = GeneralUtility::makeInstance(Member::class, $data['uid']);

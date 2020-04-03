@@ -59,7 +59,7 @@ class StaffRepository extends AbstractRepository {
 	public function findByUid($uid) {
 		$staffDao = $this->dao->getStaffByUid($uid);
 		if ($staffDao) {
-			$staffs = $this->dao2business(array($staffDao));
+			$staffs = $this->dao2business([$staffDao]);
 			return $staffs[0];
 		}
 		return NULL;
@@ -96,7 +96,7 @@ class StaffRepository extends AbstractRepository {
 	 * @return Staff[]
 	 */
 	protected function dao2business(array $dao) {
-		$ret = array();
+		$ret = [];
 		foreach ($dao as $data) {
 			/** @var Staff $staff */
 			$staff = GeneralUtility::makeInstance(Staff::class, $data['uid']);

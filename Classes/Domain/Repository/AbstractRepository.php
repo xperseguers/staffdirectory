@@ -63,7 +63,7 @@ abstract class AbstractRepository implements \TYPO3\CMS\Core\SingletonInterface 
 	public function injectDao(Dao $dao = NULL) {
 		$this->dao = $dao;
 		$this->cObj = $dao ? $dao->getContentObject() : GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class);
-		$this->settings = $dao ? $dao->getSettings() : array();
+		$this->settings = $dao ? $dao->getSettings() : [];
 	}
 
 	/**

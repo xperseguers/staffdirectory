@@ -72,7 +72,7 @@ class DepartmentRepository extends AbstractRepository {
 	 * @return Department[]
 	 */
 	protected function dao2business(array $dao, Staff $staff) {
-		$ret = array();
+		$ret = [];
 		foreach ($dao as $data) {
 			/** @var Department $department */
 			$department = GeneralUtility::makeInstance(Department::class, $data['uid']);

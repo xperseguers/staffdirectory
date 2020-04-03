@@ -66,7 +66,7 @@ abstract class AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlu
 	 * @param array $subparts Subparts
 	 * @return string
 	 */
-	protected function render($template, array $data, \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObj, array $tsConfig = array(), array $markers = array(), array $subparts = array()) {
+	protected function render($template, array $data, \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObj, array $tsConfig = [], array $markers = [], array $subparts = []) {
 		if ($this->debug) {
 			$this->showDebug($data, 'data');
 		}
@@ -135,7 +135,7 @@ abstract class AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlu
 			$this->LOCAL_LANG = GeneralUtility::readLLfile($basePath, $this->LLkey, $GLOBALS['TSFE']->renderCharset);
 			if ($this->altLLkey) {
 				$tempLOCAL_LANG = GeneralUtility::readLLfile($basePath, $this->altLLkey);
-				$this->LOCAL_LANG = array_merge(is_array($this->LOCAL_LANG) ? $this->LOCAL_LANG : array(), $tempLOCAL_LANG);
+				$this->LOCAL_LANG = array_merge(is_array($this->LOCAL_LANG) ? $this->LOCAL_LANG : [], $tempLOCAL_LANG);
 			}
 
 				// Overlaying labels from TypoScript (including fictitious language keys for non-system languages!):
