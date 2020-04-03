@@ -292,7 +292,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
             $this->t['member']
             . ' INNER JOIN ' . $this->t['person'] . ' ON ' . $this->t['person'] . '.uid=' . $this->t['member'] . '.feuser_id'
             . ' INNER JOIN ' . $this->t['department'] . ' ON ' . $this->t['department'] . '.uid=' . $this->t['member'] . '.department',
-            $this->t['department'] . '.staff IN (' . implode(',', t3lib_div::intExplode(',', $staffs, TRUE)) . ')'
+            $this->t['department'] . '.staff IN (' . implode(',', GeneralUtility::intExplode(',', $staffs, true)) . ')'
             . ' AND ' . $this->t['member'] . '.sys_language_uid=0'
             . $this->cObj->enableFields($this->t['member'])
             . $this->cObj->enableFields($this->t['person'])

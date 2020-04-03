@@ -54,7 +54,7 @@ abstract class AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlu
     protected $template;
 
     /** @var boolean */
-    protected $debug = FALSE;
+    protected $debug = false;
 
     /**
      * Renders a HTML template with markers.
@@ -185,7 +185,7 @@ abstract class AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlu
     protected function sanitizeParameters(array $types)
     {
         foreach ($types as $key => $type) {
-            switch (TRUE) {
+            switch (true) {
                 case $type === 'bool':
                     $OK = isset($this->parameters[$key])
                         && (string)((bool)$this->parameters[$key] ? 1 : 0) === $this->parameters[$key];

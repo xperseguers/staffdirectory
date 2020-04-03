@@ -60,7 +60,7 @@ class Staff extends AbstractEntity
     public function __construct($uid)
     {
         parent::__construct($uid);
-        $this->departments = NULL;
+        $this->departments = null;
     }
 
     /**
@@ -104,7 +104,7 @@ class Staff extends AbstractEntity
      */
     public function getDepartments()
     {
-        if ($this->departments === NULL) {
+        if ($this->departments === null) {
             /** @var \Causal\Staffdirectory\Domain\Repository\StaffRepository $staffRepository */
             $staffDirectoryRepository = \Causal\Staffdirectory\Domain\Repository\Factory::getRepository('Staff');
             $staffDirectoryRepository->loadDepartments($this);

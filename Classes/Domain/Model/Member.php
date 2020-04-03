@@ -135,7 +135,7 @@ class Member extends AbstractEntity
     public function __construct($uid)
     {
         parent::__construct($uid);
-        $this->staffs = NULL;
+        $this->staffs = null;
     }
 
     /**
@@ -449,7 +449,7 @@ class Member extends AbstractEntity
      */
     public function getStaffs()
     {
-        if ($this->staffs === NULL) {
+        if ($this->staffs === null) {
             /** @var \Causal\Staffdirectory\Domain\Repository\MemberRepository $memberRepository */
             $memberDirectoryRepository = \Causal\Staffdirectory\Domain\Repository\Factory::getRepository('Member');
             $memberDirectoryRepository->loadStaffs($this);

@@ -65,8 +65,8 @@ class Department extends AbstractEntity
     public function __construct($uid)
     {
         parent::__construct($uid);
-        $this->staff = NULL;
-        $this->members = NULL;
+        $this->staff = null;
+        $this->members = null;
     }
 
     /**
@@ -128,7 +128,7 @@ class Department extends AbstractEntity
      */
     public function getMembers()
     {
-        if ($this->members === NULL) {
+        if ($this->members === null) {
             /** @var \Causal\Staffdirectory\Domain\Repository\DepartmentRepository $departmentRepository */
             $departmentDirectoryRepository = \Causal\Staffdirectory\Domain\Repository\Factory::getRepository('Department');
             $departmentDirectoryRepository->loadMembers($this);

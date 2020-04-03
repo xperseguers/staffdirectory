@@ -48,12 +48,12 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
 
     public $prefixId = 'tx_staffdirectory_pi1';
     public $scriptRelPath = 'Classes/Controller/Pi1/Pi1Controller.php';
-    public $pi_checkCHash = TRUE;
+    public $pi_checkCHash = true;
 
     /**
      * @var boolean
      */
-    protected $isCachable = TRUE;
+    protected $isCachable = true;
 
     /**
      * @var string
@@ -79,7 +79,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
             $this->showDebug($this->parameters, 'Parameters of ' . $this->prefixId);
         }
 
-        $start = microtime(TRUE);
+        $start = microtime(true);
         $this->content = '';
 
         if ($this->conf['enableRdf'] && $this->clientExpectsRdf()) {
@@ -103,7 +103,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
                 throw new RuntimeException('Invalid display mode "' . $this->conf['displayMode'] . '"', 1316091409);
         }
 
-        $end = microtime(TRUE) - $start;
+        $end = microtime(true) - $start;
 
         if ($this->conf['showRenderTime']) {
             $this->content .= '<!-- ' . $this->prefixId . ' rendered in ' . $end . ' sec -->';
@@ -220,7 +220,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
     {
         /** @var MemberRepository $memberRepository */
         $memberRepository = Factory::getRepository('Member');
-        $member = NULL;
+        $member = null;
 
         if (isset($this->conf['person']) && $this->conf['person'] > 0) {
             $member = $memberRepository->findOneByPersonUid($this->conf['person']);
@@ -248,7 +248,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
         /** @var ContentObjectRenderer $contentObj */
         $contentObj = GeneralUtility::makeInstance(ContentObjectRenderer::class);
 
-        $this->content .= $this->renderMember('person', $template, NULL, $member, $contentObj);
+        $this->content .= $this->renderMember('person', $template, null, $member, $contentObj);
     }
 
     /**
@@ -285,7 +285,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
             $templateMember = $this->cObj->getSubpart($template, '###MEMBER###');
             $out = '';
             foreach ($members as $member) {
-                $out .= $this->renderMember('directory', $templateMember, NULL, $member, $contentObj);
+                $out .= $this->renderMember('directory', $templateMember, null, $member, $contentObj);
             }
             $subparts['###MEMBER###'] = $out;
 
@@ -311,9 +311,9 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      * @return string
      * @throws \RuntimeException
      */
-    protected function renderStaff($template, Staff $staff = NULL, ContentObjectRenderer $contentObj, $showBackLink = TRUE)
+    protected function renderStaff($template, Staff $staff = null, ContentObjectRenderer $contentObj, $showBackLink = true)
     {
-        if ($staff === NULL) {
+        if ($staff === null) {
             throw new \RuntimeException('Invalid staff', 1316087275);
         }
         $subparts = [];
@@ -358,9 +358,9 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      * @return string
      * @throws \RuntimeException
      */
-    protected function renderDepartment($context, $template, Department $department = NULL, ContentObjectRenderer $contentObj)
+    protected function renderDepartment($context, $template, Department $department = null, ContentObjectRenderer $contentObj)
     {
-        if ($department === NULL) {
+        if ($department === null) {
             throw new \RuntimeException('Invalid department', 1316089173);
         }
         $subparts = [];
@@ -402,10 +402,10 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      * @return string
      * @throws \RuntimeException
      */
-    protected function renderMember($context, $template, Staff $staff = NULL, Member $member = NULL, ContentObjectRenderer $contentObj)
+    protected function renderMember($context, $template, Staff $staff = null, Member $member = null, ContentObjectRenderer $contentObj)
     {
         static $renderedPersons = [];
-        if ($member === NULL) {
+        if ($member === null) {
             throw new \RuntimeException('Invalid member', 1316091823);
         }
 
@@ -430,7 +430,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
         if ($templateStaff) {
             $out = '';
             foreach ($member->getStaffs() as $staff) {
-                $out .= $this->renderStaff($templateStaff, $staff, $contentObj, FALSE);
+                $out .= $this->renderStaff($templateStaff, $staff, $contentObj, false);
             }
             $subparts['###STAFF###'] = $out;
         }
@@ -462,8 +462,8 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
         }
         $subparts['###IF_MAIN_PHONE###'] = !$data['main_phone'] ? '' : ['', ''];
         if ($member->getImage()) {
-            $images = t3lib_div::trimExplode(',', $member->getImage(), TRUE);
-            $data['photo_url'] = 'http://' . t3lib_div::getIndpEnv('HTTP_HOST') . '/uploads/pics/' . $images[0];
+            $images = GeneralUtility::trimExplode(',', $member->getImage(), true);
+            $data['photo_url'] = 'http://' . GeneralUtility::getIndpEnv('HTTP_HOST') . '/uploads/pics/' . $images[0];
         } else {
             $data['photo_url'] = '';
         }
@@ -485,7 +485,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
             'parameter' => $uid,
             'useCacheHash' => 1,
             'no_cache' => 0,
-            'additionalParams' => GeneralUtility::implodeArrayForUrl($this->prefixId, $params, '', TRUE),
+            'additionalParams' => GeneralUtility::implodeArrayForUrl($this->prefixId, $params, '', true),
         ];
         return $conf;
     }
@@ -498,7 +498,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      * @return array
      * @throws RuntimeException
      */
-    protected function getLinkStaff(Staff $staff, $showBackLink = TRUE)
+    protected function getLinkStaff(Staff $staff, $showBackLink = true)
     {
         if (!$this->conf['targets.']['staff']) {
             throw new \RuntimeException('plugin.' . $this->prefixId . '.targets.staff is not properly set', 1316087308);
@@ -521,7 +521,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      * @return array
      * @throws \RuntimeException
      */
-    protected function getLinkPerson(Member $member, Staff $staff = NULL)
+    protected function getLinkPerson(Member $member, Staff $staff = null)
     {
         if (!$this->conf['targets.']['person']) {
             throw new \RuntimeException('plugin.' . $this->prefixId . '.targets.person is not properly set', 1316101961);
@@ -551,7 +551,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
             $conf = $this->getTypolinkConf($this->parameters['back'], $additionalParams);
             return $this->cObj->typolinkWrap($conf);
         } else {
-            return NULL;
+            return null;
         }
     }
 
@@ -582,7 +582,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
      */
     protected function clientExpectsRdf()
     {
-        $rdf = FALSE;
+        $rdf = false;
         if (isset($_SERVER['HTTP_ACCEPT'])) {
             $accept = GeneralUtility::trimExplode(',', $_SERVER['HTTP_ACCEPT']);
             $accept = GeneralUtility::trimExplode(';', $accept[0]);

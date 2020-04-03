@@ -65,7 +65,7 @@ class MemberRepository extends AbstractRepository
             $members = $this->dao2business([$memberDao]);
             return $members[0];
         }
-        return NULL;
+        return null;
     }
 
     /**
@@ -81,7 +81,7 @@ class MemberRepository extends AbstractRepository
             $members = $this->dao2business($membersDao);
             return $members[0];
         }
-        return NULL;
+        return null;
     }
 
     /**

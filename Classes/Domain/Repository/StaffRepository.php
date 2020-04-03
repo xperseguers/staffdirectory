@@ -65,7 +65,7 @@ class StaffRepository extends AbstractRepository
             $staffs = $this->dao2business([$staffDao]);
             return $staffs[0];
         }
-        return NULL;
+        return null;
     }
 
     /**

@@ -97,7 +97,7 @@ abstract class AbstractEntity
 
         $ret = [];
         foreach ($properties as $property) {
-            $property->setAccessible(TRUE);
+            $property->setAccessible(true);
             $value = $property->getValue($this);
             if (!is_array($value)) {
                 $ret[$property->getName()] = (string)$value;

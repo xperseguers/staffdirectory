@@ -61,7 +61,7 @@ abstract class AbstractRepository implements \TYPO3\CMS\Core\SingletonInterface
      * @param Dao $dao
      * @return void
      */
-    public function injectDao(Dao $dao = NULL)
+    public function injectDao(Dao $dao = null)
     {
         $this->dao = $dao;
         $this->cObj = $dao ? $dao->getContentObject() : GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class);
