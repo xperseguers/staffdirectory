@@ -4,7 +4,7 @@ defined('TYPO3_MODE') || die ('Access denied.');
 $tempColumns = [
     'tx_staffdirectory_mobilephone' => [
         'exclude' => 0,
-        'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:fe_users.tx_staffdirectory_mobilephone',
+        'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:fe_users.tx_staffdirectory_mobilephone',
         'config' => [
             'type' => 'input',
             'size' => '20',
@@ -14,12 +14,12 @@ $tempColumns = [
     ],
     'tx_staffdirectory_gender' => [
         'exclude' => 0,
-        'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:fe_users.tx_staffdirectory_gender',
+        'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:fe_users.tx_staffdirectory_gender',
         'config' => [
             'type' => 'select',
             'items' => [
-                ['LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:fe_users.tx_staffdirectory_gender.I.0', '0'],
-                ['LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:fe_users.tx_staffdirectory_gender.I.1', '1'],
+                ['LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:fe_users.tx_staffdirectory_gender.I.0', '0'],
+                ['LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:fe_users.tx_staffdirectory_gender.I.1', '1'],
             ],
             'size' => 1,
             'maxitems' => 1,
@@ -44,7 +44,7 @@ $tempColumns = [
 
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY . '_pi1'] = 'layout,select_key';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin([
-    'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tt_content.list_type_pi1',
+    'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tt_content.list_type_pi1',
     $_EXTKEY . '_pi1',
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'ext_icon.gif'
 ], 'list_type');

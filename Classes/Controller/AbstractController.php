@@ -110,7 +110,7 @@ abstract class AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlu
     }
 
     /**
-     * Adds all labels from locallang.xml.
+     * Adds all labels from locallang.xlf.
      *
      * @param array $markers
      * @return void
@@ -133,7 +133,7 @@ abstract class AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlu
     public function pi_loadLL()
     {
         if (!$this->LOCAL_LANG_loaded) {
-            $basePath = 'EXT:' . $this->extKey . '/Resources/Private/Language/locallang.xml';
+            $basePath = 'EXT:' . $this->extKey . '/Resources/Private/Language/locallang.xlf';
 
             // Read the strings in the required charset (since TYPO3 4.2)
             $this->LOCAL_LANG = GeneralUtility::readLLfile($basePath, $this->LLkey, $GLOBALS['TSFE']->renderCharset);

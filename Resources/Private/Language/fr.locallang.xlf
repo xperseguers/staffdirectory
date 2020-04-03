@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2020-0304-02T16:24:07Z" product-name="staffdirectory">
+        <header/>
+        <body>
+            <trans-unit id="pi_flexform.sheet_general">
+                <target>Général</target>
+            </trans-unit>
+            <trans-unit id="pi_flexform.displayMode">
+                <target>Mode d'affichage</target>
+            </trans-unit>
+            <trans-unit id="pi_flexform.displayMode.LIST">
+                <target>Vue liste (LIST)</target>
+            </trans-unit>
+            <trans-unit id="pi_flexform.displayMode.STAFF">
+                <target>Vue fiche de l'équipe (STAFF)</target>
+            </trans-unit>
+            <trans-unit id="pi_flexform.displayMode.PERSON">
+                <target>Vue fiche de la personne (PERSON)</target>
+            </trans-unit>
+            <trans-unit id="pi_flexform.displayMode.PERSON.dynamic">
+                <target>dynamique</target>
+            </trans-unit>
+            <trans-unit id="pi_flexform.displayMode.DIRECTORY">
+                <target>Liste des personnes (DIRECTORY)</target>
+            </trans-unit>
+            <trans-unit id="pi_flexform.staffs">
+                <target>Équipes</target>
+            </trans-unit>
+            <trans-unit id="pi_flexform.person">
+                <target>Personne</target>
+            </trans-unit>
+            <trans-unit id="pi_flexform.tsconfig">
+                <target>TypoScript pour cet élément de contenu (plugin.tx_staffdirectory_pi1.[votre TS])</target>
+            </trans-unit>
+
+            <trans-unit id="label_empty_staff_list">
+                <target>Aucune équipe</target>
+            </trans-unit>
+            <trans-unit id="label_empty_directory_list">
+                <target>Aucune personne</target>
+            </trans-unit>
+            <trans-unit id="label_contact">
+                <target>Contact</target>
+            </trans-unit>
+            <trans-unit id="label_member_staffs">
+                <target>Membre de</target>
+            </trans-unit>
+            <trans-unit id="label_member_address">
+                <target>Adresse</target>
+            </trans-unit>
+            <trans-unit id="label_member_telephone">
+                <target>Téléphone</target>
+            </trans-unit>
+            <trans-unit id="label_member_fax">
+                <target>Fax</target>
+            </trans-unit>
+            <trans-unit id="label_member_mobile_phone">
+                <target>Mobile</target>
+            </trans-unit>
+            <trans-unit id="label_member_email">
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="label_back">
+                <target>Retour à la page précédente</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

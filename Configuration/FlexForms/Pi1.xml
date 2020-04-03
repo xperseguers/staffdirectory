@@ -7,14 +7,14 @@
 		<sDEF>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.sheet_general</sheetTitle>
+					<sheetTitle>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.sheet_general</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<displayMode>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.displayMode</label>
+							<label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode</label>
 							<onChange>reload</onChange>
 							<config>
 								<type>select</type>
@@ -24,19 +24,19 @@
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.displayMode.LIST</numIndex>
+										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode.LIST</numIndex>
 										<numIndex index="1">LIST</numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.displayMode.STAFF</numIndex>
+										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.≤xlf:pi_flexform.displayMode.STAFF</numIndex>
 										<numIndex index="1">STAFF</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
-										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.displayMode.PERSON</numIndex>
+										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode.PERSON</numIndex>
 										<numIndex index="1">PERSON</numIndex>
 									</numIndex>
 									<numIndex index="4" type="array">
-										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.displayMode.DIRECTORY</numIndex>
+										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode.DIRECTORY</numIndex>
 										<numIndex index="1">DIRECTORY</numIndex>
 									</numIndex>
 								</items>
@@ -46,7 +46,7 @@
 					<staffs>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.staffs</label>
+							<label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.staffs</label>
 							<displayCond><![CDATA[FIELD:displayMode:!=:PERSON]]></displayCond>
 							<config>
 								<type>select</type>
@@ -61,13 +61,13 @@
 					<person>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.person</label>
+							<label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.person</label>
 							<displayCond><![CDATA[FIELD:displayMode:=:PERSON]]></displayCond>
 							<config>
 								<type>select</type>
 								<items>
 									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.displayMode.PERSON.dynamic</numIndex>
+										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode.PERSON.dynamic</numIndex>
 										<numIndex index="1">0</numIndex>
 									</numIndex>
 								</items>
@@ -83,7 +83,7 @@
 						<TCEforms>
 							<displayCond>HIDE_FOR_NON_ADMINS</displayCond>
 							<exclude>1</exclude>
-							<label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xml:pi_flexform.tsconfig</label>
+							<label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.tsconfig</label>
 							<config>
 								<type>text</type>
 								<cols>80</cols>

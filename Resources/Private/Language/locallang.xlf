@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2020-0304-02T16:24:07Z" product-name="staffdirectory">
+        <header/>
+        <body>
+            <trans-unit id="pi_flexform.sheet_general">
+                <source>General</source>
+            </trans-unit>
+            <trans-unit id="pi_flexform.displayMode">
+                <source>Display Mode</source>
+            </trans-unit>
+            <trans-unit id="pi_flexform.displayMode.LIST">
+                <source>List view (LIST)</source>
+            </trans-unit>
+            <trans-unit id="pi_flexform.displayMode.STAFF">
+                <source>Staff view (STAFF)</source>
+            </trans-unit>
+            <trans-unit id="pi_flexform.displayMode.PERSON">
+                <source>Person view (PERSON)</source>
+            </trans-unit>
+            <trans-unit id="pi_flexform.displayMode.PERSON.dynamic">
+                <source>dynamic</source>
+            </trans-unit>
+            <trans-unit id="pi_flexform.displayMode.DIRECTORY">
+                <source>Person listing (DIRECTORY)</source>
+            </trans-unit>
+            <trans-unit id="pi_flexform.staffs">
+                <source>Staffs</source>
+            </trans-unit>
+            <trans-unit id="pi_flexform.person">
+                <source>Person</source>
+            </trans-unit>
+            <trans-unit id="pi_flexform.tsconfig">
+                <source>TypoScript for this content element (plugin.tx_staffdirectory_pi1.[your TS])</source>
+            </trans-unit>
+
+            <trans-unit id="label_empty_staff_list">
+                <source>No staffs</source>
+            </trans-unit>
+            <trans-unit id="label_empty_directory_list">
+                <source>No persons</source>
+            </trans-unit>
+            <trans-unit id="label_contact">
+                <source>Contact</source>
+            </trans-unit>
+            <trans-unit id="label_member_staffs">
+                <source>Membership</source>
+            </trans-unit>
+            <trans-unit id="label_member_address">
+                <source>Address</source>
+            </trans-unit>
+            <trans-unit id="label_member_telephone">
+                <source>Phone</source>
+            </trans-unit>
+            <trans-unit id="label_member_fax">
+                <source>Fax</source>
+            </trans-unit>
+            <trans-unit id="label_member_mobile_phone">
+                <source>Mobile Phone</source>
+            </trans-unit>
+            <trans-unit id="label_member_email">
+                <source>E-mail</source>
+            </trans-unit>
+            <trans-unit id="label_back">
+                <source>Back to previous page</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
