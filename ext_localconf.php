@@ -23,7 +23,7 @@ RTE.config.%s {
 ';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(sprintf($templateRTE,
-	'tx_staffdirectory_staffs', 'description', 'tx_staffdirectory_staffs.description'
+    'tx_staffdirectory_staffs', 'description', 'tx_staffdirectory_staffs.description'
 ));
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43($_EXTKEY, 'Classes/Controller/Pi1/Pi1Controller.php', '_pi1', 'list_type', 1);

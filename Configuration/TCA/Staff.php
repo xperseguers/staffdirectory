@@ -1,131 +1,131 @@
 <?php
 if (!defined('TYPO3_MODE')) {
-	die ('Access denied.');
+    die ('Access denied.');
 }
 
 $TCA['tx_staffdirectory_staffs'] = [
-	'ctrl' => $TCA['tx_staffdirectory_staffs']['ctrl'],
-	'interface' => [
-		'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,staff_name,description,departments,parent_staff'
+    'ctrl' => $TCA['tx_staffdirectory_staffs']['ctrl'],
+    'interface' => [
+        'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,staff_name,description,departments,parent_staff'
     ],
-	'types' => [
-		'1' => [
-			'showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1,
+    'types' => [
+        '1' => [
+            'showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1,
 			 		staff_name, description;;;richtext[]:rte_transform[mode=ts_css|imgpath=uploads/tx_staffdirectory/rte/],parent_staff,
 			 	--div--;LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tabs.departments,
 			 		departments'
         ],
     ],
-	'palettes' => [
-		'1' => ['showitem' => '']
+    'palettes' => [
+        '1' => ['showitem' => '']
     ],
-	'columns' => [
-		't3ver_label' => [
-			'label'  => 'LLL:EXT:lang/locallang_general.xml:LGL.versionLabel',
-			'config' => [
-				'type' => 'input',
-				'size' => '30',
-				'max'  => '30',
+    'columns' => [
+        't3ver_label' => [
+            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.versionLabel',
+            'config' => [
+                'type' => 'input',
+                'size' => '30',
+                'max' => '30',
             ]
         ],
-		'sys_language_uid' => [
-			'exclude' => 1,
-			'label'  => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
-			'config' => [
-				'type'                => 'select',
-				'foreign_table'       => 'sys_language',
-				'foreign_table_where' => 'ORDER BY sys_language.title',
-				'items' => [
-					['LLL:EXT:lang/locallang_general.xml:LGL.allLanguages', -1],
-					['LLL:EXT:lang/locallang_general.xml:LGL.default_value', 0]
+        'sys_language_uid' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
+            'config' => [
+                'type' => 'select',
+                'foreign_table' => 'sys_language',
+                'foreign_table_where' => 'ORDER BY sys_language.title',
+                'items' => [
+                    ['LLL:EXT:lang/locallang_general.xml:LGL.allLanguages', -1],
+                    ['LLL:EXT:lang/locallang_general.xml:LGL.default_value', 0]
                 ]
             ]
         ],
-		'l10n_parent' => [
-			'displayCond' => 'FIELD:sys_language_uid:>:0',
-			'exclude'     => 1,
-			'label'       => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
-			'config'      => [
-				'type'  => 'select',
-				'items' => [
-					['', 0],
+        'l10n_parent' => [
+            'displayCond' => 'FIELD:sys_language_uid:>:0',
+            'exclude' => 1,
+            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
+            'config' => [
+                'type' => 'select',
+                'items' => [
+                    ['', 0],
                 ],
-				'foreign_table'       => 'tx_staffdirectory_staffs',
-				'foreign_table_where' => 'AND tx_staffdirectory_staffs.pid=###CURRENT_PID### AND tx_staffdirectory_staffs.sys_language_uid IN (-1,0)',
+                'foreign_table' => 'tx_staffdirectory_staffs',
+                'foreign_table_where' => 'AND tx_staffdirectory_staffs.pid=###CURRENT_PID### AND tx_staffdirectory_staffs.sys_language_uid IN (-1,0)',
             ]
         ],
-		'l10n_diffsource' => [
-			'config' => [
-				'type' => 'passthrough'
+        'l10n_diffsource' => [
+            'config' => [
+                'type' => 'passthrough'
             ]
         ],
-		'hidden' => [
-			'exclude' => 1,
-			'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
-			'config'  => [
-				'type'    => 'check',
-				'default' => '0'
+        'hidden' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
+            'config' => [
+                'type' => 'check',
+                'default' => '0'
             ]
         ],
-		'staff_name' => [
-			'exclude' => 0,
-			'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_staffs.staff_name',
-			'config' => [
-				'type' => 'input',
-				'size' => '30',
-				'max' => '50',
-				'eval' => 'required,trim',
+        'staff_name' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_staffs.staff_name',
+            'config' => [
+                'type' => 'input',
+                'size' => '30',
+                'max' => '50',
+                'eval' => 'required,trim',
             ]
         ],
-		'description' => [
-			'exclude' => 0,
-			'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_staffs.description',
-			'config' => [
-				'type' => 'text',
-				'cols' => '30',
-				'rows' => '5',
-				'wizards' => [
-					'_PADDING' => 2,
-					'RTE' => [
-						'notNewRecords' => 1,
-						'RTEonly'       => 1,
-						'type'          => 'script',
-						'title'         => 'Full screen Rich Text Editing|Formatteret redigering i hele vinduet',
-						'icon'          => 'wizard_rte2.gif',
-						'script'        => 'wizard_rte.php',
+        'description' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_staffs.description',
+            'config' => [
+                'type' => 'text',
+                'cols' => '30',
+                'rows' => '5',
+                'wizards' => [
+                    '_PADDING' => 2,
+                    'RTE' => [
+                        'notNewRecords' => 1,
+                        'RTEonly' => 1,
+                        'type' => 'script',
+                        'title' => 'Full screen Rich Text Editing|Formatteret redigering i hele vinduet',
+                        'icon' => 'wizard_rte2.gif',
+                        'script' => 'wizard_rte.php',
                     ],
                 ],
             ]
         ],
-		'departments' => [
-			'exclude' => 0,
-			'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_staffs.departments',
-			'config' => [
-				'type' => 'inline',
-				'foreign_table' => 'tx_staffdirectory_departments',
-				'foreign_field' => 'staff',
-				'foreign_sortby' => 'sorting',
-				'maxitems' => 99,
-				'appearance' => [
-					'collapse' => 0,
-					'useSortable' => 1,
-					'newRecordLinkPosition' => 'bottom',
+        'departments' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_staffs.departments',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_staffdirectory_departments',
+                'foreign_field' => 'staff',
+                'foreign_sortby' => 'sorting',
+                'maxitems' => 99,
+                'appearance' => [
+                    'collapse' => 0,
+                    'useSortable' => 1,
+                    'newRecordLinkPosition' => 'bottom',
                 ],
             ]
         ],
-		'parent_staff' => [
-			'exclude' => 0,
-			'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_staffs.parent_staff',
-			'config' => [
-				'type' => 'select',
-				'items' => [
-					['', 0],
+        'parent_staff' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xml:tx_staffdirectory_staffs.parent_staff',
+            'config' => [
+                'type' => 'select',
+                'items' => [
+                    ['', 0],
                 ],
-				'foreign_table' => 'tx_staffdirectory_staffs',
-				'foreign_table_where' => 'ORDER BY tx_staffdirectory_staffs.uid',
-				'size' => 1,
-				'minitems' => 0,
-				'maxitems' => 1,
+                'foreign_table' => 'tx_staffdirectory_staffs',
+                'foreign_table_where' => 'ORDER BY tx_staffdirectory_staffs.uid',
+                'size' => 1,
+                'minitems' => 0,
+                'maxitems' => 1,
             ]
         ],
     ],
