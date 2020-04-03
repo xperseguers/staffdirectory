@@ -33,7 +33,7 @@ return [
                 '
 					position_title, position_description, members,
 				--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,
-					hidden;;1, starttime, endtime'
+					hidden, starttime, endtime'
         ],
     ],
     'palettes' => [
@@ -53,6 +53,7 @@ return [
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
                 'items' => [
@@ -67,6 +68,7 @@ return [
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => [
                     ['', 0],
                 ],

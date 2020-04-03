@@ -25,14 +25,14 @@ $EM_CONF[$_EXTKEY] = [
     'state' => 'beta',
     'internal' => '',
     'uploadfolder' => 0,
-    'createDirs' => 'uploads/tx_staffdirectory/rte/',
+    'createDirs' => '',
     'modify_tables' => '',
     'clearCacheOnLoad' => 0,
     'lockType' => '',
     'version' => '0.7.0-dev',
     'constraints' => [
         'depends' => [
-            'typo3' => '7.6.0-10.25.99',
+            'typo3' => '7.6.0-10.5.99',
         ],
         'conflicts' => [
         ],

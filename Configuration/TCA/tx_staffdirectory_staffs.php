@@ -24,8 +24,8 @@ return [
     ],
     'types' => [
         '1' => [
-            'showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1,
-			 		staff_name, description;;;richtext[]:rte_transform[mode=ts_css|imgpath=uploads/tx_staffdirectory/rte/],parent_staff,
+            'showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,
+			 		staff_name, description,parent_staff,
 			 	--div--;LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tabs.departments,
 			 		departments'
         ],
@@ -47,6 +47,7 @@ return [
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
                 'items' => [
@@ -61,6 +62,7 @@ return [
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => [
                     ['', 0],
                 ],
@@ -98,7 +100,9 @@ return [
                 'type' => 'text',
                 'cols' => '30',
                 'rows' => '5',
-            ]
+                'softref' => 'typolink_tag,images,email[subst],url',
+            ],
+            'defaultExtras' => 'richtext:rte_transform[mode=ts_css]',
         ],
         'departments' => [
             'exclude' => 0,
@@ -121,6 +125,7 @@ return [
             'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_staffs.parent_staff',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => [
                     ['', 0],
                 ],
