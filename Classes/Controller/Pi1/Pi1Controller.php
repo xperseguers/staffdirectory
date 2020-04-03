@@ -131,7 +131,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
     {
         $templateFile = $this->conf['templates.']['list'];
         $markerBaseTemplateService = $this->getMarkerBaseTemplateService();
-        $this->template = GeneralUtility::getFileAbsFileName($templateFile)
+        $this->template = GeneralUtility::getFileAbsFileName($templateFile);
         $emptyTemplate = $markerBaseTemplateService->getSubpart($this->template, '###LIST_EMPTY###');
         $this->template = $markerBaseTemplateService->getSubpart($this->template, '###LIST###');
 
