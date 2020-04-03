@@ -125,29 +125,6 @@ return [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'wizards' => [
-                    '_PADDING' => 2,
-                    '_VERTICAL' => 1,
-                    'add' => [
-                        'type' => 'script',
-                        'title' => 'Create new record',
-                        'icon' => 'add.gif',
-                        'params' => [
-                            'table' => 'fe_users',
-                            'pid' => '###CURRENT_PID###',
-                            'setValue' => 'prepend'
-                        ],
-                        'script' => 'wizard_add.php',
-                    ],
-                    'edit' => [
-                        'type' => 'popup',
-                        'title' => 'Edit',
-                        'script' => 'wizard_edit.php',
-                        'popup_onlyOpenIfSelected' => 1,
-                        'icon' => 'edit2.gif',
-                        'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-                    ],
-                ],
             ]
         ],
         'position_function' => [
