@@ -151,7 +151,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
             $staffs = $staffRepository->findAll();
         }
 
-        if (count($staffs) == 0) {
+        if (count($staffs) === 0) {
             $markers = [];
             $this->addLabelMarkers($markers);
             $this->content .= $this->render($emptyTemplate, [], $this->cObj, [], $markers);
@@ -277,7 +277,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
             $members = $memberRepository->findAll();
         }
 
-        if (count($members) == 0) {
+        if (count($members) === 0) {
             $markers = [];
             $this->addLabelMarkers($markers);
             $this->content .= $this->render($emptyTemplate, [], $this->cObj, [], $markers);
