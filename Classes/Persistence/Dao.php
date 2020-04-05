@@ -165,7 +165,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
         $rows = $queryBuilder
             ->selectLiteral('DISTINCT')
             ->addSelect(
-                $this->getFields($this->t['staff'], 'uid,pid,sys_language_uid,staff_name,description')
+                ... $this->getFields($this->t['staff'], 'uid,pid,sys_language_uid,staff_name,description')
             )
             ->from($this->t['staff'])
             ->join(
@@ -229,7 +229,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable($this->t['member']);
         $rows = $queryBuilder
-            ->select(array_merge(
+            ->select(... array_merge(
                 $this->getFields($this->t['member'], 'uid,pid,sys_language_uid'),
                 $this->getFields(
                     $this->t['person'],
@@ -273,7 +273,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable($this->t['member']);
         $rows = $queryBuilder
-            ->select(array_merge(
+            ->select(... array_merge(
                 $this->getFields($this->t['member'], 'uid,pid,sys_language_uid,position_function'),
                 $this->getFields(
                     $this->t['person'],
@@ -310,7 +310,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable($this->t['member']);
         $rows = $queryBuilder
-            ->select(array_merge(
+            ->select(... array_merge(
                 $this->getFields($this->t['member'], 'uid,pid,sys_language_uid,position_function'),
                 $this->getFields(
                     $this->t['person'],
@@ -347,7 +347,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
             ->getQueryBuilderForTable($this->t['member']);
         $rows = $queryBuilder
             ->selectLiteral('DISTINCT')
-            ->addSelect(array_merge(
+            ->addSelect(... array_merge(
                 $this->getFields($this->t['member'], 'uid,pid,sys_language_uid'),
                 $this->getFields(
                     $this->t['person'],
@@ -398,7 +398,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable($this->t['member']);
         $rows = $queryBuilder
-            ->select(array_merge(
+            ->select(... array_merge(
                 $this->getFields($this->t['member'], 'uid,pid,sys_language_uid,position_function'),
                 $this->getFields(
                     $this->t['person'],

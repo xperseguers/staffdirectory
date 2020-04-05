@@ -134,7 +134,7 @@ abstract class AbstractController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlu
      *
      * @return    void
      */
-    public function pi_loadLL()
+    public function pi_loadLL($languageFilePath = '')
     {
         return parent::pi_loadLL('EXT:' . $this->extKey . '/Resources/Private/Language/locallang.xlf');
     }

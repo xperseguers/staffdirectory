@@ -22,6 +22,8 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+namespace Causal\Staffdirectory\Controller\Pi1;
+
 use Causal\Staffdirectory\Domain\Model\Department;
 use Causal\Staffdirectory\Domain\Model\Member;
 use Causal\Staffdirectory\Domain\Model\Staff;
@@ -131,7 +133,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
     {
         $templateFile = $this->conf['templates.']['list'];
         $markerBaseTemplateService = $this->getMarkerBaseTemplateService();
-        $this->template = GeneralUtility::getFileAbsFileName($templateFile);
+        $this->template = file_get_contents(GeneralUtility::getFileAbsFileName($templateFile));
         $emptyTemplate = $markerBaseTemplateService->getSubpart($this->template, '###LIST_EMPTY###');
         $this->template = $markerBaseTemplateService->getSubpart($this->template, '###LIST###');
 
@@ -199,7 +201,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
         } else {
             $templateFile = $this->conf['templates.']['rdf_staff'];
         }
-        $this->template = GeneralUtility::getFileAbsFileName($templateFile);
+        $this->template = file_get_contents(GeneralUtility::getFileAbsFileName($templateFile));
         $markerBaseTemplateService = $this->getMarkerBaseTemplateService();
         $template = $markerBaseTemplateService->getSubpart($this->template, '###STAFF###');
 
@@ -240,7 +242,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
         } else {
             $templateFile = $this->conf['templates.']['rdf_person'];
         }
-        $this->template = GeneralUtility::getFileAbsFileName($templateFile);
+        $this->template = file_get_contents(GeneralUtility::getFileAbsFileName($templateFile));
         $markerBaseTemplateService = $this->getMarkerBaseTemplateService();
         $template = $markerBaseTemplateService->getSubpart($this->template, '###PERSON###');
 
@@ -258,7 +260,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
     protected function directoryAction(): void
     {
         $templateFile = $this->conf['templates.']['directory'];
-        $this->template = GeneralUtility::getFileAbsFileName($templateFile);
+        $this->template = file_get_contents(GeneralUtility::getFileAbsFileName($templateFile));
         $markerBaseTemplateService = $this->getMarkerBaseTemplateService();
         $emptyTemplate = $markerBaseTemplateService->getSubpart($this->template, '###DIRECTORY_EMPTY###');
         $template = $markerBaseTemplateService->getSubpart($this->template, '###DIRECTORY###');
@@ -544,9 +546,9 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
     /**
      * Gets a back link.
      *
-     * @return array
+     * @return array|null
      */
-    public function getLinkBack(): array
+    public function getLinkBack(): ?array
     {
         if (isset($this->parameters['back'])) {
             $additionalParams = [];
@@ -683,3 +685,5 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
     }
 
 }
+
+class Pi1Controller extends tx_staffdirectory_pi1 {}
