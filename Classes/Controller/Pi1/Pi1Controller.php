@@ -467,9 +467,7 @@ class tx_staffdirectory_pi1 extends \Causal\Staffdirectory\Controller\AbstractCo
         }
         $subparts['###IF_MAIN_PHONE###'] = !$data['main_phone'] ? '' : ['', ''];
         if ($member->getImage()) {
-            // TODO: migrate to FAL
-            $images = GeneralUtility::trimExplode(',', $member->getImage(), true);
-            $data['photo_url'] = 'https://' . GeneralUtility::getIndpEnv('HTTP_HOST') . '/uploads/pics/' . $images[0];
+            $data['photo_url'] = 'https://' . GeneralUtility::getIndpEnv('HTTP_HOST') . $member->getImage();
         } else {
             $data['photo_url'] = '';
         }

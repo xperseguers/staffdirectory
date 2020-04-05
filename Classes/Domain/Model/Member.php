@@ -63,7 +63,7 @@ class Member extends AbstractEntity
     protected $last_name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $image;
 
@@ -231,16 +231,16 @@ class Member extends AbstractEntity
     /**
      * @return string
      */
-    public function getImage(): string
+    public function getImage(): ?string
     {
         return $this->image;
     }
 
     /**
-     * @param string $image
+     * @param string|null $image
      * @return Member
      */
-    public function setImage(string $image): Member
+    public function setImage(?string $image): Member
     {
         $this->image = $image;
         return $this;

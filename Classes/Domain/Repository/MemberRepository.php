@@ -26,6 +26,7 @@ namespace Causal\Staffdirectory\Domain\Repository;
 
 use Causal\Staffdirectory\Domain\Model\Department;
 use Causal\Staffdirectory\Domain\Model\Member;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -140,7 +141,6 @@ class MemberRepository extends AbstractRepository
                 ->setName($data['name'])
                 ->setFirstName($data['first_name'])
                 ->setLastName($data['last_name'])
-                ->setImage($data['image'])
                 ->setAddress(trim($data['address']))
                 ->setPostalCode($data['zip'])
                 ->setCity($data['city'])
@@ -152,6 +152,30 @@ class MemberRepository extends AbstractRepository
                 ->setGender($data['tx_staffdirectory_gender'])
                 ->setMobilePhone($data['tx_staffdirectory_mobilephone'])
                 ->setEmail2($data['tx_staffdirectory_email2']);
+            if (!empty($data['image'])) {
+                // Very basic handling of FAL resource
+                $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+                    ->getQueryBuilderForTable('sys_file');
+                $image = $queryBuilder
+                    ->select('f.identifier')
+                    ->from('sys_file', 'f')
+                    ->join(
+                        'f',
+                        'sys_file_reference',
+                        'fr',
+                        $queryBuilder->expr()->eq('fr.uid_local', $queryBuilder->quoteIdentifier('f.uid'))
+                    )
+                    ->where(
+                        $queryBuilder->expr()->eq('fr.tablenames', $queryBuilder->quote('fe_users')),
+                        $queryBuilder->expr()->eq('fr.fieldname', $queryBuilder->quote('image')),
+                        $queryBuilder->expr()->eq('fr.uid_foreign', $queryBuilder->createNamedParameter($data['person_id'], \PDO::PARAM_INT))
+                    )
+                    ->execute()
+                    ->fetchColumn(0);
+                if (!empty($image)) {
+                    $member->setImage('/fileadmin' . $image);
+                }
+            }
             $ret[] = $member;
         }
         return $ret;
