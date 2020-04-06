@@ -36,6 +36,10 @@
 										<numIndex index="1">PERSON</numIndex>
 									</numIndex>
 									<numIndex index="4" type="array">
+										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode.PERSONS</numIndex>
+										<numIndex index="1">PERSONS</numIndex>
+									</numIndex>
+									<numIndex index="5" type="array">
 										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode.DIRECTORY</numIndex>
 										<numIndex index="1">DIRECTORY</numIndex>
 									</numIndex>
@@ -46,7 +50,13 @@
 					<settings.staffs>
 						<TCEforms>
 							<label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.staffs</label>
-							<displayCond><![CDATA[FIELD:settings.displayMode:!=:PERSON]]></displayCond>
+							<displayCond>
+								<OR>
+									<numIndex index="0"><![CDATA[FIELD:settings.displayMode:=:LIST]]></numIndex>
+									<numIndex index="1"><![CDATA[FIELD:settings.displayMode:=:STAFF]]></numIndex>
+									<numIndex index="2"><![CDATA[FIELD:settings.displayMode:=:DIRECTORY]]></numIndex>
+								</OR>
+							</displayCond>
 							<config>
 								<type>select</type>
 								<renderType>selectMultipleSideBySide</renderType>
@@ -79,6 +89,21 @@
 							</config>
 						</TCEforms>
 					</settings.person>
+					<settings.persons>
+						<TCEforms>
+							<label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.persons</label>
+							<displayCond><![CDATA[FIELD:settings.displayMode:=:PERSONS]]></displayCond>
+							<config>
+								<type>select</type>
+								<renderType>selectMultipleSideBySide</renderType>
+								<foreign_table>fe_users</foreign_table>
+								<foreign_table_where>ORDER BY fe_users.last_name</foreign_table_where>
+								<size>8</size>
+								<maxitems>99</maxitems>
+								<multiple>0</multiple>
+							</config>
+						</TCEforms>
+					</settings.persons>
 					<settings.layout>
 						<TCEforms>
 							<label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.layout</label>

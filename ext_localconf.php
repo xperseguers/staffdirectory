@@ -8,7 +8,7 @@ $boot = function (string $_EXTKEY) {
         'Pi1',
         // cacheable actions
         [
-            'Staff' => 'dispatch, list, staff, person, directory',
+            'Staff' => 'dispatch, list, staff, person, persons, directory',
         ],
         // non-cacheable actions
         []

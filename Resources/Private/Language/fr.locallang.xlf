@@ -18,6 +18,9 @@
             <trans-unit id="pi_flexform.displayMode.PERSON">
                 <target>Vue fiche de la personne (PERSON)</target>
             </trans-unit>
+            <trans-unit id="pi_flexform.displayMode.PERSONS">
+                <target>Vue fiche de plusieurs personnes (PERSONS)</target>
+            </trans-unit>
             <trans-unit id="pi_flexform.displayMode.PERSON.dynamic">
                 <target>dynamique</target>
             </trans-unit>
@@ -29,6 +32,9 @@
             </trans-unit>
             <trans-unit id="pi_flexform.person">
                 <target>Personne</target>
+            </trans-unit>
+            <trans-unit id="pi_flexform.persons">
+                <target>Personnes</target>
             </trans-unit>
             <trans-unit id="pi_flexform.layout">
                 <target>Mise en page</target>

@@ -59,6 +59,9 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             case 'PERSON':
                 $this->forward('person');
                 break;
+            case 'PERSONS':
+                $this->forward('persons');
+                break;
             case 'DIRECTORY':
                 $this->forward('directory');
                 break;
@@ -134,7 +137,7 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $member = null;
 
         if (!empty($this->settings['person'])) {
-            $member = $memberRepository->findOneByPersonUid($this->settings['person']);
+            $member = $memberRepository->findOneByPersonUid((int)$this->settings['person']);
         } elseif (!empty($person)) {
             $member = $memberRepository->findByUid($person);
         }
@@ -144,6 +147,32 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         $this->view->assignMultiple([
             'member' => $member,
+        ]);
+    }
+
+    /**
+     * PERSONS action.
+     *
+     * @return void
+     * @throws \RuntimeException
+     */
+    protected function personsAction(): void
+    {
+        /** @var MemberRepository $memberRepository */
+        $memberRepository = Factory::getRepository('Member');
+        $members = [];
+
+        $uids = GeneralUtility::intExplode(',', $this->settings['persons'], true);
+        foreach ($uids as $uid) {
+            $members[] = $memberRepository->findOneByPersonUid($uid);
+        }
+
+        if (empty($members)) {
+            throw new \RuntimeException('No persons selected', 1586196671);
+        }
+
+        $this->view->assignMultiple([
+            'members' => $members,
         ]);
     }
 

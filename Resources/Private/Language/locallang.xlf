@@ -18,6 +18,9 @@
             <trans-unit id="pi_flexform.displayMode.PERSON">
                 <source>Person view (PERSON)</source>
             </trans-unit>
+            <trans-unit id="pi_flexform.displayMode.PERSONS">
+                <source>Multiple persons view (PERSONS)</source>
+            </trans-unit>
             <trans-unit id="pi_flexform.displayMode.PERSON.dynamic">
                 <source>dynamic</source>
             </trans-unit>
@@ -29,6 +32,9 @@
             </trans-unit>
             <trans-unit id="pi_flexform.person">
                 <source>Person</source>
+            </trans-unit>
+            <trans-unit id="pi_flexform.persons">
+                <source>Persons</source>
             </trans-unit>
             <trans-unit id="pi_flexform.layout">
                 <source>Layout</source>
