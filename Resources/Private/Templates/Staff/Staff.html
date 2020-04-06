@@ -2,6 +2,13 @@
       xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
+<f:if condition="{staff.description}">
+    <div class="jumbotron">
+        <h1 class="display-4">Présentation</h1>
+        {staff.description -> f:format.raw()}
+    </div>
+</f:if>
+
 <f:for each="{staff.departments}" as="department">
     <f:if condition="{staff.departments -> f:count()}==1">
         <f:then>
