@@ -1,4 +1,4 @@
-plugin.tx_filelist {
+plugin.tx_staffdirectory {
 
 	view {
 		templateRootPaths {
