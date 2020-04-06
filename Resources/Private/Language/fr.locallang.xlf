@@ -30,9 +30,6 @@
             <trans-unit id="pi_flexform.person">
                 <target>Personne</target>
             </trans-unit>
-            <trans-unit id="pi_flexform.tsconfig">
-                <target>TypoScript pour cet élément de contenu (plugin.tx_staffdirectory_pi1.[votre TS])</target>
-            </trans-unit>
 
             <trans-unit id="label_empty_staff_list">
                 <target>Aucune équipe</target>

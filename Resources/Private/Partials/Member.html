@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<div class="col-md-6">
+    <div class="card card-profile card-plain">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card-header card-header-image">
+                    <a href="#pablo">
+                        <f:image src="{member.image}" width="215c" height="215c" class="img"/>
+                    </a>
+                    <div class="colored-shadow" style="background-image: url({f:uri.image(src:member.image,height:'215c',width:'215c')}); opacity: 1;"></div></div>
+            </div>
+            <div class="col-md-7">
+                <div class="card-body">
+                    <h4 class="card-title">{member.name}</h4>
+                    <h6 class="card-category text-muted">{member.positionFunction}</h6>
+                    <div class="card-description">
+                        <f:if condition="{member.telephone}">
+                            <p class="text-center"><i class="fa fa-phone"></i>&nbsp; <a href="tel:{member.telephone}">{member.telephone}</a></p>
+                        </f:if>
+                        <f:if condition="{member.mobilePhone}">
+                            <p class="text-center"><i class="fa fa-mobile"></i>&nbsp; <a href="tel:{member.mobilePhone}">{member.mobilePhone}</a></p>
+                        </f:if>
+                        <f:if condition="{member.email}">
+                            <p class="text-center"><i class="fa fa-envelope"></i>&nbsp; <f:link.email email="{member.email}">{member.email}</f:link.email></p>
+                        </f:if>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

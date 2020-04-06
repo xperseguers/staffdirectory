@@ -43,16 +43,6 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
 {
 
     /**
-     * @var array
-     */
-    protected $settings;
-
-    /**
-     * @var ContentObjectRenderer
-     */
-    protected $cObj;
-
-    /**
      * DB tables
      * @var array
      */
@@ -60,36 +50,15 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
 
     /**
      * Default constructor.
-     *
-     * @param array $settings
-     * @param ContentObjectRenderer $cObj
      */
-    public function __construct(array $settings, ContentObjectRenderer $cObj)
+    public function __construct()
     {
-        $this->settings = $settings;
-        $this->cObj = $cObj;
         $this->t = [
             'staff' => 'tx_staffdirectory_staffs',
             'department' => 'tx_staffdirectory_departments',
             'member' => 'tx_staffdirectory_members',
             'person' => 'fe_users',
         ];
-    }
-
-    /**
-     * @return array
-     */
-    public function getSettings(): array
-    {
-        return $this->settings;
-    }
-
-    /**
-     * @return ContentObjectRenderer
-     */
-    public function getContentObject(): ContentObjectRenderer
-    {
-        return $this->cObj;
     }
 
     /**

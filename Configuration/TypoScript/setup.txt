@@ -1,166 +1,32 @@
-plugin.tx_staffdirectory_pi1 {
+plugin.tx_filelist {
 
+	view {
+		templateRootPaths {
+			0 = EXT:staffdirectory/Resources/Private/Templates/
+			1 = {$plugin.tx_staffdirectory.view.templateRootPath}
+		}
+
+		partialRootPaths  {
+			0 = EXT:staffdirectory/Resources/Private/Partials/
+			1 = {$plugin.tx_staffdirectory.view.partialRootPath}
+		}
+
+		layoutRootPaths  {
+			0 = EXT:staffdirectory/Resources/Private/Layouts/
+			1 = {$plugin.tx_staffdirectory.view.layoutRootPath}
+		}
+	}
+
+	settings {
 		# options: LIST|STAFF|PERSON|DIRECTORY
-	displayMode =
-
-	enableRdf = 1
+		displayMode =
 
 		# comma-separated list of staff uid's
-	staffs =
+		staffs =
 
-	targets {
-		staff  = {$plugin.tx_staffdirectory.targets.staff}
-		person = {$plugin.tx_staffdirectory.targets.person}
-	}
-
-	pidList = {$plugin.tx_staffdirectory.pidList}
-	recursive = {$plugin.tx_staffdirectory.recursive}
-
-	templates {
-		list       = {$plugin.tx_staffdirectory.templates.list}
-		staff      = {$plugin.tx_staffdirectory.templates.staff}
-		person     = {$plugin.tx_staffdirectory.templates.person}
-		directory  = {$plugin.tx_staffdirectory.templates.directory}
-
-		rdf_person = EXT:staffdirectory/Resources/Private/Templates/Pi1/Person.xml
-		rdf_staff  = EXT:staffdirectory/Resources/Private/Templates/Pi1/Staff.xml
-	}
-
-		# rendering options
-		# Format #1: <lower case marker> = <content object definition>
-		# Format #2: <lower case marker>.<stdWrap properties>
-	render {
-		list {
-				# Example:
-			#location.noTrimWrap = |lieu: ||
+		targets {
+			staff  = {$plugin.tx_staffdirectory.targets.staff}
+			person = {$plugin.tx_staffdirectory.targets.person}
 		}
-
-		staff_member {
-			photo = IMAGE
-			photo {
-				file {
-					import = uploads/pics/
-					import.field = image
-					import.listNum = 0
-					width = {$plugin.tx_staffdirectory.staff_member.photo.width}
-        			height = {$plugin.tx_staffdirectory.staff_member.photo.height}
-				}
-				altText.field = name
-
-				stdWrap.override.if.isFalse.field = image
-				stdWrap.override.cObject = CASE
-				stdWrap.override.cObject {
-					key.field = gender
-
-					0 = IMAGE
-					0 {
-						file = EXT:staffdirectory/Resources/Public/Images/photoblank.gif
-						file.width = {$plugin.tx_staffdirectory.staff_member.photo.width}
-						file.height = {$plugin.tx_staffdirectory.staff_member.photo.height}
-						altText.field = name
-					}
-					1 < .0
-					1.file = EXT:staffdirectory/Resources/Public/Images/photoblank_f.gif
-					default < .0
-				}
-			}
-
-			address = TEXT
-			address.field = address
-			address.br = 1
-
-			email = TEXT
-			email {
-				field = email
-				typolink.parameter.field = email
-				typolink.parameter.wrap = mailto:|
-			}
-
-			email2 = TEXT
-			email2 {
-				field = email2
-				typolink.parameter.field = email2
-				typolink.parameter.wrap = mailto:|
-			}
-		}
-
-		person_member < .staff_member
-		person_member.photo {
-			file.width = {$plugin.tx_staffdirectory.person_member.photo.width}
-			file.height = {$plugin.tx_staffdirectory.person_member.photo.height}
-
-			stdWrap.override.cObject.0.file.width = {$plugin.tx_staffdirectory.person_member.photo.width}
-			stdWrap.override.cObject.0.file.height = {$plugin.tx_staffdirectory.person_member.photo.height}
-			stdWrap.override.cObject.1.file.width = {$plugin.tx_staffdirectory.person_member.photo.width}
-			stdWrap.override.cObject.1.file.height = {$plugin.tx_staffdirectory.person_member.photo.height}
-		}
-
-		directory_member < .staff_member
 	}
-
-		# Debugging options
-	debug = 0
-	showRenderTime = 0
-
 }
-
-plugin.tx_staffdirectory_pi1._CSS_DEFAULT_STYLE (
-	.tx-staffdirectory-pi1-photo {
-		float: left;
-		margin-right: 10px;
-	}
-
-	ol.tx-staffdirectory-pi1-departments,
-	ol.tx-staffdirectory-pi1-members {
-		list-style-type: none;
-		padding: 0;
-	}
-
-	.tx-staffdirectory-pi1-members li+li {
-		margin-top: 1.5em;
-	}
-
-	.tx-staffdirectory-pi1-fieldLabel {
-    	clear: left;
-    	display: block;
-    	float: left;
-	    font-weight: bold;
-    	margin-top: 1ex;
-    	margin-right: .75em;
-    	width: 8em;
-    	text-align: right;
-    }
-
-    .tx-staffdirectory-pi1-fieldValue {
-    	display: block;
-    	float: left;
-    	margin-top: 1ex;
-    }
-
-    .tx-staffdirectory-pi1-fieldValue ul.tx-staffdirectory-pi1-staffs {
-    	list-style-type: none;
-    	padding: 0;
-    	margin: 0 0 1em 0;
-    }
-
-	.tx-staffdirectory-pi1-person-name {
-		display: block;
-		float: left;
-		width: 15em;
-	}
-
-	.tx-staffdirectory-pi1-person-staffs {
-		display: block;
-		float: left;
-	}
-
-    ul.tx-staffdirectory-pi1-persons ul {
-    	list-style-type: none;
-    	padding: 0;
-    	margin: 0;
-    }
-
-	.tx-staffdirectory-pi1-back {
-		margin-top: 2em;
-	}
-)

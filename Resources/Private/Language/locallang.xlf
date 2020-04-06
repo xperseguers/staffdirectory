@@ -30,9 +30,6 @@
             <trans-unit id="pi_flexform.person">
                 <source>Person</source>
             </trans-unit>
-            <trans-unit id="pi_flexform.tsconfig">
-                <source>TypoScript for this content element (plugin.tx_staffdirectory_pi1.[your TS])</source>
-            </trans-unit>
 
             <trans-unit id="label_empty_staff_list">
                 <source>No staffs</source>

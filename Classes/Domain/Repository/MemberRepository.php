@@ -173,7 +173,7 @@ class MemberRepository extends AbstractRepository
                     ->execute()
                     ->fetchColumn(0);
                 if (!empty($image)) {
-                    $member->setImage('/fileadmin' . $image);
+                    $member->setImage('fileadmin' . $image);
                 }
             }
             $ret[] = $member;

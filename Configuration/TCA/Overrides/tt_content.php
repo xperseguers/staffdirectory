@@ -1,15 +1,17 @@
 <?php
 defined('TYPO3_MODE') or die();
 
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['staffdirectory_pi1'] = 'layout,select_key';
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
-    [
-        'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tt_content.list_type_pi1',
-        'staffdirectory_pi1',
-    ],
-    'list_type',
-    'staffdirectory'
+// Register Frontend plugin
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'Causal.staffdirectory',
+    'Pi1',
+    'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tt_content.list_type_pi1'
 );
+
+$pluginSignature = 'staffdirectory_pi1';
+
+// Disable the display of layout, select_key and page fields
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout,select_key,pages,recursive';
 
 // Register the FlexForms
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['staffdirectory_pi1'] = 'pi_flexform';

@@ -26,7 +26,7 @@ namespace Causal\Staffdirectory\Domain\Repository;
 
 use Causal\Staffdirectory\Persistence\Dao;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer as ContentObjectRendererAlias;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Base class for repositories.
@@ -42,7 +42,7 @@ abstract class AbstractRepository implements \TYPO3\CMS\Core\SingletonInterface
 {
 
     /**
-     * @var ContentObjectRendererAlias
+     * @var ContentObjectRenderer
      */
     protected $cObj;
 
@@ -52,21 +52,15 @@ abstract class AbstractRepository implements \TYPO3\CMS\Core\SingletonInterface
     protected $dao;
 
     /**
-     * @var array
-     */
-    protected $settings;
-
-    /**
      * Injects the DAO.
      *
      * @param Dao $dao
      * @return void
      */
-    public function injectDao(Dao $dao = null): void
+    public function injectDao(?Dao $dao = null): void
     {
         $this->dao = $dao;
-        $this->cObj = $dao ? $dao->getContentObject() : GeneralUtility::makeInstance(ContentObjectRendererAlias::class);
-        $this->settings = $dao ? $dao->getSettings() : [];
+        $this->cObj = GeneralUtility::makeInstance(ContentObjectRenderer::class);
     }
 
     /**
