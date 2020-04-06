@@ -30,6 +30,15 @@
             <trans-unit id="pi_flexform.person">
                 <target>Personne</target>
             </trans-unit>
+            <trans-unit id="pi_flexform.layout">
+                <target>Mise en page</target>
+            </trans-unit>
+            <trans-unit id="pi_flexform.layout.Normal">
+                <target>Normale</target>
+            </trans-unit>
+            <trans-unit id="pi_flexform.layout.Condensed">
+                <target>Condensée</target>
+            </trans-unit>
 
             <trans-unit id="label_empty_staff_list">
                 <target>Aucune équipe</target>

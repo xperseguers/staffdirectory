@@ -5,15 +5,15 @@
 <f:for each="{staff.departments}" as="department">
     <f:if condition="{staff.departments -> f:count()}==1">
         <f:then>
-            <f:render section="Department" arguments="{department: department, showName: 0}"/>
+            <f:render section="Department-{settings.layout}" arguments="{department: department, showName: 0}"/>
         </f:then>
         <f:else>
-            <f:render section="Department" arguments="{department: department, showName: 1}"/>
+            <f:render section="Department-{settings.layout}" arguments="{department: department, showName: 1}"/>
         </f:else>
     </f:if>
 </f:for>
 
-<f:section name="Department">
+<f:section name="Department-Normal">
     <div class="container">
         <f:if condition="{showName}">
             <div class="row">
@@ -28,7 +28,25 @@
 
         <div class="row">
             <f:for each="{department.members}" as="member">
-                <f:render partial="Member" arguments="{member: member}"/>
+                <f:render partial="Member/Normal" arguments="{member: member}"/>
+            </f:for>
+        </div>
+    </div>
+</f:section>
+
+<f:section name="Department-Condensed">
+    <div class="container">
+        <div class="row">
+            <f:if condition="{showName}">
+                <div class="col-md-3 text-center">
+                    <h4 class="title">{department.name}</h4>
+                    <f:if condition="{department.description}">
+                        <h5 class="description">{department.description}</h5>
+                    </f:if>
+                </div>
+            </f:if>
+            <f:for each="{department.members}" as="member">
+                <f:render partial="Member/Condensed" arguments="{member: member}"/>
             </f:for>
         </div>
     </div>

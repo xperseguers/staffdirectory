@@ -18,6 +18,7 @@
 							<onChange>reload</onChange>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items>
 									<numIndex index="0" type="array">
 										<numIndex index="0"></numIndex>
@@ -28,7 +29,7 @@
 										<numIndex index="1">LIST</numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.≤xlf:pi_flexform.displayMode.STAFF</numIndex>
+										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode.STAFF</numIndex>
 										<numIndex index="1">STAFF</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
@@ -50,6 +51,7 @@
 							<displayCond><![CDATA[FIELD:settings.displayMode:!=:PERSON]]></displayCond>
 							<config>
 								<type>select</type>
+								<renderType>selectMultipleSideBySide</renderType>
 								<foreign_table>tx_staffdirectory_staffs</foreign_table>
 								<foreign_table_where>ORDER BY tx_staffdirectory_staffs.staff_name</foreign_table_where>
 								<size>8</size>
@@ -65,6 +67,7 @@
 							<displayCond><![CDATA[FIELD:settings.displayMode:=:PERSON]]></displayCond>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items>
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode.PERSON.dynamic</numIndex>
@@ -79,6 +82,25 @@
 							</config>
 						</TCEforms>
 					</settings.person>
+					<settings.layout>
+						<TCEforms>
+							<label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.layout</label>
+							<config>
+								<type>select</type>
+								<renderType>selectSingle</renderType>
+								<items>
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.layout.Normal</numIndex>
+										<numIndex index="1">Normal</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.layout.Condensed</numIndex>
+										<numIndex index="1">Condensed</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</settings.layout>
 				</el>
 			</ROOT>
 		</sDEF>

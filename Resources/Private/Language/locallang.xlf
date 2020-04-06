@@ -30,6 +30,15 @@
             <trans-unit id="pi_flexform.person">
                 <source>Person</source>
             </trans-unit>
+            <trans-unit id="pi_flexform.layout">
+                <source>Layout</source>
+            </trans-unit>
+            <trans-unit id="pi_flexform.layout.Normal">
+                <source>Normal</source>
+            </trans-unit>
+            <trans-unit id="pi_flexform.layout.Condensed">
+                <source>Condensed</source>
+            </trans-unit>
 
             <trans-unit id="label_empty_staff_list">
                 <source>No staffs</source>
