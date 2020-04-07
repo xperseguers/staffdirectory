@@ -202,7 +202,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
                 $this->getFields($this->t['member'], 'uid,pid,sys_language_uid'),
                 $this->getFields(
                     $this->t['person'],
-                    'uid AS person_id,name,first_name,last_name,image,address,zip,city,country,telephone,fax,email,www,'
+                    'uid AS person_id,title,name,first_name,last_name,image,address,zip,city,country,telephone,fax,email,www,'
                         . 'tx_staffdirectory_gender,tx_staffdirectory_mobilephone,tx_staffdirectory_email2'
                 )
             ))
@@ -283,7 +283,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
                 $this->getFields($this->t['member'], 'uid,pid,sys_language_uid,position_function'),
                 $this->getFields(
                     $this->t['person'],
-                    'uid AS person_id,name,first_name,last_name,image,address,zip,city,country,telephone,fax,email,www,'
+                    'uid AS person_id,title,name,first_name,last_name,image,address,zip,city,country,telephone,fax,email,www,'
                     . 'tx_staffdirectory_gender,tx_staffdirectory_mobilephone,tx_staffdirectory_email2'
                 )
             ))
@@ -317,7 +317,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
             ->select(
                 $this->getFields(
                     $this->t['person'],
-                    'uid AS person_id,name,first_name,last_name,image,address,zip,city,country,telephone,fax,email,www,'
+                    'uid AS person_id,title,name,first_name,last_name,image,address,zip,city,country,telephone,fax,email,www,'
                     . 'tx_staffdirectory_gender,tx_staffdirectory_mobilephone,tx_staffdirectory_email2'
                 ),
                 $this->t['person'],
@@ -354,7 +354,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
                 $this->getFields($this->t['member'], 'uid,pid,sys_language_uid'),
                 $this->getFields(
                     $this->t['person'],
-                    'uid AS person_id,name,first_name,last_name,image,address,zip,city,country,telephone,fax,email,www,'
+                    'uid AS person_id,title,name,first_name,last_name,image,address,zip,city,country,telephone,fax,email,www,'
                     . 'tx_staffdirectory_gender,tx_staffdirectory_mobilephone,tx_staffdirectory_email2'
                 )
             ))
@@ -405,7 +405,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
                 $this->getFields($this->t['member'], 'uid,pid,sys_language_uid,position_function'),
                 $this->getFields(
                     $this->t['person'],
-                    'uid AS person_id,name,first_name,last_name,image,address,zip,city,country,telephone,fax,email,www,'
+                    'uid AS person_id,title,name,first_name,last_name,image,address,zip,city,country,telephone,fax,email,www,'
                         . 'tx_staffdirectory_gender,tx_staffdirectory_mobilephone,tx_staffdirectory_email2'
                 )
             ))

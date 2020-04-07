@@ -154,6 +154,7 @@ class MemberRepository extends AbstractRepository
             $member
                 ->setPersonUid($data['person_id'])
                 ->setPositionFunction($data['position_function'])
+                ->setTitle($data['title'])
                 ->setName($data['name'])
                 ->setFirstName($data['first_name'])
                 ->setLastName($data['last_name'])

@@ -50,6 +50,11 @@ class Member extends AbstractEntity
     /**
      * @var string
      */
+    protected $title;
+
+    /**
+     * @var string
+     */
     protected $name;
 
     /**
@@ -171,6 +176,24 @@ class Member extends AbstractEntity
     public function setPositionFunction(string $position_function): Member
     {
         $this->position_function = $position_function;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     * @return Member
+     */
+    public function setTitle(string $title): Member
+    {
+        $this->title = $title;
         return $this;
     }
 
