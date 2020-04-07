@@ -18,26 +18,12 @@ $boot = function (string $_EXTKEY) {
         options.saveDocNew.tx_staffdirectory_staffs = 1
     ');
 
-    $templateRTE = '
-
-	# ***************************************************************************************
-	# CONFIGURATION of RTE in table "%s", field "%s"
-	# ***************************************************************************************
-RTE.config.%s {
-	buttons.formatblock.removeItems = H1, H4, H5, H6
-	proc.exitHTMLparser_db = 1
-	proc.exitHTMLparser_db {
-		keepNonMatchedTags = 1
-		tags.font.allowedAttribs = color
-		tags.font.rmTagIfNoAttrib = 1
-		tags.font.nesting = global
-	}
-}
-';
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(sprintf($templateRTE,
-        'tx_staffdirectory_staffs', 'description', 'tx_staffdirectory_staffs.description'
-    ));
+    /* ===========================================================================
+        Web > Page hook
+    =========================================================================== */
+    $pluginSignature = 'staffdirectory_pi1';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['list_type_Info'][$pluginSignature][$_EXTKEY] =
+        \Causal\Staffdirectory\Hooks\PageLayoutView::class . '->getExtensionSummary';
 
 };
 
