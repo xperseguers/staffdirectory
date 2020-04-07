@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="messages" date="2020-0304-02T16:24:07Z" product-name="staffdirectory">
+    <file source-language="en" datatype="plaintext" original="messages" date="2020-04-02T16:24:07Z" product-name="staffdirectory">
         <header/>
         <body>
             <trans-unit id="tt_content.list_type_pi1">
@@ -17,6 +17,9 @@
             </trans-unit>
             <trans-unit id="fe_users.tx_staffdirectory_gender">
                 <source>Mr/Ms:</source>
+            </trans-unit>
+            <trans-unit id="fe_users.tx_staffdirectory_email2">
+                <source>Email (alternative):</source>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_staffs">
                 <source>Group</source>

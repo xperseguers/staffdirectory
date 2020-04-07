@@ -1,62 +1,65 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2020-0304-02T16:24:07Z" product-name="staffdirectory">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2020-04-02T16:24:07Z" product-name="staffdirectory">
         <header/>
         <body>
             <trans-unit id="tt_content.list_type_pi1">
-                <source>Répertoire d'équipes</source>
+                <target>Répertoire d'équipes</target>
             </trans-unit>
             <trans-unit id="fe_users.tx_staffdirectory_mobilephone">
-                <source>Téléphone portable :</source>
+                <target>Téléphone portable :</target>
             </trans-unit>
             <trans-unit id="fe_users.tx_staffdirectory_gender.I.0">
-                <source>M</source>
+                <target>M</target>
             </trans-unit>
             <trans-unit id="fe_users.tx_staffdirectory_gender.I.1">
-                <source>Mme</source>
+                <target>Mme</target>
             </trans-unit>
             <trans-unit id="fe_users.tx_staffdirectory_gender">
-                <source>M./Mme :</source>
+                <target>M./Mme :</target>
+            </trans-unit>
+            <trans-unit id="fe_users.tx_staffdirectory_email2">
+                <target>Email (alternatif) :</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_staffs">
-                <source>Groupe</source>
+                <target>Groupe</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_staffs.staff_name">
-                <source>Nom du groupe :</source>
+                <target>Nom du groupe :</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_staffs.description">
-                <source>Description :</source>
+                <target>Description :</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_staffs.departments">
-                <source>Départements :</source>
+                <target>Départements :</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_staffs.parent_staff">
-                <source>Groupe parent :</source>
+                <target>Groupe parent :</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_departments">
-                <source>Département</source>
+                <target>Département</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_departments.position_title">
-                <source>Titre :</source>
+                <target>Titre :</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_departments.position_description">
-                <source>Description :</source>
+                <target>Description :</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_departments.members">
-                <source>Membres :</source>
+                <target>Membres :</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_members">
-                <source>Membre</source>
+                <target>Membre</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_members.position_function">
-                <source>Fonction :</source>
+                <target>Fonction :</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_members.feuser_id">
-                <source>Personne :</source>
+                <target>Personne :</target>
             </trans-unit>
 
             <trans-unit id="tabs.departments">
-                <source>Départements</source>
+                <target>Départements</target>
             </trans-unit>
         </body>
     </file>
