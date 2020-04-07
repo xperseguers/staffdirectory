@@ -274,7 +274,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
      * @param int $uid
      * @return array
      */
-    public function getMemberByPersonUid(int $uid): array
+    public function getMembersByPersonUid(int $uid): array
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable($this->t['member']);
@@ -302,6 +302,40 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
             ->fetchAll();
 
         return $this->getRecordsOverlays($this->t['member'], $rows);
+    }
+
+    /**
+     * Instantiates a skeleton member by an underlying person uid.
+     *
+     * @param int $uid
+     * @return array
+     */
+    public function instantiateMemberByPersonUid(int $uid): array
+    {
+        $row = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable($this->t['person'])
+            ->select(
+                $this->getFields(
+                    $this->t['person'],
+                    'uid AS person_id,name,first_name,last_name,image,address,zip,city,country,telephone,fax,email,www,'
+                    . 'tx_staffdirectory_gender,tx_staffdirectory_mobilephone,tx_staffdirectory_email2'
+                ),
+                $this->t['person'],
+                [
+                    'uid' => $uid,
+                ]
+            )
+            ->fetch();
+        if (!empty($row)) {
+            $row += [
+                'uid' => 0,
+                'pid' => 0,
+                'sys_language_uid' => 0,
+                'position_function' => '',
+            ];
+        }
+
+        return $row;
     }
 
     /**

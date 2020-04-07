@@ -77,9 +77,25 @@ class MemberRepository extends AbstractRepository
      */
     public function findOneByPersonUid(int $uid): ?Member
     {
-        $membersDao = $this->dao->getMemberByPersonUid($uid);
+        $membersDao = $this->dao->getMembersByPersonUid($uid);
         if ($membersDao) {
             $members = $this->dao2business($membersDao);
+            return $members[0];
+        }
+        return null;
+    }
+
+    /**
+     * Instantiates a skeleton member by an underlying person uid.
+     *
+     * @param int $uid
+     * @return Member|null
+     */
+    public function instantiateFromPersonUid(int $uid): ?Member
+    {
+        $memberDao = $this->dao->instantiateMemberByPersonUid($uid);
+        if ($memberDao) {
+            $members = $this->dao2business([$memberDao]);
             return $members[0];
         }
         return null;

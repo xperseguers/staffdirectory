@@ -137,7 +137,7 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $member = null;
 
         if (!empty($this->settings['person'])) {
-            $member = $memberRepository->findOneByPersonUid((int)$this->settings['person']);
+            $member = $memberRepository->instantiateFromPersonUid((int)$this->settings['person']);
         } elseif (!empty($person)) {
             $member = $memberRepository->findByUid($person);
         }
@@ -164,7 +164,7 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         $uids = GeneralUtility::intExplode(',', $this->settings['persons'], true);
         foreach ($uids as $uid) {
-            $members[] = $memberRepository->findOneByPersonUid($uid);
+            $members[] = $memberRepository->instantiateFromPersonUid($uid);
         }
 
         if (empty($members)) {
