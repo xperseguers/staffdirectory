@@ -17,7 +17,6 @@ declare(strict_types = 1);
 namespace Causal\Staffdirectory\Hooks;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
  * Hooks into \TYPO3\CMS\Core\DataHandling\DataHandler.

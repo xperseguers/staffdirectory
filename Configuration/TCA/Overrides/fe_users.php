@@ -44,6 +44,7 @@ $tempColumns = [
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'tx_staffdirectory_email2', '', 'after:email');
 
 $GLOBALS['TCA']['fe_users']['ctrl']['label'] = 'last_name';
-$GLOBALS['TCA']['fe_users']['ctrl']['label_alt'] = 'first_name';
+$GLOBALS['TCA']['fe_users']['ctrl']['label_alt'] = 'first_name, title'; //  BEWARE: "title" is needed for label_userFunc in the context of FlexForm
 $GLOBALS['TCA']['fe_users']['ctrl']['label_alt_force'] = 1;
+$GLOBALS['TCA']['fe_users']['ctrl']['label_userFunc'] = \Causal\Staffdirectory\Tca\FeUser::class . '->getLabel';
 $GLOBALS['TCA']['fe_users']['ctrl']['default_sortby'] = 'ORDER BY last_name, first_name';
