@@ -17,6 +17,9 @@ declare(strict_types = 1);
 namespace Causal\Staffdirectory\Hooks;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Charset\CharsetConverter;
+use TYPO3\CMS\Core\Crypto\Random;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Hooks into \TYPO3\CMS\Core\DataHandling\DataHandler.
@@ -59,7 +62,14 @@ class DataHandler
             $fullNameParts[] = $fieldArray['first_name'] ?? $record['first_name'];
             $fullNameParts[] = $fieldArray['last_name'] ?? $record['last_name'];
 
-            $fieldArray['name'] = trim(implode(' ', $fullNameParts));
+            $record['name'] = $fieldArray['name'] = trim(implode(' ', $fullNameParts));
+        }
+
+        if ($record['tx_extbase_type'] === 'tx_staffdirectory') {
+            $fieldArray['username'] = strtolower(GeneralUtility::makeInstance(CharsetConverter::class)->specCharsToASCII('utf-8', str_replace(' ', '.', $record['name'])));
+            if ($operation === 'new') {
+                $fieldArray['password'] = base64_encode(GeneralUtility::makeInstance(Random::class)->generateRandomBytes(30));
+            }
         }
     }
 

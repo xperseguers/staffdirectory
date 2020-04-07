@@ -15,9 +15,7 @@ $GLOBALS['TCA']['fe_users']['types']['tx_staffdirectory'] = [
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
                     disable,--palette--;;timeRestriction,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
-                    username,password,usergroup,
-                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:extended,
-                    tx_extbase_type
+                    username,password,usergroup,tx_extbase_type
             ',
 ];
 $GLOBALS['TCA']['fe_users']['palettes'] += [
