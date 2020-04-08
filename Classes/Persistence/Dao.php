@@ -99,7 +99,6 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
                 $this->t['staff'],
                 [
                     'uid' => $uid,
-                    'sys_language_uid' => 0,
                 ]
             )
             ->fetchAll();

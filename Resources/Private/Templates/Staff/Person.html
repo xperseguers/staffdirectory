@@ -2,6 +2,14 @@
       xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
+<f:if condition="{member}">
+    <f:else>
+        <div class="alert alert-warning" role="alert">
+            NO PERSONS
+        </div>
+    </f:else>
+</f:if>
+
 <div class="row">
     <f:render partial="Member/{settings.layout}" arguments="{member: member}"/>
 </div>

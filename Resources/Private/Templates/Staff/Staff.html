@@ -2,6 +2,14 @@
       xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
+<f:if condition="{staff}">
+    <f:else>
+        <div class="alert alert-warning" role="alert">
+            NO STAFF
+        </div>
+    </f:else>
+</f:if>
+
 <f:if condition="{staff.description}">
     <div class="jumbotron">
         <h1 class="display-4">Présentation</h1>
