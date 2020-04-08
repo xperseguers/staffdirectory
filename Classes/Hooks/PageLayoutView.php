@@ -87,15 +87,6 @@ class PageLayoutView
                             $description .= '<strong>' . htmlspecialchars($this->getStaffNames($staffUids)) . '</strong>';
                         }
                         break;
-                    case 'PERSON':
-                        $description = htmlspecialchars($this->sL('pi_flexform.persons')) . ': ';
-                        $personUid = (int)$this->getFieldFromFlexForm('settings.person');
-                        if (empty($personUid)) {
-                            $description .= sprintf($errorPattern, htmlspecialchars($this->sL('label_empty_directory_list')));
-                        } else {
-                            $description .= '<strong>' . htmlspecialchars($this->getPersonNames([$personUid])) . '</strong>';
-                        }
-                        break;
                     case 'PERSONS':
                         $description = htmlspecialchars($this->sL('pi_flexform.persons')) . ': ';
                         $personUids = GeneralUtility::intExplode(',', $this->getFieldFromFlexForm('settings.persons'), true);

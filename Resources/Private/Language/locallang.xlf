@@ -15,14 +15,8 @@
             <trans-unit id="pi_flexform.displayMode.STAFF">
                 <source>Staff view (STAFF)</source>
             </trans-unit>
-            <trans-unit id="pi_flexform.displayMode.PERSON">
-                <source>Person view (PERSON)</source>
-            </trans-unit>
             <trans-unit id="pi_flexform.displayMode.PERSONS">
-                <source>Multiple persons view (PERSONS)</source>
-            </trans-unit>
-            <trans-unit id="pi_flexform.displayMode.PERSON.dynamic">
-                <source>dynamic</source>
+                <source>Single or multiple persons view (PERSONS)</source>
             </trans-unit>
             <trans-unit id="pi_flexform.displayMode.DIRECTORY">
                 <source>Person listing (DIRECTORY)</source>

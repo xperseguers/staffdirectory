@@ -15,14 +15,8 @@
             <trans-unit id="pi_flexform.displayMode.STAFF">
                 <target>Vue fiche de l'équipe (STAFF)</target>
             </trans-unit>
-            <trans-unit id="pi_flexform.displayMode.PERSON">
-                <target>Vue fiche de la personne (PERSON)</target>
-            </trans-unit>
             <trans-unit id="pi_flexform.displayMode.PERSONS">
-                <target>Vue fiche de plusieurs personnes (PERSONS)</target>
-            </trans-unit>
-            <trans-unit id="pi_flexform.displayMode.PERSON.dynamic">
-                <target>dynamique</target>
+                <target>Vue fiche d'une ou plusieurs personnes (PERSONS)</target>
             </trans-unit>
             <trans-unit id="pi_flexform.displayMode.DIRECTORY">
                 <target>Liste des personnes (DIRECTORY)</target>

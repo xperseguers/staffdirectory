@@ -134,7 +134,9 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $member = null;
 
         if (!empty($this->settings['person'])) {
-            $member = $memberRepository->instantiateFromPersonUid((int)$this->settings['person']);
+            // Get first selected person in the list
+            $uids = GeneralUtility::intExplode(',', $this->settings['persons'], true);
+            $member = $memberRepository->instantiateFromPersonUid(count($uids) > 0 ? $uids[0] : 0);
         } elseif (!empty($person)) {
             $member = $memberRepository->findByUid($person);
         }
