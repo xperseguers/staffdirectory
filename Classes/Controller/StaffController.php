@@ -100,7 +100,6 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      *
      * @param int $staff
      * @return void
-     * @throws \RuntimeException
      */
     public function staffAction(int $staff = 0)
     {
@@ -111,7 +110,7 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
 
         if (empty($uid)) {
-            throw new \RuntimeException('No staff selected', 1316088274);
+            return $this->errorMessage('No staff selected.', 1316088274);
         }
 
         /** @var StaffRepository $staffRepository */
@@ -127,10 +126,8 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * PERSON action.
      *
      * @param int $person
-     * @return void
-     * @throws \RuntimeException
      */
-    protected function personAction(int $person = 0): void
+    protected function personAction(int $person = 0)
     {
         /** @var MemberRepository $memberRepository */
         $memberRepository = Factory::getRepository('Member');
@@ -142,7 +139,7 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $member = $memberRepository->findByUid($person);
         }
         if ($member === null) {
-            throw new \RuntimeException('No person selected', 1316103052);
+            return $this->errorMessage('No person selected', 1316103052);
         }
 
         $this->view->assignMultiple([
@@ -152,11 +149,8 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
     /**
      * PERSONS action.
-     *
-     * @return void
-     * @throws \RuntimeException
      */
-    protected function personsAction(): void
+    protected function personsAction()
     {
         /** @var MemberRepository $memberRepository */
         $memberRepository = Factory::getRepository('Member');
@@ -168,7 +162,7 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
 
         if (empty($members)) {
-            throw new \RuntimeException('No persons selected', 1586196671);
+            return $this->errorMessage('No persons selected.', 1586196671);
         }
 
         $this->view->assignMultiple([
@@ -195,6 +189,21 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->view->assignMultiple([
             'members' => $members,
         ]);
+    }
+
+    /**
+     * @param string $message
+     * @param int $errorCode
+     * @return string
+     */
+    protected function errorMessage(string $message, int $errorCode): string
+    {
+        $out = [];
+        $out[] = '<div class="alert alert-danger" role="alert">';
+        $out[] = htmlspecialchars($message) . ' (' . $errorCode . ')';
+        $out[] = '</div>';
+
+        return implode(LF, $out);
     }
 
 }
