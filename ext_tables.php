@@ -1,7 +1,7 @@
 <?php
 defined('TYPO3_MODE') || die ('Access denied.');
 
-$boot = function (string $_EXTKEY) {
+$boot = function (string $_EXTKEY): void {
 
     /*****************************************************
      * Hooks
@@ -13,5 +13,5 @@ $boot = function (string $_EXTKEY) {
 
 };
 
-$boot($_EXTKEY);
+$boot('staffdirectory');
 unset($boot);

@@ -1,7 +1,7 @@
 <?php
 defined('TYPO3_MODE') || die ('Access denied.');
 
-$boot = function (string $_EXTKEY) {
+$boot = function (string $_EXTKEY): void {
 
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'Causal.' . $_EXTKEY,
@@ -27,5 +27,5 @@ $boot = function (string $_EXTKEY) {
 
 };
 
-$boot($_EXTKEY);
+$boot('staffdirectory');
 unset($boot);
