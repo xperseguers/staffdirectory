@@ -19,9 +19,6 @@ return [
         ],
         'iconfile' => 'EXT:staffdirectory/Resources/Public/Icons/icon_tx_staffdirectory_staffs.gif',
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,staff_name,description,departments,parent_staff'
-    ],
     'types' => [
         '1' => [
             'showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,

@@ -21,9 +21,6 @@ return [
         ],
         'iconfile' => 'EXT:staffdirectory/Resources/Public/Icons/icon_tx_staffdirectory_members.gif',
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,starttime,endtime,feuser_id,position_function'
-    ],
     'types' => [
         '1' => [
             'showitem' => '
