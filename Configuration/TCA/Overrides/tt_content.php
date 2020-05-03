@@ -1,9 +1,15 @@
 <?php
 defined('TYPO3_MODE') || die();
 
+$typo3Branch = class_exists(\TYPO3\CMS\Core\Information\Typo3Version::class)
+    ? (new \TYPO3\CMS\Core\Information\Typo3Version())->getBranch()
+    : TYPO3_branch;
+
 // Register Frontend plugin
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'Causal.staffdirectory',
+    version_compare($typo3Branch, '10.0', '>=')
+        ? 'staffdirectory'
+        : 'Causal.staffdirectory',
     'Pi1',
     'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tt_content.list_type_pi1'
 );
