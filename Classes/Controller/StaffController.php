@@ -26,11 +26,14 @@ declare(strict_types = 1);
 
 namespace Causal\Staffdirectory\Controller;
 
+use Causal\Staffdirectory\Domain\Model\Member;
+use Causal\Staffdirectory\Domain\Model\Staff;
 use Causal\Staffdirectory\Domain\Repository\Factory;
 use Causal\Staffdirectory\Domain\Repository\MemberRepository;
 use Causal\Staffdirectory\Domain\Repository\StaffRepository;
 use Causal\Staffdirectory\Persistence\Dao;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
@@ -84,10 +87,19 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $uids = GeneralUtility::intExplode(',', $this->settings['staffs'], true);
             $staffs = [];
             foreach ($uids as $uid) {
-                $staffs[] = $staffRepository->findByUid($uid);
+                $staff = $staffRepository->findByUid($uid);
+                if ($staff !== null) {
+                    $staffs[] = $staff;
+                }
             }
         } else {
             $staffs = $staffRepository->findAll();
+        }
+
+        foreach ($staffs as $staff) {
+            // Tag the page cache so that FAL signal operations may be listened to in
+            // order to flush corresponding page cache
+            $this->addCacheTagsForStaff($staff);
         }
 
         $this->view->assignMultiple([
@@ -117,6 +129,8 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $staffRepository = Factory::getRepository('Staff');
         $staff = $staffRepository->findByUid($uid);
 
+        $this->addCacheTagsForStaff($staff);
+
         $this->view->assignMultiple([
             'staff' => $staff,
         ]);
@@ -144,6 +158,8 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             return $this->errorMessage('No person selected', 1316103052);
         }
 
+        $this->addCacheTagsForMember($member);
+
         $this->view->assignMultiple([
             'member' => $member,
         ]);
@@ -160,11 +176,18 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         $uids = GeneralUtility::intExplode(',', $this->settings['persons'], true);
         foreach ($uids as $uid) {
-            $members[] = $memberRepository->instantiateFromPersonUid($uid);
+            $member = $memberRepository->instantiateFromPersonUid($uid);
+            if ($member !== null) {
+                $members[] = $member;
+            }
         }
 
         if (empty($members)) {
             return $this->errorMessage('No persons selected.', 1586196671);
+        }
+
+        foreach ($members as $member) {
+            $this->addCacheTagsForMember($member);
         }
 
         $this->view->assignMultiple([
@@ -188,6 +211,10 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $members = $memberRepository->findAll();
         }
 
+        foreach ($members as $member) {
+            $this->addCacheTagsForMember($member);
+        }
+
         $this->view->assignMultiple([
             'members' => $members,
         ]);
@@ -206,6 +233,56 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $out[] = '</div>';
 
         return implode(LF, $out);
+    }
+
+    /**
+     * Tags the page cache so that FAL signal operations may be listened to in
+     * order to flush corresponding page cache.
+     *
+     * @param Staff $staff
+     */
+    protected function addCacheTagsForStaff(?Staff $staff): void
+    {
+        if ($staff === null) {
+            return;
+        }
+
+        $cacheTags = [];
+
+        foreach ($staff->getDepartments() as $department) {
+            foreach ($department->getMembers() as $member) {
+                $cacheTags[] = 'tx_staffdirectory_person_' . $member->getPersonUid();
+            }
+        }
+
+        $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
+    }
+
+    /**
+     * Tags the page cache so that FAL signal operations may be listened to in
+     * order to flush corresponding page cache.
+     *
+     * @param Member $member
+     */
+    protected function addCacheTagsForMember(Member $member): void {
+        if ($member === null) {
+            return;
+        }
+
+        // Tag the page cache so that FAL signal operations may be listened to in
+        // order to flush corresponding page cache
+        $cacheTags = [
+            'tx_staffdirectory_person_' . $member->getPersonUid(),
+        ];
+        $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
+    }
+
+    /**
+     * @return TypoScriptFrontendController
+     */
+    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 
 }

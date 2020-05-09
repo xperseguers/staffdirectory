@@ -1,0 +1,12 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Causal\Staffdirectory\EventListener\CoreResourceStorageEventListener:
+    tags:
+      - name: event.listener
+        identifier: 'causal/staffdirectory'
+        method: 'afterFileReplaced'
+        event: TYPO3\CMS\Core\Resource\Event\AfterFileReplacedEvent
