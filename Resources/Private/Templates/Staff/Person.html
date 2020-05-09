@@ -11,7 +11,7 @@
 </f:if>
 
 <div class="row">
-    <f:render partial="Member/{settings.layout}" arguments="{member: member}"/>
+    <f:render partial="Member/{settings.layout}" arguments="{member: member, offset: 3}"/>
 </div>
 
 <f:if condition="{positions}">
@@ -19,7 +19,7 @@
 </f:if>
 
 <f:section name="Positions">
-    <h3>Groupes</h3>
+    <h3>Groupes et équipes</h3>
     <div class="row">
         <div class="col-md-12">
             <p>
@@ -32,15 +32,17 @@
 
             <table class="table table-striped">
                 <f:for each="{positions}" as="position">
-                    <tr>
-                        <th rowspan="{position.functions -> f:count()}">{position.staff.name}</th>
-                        <f:for each="{position.functions}" as="function" iteration="iterator">
-                            <f:if condition="{iterator.isFirst}">
-                                <f:else></tr><tr></f:else>
-                            </f:if>
+                    <f:for each="{position.functions}" as="function">
+                        <tr>
+                            <th>{position.staff.name}</th>
                             <td>{function}</td>
-                        </f:for>
-                    </tr>
+                            <td>
+                                <f:for each="{position.links}" as="link">
+                                    <f:link.page pageUid="{link.pageUid}">{link.title}</f:link.page>
+                                </f:for>
+                            </td>
+                        </tr>
+                    </f:for>
                 </f:for>
             </table>
         </div>

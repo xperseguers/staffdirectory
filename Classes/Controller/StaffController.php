@@ -172,7 +172,9 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             ->fetchAll();
 
         $positions = [];
+        $staffUids = [];
         foreach ($rows as $row) {
+            $staffUids[] = $row['staff'];
             $key = 'staff-' . $row['staff'];
             if (!isset($positions[$key])) {
                 $positions[$key] = [
@@ -181,10 +183,39 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                         'name' => $row['staff_name'],
                     ],
                     'functions' => [],
+                    'links' => [],
                 ];
             }
             $positions[$key]['functions'][] = $row['position_function'] ?: $row['position_title'];
         }
+
+        // Find pages where the plugin is located
+        $pagesWithPlugin = $this->findPagesWithPlugin($person, $staffUids);
+        $cacheTags = [];
+        foreach ($pagesWithPlugin as $key => $links) {
+            if (isset($positions[$key])) {
+                foreach ($links as $link) {
+                    $positions[$key]['links'][] = $link;
+                    $cacheTags[] = 'pageId_' . $link['pageUid'];
+                }
+            } else {
+                foreach ($links as $link) {
+                    $positions[$key . '-' . $link['pageUid']] = [
+                        'staff' => [
+                            'uid' => 0,
+                            'name' => $link['title']
+                        ],
+                        'functions' => ['Personne de contact'],
+                        'links' => [[
+                            'pageUid' => $link['pageUid'],
+                            'title' => 'Détails',
+                        ]],
+                    ];
+                    $cacheTags[] = 'pageId_' . $link['pageUid'];
+                }
+            }
+        }
+        $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
 
         /** @var MemberRepository $memberRepository */
         $memberRepository = Factory::getRepository('Member');
@@ -323,6 +354,57 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             'tx_staffdirectory_person_' . $member->getPersonUid(),
         ];
         $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
+    }
+
+    /**
+     * @param int $personUid
+     * @param array $staffUids
+     * @return array
+     */
+    protected function findPagesWithPlugin(int $personUid, array $staffUids): array
+    {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tt_content');
+        $rows = $queryBuilder
+            ->select('c.pid', 'c.pi_flexform', 'p.title')
+            ->from('tt_content', 'c')
+            ->join(
+                'c',
+                'pages',
+                'p',
+                $queryBuilder->expr()->eq('p.uid', $queryBuilder->quoteIdentifier('c.pid'))
+            )
+            ->where(
+                $queryBuilder->expr()->eq('CType', $queryBuilder->quote('list')),
+                $queryBuilder->expr()->eq('list_type', $queryBuilder->quote('staffdirectory_pi1')),
+                $queryBuilder->expr()->eq('p.doktype', 1)
+            )
+            ->execute()
+            ->fetchAll();
+
+        $data = [];
+        foreach ($rows as $row) {
+            $flexform = GeneralUtility::xml2array($row['pi_flexform'])['data']['sDEF']['lDEF'];
+            if ($flexform['settings.displayMode']['vDEF'] === 'STAFF') {
+                $staffs = GeneralUtility::intExplode(',', $flexform['settings.staffs']['vDEF'], true);
+                foreach (array_intersect($staffs, $staffUids) as $staff) {
+                    $data['staff-' . $staff][] = [
+                        'pageUid' => $row['pid'],
+                        'title' => $row['title'],
+                    ];
+                }
+            } elseif ($flexform['settings.displayMode']['vDEF'] === 'PERSONS') {
+                $persons = GeneralUtility::intExplode(',', $flexform['settings.persons']['vDEF'], true);
+                if (in_array($personUid, $persons, true)) {
+                    $data['person-' . $personUid][] = [
+                        'pageUid' => $row['pid'],
+                        'title' => $row['title'],
+                    ];
+                }
+            }
+        }
+
+        return $data;
     }
 
     /**
