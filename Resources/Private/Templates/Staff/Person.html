@@ -45,8 +45,11 @@
                             <th>{position.staff.name}</th>
                             <td>{function}</td>
                             <td>
-                                <f:for each="{position.links}" as="link">
+                                <f:for each="{position.links}" as="link" iteration="iterator">
                                     <f:link.page pageUid="{link.pageUid}">{link.title}</f:link.page>
+                                    <f:if condition="{iterator.isLast}">
+                                        <f:else><br/></f:else>
+                                    </f:if>
                                 </f:for>
                             </td>
                         </tr>
