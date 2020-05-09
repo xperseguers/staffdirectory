@@ -59,12 +59,29 @@ $tempColumns = [
             'max' => '255'
         ]
     ],
+    'path_segment' => [
+        'exclude' => false,
+        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:pages.slug',
+        'config' => [
+            'type' => 'slug',
+            'size' => 50,
+            'generatorOptions' => [
+                'fields' => ['name'],
+                'fieldSeparator' => '/',
+                'prefixParentPageSlug' => true
+            ],
+            'fallbackCharacter' => '-',
+            'eval' => 'uniqueInSite',
+            'default' => ''
+        ]
+    ],
 ];
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tempColumns, 1);
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'tx_staffdirectory_gender', '', 'before:title');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'tx_staffdirectory_mobilephone', '0', 'after:telephone');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'tx_staffdirectory_email2', '', 'after:email');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'path_segment', '', 'after:image');
 
 $GLOBALS['TCA']['fe_users']['ctrl']['label'] = 'last_name';
 $GLOBALS['TCA']['fe_users']['ctrl']['label_alt'] = 'first_name, title'; //  BEWARE: "title" is needed for label_userFunc in the context of FlexForm
