@@ -31,6 +31,14 @@
             </p>
 
             <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Groupe / Équipe</th>
+                        <th>Fonction</th>
+                        <th>Page sur le site</th>
+                    </tr>
+                </thead>
+                <tbody>
                 <f:for each="{positions}" as="position">
                     <f:for each="{position.functions}" as="function">
                         <tr>
@@ -44,6 +52,7 @@
                         </tr>
                     </f:for>
                 </f:for>
+                </tbody>
             </table>
         </div>
     </div>
