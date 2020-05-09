@@ -18,6 +18,9 @@
             <trans-unit id="pi_flexform.displayMode.PERSONS">
                 <source>Single or multiple persons view (PERSONS)</source>
             </trans-unit>
+            <trans-unit id="pi_flexform.displayMode.PERSON">
+                <source>Single person view (PERSON)</source>
+            </trans-unit>
             <trans-unit id="pi_flexform.displayMode.DIRECTORY">
                 <source>Person listing (DIRECTORY)</source>
             </trans-unit>

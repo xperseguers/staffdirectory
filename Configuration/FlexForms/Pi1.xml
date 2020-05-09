@@ -36,6 +36,10 @@
 										<numIndex index="1">PERSONS</numIndex>
 									</numIndex>
 									<numIndex index="4" type="array">
+										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode.PERSON</numIndex>
+										<numIndex index="1">PERSON</numIndex>
+									</numIndex>
+									<numIndex index="5" type="array">
 										<numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode.DIRECTORY</numIndex>
 										<numIndex index="1">DIRECTORY</numIndex>
 									</numIndex>

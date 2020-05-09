@@ -18,6 +18,9 @@
             <trans-unit id="pi_flexform.displayMode.PERSONS">
                 <target>Vue fiche d'une ou plusieurs personnes (PERSONS)</target>
             </trans-unit>
+            <trans-unit id="pi_flexform.displayMode.PERSON">
+                <source>Vue fiche d'une seule personne (PERSON)</source>
+            </trans-unit>
             <trans-unit id="pi_flexform.displayMode.DIRECTORY">
                 <target>Liste des personnes (DIRECTORY)</target>
             </trans-unit>

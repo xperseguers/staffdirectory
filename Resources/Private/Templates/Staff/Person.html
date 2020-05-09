@@ -14,4 +14,37 @@
     <f:render partial="Member/{settings.layout}" arguments="{member: member}"/>
 </div>
 
+<f:if condition="{positions}">
+    <f:render section="Positions" arguments="{_all}"/>
+</f:if>
+
+<f:section name="Positions">
+    <h3>Groupes</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                {member.title} {member.firstName} fait partie
+                <f:if condition="{positions -> f:count()}==1">
+                    <f:then>de l'équipe suivante :</f:then>
+                    <f:else>des équipes suivantes :</f:else>
+                </f:if>
+            </p>
+
+            <table class="table table-striped">
+                <f:for each="{positions}" as="position">
+                    <tr>
+                        <th rowspan="{position.functions -> f:count()}">{position.staff.name}</th>
+                        <f:for each="{position.functions}" as="function" iteration="iterator">
+                            <f:if condition="{iterator.isFirst}">
+                                <f:else></tr><tr></f:else>
+                            </f:if>
+                            <td>{function}</td>
+                        </f:for>
+                    </tr>
+                </f:for>
+            </table>
+        </div>
+    </div>
+</f:section>
+
 </html>

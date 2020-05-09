@@ -32,6 +32,7 @@ use Causal\Staffdirectory\Domain\Repository\Factory;
 use Causal\Staffdirectory\Domain\Repository\MemberRepository;
 use Causal\Staffdirectory\Domain\Repository\StaffRepository;
 use Causal\Staffdirectory\Persistence\Dao;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -143,6 +144,48 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     protected function personAction(int $person = 0)
     {
+        // Search the staffs that the person belongs to
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_staffdirectory_members');
+        $rows = $queryBuilder
+            ->select('d.staff', 'm.position_function', 'd.position_title', 's.staff_name')
+            ->from('tx_staffdirectory_members', 'm')
+            ->join(
+                'm',
+                'tx_staffdirectory_departments',
+                'd',
+                $queryBuilder->expr()->eq('d.uid', $queryBuilder->quoteIdentifier('m.department'))
+            )
+            ->join(
+                'd',
+                'tx_staffdirectory_staffs',
+                's',
+                $queryBuilder->expr()->eq('s.uid', $queryBuilder->quoteIdentifier('d.staff'))
+            )
+            ->where(
+                $queryBuilder->expr()->eq('m.feuser_id', $queryBuilder->createNamedParameter($person, \PDO::PARAM_INT))
+            )
+            ->orderBy('staff_name')
+            ->addOrderBy('d.sorting')
+            ->addOrderBy('m.sorting')
+            ->execute()
+            ->fetchAll();
+
+        $positions = [];
+        foreach ($rows as $row) {
+            $key = 'staff-' . $row['staff'];
+            if (!isset($positions[$key])) {
+                $positions[$key] = [
+                    'staff' => [
+                        'uid' => $row['staff'],
+                        'name' => $row['staff_name'],
+                    ],
+                    'functions' => [],
+                ];
+            }
+            $positions[$key]['functions'][] = $row['position_function'] ?: $row['position_title'];
+        }
+
         /** @var MemberRepository $memberRepository */
         $memberRepository = Factory::getRepository('Member');
         $member = null;
@@ -152,7 +195,7 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $uids = GeneralUtility::intExplode(',', $this->settings['persons'], true);
             $member = $memberRepository->instantiateFromPersonUid(count($uids) > 0 ? $uids[0] : 0);
         } elseif (!empty($person)) {
-            $member = $memberRepository->findByUid($person);
+            $member = $memberRepository->instantiateFromPersonUid($person);
         }
         if ($member === null) {
             return $this->errorMessage('No person selected', 1316103052);
@@ -160,8 +203,13 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         $this->addCacheTagsForMember($member);
 
+        // Disable link to ourself
+        $this->settings['targets']['person'] = null;
+
         $this->view->assignMultiple([
+            'settings' => $this->settings,
             'member' => $member,
+            'positions' => array_values($positions),
         ]);
     }
 
