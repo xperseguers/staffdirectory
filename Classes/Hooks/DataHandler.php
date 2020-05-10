@@ -17,6 +17,7 @@ declare(strict_types = 1);
 namespace Causal\Staffdirectory\Hooks;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Crypto\Random;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -52,6 +53,8 @@ class DataHandler
 
         if ($operation === 'update') {
             $record = BackendUtility::getRecord($table, $id);
+            $pageCache = GeneralUtility::makeInstance(CacheManager::class);
+            $pageCache->flushCachesByTag('tx_staffdirectory_person_' . $id);
         } else {
             $record = $fieldArray;
         }
