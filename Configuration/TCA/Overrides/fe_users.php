@@ -8,6 +8,9 @@ $GLOBALS['TCA']['fe_users']['columns']['tx_extbase_type']['config']['items'][] =
     'tx_staffdirectory'
 ];
 
+$GLOBALS['TCA']['fe_users']['columns']['name']['exclude'] = 0;
+$GLOBALS['TCA']['fe_users']['columns']['name']['config']['readOnly'] = true;
+
 $GLOBALS['TCA']['fe_users']['types']['tx_staffdirectory'] = [
     'showitem' => '
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:fe_users.tabs.personelData,
@@ -19,7 +22,7 @@ $GLOBALS['TCA']['fe_users']['types']['tx_staffdirectory'] = [
             ',
 ];
 $GLOBALS['TCA']['fe_users']['palettes'] += [
-    'sd_name' => ['showitem' => 'title,first_name,last_name'],
+    'sd_name' => ['showitem' => 'title,first_name,last_name,--linebreak--,name'],
     'sd_contact' => ['showitem' => 'telephone,tx_staffdirectory_mobilephone,--linebreak--,email,tx_staffdirectory_email2'],
     'sd_address' => ['showitem' => 'address,--linebreak--,zip,--linebreak--,city,--linebreak--,country'],
 ];
@@ -68,7 +71,6 @@ $tempColumns = [
             'generatorOptions' => [
                 'fields' => ['name'],
                 'fieldSeparator' => '/',
-                'prefixParentPageSlug' => true
             ],
             'fallbackCharacter' => '-',
             'eval' => 'unique',
@@ -81,7 +83,7 @@ $tempColumns = [
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'tx_staffdirectory_gender', '', 'before:title');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'tx_staffdirectory_mobilephone', '0', 'after:telephone');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'tx_staffdirectory_email2', '', 'after:email');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'path_segment', '', 'after:image');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'path_segment', '', 'after:name');
 
 $GLOBALS['TCA']['fe_users']['ctrl']['label'] = 'last_name';
 $GLOBALS['TCA']['fe_users']['ctrl']['label_alt'] = 'first_name, title'; //  BEWARE: "title" is needed for label_userFunc in the context of FlexForm
