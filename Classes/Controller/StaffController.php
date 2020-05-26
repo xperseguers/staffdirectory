@@ -215,6 +215,11 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 }
             }
         }
+
+        if (empty($positions)) {
+            $this->redirectToUri(GeneralUtility::getIndpEnv('TYPO3_SITE_URL'), 0, 404);
+        }
+
         $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
 
         /** @var MemberRepository $memberRepository */
