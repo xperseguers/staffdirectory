@@ -79,7 +79,7 @@ $tempColumns = [
         'config' => [
             'type' => 'text',
             'cols' => 30,
-            'rows' => 5,
+            'rows' => 10,
         ],
     ],
     'path_segment' => [
