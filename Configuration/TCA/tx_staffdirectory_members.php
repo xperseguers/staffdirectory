@@ -119,7 +119,7 @@ return [
                     ['', 0],
                 ],
                 'foreign_table' => 'fe_users',
-                'foreign_table_where' => 'AND fe_users.pid=###CURRENT_PID### ORDER BY fe_users.last_name, fe_users.first_name',
+                'foreign_table_where' => 'AND fe_users.pid=###CURRENT_PID### AND fe_users.disable=0 ORDER BY fe_users.last_name, fe_users.first_name',
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,

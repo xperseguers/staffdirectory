@@ -81,7 +81,7 @@
 								<type>select</type>
 								<renderType>selectMultipleSideBySide</renderType>
 								<foreign_table>fe_users</foreign_table>
-								<foreign_table_where>ORDER BY fe_users.last_name</foreign_table_where>
+								<foreign_table_where>AND fe_users.disable=0 ORDER BY fe_users.last_name</foreign_table_where>
 								<size>8</size>
 								<maxitems>99</maxitems>
 								<multiple>0</multiple>
