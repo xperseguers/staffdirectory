@@ -21,6 +21,12 @@
             <trans-unit id="fe_users.tx_staffdirectory_email2">
                 <target>Email (alternatif) :</target>
             </trans-unit>
+            <trans-unit id="fe_users.tx_staffdirectory_gdpr_date">
+                <target>Date d'approbation pour publier ce profil</target>
+            </trans-unit>
+            <trans-unit id="fe_users.tx_staffdirectory_gdpr_proof">
+                <target>Preuve (contenu d'un email, déclaration d'un document Word, ...)</target>
+            </trans-unit>
             <trans-unit id="tx_staffdirectory_staffs">
                 <target>Groupe</target>
             </trans-unit>
@@ -58,6 +64,9 @@
                 <target>Personne :</target>
             </trans-unit>
 
+            <trans-unit id="palettes.gdpr">
+                <target>Règlement général sur la protection des données (RGPD)</target>
+            </trans-unit>
             <trans-unit id="tabs.departments">
                 <target>Départements</target>
             </trans-unit>

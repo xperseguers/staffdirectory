@@ -33,7 +33,14 @@ class FeUser
         }
 
         $feUser = $params['row'];
-        $displayName = !empty($feUser['last_name']) ? $feUser['last_name'] . ', ' : '';
+
+        if (empty($feUser['tx_staffdirectory_gdpr_date']) || empty($feUser['tx_staffdirectory_gdpr_proof'])) {
+            $displayName = '[GDPR❓] ';
+        } else {
+            $displayName = '✅ ';
+        }
+
+        $displayName .= !empty($feUser['last_name']) ? $feUser['last_name'] . ', ' : '';
         $displayName .= $feUser['first_name'];
         if (!empty($feUser['title'])) {
             $displayName .= ' (' . $feUser['title'] . ')';

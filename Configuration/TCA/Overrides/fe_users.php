@@ -17,6 +17,7 @@ $GLOBALS['TCA']['fe_users']['types']['tx_staffdirectory'] = [
                     --palette--;;sd_name, --palette--;;sd_contact, --palette--;;sd_address, image,                
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
                     disable,--palette--;;timeRestriction,
+                    --palette--;LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:palettes.gdpr;gdpr,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
                     username,password,usergroup,tx_extbase_type
             ',
@@ -25,6 +26,7 @@ $GLOBALS['TCA']['fe_users']['palettes'] += [
     'sd_name' => ['showitem' => 'title,first_name,last_name,--linebreak--,name'],
     'sd_contact' => ['showitem' => 'telephone,tx_staffdirectory_mobilephone,--linebreak--,email,tx_staffdirectory_email2'],
     'sd_address' => ['showitem' => 'address,--linebreak--,zip,--linebreak--,city,--linebreak--,country'],
+    'gdpr' => ['showitem' => 'tx_staffdirectory_gdpr_date,--linebreak--,tx_staffdirectory_gdpr_proof'],
 ];
 
 $tempColumns = [
@@ -62,8 +64,26 @@ $tempColumns = [
             'max' => '255'
         ]
     ],
+    'tx_staffdirectory_gdpr_date' => [
+        'exclude' => 0,
+        'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:fe_users.tx_staffdirectory_gdpr_date',
+        'config' => [
+            'type' => 'input',
+            'renderType' => 'inputDateTime',
+            'eval' => 'date',
+        ],
+    ],
+    'tx_staffdirectory_gdpr_proof' => [
+        'exclude' => 0,
+        'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:fe_users.tx_staffdirectory_gdpr_proof',
+        'config' => [
+            'type' => 'text',
+            'cols' => 30,
+            'rows' => 5,
+        ],
+    ],
     'path_segment' => [
-        'exclude' => false,
+        'exclude' => 0,
         'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:pages.slug',
         'config' => [
             'type' => 'slug',
