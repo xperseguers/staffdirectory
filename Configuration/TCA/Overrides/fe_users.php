@@ -106,7 +106,8 @@ $tempColumns = [
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'path_segment', '', 'after:name');
 
 $GLOBALS['TCA']['fe_users']['ctrl']['label'] = 'last_name';
-$GLOBALS['TCA']['fe_users']['ctrl']['label_alt'] = 'first_name, title'; //  BEWARE: "title" is needed for label_userFunc in the context of FlexForm
+// BEWARE: "title" and GDPR fields are needed for label_userFunc in the context of FlexForm
+$GLOBALS['TCA']['fe_users']['ctrl']['label_alt'] = 'first_name, title, tx_staffdirectory_gdpr_date, tx_staffdirectory_gdpr_proof';
 $GLOBALS['TCA']['fe_users']['ctrl']['label_alt_force'] = 1;
 $GLOBALS['TCA']['fe_users']['ctrl']['label_userFunc'] = \Causal\Staffdirectory\Tca\FeUser::class . '->getLabel';
 $GLOBALS['TCA']['fe_users']['ctrl']['default_sortby'] = 'ORDER BY last_name, first_name';
