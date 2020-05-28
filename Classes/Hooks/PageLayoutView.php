@@ -35,7 +35,7 @@ class PageLayoutView
     const LL_PATH = 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:';
 
     /**
-     * @var \TYPO3\CMS\Lang\LanguageService
+     * @var \TYPO3\CMS\Core\Localization\LanguageService
      */
     protected $languageService;
 
