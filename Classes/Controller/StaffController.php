@@ -144,6 +144,49 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     protected function personAction(int $person = 0)
     {
+        $cacheTags = [];
+        $positions = static::getPersonPositions($person, $cacheTags);
+
+        if (empty($positions)) {
+            $this->redirectToUri(GeneralUtility::getIndpEnv('TYPO3_SITE_URL'), 0, 404);
+        }
+
+        $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
+
+        /** @var MemberRepository $memberRepository */
+        $memberRepository = Factory::getRepository('Member');
+        $member = null;
+
+        if (!empty($this->settings['person'])) {
+            // Get first selected person in the list
+            $uids = GeneralUtility::intExplode(',', $this->settings['persons'], true);
+            $member = $memberRepository->instantiateFromPersonUid(count($uids) > 0 ? $uids[0] : 0);
+        } elseif (!empty($person)) {
+            $member = $memberRepository->instantiateFromPersonUid($person);
+        }
+        if ($member === null) {
+            return $this->errorMessage('No person selected', 1316103052);
+        }
+
+        $this->addCacheTagsForMember($member);
+
+        // Disable link to ourself
+        $this->settings['targets']['person'] = null;
+
+        $this->view->assignMultiple([
+            'settings' => $this->settings,
+            'member' => $member,
+            'positions' => array_values($positions),
+        ]);
+    }
+
+    /**
+     * @param int $person
+     * @param array $cacheTags
+     * @return array
+     */
+    public static function getPersonPositions(int $person, array &$cacheTags = []): array
+    {
         // Search the staffs that the person belongs to
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_staffdirectory_members');
@@ -190,8 +233,7 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
 
         // Find pages where the plugin is located
-        $pagesWithPlugin = $this->findPagesWithPlugin($person, $staffUids);
-        $cacheTags = [];
+        $pagesWithPlugin = static::findPagesWithPlugin($person, $staffUids);
         foreach ($pagesWithPlugin as $key => $links) {
             if (isset($positions[$key])) {
                 foreach ($links as $link) {
@@ -216,37 +258,7 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             }
         }
 
-        if (empty($positions)) {
-            $this->redirectToUri(GeneralUtility::getIndpEnv('TYPO3_SITE_URL'), 0, 404);
-        }
-
-        $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
-
-        /** @var MemberRepository $memberRepository */
-        $memberRepository = Factory::getRepository('Member');
-        $member = null;
-
-        if (!empty($this->settings['person'])) {
-            // Get first selected person in the list
-            $uids = GeneralUtility::intExplode(',', $this->settings['persons'], true);
-            $member = $memberRepository->instantiateFromPersonUid(count($uids) > 0 ? $uids[0] : 0);
-        } elseif (!empty($person)) {
-            $member = $memberRepository->instantiateFromPersonUid($person);
-        }
-        if ($member === null) {
-            return $this->errorMessage('No person selected', 1316103052);
-        }
-
-        $this->addCacheTagsForMember($member);
-
-        // Disable link to ourself
-        $this->settings['targets']['person'] = null;
-
-        $this->view->assignMultiple([
-            'settings' => $this->settings,
-            'member' => $member,
-            'positions' => array_values($positions),
-        ]);
+        return $positions;
     }
 
     /**
@@ -366,7 +378,7 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @param array $staffUids
      * @return array
      */
-    protected function findPagesWithPlugin(int $personUid, array $staffUids): array
+    protected static function findPagesWithPlugin(int $personUid, array $staffUids): array
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tt_content');
