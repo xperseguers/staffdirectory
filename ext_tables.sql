@@ -5,7 +5,7 @@ CREATE TABLE fe_users (
 	tx_staffdirectory_mobilephone varchar(20) DEFAULT '' NOT NULL,
 	tx_staffdirectory_gender int(11) DEFAULT '0' NOT NULL,
 	tx_staffdirectory_email2 varchar(255) DEFAULT '' NOT NULL,
-	tx_staffdirectory_gdpr_date int(11) DEFAULT '' NOT NULL,
+	tx_staffdirectory_gdpr_date int(11) DEFAULT '0' NOT NULL,
 	tx_staffdirectory_gdpr_proof text,
 	path_segment varchar(2048),
 );
