@@ -106,10 +106,6 @@ return [
                 'eval' => 'date',
                 'checkbox' => '0',
                 'default' => '0',
-                'range' => [
-                    'upper' => mktime(3, 14, 7, 1, 19, 2038),
-                    'lower' => mktime(0, 0, 0, date('m') - 1, date('d'), date('Y'))
-                ]
             ]
         ],
         'position_title' => [
