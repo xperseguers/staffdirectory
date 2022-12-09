@@ -334,7 +334,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
             ];
         }
 
-        return $row;
+        return $row ?: [];
     }
 
     /**
