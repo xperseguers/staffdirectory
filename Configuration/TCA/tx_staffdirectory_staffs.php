@@ -1,5 +1,6 @@
 <?php
-return [
+$typo3Version = (new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion();
+$tca = [
     'ctrl' => [
         'title' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_staffs',
         'label' => 'staff_name',
@@ -42,16 +43,20 @@ return [
         'sys_language_uid' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'sys_language',
-                'foreign_table_where' => 'ORDER BY sys_language.title',
-                'items' => [
-                    ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages', -1],
-                    ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.default_value', 0]
+            'config' => $typo3Version >= 11
+                ? [
+                    'type' => 'language',
                 ]
-            ]
+                : [
+                    'type' => 'select',
+                    'renderType' => 'selectSingle',
+                    'foreign_table' => 'sys_language',
+                    'foreign_table_where' => 'ORDER BY sys_language.title',
+                    'items' => [
+                        ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages', -1],
+                        ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.default_value', 0]
+                    ],
+                ],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -59,9 +64,16 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => [
-                    ['', 0],
-                ],
+                'items' => $typo3Version >= 12
+                    ? [
+                        [
+                            'label' => '',
+                            'value' => 0,
+                        ],
+                    ]
+                    : [
+                        ['', 0],
+                    ],
                 'foreign_table' => 'tx_staffdirectory_staffs',
                 'foreign_table_where' => 'AND tx_staffdirectory_staffs.pid=###CURRENT_PID### AND tx_staffdirectory_staffs.sys_language_uid IN (-1,0)',
             ]
@@ -86,7 +98,8 @@ return [
                 'type' => 'input',
                 'size' => '30',
                 'max' => '50',
-                'eval' => 'required,trim',
+                'eval' => $typo3Version >= 12 ? 'trim' : 'required,trim',
+                'required' => true,
             ]
         ],
         'description' => [
@@ -135,3 +148,9 @@ return [
         ],
     ],
 ];
+
+if ($typo3Version >= 12) {
+    unset($tca['ctrl']['cruser_id']);
+}
+
+return $tca;
