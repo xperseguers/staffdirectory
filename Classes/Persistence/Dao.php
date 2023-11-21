@@ -104,7 +104,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
             ->fetchAllAssociative();
 
         $rows = $this->getRecordsOverlays($this->t['staff'], $rows);
-        return (count($rows) > 0) ? $rows[0] : [];
+        return !empty($rows) ? $rows[0] : [];
     }
 
     /**
@@ -264,7 +264,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
             ->fetchAllAssociative();
 
         $rows = $this->getRecordsOverlays($this->t['member'], $rows);
-        return (count($rows) > 0) ? $rows[0] : [];
+        return !empty($rows) ? $rows[0] : [];
     }
 
     /**

@@ -112,14 +112,13 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * STAFF action.
      *
      * @param int $staff
-     * @return void
      */
     public function staffAction(int $staff = 0)
     {
         if (empty($staff)) {
             // Get first selected staff in the list
             $uids = GeneralUtility::intExplode(',', $this->settings['staffs'], true);
-            $uid = count($uids) > 0 ? $uids[0] : 0;
+            $uid = !empty($uids) ? $uids[0] : 0;
         }
 
         if (empty($uid)) {
@@ -160,7 +159,7 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         if (!empty($this->settings['person'])) {
             // Get first selected person in the list
             $uids = GeneralUtility::intExplode(',', $this->settings['persons'], true);
-            $member = $memberRepository->instantiateFromPersonUid(count($uids) > 0 ? $uids[0] : 0);
+            $member = $memberRepository->instantiateFromPersonUid(!empty($uids) ? $uids[0] : 0);
         } elseif (!empty($person)) {
             $member = $memberRepository->instantiateFromPersonUid($person);
         }
