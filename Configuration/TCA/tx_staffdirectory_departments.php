@@ -28,9 +28,9 @@ $tca = [
     'types' => [
         '1' => [
             'showitem' => '
-					position_title, position_description, members,
-				--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,
-					hidden, starttime, endtime'
+                    position_title, position_description, members,
+                --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,
+                    hidden, starttime, endtime'
         ],
     ],
     'palettes' => [

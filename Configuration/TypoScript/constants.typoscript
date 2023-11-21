@@ -1,20 +1,18 @@
 plugin.tx_staffdirectory {
+    view {
+        # cat=plugin.tx_staffdirectory/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:staffdirectory/Resources/Private/Templates/
+        # cat=plugin.tx_staffdirectory/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:staffdirectory/Resources/Private/Partials/
+        # cat=plugin.tx_staffdirectory/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:staffdirectory/Resources/Private/Layouts/
+    }
 
-	view {
-		# cat=plugin.tx_staffdirectory/file; type=string; label=Path to template root (FE)
-		templateRootPath = EXT:staffdirectory/Resources/Private/Templates/
-		# cat=plugin.tx_staffdirectory/file; type=string; label=Path to template partials (FE)
-		partialRootPath = EXT:staffdirectory/Resources/Private/Partials/
-		# cat=plugin.tx_staffdirectory/file; type=string; label=Path to template layouts (FE)
-		layoutRootPath = EXT:staffdirectory/Resources/Private/Layouts/
-	}
+    settings {
+        # cat=plugin.tx_filelist; type=int; label=Uid of the detail page for a staff
+        targets.staff =
 
-	settings {
-		# cat=plugin.tx_filelist; type=int; label=Uid of the detail page for a staff
-		targets.staff =
-
-		# cat=plugin.tx_filelist; type=int; label=Uid of the detail page for a person
-		targets.person =
-	}
-
+        # cat=plugin.tx_filelist; type=int; label=Uid of the detail page for a person
+        targets.person =
+    }
 }

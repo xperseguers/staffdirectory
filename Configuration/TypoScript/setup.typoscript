@@ -1,32 +1,31 @@
 plugin.tx_staffdirectory {
+    view {
+        templateRootPaths {
+            0 = EXT:staffdirectory/Resources/Private/Templates/
+            1 = {$plugin.tx_staffdirectory.view.templateRootPath}
+        }
 
-	view {
-		templateRootPaths {
-			0 = EXT:staffdirectory/Resources/Private/Templates/
-			1 = {$plugin.tx_staffdirectory.view.templateRootPath}
-		}
+        partialRootPaths {
+            0 = EXT:staffdirectory/Resources/Private/Partials/
+            1 = {$plugin.tx_staffdirectory.view.partialRootPath}
+        }
 
-		partialRootPaths  {
-			0 = EXT:staffdirectory/Resources/Private/Partials/
-			1 = {$plugin.tx_staffdirectory.view.partialRootPath}
-		}
+        layoutRootPaths {
+            0 = EXT:staffdirectory/Resources/Private/Layouts/
+            1 = {$plugin.tx_staffdirectory.view.layoutRootPath}
+        }
+    }
 
-		layoutRootPaths  {
-			0 = EXT:staffdirectory/Resources/Private/Layouts/
-			1 = {$plugin.tx_staffdirectory.view.layoutRootPath}
-		}
-	}
+    settings {
+        # options: LIST|STAFF|PERSON|DIRECTORY
+        displayMode =
 
-	settings {
-		# options: LIST|STAFF|PERSON|DIRECTORY
-		displayMode =
+        # comma-separated list of staff uid's
+        staffs =
 
-		# comma-separated list of staff uid's
-		staffs =
-
-		targets {
-			staff  = {$plugin.tx_staffdirectory.targets.staff}
-			person = {$plugin.tx_staffdirectory.targets.person}
-		}
-	}
+        targets {
+            staff = {$plugin.tx_staffdirectory.targets.staff}
+            person = {$plugin.tx_staffdirectory.targets.person}
+        }
+    }
 }

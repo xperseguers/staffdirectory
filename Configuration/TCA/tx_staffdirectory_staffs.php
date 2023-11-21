@@ -23,9 +23,9 @@ $tca = [
     'types' => [
         '1' => [
             'showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,
-			 		staff_name, description,parent_staff,
-			 	--div--;LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tabs.departments,
-			 		departments'
+                    staff_name, description,parent_staff,
+                --div--;LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tabs.departments,
+                    departments'
         ],
     ],
     'palettes' => [
