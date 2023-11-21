@@ -1,7 +1,7 @@
 <?php
 defined('TYPO3') || die ();
 
-$boot = function (string $_EXTKEY): void {
+(static function (string $_EXTKEY) {
     $typo3Branch = class_exists(\TYPO3\CMS\Core\Information\Typo3Version::class)
         ? (new \TYPO3\CMS\Core\Information\Typo3Version())->getBranch()
         : TYPO3_branch;
@@ -40,8 +40,4 @@ $boot = function (string $_EXTKEY): void {
     $pluginSignature = 'staffdirectory_pi1';
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['list_type_Info'][$pluginSignature][$_EXTKEY] =
         \Causal\Staffdirectory\Hooks\PageLayoutView::class . '->getExtensionSummary';
-
-};
-
-$boot('staffdirectory');
-unset($boot);
+})('staffdirectory');
