@@ -188,7 +188,7 @@ class MemberRepository extends AbstractRepository
                         $queryBuilder->expr()->eq('fr.uid_foreign', $queryBuilder->createNamedParameter($data['person_id'], \PDO::PARAM_INT))
                     )
                     ->execute()
-                    ->fetchColumn(0);
+                    ->fetchOne();
                 if (!empty($image)) {
                     $member->setImage('fileadmin' . $image);
                 }

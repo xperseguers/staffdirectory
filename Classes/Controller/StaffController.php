@@ -212,7 +212,7 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             ->addOrderBy('d.sorting')
             ->addOrderBy('m.sorting')
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
 
         $positions = [];
         $staffUids = [];
@@ -397,7 +397,7 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 $queryBuilder->expr()->eq('p.doktype', 1)
             )
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
 
         $data = [];
         foreach ($rows as $row) {

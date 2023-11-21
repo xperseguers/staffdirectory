@@ -70,7 +70,7 @@ class CoreResourceStorageEventListener
                     'fieldname' => 'image',
                 ]
             )
-            ->fetchAll();
+            ->fetchAllAssociative();
         foreach ($rows as $row) {
             $this->pageCache->flushCachesByTag('tx_staffdirectory_person_' . $row['uid_foreign']);
         }

@@ -117,7 +117,7 @@ class PageLayoutView
                 $queryBuilder->expr()->in('uid', $uids)
             )
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
 
         $content = [];
         foreach ($rows as $row) {
@@ -138,7 +138,7 @@ class PageLayoutView
                 $queryBuilder->expr()->in('uid', $uids)
             )
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
 
         $content = [];
         foreach ($rows as $row) {

@@ -79,7 +79,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
             )
             ->orderBy('staff_name', 'ASC')
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
 
         return $this->getRecordsOverlays($this->t['staff'], $rows);
     }
@@ -101,7 +101,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
                     'uid' => $uid,
                 ]
             )
-            ->fetchAll();
+            ->fetchAllAssociative();
 
         $rows = $this->getRecordsOverlays($this->t['staff'], $rows);
         return (count($rows) > 0) ? $rows[0] : [];
@@ -124,7 +124,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
                     'uid' => $memberUid,
                 ]
             )
-            ->fetchColumn(0);
+            ->fetchOne();
 
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable($this->t['staff']);
@@ -155,7 +155,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
                 $queryBuilder->expr()->eq($this->t['staff'] . 'sys_language_uid', 0)
             )
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
 
         return $this->getRecordsOverlays($this->t['staff'], $rows);
     }
@@ -182,7 +182,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
                     'sorting' => 'ASC'
                 ]
             )
-            ->fetchAll();
+            ->fetchAllAssociative();
 
         return $this->getRecordsOverlays($this->t['department'], $rows);
     }
@@ -218,7 +218,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
             ->orderBy($this->t['person'] . '.last_name', 'ASC')
             ->addOrderBy($this->t['person'] . '.first_name', 'ASC')
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
 
         // Remove duplicate persons
         $temp = [];
@@ -261,7 +261,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
                 $queryBuilder->expr()->eq($this->t['member'] . '.sys_language_uid', 0)
             )
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
 
         $rows = $this->getRecordsOverlays($this->t['member'], $rows);
         return (count($rows) > 0) ? $rows[0] : [];
@@ -298,7 +298,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
                 $queryBuilder->expr()->eq($this->t['member'] . '.sys_language_uid', 0)
             )
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
 
         return $this->getRecordsOverlays($this->t['member'], $rows);
     }
@@ -324,7 +324,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
                     'uid' => $uid,
                 ]
             )
-            ->fetch();
+            ->fetchAssociative();
         if (!empty($row)) {
             $row += [
                 'uid' => 0,
@@ -377,7 +377,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
             ->orderBy($this->t['person'] . '.last_name', 'ASC')
             ->addOrderBy($this->t['person'] . '.first_name', 'ASC')
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
 
         // Remove duplicated persons
         $temp = [];
@@ -421,7 +421,7 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
             )
             ->orderBy('sorting', 'ASC')
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
 
         return $this->getRecordsOverlays($this->t['member'], $rows);
     }

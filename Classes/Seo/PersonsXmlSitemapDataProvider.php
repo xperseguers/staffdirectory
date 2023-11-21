@@ -91,7 +91,7 @@ class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
             );
         }
 
-        $rows = $queryBuilder->execute()->fetchAll();
+        $rows = $queryBuilder->execute()->fetchAllAssociative();
 
         foreach ($rows as $row) {
             if (!empty(\Causal\Staffdirectory\Controller\StaffController::getPersonPositions($row['uid']))) {
