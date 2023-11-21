@@ -1,5 +1,5 @@
 <?php
-defined('TYPO3_MODE') || die ('Access denied.');
+defined('TYPO3') || die ();
 
 $boot = function (string $_EXTKEY): void {
     $typo3Branch = class_exists(\TYPO3\CMS\Core\Information\Typo3Version::class)

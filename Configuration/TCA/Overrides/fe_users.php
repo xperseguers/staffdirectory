@@ -1,5 +1,5 @@
 <?php
-defined('TYPO3_MODE') || die();
+defined('TYPO3') || die();
 
 // Create a dedicated type of records to ease the management of those fe_users records in the context of this staffs
 
