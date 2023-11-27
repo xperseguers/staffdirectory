@@ -1,15 +1,9 @@
 <?php
 defined('TYPO3') || die();
 
-$typo3Branch = class_exists(\TYPO3\CMS\Core\Information\Typo3Version::class)
-    ? (new \TYPO3\CMS\Core\Information\Typo3Version())->getBranch()
-    : TYPO3_branch;
-
 // Register Frontend plugin
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    version_compare($typo3Branch, '10.0', '>=')
-        ? 'staffdirectory'
-        : 'Causal.staffdirectory',
+    'staffdirectory',
     'Pi1',
     'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tt_content.list_type_pi1'
 );
@@ -20,5 +14,5 @@ $pluginSignature = 'staffdirectory_pi1';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout,select_key,pages,recursive';
 
 // Register the FlexForms
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['staffdirectory_pi1'] = 'pi_flexform';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue('staffdirectory_pi1', 'FILE:EXT:staffdirectory/Configuration/FlexForms/Pi1.xml');
