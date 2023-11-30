@@ -59,7 +59,7 @@ $tca = [
                 'multiple' => 0,
                 'suggestOptions' => [
                     'default' => [
-                        'receiverClass' => \Causal\Staffdirectory\Form\Wizard\MemberSuggestReceiver::class,
+                        'receiverClass' => \Causal\Staffdirectory\Backend\Form\Wizard\MemberSuggestReceiver::class,
                         'maxItemsInResultList' => 20,
                     ],
                 ],

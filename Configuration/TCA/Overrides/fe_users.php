@@ -131,6 +131,19 @@ $tempColumns = [
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tempColumns);
 
+// Configure the field country to be an actual usable country
+$GLOBALS['TCA']['fe_users']['columns']['country']['config'] = [
+    'type' => 'select',
+    'renderType' => 'selectSingle',
+    'items' => [
+        ['', ''],
+    ],
+    'itemsProcFunc' => \Causal\Staffdirectory\Tca\Country::class . '->getAll',
+    'size' => 1,
+    'minitems' => 0,
+    'maxitems' => 1
+];
+
 $GLOBALS['TCA']['fe_users']['ctrl']['label'] = 'last_name';
 // BEWARE: "title" and GDPR fields are needed for label_userFunc in the context of FlexForm
 $GLOBALS['TCA']['fe_users']['ctrl']['label_alt'] = 'first_name, title, tx_staffdirectory_gdpr_date, tx_staffdirectory_gdpr_proof';

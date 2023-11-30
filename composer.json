@@ -17,7 +17,9 @@
   "license": "GPL-2.0-or-later",
   "require": {
     "php": ">=7.4.0 <=7.4.99 || >=8.0.0 <=8.2.99",
-    "typo3/cms-core": "^11 || ^12"
+    "typo3/cms-core": "^11 || ^12",
+    "sjbr/static-info-tables": "^11.5 || ^12.4",
+    "giggsey/libphonenumber-for-php": "^8.12"
   },
   "autoload": {
     "psr-4": {

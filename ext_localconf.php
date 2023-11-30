@@ -5,7 +5,7 @@ defined('TYPO3') || die ();
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1701340648] = [
         'nodeName' => 'staffdirectoryParentOrganizations',
         'priority' => 70,
-        'class' => \Causal\Staffdirectory\Form\Element\ParentOrganizations::class,
+        'class' => \Causal\Staffdirectory\Backend\Form\Element\ParentOrganizations::class,
     ];
 
     /*

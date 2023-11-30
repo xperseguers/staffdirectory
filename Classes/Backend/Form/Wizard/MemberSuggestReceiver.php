@@ -14,7 +14,7 @@ declare(strict_types = 1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace Causal\Staffdirectory\Form\Wizard;
+namespace Causal\Staffdirectory\Backend\Form\Wizard;
 
 use TYPO3\CMS\Backend\Form\Wizard\SuggestWizardDefaultReceiver;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

@@ -14,7 +14,7 @@ declare(strict_types = 1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace Causal\Staffdirectory\Form\Element;
+namespace Causal\Staffdirectory\Backend\Form\Element;
 
 use TYPO3\CMS\Backend\Form\Element\AbstractFormElement;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
