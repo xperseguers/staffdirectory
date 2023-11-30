@@ -27,6 +27,8 @@ $tca = [
                     long_name, short_name, description,
                 --div--;LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tabs.members,
                     members,
+                --div--;LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tabs.hierarchy,
+                    parent_organizations, suborganizations,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
                     sys_language_uid, l10n_parent, l10n_diffsource,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:categories,
@@ -72,7 +74,7 @@ $tca = [
             ]
         ],
         'hidden' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
@@ -91,7 +93,7 @@ $tca = [
             ]
         ],
         'long_name' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_domain_model_organization.long_name',
             'config' => [
                 'type' => 'input',
@@ -102,7 +104,7 @@ $tca = [
             ]
         ],
         'short_name' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_domain_model_organization.short_name',
             'config' => [
                 'type' => 'input',
@@ -113,7 +115,7 @@ $tca = [
             ]
         ],
         'description' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_domain_model_organization.description',
             'config' => [
                 'type' => 'text',
@@ -122,6 +124,28 @@ $tca = [
                 'cols' => 30,
                 'rows' => 5,
                 'softref' => 'typolink_tag,images,email[subst],url',
+            ],
+        ],
+        //'members' => []
+        'parent_organizations' => [
+            'exclude' => false,
+            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_domain_model_organization.parent_organizations',
+            'config' => [
+                'type' => 'none',
+                'renderType' => 'staffdirectoryParentOrganizations',
+            ],
+        ],
+        'suborganizations' => [
+            'exclude' => false,
+            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_domain_model_organization.suborganizations',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_staffdirectory_domain_model_organization',
+                'foreign_table_where' => 'AND tx_staffdirectory_domain_model_organization.uid<>###THIS_UID### AND tx_staffdirectory_domain_model_organization.pid=###CURRENT_PID### AND tx_staffdirectory_domain_model_organization.sys_language_uid IN (0,-1) ORDER BY tx_staffdirectory_domain_model_organization.long_name',
+                'size' => 6,
+                'minitems' => 0,
+                'maxitems' => 20,
             ],
         ],
     ],

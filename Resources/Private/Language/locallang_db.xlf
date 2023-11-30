@@ -41,6 +41,18 @@
             <trans-unit id="tx_staffdirectory_domain_model_organization.description">
                 <source>Description</source>
             </trans-unit>
+            <trans-unit id="tx_staffdirectory_domain_model_organization.members">
+                <source>Members</source>
+            </trans-unit>
+            <trans-unit id="tx_staffdirectory_domain_model_organization.suborganizations">
+                <source>Suborganizations</source>
+            </trans-unit>
+            <trans-unit id="tx_staffdirectory_domain_model_organization.parent_organizations">
+                <source>Parent organizations</source>
+            </trans-unit>
+            <trans-unit id="tx_staffdirectory_domain_model_organization.parent_organizations.none">
+                <source>None</source>
+            </trans-unit>
 
             <trans-unit id="tx_staffdirectory_staffs">
                 <source>Group (deprecated)</source>
@@ -83,6 +95,9 @@
 
             <trans-unit id="palettes.gdpr">
                 <source>General Data Protection Regulation (GDPR)</source>
+            </trans-unit>
+            <trans-unit id="tabs.hierarchy">
+                <source>Hierarchy</source>
             </trans-unit>
             <trans-unit id="tabs.members">
                 <source>Members</source>
