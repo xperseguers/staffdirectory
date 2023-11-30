@@ -61,8 +61,8 @@ class DepartmentRepository extends AbstractRepository
      */
     public function loadMembers(Department $department): void
     {
-        /** @var MemberRepository $memberRepository */
-        $memberRepository = Factory::getRepository('Member');
+        /** @var DeprecatedMemberRepository $memberRepository */
+        $memberRepository = Factory::getRepository('DeprecatedMember');
         $members = $memberRepository->findByDepartment($department);
         $department->setMembers($members);
     }

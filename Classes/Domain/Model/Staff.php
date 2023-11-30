@@ -34,7 +34,7 @@ namespace Causal\Staffdirectory\Domain\Model;
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
-class Staff extends AbstractEntity
+class Staff extends DeprecatedAbstractEntity
 {
 
     /**

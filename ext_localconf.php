@@ -8,11 +8,15 @@ defined('TYPO3') || die ();
         'class' => \Causal\Staffdirectory\Backend\Form\Element\ParentOrganizations::class,
     ];
 
-    /*
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig('
-        options.saveDocNew.tx_staffdirectory_staffs = 1
-    ');
-    */
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        $_EXTKEY,
+        'Plugin',
+        [
+            \Causal\Staffdirectory\Controller\OrganizationController::class => 'dispatch, list, organization, person, persons, directory',
+        ],
+        [],
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+    );
 
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         $_EXTKEY,
@@ -24,6 +28,10 @@ defined('TYPO3') || die ();
         // non-cacheable actions
         []
     );
+
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
+    @import \'EXT:staffdirectory/Configuration/TSconfig/ContentElementWizard.tsconfig\'
+    ');
 
     /* ===========================================================================
         Web > Page hook

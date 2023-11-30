@@ -53,6 +53,7 @@ $tca = [
                 'internal_type' => 'db',
                 'allowed' => 'fe_users',
                 'foreign_table' => 'fe_users', // MANDATORY for Extbase
+                'foreign_table_where' => 'AND fe_users.tx_extbase_type=\'tx_staffdirectory\'',
                 'size' => 1,
                 'autoSizeMax' => 1,
                 'maxitems' => 1,

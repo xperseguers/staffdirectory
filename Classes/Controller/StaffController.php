@@ -26,10 +26,10 @@ declare(strict_types = 1);
 
 namespace Causal\Staffdirectory\Controller;
 
-use Causal\Staffdirectory\Domain\Model\Member;
+use Causal\Staffdirectory\Domain\Model\DeprecatedMember;
 use Causal\Staffdirectory\Domain\Model\Staff;
 use Causal\Staffdirectory\Domain\Repository\Factory;
-use Causal\Staffdirectory\Domain\Repository\MemberRepository;
+use Causal\Staffdirectory\Domain\Repository\DeprecatedMemberRepository;
 use Causal\Staffdirectory\Domain\Repository\StaffRepository;
 use Causal\Staffdirectory\Persistence\Dao;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -151,8 +151,8 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
 
-        /** @var MemberRepository $memberRepository */
-        $memberRepository = Factory::getRepository('Member');
+        /** @var DeprecatedMemberRepository $memberRepository */
+        $memberRepository = Factory::getRepository('DeprecatedMember');
         $member = null;
 
         if (!empty($this->settings['person'])) {
@@ -264,8 +264,8 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     protected function personsAction()
     {
-        /** @var MemberRepository $memberRepository */
-        $memberRepository = Factory::getRepository('Member');
+        /** @var DeprecatedMemberRepository $memberRepository */
+        $memberRepository = Factory::getRepository('DeprecatedMember');
         $members = [];
 
         $uids = GeneralUtility::intExplode(',', $this->settings['persons'], true);
@@ -296,8 +296,8 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     protected function directoryAction(): void
     {
-        /** @var MemberRepository $memberRepository */
-        $memberRepository = Factory::getRepository('Member');
+        /** @var DeprecatedMemberRepository $memberRepository */
+        $memberRepository = Factory::getRepository('DeprecatedMember');
 
         if (!empty($this->settings['staffs'])) {
             $members = $memberRepository->findByStaffs($this->settings['staffs']);
@@ -356,9 +356,9 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * Tags the page cache so that FAL signal operations may be listened to in
      * order to flush corresponding page cache.
      *
-     * @param Member $member
+     * @param DeprecatedMember $member
      */
-    protected function addCacheTagsForMember(Member $member): void {
+    protected function addCacheTagsForMember(DeprecatedMember $member): void {
         if ($member === null) {
             return;
         }

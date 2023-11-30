@@ -24,6 +24,8 @@
 
 namespace Causal\Staffdirectory\Domain\Model;
 
+use Causal\Staffdirectory\Domain\Repository\Factory;
+
 /**
  * Member.
  *
@@ -34,7 +36,7 @@ namespace Causal\Staffdirectory\Domain\Model;
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
-class Member extends AbstractEntity
+class DeprecatedMember extends DeprecatedAbstractEntity
 {
 
     /**
@@ -153,9 +155,9 @@ class Member extends AbstractEntity
 
     /**
      * @param int $person_uid
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setPersonUid(int $person_uid): Member
+    public function setPersonUid(int $person_uid): DeprecatedMember
     {
         $this->person_uid = $person_uid;
         return $this;
@@ -171,9 +173,9 @@ class Member extends AbstractEntity
 
     /**
      * @param string $position_function
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setPositionFunction(string $position_function): Member
+    public function setPositionFunction(string $position_function): DeprecatedMember
     {
         $this->position_function = $position_function;
         return $this;
@@ -189,9 +191,9 @@ class Member extends AbstractEntity
 
     /**
      * @param string $title
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setTitle(string $title): Member
+    public function setTitle(string $title): DeprecatedMember
     {
         $this->title = $title;
         return $this;
@@ -207,9 +209,9 @@ class Member extends AbstractEntity
 
     /**
      * @param string $name
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setName(string $name): Member
+    public function setName(string $name): DeprecatedMember
     {
         $this->name = $name;
         return $this;
@@ -225,9 +227,9 @@ class Member extends AbstractEntity
 
     /**
      * @param string $first_name
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setFirstName(string $first_name): Member
+    public function setFirstName(string $first_name): DeprecatedMember
     {
         $this->first_name = $first_name;
         return $this;
@@ -243,9 +245,9 @@ class Member extends AbstractEntity
 
     /**
      * @param string $last_name
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setLastName(string $last_name): Member
+    public function setLastName(string $last_name): DeprecatedMember
     {
         $this->last_name = $last_name;
         return $this;
@@ -261,9 +263,9 @@ class Member extends AbstractEntity
 
     /**
      * @param string|null $image
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setImage(?string $image): Member
+    public function setImage(?string $image): DeprecatedMember
     {
         $this->image = $image;
         return $this;
@@ -279,9 +281,9 @@ class Member extends AbstractEntity
 
     /**
      * @param string $address
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setAddress(string $address): Member
+    public function setAddress(string $address): DeprecatedMember
     {
         $this->address = $address;
         return $this;
@@ -297,9 +299,9 @@ class Member extends AbstractEntity
 
     /**
      * @param string $postal_code
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setPostalCode(string $postal_code): Member
+    public function setPostalCode(string $postal_code): DeprecatedMember
     {
         $this->postal_code = $postal_code;
         return $this;
@@ -315,9 +317,9 @@ class Member extends AbstractEntity
 
     /**
      * @param string $city
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setCity(string $city): Member
+    public function setCity(string $city): DeprecatedMember
     {
         $this->city = $city;
         return $this;
@@ -333,9 +335,9 @@ class Member extends AbstractEntity
 
     /**
      * @param string $country
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setCountry(string $country): Member
+    public function setCountry(string $country): DeprecatedMember
     {
         $this->country = $country;
         return $this;
@@ -351,9 +353,9 @@ class Member extends AbstractEntity
 
     /**
      * @param string $telephone
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setTelephone(string $telephone): Member
+    public function setTelephone(string $telephone): DeprecatedMember
     {
         $this->telephone = $telephone;
         return $this;
@@ -369,9 +371,9 @@ class Member extends AbstractEntity
 
     /**
      * @param string $fax
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setFax(string $fax): Member
+    public function setFax(string $fax): DeprecatedMember
     {
         $this->fax = $fax;
         return $this;
@@ -387,9 +389,9 @@ class Member extends AbstractEntity
 
     /**
      * @param string $email
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setEmail(string $email): Member
+    public function setEmail(string $email): DeprecatedMember
     {
         $this->email = $email;
         return $this;
@@ -405,9 +407,9 @@ class Member extends AbstractEntity
 
     /**
      * @param string $email2
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setEmail2(string $email2): Member
+    public function setEmail2(string $email2): DeprecatedMember
     {
         $this->email2 = $email2;
         return $this;
@@ -423,9 +425,9 @@ class Member extends AbstractEntity
 
     /**
      * @param string $website
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setWebsite(string $website): Member
+    public function setWebsite(string $website): DeprecatedMember
     {
         $this->website = $website;
         return $this;
@@ -441,9 +443,9 @@ class Member extends AbstractEntity
 
     /**
      * @param int $gender
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setGender(int $gender): Member
+    public function setGender(int $gender): DeprecatedMember
     {
         $this->gender = $gender;
         return $this;
@@ -459,9 +461,9 @@ class Member extends AbstractEntity
 
     /**
      * @param string $mobile_phone
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setMobilePhone(string $mobile_phone): Member
+    public function setMobilePhone(string $mobile_phone): DeprecatedMember
     {
         $this->mobile_phone = $mobile_phone;
         return $this;
@@ -473,8 +475,8 @@ class Member extends AbstractEntity
     public function getStaffs(): array
     {
         if ($this->staffs === null) {
-            /** @var \Causal\Staffdirectory\Domain\Repository\MemberRepository $memberRepository */
-            $memberDirectoryRepository = \Causal\Staffdirectory\Domain\Repository\Factory::getRepository('Member');
+            /** @var \Causal\Staffdirectory\Domain\Repository\DeprecatedMemberRepository $memberRepository */
+            $memberDirectoryRepository = Factory::getRepository('DeprecatedMember');
             $memberDirectoryRepository->loadStaffs($this);
         }
         return $this->staffs;
@@ -482,9 +484,9 @@ class Member extends AbstractEntity
 
     /**
      * @param Staff[] $staffs
-     * @return Member
+     * @return DeprecatedMember
      */
-    public function setStaffs(array $staffs): Member
+    public function setStaffs(array $staffs): DeprecatedMember
     {
         $this->staffs = $staffs;
         return $this;

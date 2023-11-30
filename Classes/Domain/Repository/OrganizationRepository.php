@@ -18,7 +18,7 @@ namespace Causal\Staffdirectory\Domain\Repository;
 
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
-class MemberRepository extends Repository
+class OrganizationRepository extends Repository
 {
 
 }

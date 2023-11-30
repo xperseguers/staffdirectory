@@ -34,7 +34,7 @@ namespace Causal\Staffdirectory\Domain\Model;
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
-abstract class AbstractEntity
+abstract class DeprecatedAbstractEntity
 {
 
     /**
@@ -77,9 +77,9 @@ abstract class AbstractEntity
 
     /**
      * @param int $pid
-     * @return AbstractEntity
+     * @return DeprecatedAbstractEntity
      */
-    public function setPid(int $pid): AbstractEntity
+    public function setPid(int $pid): DeprecatedAbstractEntity
     {
         $this->pid = $pid;
         return $this;
@@ -103,7 +103,7 @@ abstract class AbstractEntity
             if (!is_array($value)) {
                 $ret[$property->getName()] = (string)$value;
             }
-            if ($value instanceof AbstractEntity) {
+            if ($value instanceof DeprecatedAbstractEntity) {
                 $ret[$property->getName() . '_uid'] = $value->getUid();
             }
         }

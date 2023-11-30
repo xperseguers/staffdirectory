@@ -24,7 +24,7 @@
 
 namespace Causal\Staffdirectory\Domain\Repository;
 
-use Causal\Staffdirectory\Domain\Model\Member;
+use Causal\Staffdirectory\Domain\Model\DeprecatedMember;
 use Causal\Staffdirectory\Domain\Model\Staff;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -71,10 +71,10 @@ class StaffRepository extends AbstractRepository
     /**
      * Finds all staffs of a given person.
      *
-     * @param Member $member
+     * @param DeprecatedMember $member
      * @return Staff[]
      */
-    public function findByPerson(Member $member): array
+    public function findByPerson(DeprecatedMember $member): array
     {
         $staffsDao = $this->dao->getStaffsByPerson($member->getUid());
         return $this->dao2business($staffsDao);

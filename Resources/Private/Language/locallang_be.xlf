@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2023-11-30T18:51:53Z" product-name="staffdirectory">
+        <header/>
+        <body>
+            <trans-unit id="plugin.staffdirectory_plugin.title">
+                <source>Staffdirectory</source>
+            </trans-unit>
+            <trans-unit id="plugin.staffdirectory_plugin.description">
+                <source>Display one or more organizations, persons and detail page.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

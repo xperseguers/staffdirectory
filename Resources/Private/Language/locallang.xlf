@@ -12,6 +12,9 @@
             <trans-unit id="pi_flexform.displayMode.LIST">
                 <source>List view (LIST)</source>
             </trans-unit>
+            <trans-unit id="pi_flexform.displayMode.ORGANIZATION">
+                <source>Organization view (ORGANIZATION)</source>
+            </trans-unit>
             <trans-unit id="pi_flexform.displayMode.STAFF">
                 <source>Staff view (STAFF)</source>
             </trans-unit>
@@ -23,6 +26,9 @@
             </trans-unit>
             <trans-unit id="pi_flexform.displayMode.DIRECTORY">
                 <source>Person listing (DIRECTORY)</source>
+            </trans-unit>
+            <trans-unit id="pi_flexform.organizations">
+                <source>Organizations</source>
             </trans-unit>
             <trans-unit id="pi_flexform.staffs">
                 <source>Staffs</source>

@@ -24,6 +24,8 @@
 
 namespace Causal\Staffdirectory\Domain\Model;
 
+use Causal\Staffdirectory\Domain\Repository\Factory;
+
 /**
  * Department.
  *
@@ -34,7 +36,7 @@ namespace Causal\Staffdirectory\Domain\Model;
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
-class Department extends AbstractEntity
+class Department extends DeprecatedAbstractEntity
 {
 
     /**
@@ -53,7 +55,7 @@ class Department extends AbstractEntity
     protected $description;
 
     /**
-     * @var Member[]
+     * @var DeprecatedMember[]
      */
     protected $members;
 
@@ -124,20 +126,20 @@ class Department extends AbstractEntity
     }
 
     /**
-     * @return Member[]
+     * @return DeprecatedMember[]
      */
     public function getMembers(): array
     {
         if ($this->members === null) {
             /** @var \Causal\Staffdirectory\Domain\Repository\DepartmentRepository $departmentRepository */
-            $departmentDirectoryRepository = \Causal\Staffdirectory\Domain\Repository\Factory::getRepository('Department');
+            $departmentDirectoryRepository = Factory::getRepository('Department');
             $departmentDirectoryRepository->loadMembers($this);
         }
         return $this->members;
     }
 
     /**
-     * @param Member[] $members
+     * @param DeprecatedMember[] $members
      * @return Department
      */
     public function setMembers(array $members): Department
