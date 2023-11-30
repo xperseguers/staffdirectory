@@ -38,7 +38,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-
     public function initializeAction()
     {
         /** @var Dao $dao */
@@ -430,5 +429,4 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         return $GLOBALS['TSFE'];
     }
-
 }

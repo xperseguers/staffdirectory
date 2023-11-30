@@ -40,7 +40,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class TypoScriptUtility
 {
-
     /**
      * Processes the global parameters by applying stdWrap if needed.
      *
@@ -62,10 +61,10 @@ class TypoScriptUtility
             99 => 'showRenderTime',
 
             'targets.' => [
-                'staff', 'person'
+                'organization', 'person', 'staff'
             ],
             'templates.' => [
-                'list', 'staff', 'person'
+                'list', 'organization', 'staff', 'person'
             ],
         ];
 
@@ -94,8 +93,8 @@ class TypoScriptUtility
                 }
             }
         } else {
-            if (substr($parameter, -1) === '.') {
-                $parameter = substr($parameter, 0, strlen($parameter) - 1);
+            if (str_ends_with($parameter, '.')) {
+                $parameter = substr($parameter, 0, -1);
             }
             if (isset($settings[$parameter . '.'])) {
                 $settings[$parameter] = $cObj->stdWrap($settings[$parameter], $settings[$parameter . '.']);
@@ -153,5 +152,4 @@ class TypoScriptUtility
 
         return $settings;
     }
-
 }

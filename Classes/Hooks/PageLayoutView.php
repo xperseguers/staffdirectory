@@ -31,7 +31,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class PageLayoutView
 {
-
     const LL_PATH = 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:';
 
     /**
@@ -181,5 +180,4 @@ class PageLayoutView
 
         return null;
     }
-
 }

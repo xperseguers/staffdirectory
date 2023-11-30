@@ -38,7 +38,6 @@ use TYPO3\CMS\Seo\XmlSitemap\Exception\MissingConfigurationException;
  */
 class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
 {
-
     /**
      * @param ServerRequestInterface $request
      * @param string $key
@@ -169,5 +168,4 @@ class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
 
         return $additionalParams;
     }
-
 }

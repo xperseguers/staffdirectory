@@ -41,7 +41,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class Dao implements \TYPO3\CMS\Core\SingletonInterface
 {
-
     /**
      * DB tables
      * @var array
@@ -463,5 +462,4 @@ class Dao implements \TYPO3\CMS\Core\SingletonInterface
 
         return $rows;
     }
-
 }
