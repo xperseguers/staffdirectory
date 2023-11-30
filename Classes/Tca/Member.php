@@ -16,7 +16,9 @@ declare(strict_types = 1);
 
 namespace Causal\Staffdirectory\Tca;
 
-class FeUser
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+
+class Member
 {
     /**
      * Returns the label to be used for a MemberStatus.
@@ -29,20 +31,17 @@ class FeUser
             return;
         }
 
-        $feUser = $params['row'];
+        $title = BackendUtility::getProcessedValue(
+            $params['table'],
+            'feuser_id',
+                $params['row']['feuser_id'][0]['uid'] ?? 0
+        );
 
-        if (empty($feUser['tx_staffdirectory_gdpr_date']) || empty($feUser['tx_staffdirectory_gdpr_proof'])) {
-            $displayName = '[GDPR❓] ';
-        } else {
-            $displayName = '✅ ';
+        $positionFunction = $params['row']['position_function'];
+        if (!empty($positionFunction)) {
+            $title .= ' (' . $positionFunction . ')';
         }
 
-        $displayName .= !empty($feUser['last_name']) ? $feUser['last_name'] . ', ' : '';
-        $displayName .= $feUser['first_name'];
-        if (!empty($feUser['title'])) {
-            $displayName .= ' (' . $feUser['title'] . ')';
-        }
-
-        $params['title'] = $displayName;
+        $params['title'] = $title;
     }
 }

@@ -4,6 +4,7 @@ $tca = [
     'ctrl' => [
         'title' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_domain_model_member',
         'label' => 'feuser_id',
+        'label_userFunc' => \Causal\Staffdirectory\Tca\Member::class . '->getLabel',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
