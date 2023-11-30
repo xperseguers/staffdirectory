@@ -96,6 +96,9 @@
             <trans-unit id="palettes.gdpr">
                 <source>General Data Protection Regulation (GDPR)</source>
             </trans-unit>
+            <trans-unit id="tabs.personalData">
+                <source>Personal Data</source>
+            </trans-unit>
             <trans-unit id="tabs.hierarchy">
                 <source>Hierarchy</source>
             </trans-unit>

@@ -13,7 +13,7 @@ $GLOBALS['TCA']['fe_users']['columns']['name']['config']['readOnly'] = true;
 
 $GLOBALS['TCA']['fe_users']['types']['tx_staffdirectory'] = [
     'showitem' => '
-            --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:fe_users.tabs.personelData,
+            --div--;LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tabs.personalData,
                 tx_staffdirectory_gender,
                 --palette--;;sd_name,
                 path_segment,

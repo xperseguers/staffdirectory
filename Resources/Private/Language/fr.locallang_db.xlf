@@ -96,6 +96,9 @@
             <trans-unit id="palettes.gdpr">
                 <target>Règlement général sur la protection des données (RGPD)</target>
             </trans-unit>
+            <trans-unit id="tabs.personalData">
+                <target>Données personnelles</target>
+            </trans-unit>
             <trans-unit id="tabs.hierarchy">
                 <target>Hiérarchie</target>
             </trans-unit>
