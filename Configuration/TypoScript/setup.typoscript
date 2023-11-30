@@ -17,15 +17,19 @@ plugin.tx_staffdirectory {
     }
 
     settings {
-        # options: LIST|STAFF|PERSON|DIRECTORY
+        # options: LIST|ORGANIZATION|PERSON|DIRECTORY
         displayMode =
+
+        # comma-separated list of organization uid's
+        organizations =
 
         # comma-separated list of staff uid's
         staffs =
 
         targets {
-            staff = {$plugin.tx_staffdirectory.targets.staff}
+            organization = {$plugin.tx_staffdirectory.targets.organization}
             person = {$plugin.tx_staffdirectory.targets.person}
+            staff = {$plugin.tx_staffdirectory.targets.staff}
         }
     }
 }
