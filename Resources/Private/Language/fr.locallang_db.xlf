@@ -6,8 +6,9 @@
             <trans-unit id="tt_content.list_type_pi1">
                 <target>Répertoire d'équipes</target>
             </trans-unit>
+
             <trans-unit id="fe_users.tx_staffdirectory_mobilephone">
-                <target>Téléphone portable :</target>
+                <target>Téléphone portable</target>
             </trans-unit>
             <trans-unit id="fe_users.tx_staffdirectory_gender.I.0">
                 <target>M</target>
@@ -16,10 +17,10 @@
                 <target>Mme</target>
             </trans-unit>
             <trans-unit id="fe_users.tx_staffdirectory_gender">
-                <target>M./Mme :</target>
+                <target>M./Mme</target>
             </trans-unit>
             <trans-unit id="fe_users.tx_staffdirectory_email2">
-                <target>Email (alternatif) :</target>
+                <target>Email (alternatif)</target>
             </trans-unit>
             <trans-unit id="fe_users.tx_staffdirectory_gdpr_date">
                 <target>Date d'approbation pour publier ce profil</target>
@@ -27,45 +28,64 @@
             <trans-unit id="fe_users.tx_staffdirectory_gdpr_proof">
                 <target>Preuve (contenu d'un email, déclaration d'un document Word, ...)</target>
             </trans-unit>
+
+            <trans-unit id="tx_staffdirectory_domain_model_organization">
+                <target>Organisation</target>
+            </trans-unit>
+            <trans-unit id="tx_staffdirectory_domain_model_organization.long_name">
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="tx_staffdirectory_domain_model_organization.short_name">
+                <target>Nom court</target>
+            </trans-unit>
+            <trans-unit id="tx_staffdirectory_domain_model_organization.description">
+                <target>Description</target>
+            </trans-unit>
+
             <trans-unit id="tx_staffdirectory_staffs">
-                <target>Groupe</target>
+                <target>Groupe (obsolète)</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_staffs.staff_name">
-                <target>Nom du groupe :</target>
+                <target>Nom du groupe</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_staffs.description">
-                <target>Description :</target>
+                <target>Description</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_staffs.departments">
-                <target>Départements :</target>
+                <target>Départements</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_staffs.parent_staff">
-                <target>Groupe parent :</target>
+                <target>Groupe parent</target>
             </trans-unit>
+
             <trans-unit id="tx_staffdirectory_departments">
                 <target>Département</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_departments.position_title">
-                <target>Titre :</target>
+                <target>Titre</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_departments.position_description">
-                <target>Description :</target>
+                <target>Description</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_departments.members">
-                <target>Membres :</target>
+                <target>Membres</target>
             </trans-unit>
+
             <trans-unit id="tx_staffdirectory_members">
                 <target>Membre</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_members.position_function">
-                <target>Fonction :</target>
+                <target>Fonction</target>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_members.feuser_id">
-                <target>Personne :</target>
+                <target>Personne</target>
             </trans-unit>
 
             <trans-unit id="palettes.gdpr">
                 <target>Règlement général sur la protection des données (RGPD)</target>
+            </trans-unit>
+            <trans-unit id="tabs.members">
+                <target>Membres</target>
             </trans-unit>
             <trans-unit id="tabs.departments">
                 <target>Départements</target>

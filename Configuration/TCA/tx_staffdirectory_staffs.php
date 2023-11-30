@@ -22,10 +22,14 @@ $tca = [
     ],
     'types' => [
         '1' => [
-            'showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,
+            'showitem' => '
                     staff_name, description,parent_staff,
                 --div--;LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tabs.departments,
-                    departments'
+                    departments,
+                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
+                    sys_language_uid, l10n_parent, l10n_diffsource,
+                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
+                    hidden'
         ],
     ],
     'palettes' => [
@@ -88,8 +92,14 @@ $tca = [
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
-                'default' => '0'
-            ]
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        0 => '',
+                        1 => '',
+                    ]
+                ],
+            ],
         ],
         'staff_name' => [
             'exclude' => 0,

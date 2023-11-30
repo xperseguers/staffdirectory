@@ -11,6 +11,17 @@ CREATE TABLE fe_users (
 );
 
 #
+# Table structure for table 'tx_staffdirectory_domain_model_organization'
+#
+CREATE TABLE tx_staffdirectory_domain_model_organization (
+    long_name varchar(255) DEFAULT '' NOT NULL,
+    short_name varchar(50) DEFAULT '' NOT NULL,
+    description text,
+    members int(10) unsigned DEFAULT '0' NOT NULL,
+    suborganizations varchar(255) DEFAULT '' NOT NULL
+);
+
+#
 # Table structure for table 'tx_staffdirectory_staffs'
 #
 CREATE TABLE tx_staffdirectory_staffs (

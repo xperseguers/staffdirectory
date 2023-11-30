@@ -6,8 +6,9 @@
             <trans-unit id="tt_content.list_type_pi1">
                 <source>Staff Directory</source>
             </trans-unit>
+
             <trans-unit id="fe_users.tx_staffdirectory_mobilephone">
-                <source>Mobile Phone:</source>
+                <source>Mobile Phone</source>
             </trans-unit>
             <trans-unit id="fe_users.tx_staffdirectory_gender.I.0">
                 <source>Mr</source>
@@ -16,10 +17,10 @@
                 <source>Ms</source>
             </trans-unit>
             <trans-unit id="fe_users.tx_staffdirectory_gender">
-                <source>Mr/Ms:</source>
+                <source>Mr/Ms</source>
             </trans-unit>
             <trans-unit id="fe_users.tx_staffdirectory_email2">
-                <source>Email (alternative):</source>
+                <source>Email (alternative)</source>
             </trans-unit>
             <trans-unit id="fe_users.tx_staffdirectory_gdpr_date">
                 <source>Date of approval to publish this profile</source>
@@ -27,45 +28,64 @@
             <trans-unit id="fe_users.tx_staffdirectory_gdpr_proof">
                 <source>Proof (content of email, statement from Word document, ...)</source>
             </trans-unit>
+
+            <trans-unit id="tx_staffdirectory_domain_model_organization">
+                <source>Organization</source>
+            </trans-unit>
+            <trans-unit id="tx_staffdirectory_domain_model_organization.long_name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_staffdirectory_domain_model_organization.short_name">
+                <source>Short name</source>
+            </trans-unit>
+            <trans-unit id="tx_staffdirectory_domain_model_organization.description">
+                <source>Description</source>
+            </trans-unit>
+
             <trans-unit id="tx_staffdirectory_staffs">
-                <source>Group</source>
+                <source>Group (deprecated)</source>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_staffs.staff_name">
-                <source>Group name:</source>
+                <source>Group name</source>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_staffs.description">
-                <source>Description:</source>
+                <source>Description</source>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_staffs.departments">
-                <source>Departments:</source>
+                <source>Departments</source>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_staffs.parent_staff">
-                <source>Parent Group:</source>
+                <source>Parent Group</source>
             </trans-unit>
+
             <trans-unit id="tx_staffdirectory_departments">
                 <source>Department</source>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_departments.position_title">
-                <source>Title:</source>
+                <source>Title</source>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_departments.position_description">
-                <source>Description:</source>
+                <source>Description</source>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_departments.members">
-                <source>Members:</source>
+                <source>Members</source>
             </trans-unit>
+
             <trans-unit id="tx_staffdirectory_members">
                 <source>Member</source>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_members.position_function">
-                <source>Function:</source>
+                <source>Function</source>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_members.feuser_id">
-                <source>Person:</source>
+                <source>Person</source>
             </trans-unit>
 
             <trans-unit id="palettes.gdpr">
                 <source>General Data Protection Regulation (GDPR)</source>
+            </trans-unit>
+            <trans-unit id="tabs.members">
+                <source>Members</source>
             </trans-unit>
             <trans-unit id="tabs.departments">
                 <source>Departments</source>

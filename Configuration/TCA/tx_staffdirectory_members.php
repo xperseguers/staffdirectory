@@ -26,7 +26,7 @@ $tca = [
         '1' => [
             'showitem' => '
                     feuser_id, position_function,
-                --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,
+                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
                     hidden, starttime, endtime'
         ],
     ],
@@ -90,8 +90,14 @@ $tca = [
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
-                'default' => '0'
-            ]
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        0 => '',
+                        1 => '',
+                    ]
+                ],
+            ],
         ],
         'starttime' => [
             'exclude' => 1,
