@@ -83,13 +83,13 @@
                 <target>Membres</target>
             </trans-unit>
 
-            <trans-unit id="tx_staffdirectory_members">
+            <trans-unit id="tx_staffdirectory_domain_model_member">
                 <target>Membre</target>
             </trans-unit>
-            <trans-unit id="tx_staffdirectory_members.position_function">
+            <trans-unit id="tx_staffdirectory_domain_model_member.position_function">
                 <target>Fonction</target>
             </trans-unit>
-            <trans-unit id="tx_staffdirectory_members.feuser_id">
+            <trans-unit id="tx_staffdirectory_domain_model_member.feuser_id">
                 <target>Personne</target>
             </trans-unit>
 

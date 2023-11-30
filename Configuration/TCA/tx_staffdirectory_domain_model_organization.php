@@ -41,14 +41,6 @@ $tca = [
         '1' => ['showitem' => '']
     ],
     'columns' => [
-        't3ver_label' => [
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.versionLabel',
-            'config' => [
-                'type' => 'input',
-                'size' => '30',
-                'max' => '30',
-            ]
-        ],
         'sys_language_uid' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
@@ -126,7 +118,22 @@ $tca = [
                 'softref' => 'typolink_tag,images,email[subst],url',
             ],
         ],
-        //'members' => []
+        'members' => [
+            'exclude' => false,
+            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_domain_model_organization.members',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_staffdirectory_domain_model_member',
+                'foreign_field' => 'organization',
+                'foreign_sortby' => 'sorting',
+                'maxitems' => 999,
+                'appearance' => [
+                    'collapse' => 0,
+                    'useSortable' => 1,
+                    'newRecordLinkPosition' => 'both',
+                ],
+            ]
+        ],
         'parent_organizations' => [
             'exclude' => false,
             'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_domain_model_organization.parent_organizations',

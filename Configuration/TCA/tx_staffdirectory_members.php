@@ -2,7 +2,7 @@
 $typo3Version = (new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion();
 $tca = [
     'ctrl' => [
-        'title' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_members',
+        'title' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_domain_model_member',
         'label' => 'feuser_id',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -125,7 +125,7 @@ $tca = [
         ],
         'feuser_id' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_members.feuser_id',
+            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_domain_model_member.feuser_id',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -141,7 +141,7 @@ $tca = [
         ],
         'position_function' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_members.position_function',
+            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_domain_model_member.position_function',
             'config' => [
                 'type' => 'input',
                 'size' => '30',

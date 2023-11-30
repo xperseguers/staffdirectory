@@ -2,12 +2,14 @@
 # Table structure for table 'fe_users'
 #
 CREATE TABLE fe_users (
-	tx_staffdirectory_mobilephone varchar(20) DEFAULT '' NOT NULL,
-	tx_staffdirectory_gender int(11) DEFAULT '0' NOT NULL,
-	tx_staffdirectory_email2 varchar(255) DEFAULT '' NOT NULL,
-	tx_staffdirectory_gdpr_date int(11) DEFAULT '0' NOT NULL,
-	tx_staffdirectory_gdpr_proof text,
-	path_segment varchar(2048),
+    tx_staffdirectory_mobilephone varchar(20) DEFAULT '' NOT NULL,
+    tx_staffdirectory_gender int(11) DEFAULT '0' NOT NULL,
+    tx_staffdirectory_email2 varchar(255) DEFAULT '' NOT NULL,
+    tx_staffdirectory_gdpr_date int(11) DEFAULT '0' NOT NULL,
+    tx_staffdirectory_gdpr_proof text,
+    path_segment varchar(2048),
+
+    FULLTEXT KEY ft_name (first_name, middle_name, last_name),
 );
 
 #
@@ -19,6 +21,19 @@ CREATE TABLE tx_staffdirectory_domain_model_organization (
     description text,
     members int(10) unsigned DEFAULT '0' NOT NULL,
     suborganizations varchar(255) DEFAULT '' NOT NULL
+);
+
+#
+# Table structure for table 'tx_staffdirectory_domain_model_member'
+#
+CREATE TABLE tx_staffdirectory_domain_model_member (
+    feuser_id int(10) unsigned DEFAULT '0' NOT NULL,
+    position_function varchar(255) DEFAULT '' NOT NULL,
+    organization int(10) unsigned DEFAULT '0' NOT NULL,
+    sorting int(10) unsigned DEFAULT '0' NOT NULL,
+
+    KEY feuser_id (feuser_id),
+    KEY organization (organization)
 );
 
 #
