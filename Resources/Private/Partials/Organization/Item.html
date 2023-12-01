@@ -11,7 +11,10 @@
 
 <div class="row">
     <f:for each="{organization.members}" as="member">
-        <f:render partial="Member/Item" arguments="{member: member}"/>
+        <f:render partial="Member/Item" arguments="{
+            plugin: plugin,
+            member: member
+        }"/>
     </f:for>
 </div>
 
@@ -19,7 +22,11 @@
     <f:for each="{organization.suborganizations}" as="suborganization">
         <f:variable name="sublevel" value="{level + 1}"/>
         <h3>{suborganization.shortName}</h3>
-        <f:render partial="Organization/Item" arguments="{level: sublevel, organization: suborganization}"/>
+        <f:render partial="Organization/Item" arguments="{
+            plugin: plugin,
+            level: sublevel,
+            organization: suborganization
+        }"/>
     </f:for>
 </f:if>
 

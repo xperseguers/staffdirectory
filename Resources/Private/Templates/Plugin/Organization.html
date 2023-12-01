@@ -8,11 +8,15 @@
     <f:if condition="{organization}">
         <f:then>
             <h2>{organization.shortName}</h2>
-            <f:render partial="Organization/Item" arguments="{level: 1, organization: organization}"/>
+            <f:render partial="Organization/Item" arguments="{
+                plugin: plugin,
+                level: 1,
+                organization: organization
+            }"/>
         </f:then>
         <f:else>
             <div class="alert alert-warning" role="alert">
-                NO ORGANIZATION
+                <f:translate key="label_empty_organization_list"/>
             </div>
         </f:else>
     </f:if>

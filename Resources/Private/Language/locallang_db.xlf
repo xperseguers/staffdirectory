@@ -6,8 +6,15 @@
             <trans-unit id="plugins.plugin.title">
                 <source>Staff Directory - Generic Plugin</source>
             </trans-unit>
+
             <trans-unit id="tt_content.list_type_pi1">
                 <source>Staff Directory</source>
+            </trans-unit>
+            <trans-unit id="tt_content.layout.0">
+                <source>Normal</source>
+            </trans-unit>
+            <trans-unit id="tt_content.layout.1">
+                <source>Condensed</source>
             </trans-unit>
 
             <trans-unit id="fe_users.tx_staffdirectory_mobilephone">

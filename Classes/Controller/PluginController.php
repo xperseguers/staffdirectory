@@ -82,6 +82,8 @@ class PluginController extends ActionController
 
         $this->view->assignMultiple([
             'organizations' => $organizations,
+            // Raw data for the plugin
+            'plugin' => $this->configurationManager->getContentObject()->data,
         ]);
 
         return new HtmlResponse(
@@ -107,6 +109,8 @@ class PluginController extends ActionController
 
         $this->view->assignMultiple([
             'organization' => $organization,
+            // Raw data for the plugin
+            'plugin' => $this->configurationManager->getContentObject()->data,
         ]);
 
         return new HtmlResponse(

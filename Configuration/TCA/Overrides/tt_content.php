@@ -34,6 +34,21 @@ $GLOBALS['TCA']['tt_content']['types']['staffdirectory_plugin']['showitem'] = '
         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:extended,
     ';
 
+$GLOBALS['TCA']['tt_content']['types']['staffdirectory_plugin']['columnsOverrides'] = [
+    'layout' => [
+        'config' => [
+            'items' => [
+                [
+                    'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tt_content.layout.0', 0
+                ],
+                [
+                    'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tt_content.layout.1', 1
+                ]
+            ],
+        ],
+    ],
+];
+
 // Register Frontend plugin
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'staffdirectory',

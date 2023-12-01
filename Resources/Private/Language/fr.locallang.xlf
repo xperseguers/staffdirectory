@@ -49,6 +49,9 @@
                 <target>Condensée</target>
             </trans-unit>
 
+            <trans-unit id="label_empty_organization_list">
+                <target>Aucune organisation</target>
+            </trans-unit>
             <trans-unit id="label_empty_staff_list">
                 <target>Aucune équipe</target>
             </trans-unit>

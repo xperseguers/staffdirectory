@@ -2,19 +2,41 @@
       xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<div class="col-md-6{f:if(condition:offset, then: ' offset-md-{offset}')}">
-    <div class="card card-profile card-plain">
-        <div class="row">
-            <div class="col-md-5">
-                <div class="card-header card-header-image">
-                    <f:render partial="Member/Photo" arguments="{member: member}"/>
+<f:if condition="{plugin.layout}==1">
+    <f:then>
+        <f:render section="Condensed" arguments="{_all}"/>
+    </f:then>
+    <f:else>
+        <f:render section="Normal" arguments="{_all}"/>
+    </f:else>
+</f:if>
+
+<f:section name="Normal">
+    <div class="col-md-6{f:if(condition:offset, then: ' offset-md-{offset}')}">
+        <div class="card card-profile card-plain">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="card-header card-header-image">
+                        <f:render partial="Member/Photo" arguments="{member: member}"/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-7">
-                <f:render partial="Member/CardBody" arguments="{member:member}"/>
+                <div class="col-md-7">
+                    <f:render partial="Member/CardBody" arguments="{member:member}"/>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</f:section>
+
+<f:section name="Condensed">
+    <div class="col-md-3">
+        <div class="card card-profile card-plain">
+            <div class="card-header card-avatar">
+                <f:render partial="Member/Photo" arguments="{member: member}"/>
+            </div>
+            <f:render partial="Member/CardBody" arguments="{member:member}"/>
+        </div>
+    </div>
+</f:section>
 
 </html>

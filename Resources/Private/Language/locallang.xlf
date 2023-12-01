@@ -49,6 +49,9 @@
                 <source>Condensed</source>
             </trans-unit>
 
+            <trans-unit id="label_empty_organization_list">
+                <source>No organizations</source>
+            </trans-unit>
             <trans-unit id="label_empty_staff_list">
                 <source>No staffs</source>
             </trans-unit>
