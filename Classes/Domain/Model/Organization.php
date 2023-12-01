@@ -26,6 +26,12 @@ class Organization extends AbstractEntity
     protected string $description = '';
 
     /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Member>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $members;
+
+    /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Organization>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
@@ -33,6 +39,7 @@ class Organization extends AbstractEntity
 
     public function __construct()
     {
+        $this->members = new ObjectStorage();
         $this->suborganizations = new ObjectStorage();
     }
 
@@ -41,6 +48,7 @@ class Organization extends AbstractEntity
      */
     public function initializeObject()
     {
+        $this->members = $this->members ?? new ObjectStorage();
         $this->suborganizations = $this->suborganizations ?? new ObjectStorage();
     }
 
@@ -57,6 +65,11 @@ class Organization extends AbstractEntity
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function getMembers(): ObjectStorage
+    {
+        return $this->members;
     }
 
     public function getSuborganizations(): ObjectStorage

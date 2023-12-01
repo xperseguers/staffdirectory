@@ -43,7 +43,7 @@
 
         <div class="row">
             <f:for each="{department.members}" as="member">
-                <f:render partial="Member/Normal" arguments="{member: member}"/>
+                <f:render partial="Member/Deprecated/Normal" arguments="{member: member}"/>
             </f:for>
         </div>
     </div>
@@ -61,7 +61,7 @@
                 </div>
             </f:if>
             <f:for each="{department.members}" as="member">
-                <f:render partial="Member/Condensed" arguments="{member: member}"/>
+                <f:render partial="Member/Deprecated/Condensed" arguments="{member: member}"/>
             </f:for>
         </div>
     </div>
