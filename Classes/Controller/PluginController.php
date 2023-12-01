@@ -27,7 +27,7 @@ use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-class OrganizationController extends ActionController
+class PluginController extends ActionController
 {
     protected OrganizationRepository $organizationRepository;
     protected MemberRepository $memberRepository;

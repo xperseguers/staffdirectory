@@ -12,7 +12,14 @@ defined('TYPO3') || die ();
         $_EXTKEY,
         'Plugin',
         [
-            \Causal\Staffdirectory\Controller\OrganizationController::class => 'dispatch, list, organization, person, persons, directory',
+            \Causal\Staffdirectory\Controller\PluginController::class => implode(',', [
+                'dispatch',
+                'list',
+                'organization',
+                'person',
+                'persons',
+                'directory',
+            ]),
         ],
         [],
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT

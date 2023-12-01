@@ -24,7 +24,7 @@ $tca = [
     'types' => [
         '1' => [
             'showitem' => '
-                    long_name, short_name, description,
+                    long_name, short_name, path_segment, description,
                 --div--;LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tabs.members,
                     members,
                 --div--;LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tabs.hierarchy,
@@ -104,6 +104,21 @@ $tca = [
                 'max' => '50',
                 'eval' => $typo3Version >= 12 ? 'trim' : 'required,trim',
                 'required' => true,
+            ]
+        ],
+        'path_segment' => [
+            'exclude' => false,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:pages.slug',
+            'config' => [
+                'type' => 'slug',
+                'size' => 50,
+                'generatorOptions' => [
+                    'fields' => ['long_name'],
+                    'fieldSeparator' => '/',
+                ],
+                'fallbackCharacter' => '-',
+                'eval' => 'unique',
+                'default' => ''
             ]
         ],
         'description' => [

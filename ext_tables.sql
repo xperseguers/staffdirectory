@@ -20,7 +20,8 @@ CREATE TABLE tx_staffdirectory_domain_model_organization (
     short_name varchar(50) DEFAULT '' NOT NULL,
     description text,
     members int(10) unsigned DEFAULT '0' NOT NULL,
-    suborganizations varchar(255) DEFAULT '' NOT NULL
+    suborganizations varchar(255) DEFAULT '' NOT NULL,
+    path_segment varchar(2048)
 );
 
 #
