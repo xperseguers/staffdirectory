@@ -18,8 +18,10 @@ namespace Causal\Staffdirectory\Controller;
 
 use Causal\Staffdirectory\Domain\Model\Member;
 use Causal\Staffdirectory\Domain\Model\Organization;
+use Causal\Staffdirectory\Domain\Model\Person;
 use Causal\Staffdirectory\Domain\Repository\MemberRepository;
 use Causal\Staffdirectory\Domain\Repository\OrganizationRepository;
+use Causal\Staffdirectory\Domain\Repository\PersonRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -31,14 +33,17 @@ class PluginController extends ActionController
 {
     protected OrganizationRepository $organizationRepository;
     protected MemberRepository $memberRepository;
+    protected PersonRepository $personRepository;
 
     public function __construct(
         OrganizationRepository $organizationRepository,
-        MemberRepository $memberRepository
+        MemberRepository $memberRepository,
+        PersonRepository $personRepository
     )
     {
         $this->organizationRepository = $organizationRepository;
         $this->memberRepository = $memberRepository;
+        $this->personRepository = $personRepository;
     }
 
     public function dispatchAction(): ResponseInterface
@@ -102,12 +107,6 @@ class PluginController extends ActionController
             $organization = $this->organizationRepository->findByUid($uids[0] ?? 0);
         }
 
-        if ($organization === null) {
-            return new HtmlResponse(
-                $this->errorMessage('No staff selected.', 1701368504)
-            );
-        }
-
         $this->addCacheTagsForOrganization($organization);
 
         $this->view->assignMultiple([
@@ -121,9 +120,24 @@ class PluginController extends ActionController
         );
     }
 
-    public function personAction(): ResponseInterface
+    public function personAction(?Person $person = null): ResponseInterface
     {
-        // TODO
+        if ($person === null) {
+            // Get first selected person in the list
+            $uids = GeneralUtility::intExplode(',', $this->settings['persons'], true);
+            $person = $this->personRepository->findByUid($uids[0] ?? 0);
+        }
+
+        $this->addCacheTagsForPerson($person);
+
+        // Disable link to ourselves
+        $this->settings['targets']['person'] = null;
+
+        $this->view->assignMultiple([
+            'person' => $person,
+            // Raw data for the plugin
+            'plugin' => $this->configurationManager->getContentObject()->data,
+        ]);
 
         return new HtmlResponse(
             $this->view->render()
@@ -132,7 +146,30 @@ class PluginController extends ActionController
 
     public function personsAction(): ResponseInterface
     {
-        // TODO
+        if (!empty($this->settings['persons'])) {
+            $uids = GeneralUtility::intExplode(',', $this->settings['persons'], true);
+            $persons = [];
+            foreach ($uids as $uid) {
+                $person = $this->personRepository->findByUid($uid);
+                if ($person !== null) {
+                    $persons[] = $person;
+                }
+            }
+        } else {
+            $persons = $this->personRepository->findAll();
+        }
+
+        foreach ($persons as $person) {
+            // Tag the page cache so that FAL signal operations may be listened to in
+            // order to flush corresponding page cache
+            $this->addCacheTagsForPerson($person);
+        }
+
+        $this->view->assignMultiple([
+            'persons' => $persons,
+            // Raw data for the plugin
+            'plugin' => $this->configurationManager->getContentObject()->data,
+        ]);
 
         return new HtmlResponse(
             $this->view->render()
@@ -146,21 +183,6 @@ class PluginController extends ActionController
         return new HtmlResponse(
             $this->view->render()
         );
-    }
-
-    /**
-     * @param string $message
-     * @param int $errorCode
-     * @return string
-     */
-    protected function errorMessage(string $message, int $errorCode): string
-    {
-        $out = [];
-        $out[] = '<div class="alert alert-danger" role="alert">';
-        $out[] = htmlspecialchars($message) . ' (' . $errorCode . ')';
-        $out[] = '</div>';
-
-        return implode(LF, $out);
     }
 
     /**
@@ -191,14 +213,28 @@ class PluginController extends ActionController
      * @param Member|null $member
      */
     protected function addCacheTagsForMember(?Member $member): void {
-        if ($member === null || $member->getPerson() === null) {
+        if ($member === null) {
+            return;
+        }
+
+        $this->addCacheTagsForPerson($member->getPerson());
+    }
+
+    /**
+     * Tags the page cache so that FAL signal operations may be listened to in
+     * order to flush corresponding page cache.
+     *
+     * @param Person|null $person
+     */
+    protected function addCacheTagsForPerson(?Person $person): void {
+        if ($person === null) {
             return;
         }
 
         // Tag the page cache so that FAL signal operations may be listened to in
         // order to flush corresponding page cache
         $cacheTags = [
-            'tx_staffdirectory_person_' . $member->getPerson()->getUid(),
+            'tx_staffdirectory_person_' . $person->getUid(),
         ];
 
         $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);

@@ -171,7 +171,7 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         $this->addCacheTagsForMember($member);
 
-        // Disable link to ourself
+        // Disable link to ourselves
         $this->settings['targets']['person'] = null;
 
         $this->view->assignMultiple([

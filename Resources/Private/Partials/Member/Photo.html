@@ -2,12 +2,16 @@
       xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<f:if condition="{member.person.image.0}">
+<f:if condition="!{person}">
+    <f:variable name="person" value="{member.person}"/>
+</f:if>
+
+<f:if condition="{person.image.0}">
     <f:then>
-        <img src="{f:uri.image(image: member.person.image.0, width: '250c', height: '250c')}" class="img"/>
+        <img src="{f:uri.image(image: person.image.0, width: '250c', height: '250c')}" class="img"/>
     </f:then>
     <f:else>
-        <f:if condition="{member.person.gender}==1">
+        <f:if condition="{person.gender}==1">
             <f:then>
                 <img src="{f:uri.resource(path: 'Images/placeholder-woman.jpg')}" class="img"/>
             </f:then>

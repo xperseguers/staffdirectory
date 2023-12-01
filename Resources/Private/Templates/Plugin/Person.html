@@ -5,8 +5,72 @@
 <f:layout name="Default"/>
 
 <f:section name="Main">
-    PERSON goes here...
-    <f:debug>{_all}</f:debug>
+    <f:if condition="{person}">
+        <f:then>
+            <f:render section="Information" arguments="{_all}"/>
+        </f:then>
+        <f:else>
+            <div class="alert alert-warning" role="alert">
+                <f:translate key="label_empty_directory_list"/>
+            </div>
+        </f:else>
+    </f:if>
+</f:section>
+
+<f:section name="Information">
+    <div class="row">
+        <f:render partial="Member/Item" arguments="{
+            plugin: plugin,
+            person: person
+        }"/>
+    </div>
+
+    <f:if condition="{positions}">
+        <f:render section="Positions" arguments="{_all}"/>
+    </f:if>
+
+    <f:section name="Positions">
+        <h3>Groupes et équipes</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    {person.title} {person.firstName} fait partie
+                    <f:if condition="{positions -> f:count()}==1">
+                        <f:then>de l'équipe suivante :</f:then>
+                        <f:else>des équipes suivantes :</f:else>
+                    </f:if>
+                </p>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Groupe / Équipe</th>
+                        <th>Fonction</th>
+                        <th>Page sur le site</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <f:for each="{positions}" as="position">
+                        <f:for each="{position.functions}" as="function">
+                            <tr>
+                                <th>{position.staff.name}</th>
+                                <td>{function}</td>
+                                <td>
+                                    <f:for each="{position.links}" as="link" iteration="iterator">
+                                        <f:link.page pageUid="{link.pageUid}">{link.title}</f:link.page>
+                                        <f:if condition="{iterator.isLast}">
+                                            <f:else><br/></f:else>
+                                        </f:if>
+                                    </f:for>
+                                </td>
+                            </tr>
+                        </f:for>
+                    </f:for>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </f:section>
 </f:section>
 
 </html>
