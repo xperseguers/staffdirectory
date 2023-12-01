@@ -3,17 +3,12 @@
     <file source-language="en" datatype="plaintext" original="messages" date="2020-04-02T16:24:07Z" product-name="staffdirectory">
         <header/>
         <body>
-            <trans-unit id="pi_flexform.sheet_general">
-                <source>General</source>
-            </trans-unit>
+            <!-- pi_flexform.* are all deprecated -->
             <trans-unit id="pi_flexform.displayMode">
                 <source>Display Mode</source>
             </trans-unit>
             <trans-unit id="pi_flexform.displayMode.LIST">
                 <source>List view (LIST)</source>
-            </trans-unit>
-            <trans-unit id="pi_flexform.displayMode.ORGANIZATION">
-                <source>Organization view (ORGANIZATION)</source>
             </trans-unit>
             <trans-unit id="pi_flexform.displayMode.STAFF">
                 <source>Staff view (STAFF)</source>
@@ -26,9 +21,6 @@
             </trans-unit>
             <trans-unit id="pi_flexform.displayMode.DIRECTORY">
                 <source>Person listing (DIRECTORY)</source>
-            </trans-unit>
-            <trans-unit id="pi_flexform.organizations">
-                <source>Organizations</source>
             </trans-unit>
             <trans-unit id="pi_flexform.staffs">
                 <source>Staffs</source>

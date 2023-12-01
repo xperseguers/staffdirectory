@@ -49,6 +49,13 @@ $GLOBALS['TCA']['tt_content']['types']['staffdirectory_plugin']['columnsOverride
     ],
 ];
 
+/**
+ * Configure a custom preview renderer for the plugins
+ * @see https://docs.typo3.org/m/typo3/reference-coreapi/11.5/en-us/ApiOverview/ContentElements/CustomBackendPreview.html
+ */
+$GLOBALS['TCA']['tt_content']['types']['staffdirectory_plugin']['previewRenderer']
+    = \Causal\Staffdirectory\Preview\PluginPreviewRenderer::class;
+
 // Register Frontend plugin
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'staffdirectory',

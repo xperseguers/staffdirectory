@@ -3,17 +3,12 @@
     <file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2020-04-02T16:24:07Z" product-name="staffdirectory">
         <header/>
         <body>
-            <trans-unit id="pi_flexform.sheet_general">
-                <target>Général</target>
-            </trans-unit>
+            <!-- pi_flexform.* are all deprecated -->
             <trans-unit id="pi_flexform.displayMode">
                 <target>Mode d'affichage</target>
             </trans-unit>
             <trans-unit id="pi_flexform.displayMode.LIST">
                 <target>Vue liste (LIST)</target>
-            </trans-unit>
-            <trans-unit id="pi_flexform.displayMode.ORGANIZATION">
-                <target>Vue fiche de l'organisation (ORGANIZATION)</target>
             </trans-unit>
             <trans-unit id="pi_flexform.displayMode.STAFF">
                 <target>Vue fiche de l'équipe (STAFF)</target>
@@ -22,13 +17,10 @@
                 <target>Vue fiche d'une ou plusieurs personnes (PERSONS)</target>
             </trans-unit>
             <trans-unit id="pi_flexform.displayMode.PERSON">
-                <source>Vue fiche d'une seule personne (PERSON)</source>
+                <target>Vue fiche d'une seule personne (PERSON)</target>
             </trans-unit>
             <trans-unit id="pi_flexform.displayMode.DIRECTORY">
                 <target>Liste des personnes (DIRECTORY)</target>
-            </trans-unit>
-            <trans-unit id="pi_flexform.organizations">
-                <target>Organisations</target>
             </trans-unit>
             <trans-unit id="pi_flexform.staffs">
                 <target>Équipes</target>

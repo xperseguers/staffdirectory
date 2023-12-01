@@ -6,6 +6,36 @@
             <trans-unit id="plugins.plugin.title">
                 <target>Staff Directory - Plugin générique</target>
             </trans-unit>
+            <trans-unit id="plugins.plugin.settings.displayMode">
+                <target>Mode d'affichage</target>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.displayMode.errorEmpty">
+                <target>indéfini</target>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.displayMode.LIST">
+                <target>Vue liste (LIST)</target>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.displayMode.ORGANIZATION">
+                <target>Vue fiche de l'organisation (ORGANIZATION)</target>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.displayMode.PERSONS">
+                <target>Vue fiche d'une ou plusieurs personnes (PERSONS)</target>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.displayMode.PERSON">
+                <target>Vue fiche d'une seule personne (PERSON)</target>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.displayMode.DIRECTORY">
+                <target>Liste des personnes (DIRECTORY)</target>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.organizations">
+                <target>Organisations</target>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.person">
+                <target>Personne</target>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.persons">
+                <target>Personnes</target>
+            </trans-unit>
 
             <trans-unit id="tt_content.list_type_pi1">
                 <target>Répertoire d'équipes</target>

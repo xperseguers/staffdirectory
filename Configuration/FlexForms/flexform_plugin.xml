@@ -12,7 +12,7 @@
                 <el>
                     <settings.displayMode>
                         <TCEforms>
-                            <label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode</label>
+                            <label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode</label>
                             <onChange>reload</onChange>
                             <config>
                                 <type>select</type>
@@ -23,23 +23,23 @@
                                         <numIndex index="1"></numIndex>
                                     </numIndex>
                                     <numIndex index="1" type="array">
-                                        <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode.LIST</numIndex>
+                                        <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.LIST</numIndex>
                                         <numIndex index="1">LIST</numIndex>
                                     </numIndex>
                                     <numIndex index="2" type="array">
-                                        <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode.ORGANIZATION</numIndex>
+                                        <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.ORGANIZATION</numIndex>
                                         <numIndex index="1">ORGANIZATION</numIndex>
                                     </numIndex>
                                     <numIndex index="3" type="array">
-                                        <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode.PERSONS</numIndex>
+                                        <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.PERSONS</numIndex>
                                         <numIndex index="1">PERSONS</numIndex>
                                     </numIndex>
                                     <numIndex index="4" type="array">
-                                        <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode.PERSON</numIndex>
+                                        <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.PERSON</numIndex>
                                         <numIndex index="1">PERSON</numIndex>
                                     </numIndex>
                                     <numIndex index="5" type="array">
-                                        <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.displayMode.DIRECTORY</numIndex>
+                                        <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.DIRECTORY</numIndex>
                                         <numIndex index="1">DIRECTORY</numIndex>
                                     </numIndex>
                                 </items>
@@ -48,7 +48,7 @@
                     </settings.displayMode>
                     <settings.organizations>
                         <TCEforms>
-                            <label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.organizations</label>
+                            <label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.organizations</label>
                             <displayCond>
                                 <OR>
                                     <numIndex index="0"><![CDATA[FIELD:settings.displayMode:=:LIST]]></numIndex>
@@ -69,7 +69,7 @@
                     </settings.organizations>
                     <settings.persons>
                         <TCEforms>
-                            <label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.persons</label>
+                            <label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.persons</label>
                             <displayCond>
                                 <OR>
                                     <numIndex index="0"><![CDATA[FIELD:settings.displayMode:=:PERSON]]></numIndex>

@@ -7,9 +7,7 @@
         <sDEF>
             <ROOT>
                 <TCEforms>
-                    <sheetTitle>
-                        LLL:EXT:staffdirectory/Resources/Private/Language/locallang.xlf:pi_flexform.sheet_general
-                    </sheetTitle>
+                    <sheetTitle>LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general</sheetTitle>
                 </TCEforms>
                 <type>array</type>
                 <el>

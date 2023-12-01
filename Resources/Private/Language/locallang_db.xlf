@@ -6,6 +6,36 @@
             <trans-unit id="plugins.plugin.title">
                 <source>Staff Directory - Generic Plugin</source>
             </trans-unit>
+            <trans-unit id="plugins.plugin.settings.displayMode">
+                <source>Display Mode</source>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.displayMode.errorEmpty">
+                <source>undefined</source>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.displayMode.LIST">
+                <source>List view (LIST)</source>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.displayMode.ORGANIZATION">
+                <source>Organization view (ORGANIZATION)</source>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.displayMode.PERSONS">
+                <source>Single or multiple persons view (PERSONS)</source>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.displayMode.PERSON">
+                <source>Single person view (PERSON)</source>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.displayMode.DIRECTORY">
+                <source>Person listing (DIRECTORY)</source>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.organizations">
+                <source>Organizations</source>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.person">
+                <source>Person</source>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.persons">
+                <source>Persons</source>
+            </trans-unit>
 
             <trans-unit id="tt_content.list_type_pi1">
                 <source>Staff Directory</source>
