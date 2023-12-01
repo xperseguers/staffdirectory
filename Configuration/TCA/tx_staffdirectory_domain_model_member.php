@@ -76,6 +76,11 @@ $tca = [
                 'eval' => 'trim',
             ]
         ],
+        'sorting' => [
+            'config' => [
+                'type' => 'passthrough'
+            ]
+        ],
     ]
 ];
 
