@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:debug>{_all}</f:debug>
+
+<f:if condition="{organization.description}">
+    <div class="jumbotron">
+        <h1 class="display-4">Présentation</h1>
+        {organization.description -> f:format.raw()}
+    </div>
+</f:if>
+
+<div class="row">
+    <f:for each="{organization.members}" as="member">
+        <f:render partial="Member/Item" arguments="{member: member}"/>
+    </f:for>
+</div>
+
+<f:if condition="{level} < 2">
+    <f:for each="{organization.suborganizations}" as="suborganization">
+        <f:variable name="sublevel" value="{level + 1}"/>
+        <h3>{suborganization.shortName}</h3>
+        <f:render partial="Organization/Item" arguments="{level: sublevel, organization: suborganization}"/>
+    </f:for>
+</f:if>
+
+</html>

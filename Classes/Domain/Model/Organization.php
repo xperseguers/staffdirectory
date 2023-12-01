@@ -17,12 +17,32 @@ declare(strict_types = 1);
 namespace Causal\Staffdirectory\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Organization extends AbstractEntity
 {
     protected string $longName = '';
     protected string $shortName = '';
     protected string $description = '';
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Organization>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $suborganizations;
+
+    public function __construct()
+    {
+        $this->suborganizations = new ObjectStorage();
+    }
+
+    /**
+     * Called again with initialize object, as fetching an entity from the DB does not use the constructor
+     */
+    public function initializeObject()
+    {
+        $this->suborganizations = $this->suborganizations ?? new ObjectStorage();
+    }
 
     public function getLongName(): string
     {
@@ -37,5 +57,10 @@ class Organization extends AbstractEntity
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function getSuborganizations(): ObjectStorage
+    {
+        return $this->suborganizations;
     }
 }
