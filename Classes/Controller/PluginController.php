@@ -45,17 +45,20 @@ class PluginController extends ActionController
     {
         switch ($this->settings['displayMode']) {
             case 'LIST':
-                return (new ForwardResponse('list'));
+                return new ForwardResponse('list');
             case 'ORGANIZATION':
-                return (new ForwardResponse('organization'));
+                return new ForwardResponse('organization');
             case 'PERSON':
-                return (new ForwardResponse('person'));
+                return new ForwardResponse('person');
             case 'PERSONS':
-                return (new ForwardResponse('persons'));
+                return new ForwardResponse('persons');
             case 'DIRECTORY':
-                return (new ForwardResponse('directory'));
+                return new ForwardResponse('directory');
             default:
-                throw new \RuntimeException('Invalid display mode "' . $this->settings['displayMode'] . '"', 1701367726);
+                throw new \RuntimeException(
+                    sprintf('Invalid display mode "%s"', $this->settings['displayMode']),
+                    1701367726
+                );
         }
     }
 
