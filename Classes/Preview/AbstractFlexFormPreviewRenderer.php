@@ -57,6 +57,12 @@ abstract class AbstractFlexFormPreviewRenderer extends StandardContentPreviewRen
         return sprintf($errorPattern, $text);
     }
 
+    protected function showInfo(string $text): string
+    {
+        $infoPattern = '<span class="badge badge-info">%s</span>';
+        return sprintf($infoPattern, $text);
+    }
+
     protected function getFieldFromFlexForm(string $key, string $sheet = 'sDEF'): ?string
     {
         $flexForm = $this->flexFormData;

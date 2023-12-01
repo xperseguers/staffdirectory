@@ -28,13 +28,16 @@
                 <target>Liste des personnes (DIRECTORY)</target>
             </trans-unit>
             <trans-unit id="plugins.plugin.settings.organizations">
-                <target>Organisations</target>
+                <target>Organisation(s)</target>
             </trans-unit>
-            <trans-unit id="plugins.plugin.settings.person">
-                <target>Personne</target>
+            <trans-unit id="plugins.plugin.settings.organizations.empty">
+                <target>Dynamique</target>
             </trans-unit>
             <trans-unit id="plugins.plugin.settings.persons">
-                <target>Personnes</target>
+                <target>Personne(s)</target>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.persons.empty">
+                <target>Dynamique</target>
             </trans-unit>
 
             <trans-unit id="tt_content.list_type_pi1">

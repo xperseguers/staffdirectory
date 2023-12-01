@@ -28,13 +28,16 @@
                 <source>Person listing (DIRECTORY)</source>
             </trans-unit>
             <trans-unit id="plugins.plugin.settings.organizations">
-                <source>Organizations</source>
+                <source>Organization(s)</source>
             </trans-unit>
-            <trans-unit id="plugins.plugin.settings.person">
-                <source>Person</source>
+            <trans-unit id="plugins.plugin.settings.organizations.empty">
+                <source>Dynamic</source>
             </trans-unit>
             <trans-unit id="plugins.plugin.settings.persons">
-                <source>Persons</source>
+                <source>Person(s)</source>
+            </trans-unit>
+            <trans-unit id="plugins.plugin.settings.persons.empty">
+                <source>Dynamic</source>
             </trans-unit>
 
             <trans-unit id="tt_content.list_type_pi1">
