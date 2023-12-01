@@ -31,10 +31,11 @@ class Member
             return;
         }
 
+        $feuserId = $params['row']['feuser_id'] ?? 0;
         $title = BackendUtility::getProcessedValue(
             $params['table'],
             'feuser_id',
-                $params['row']['feuser_id'][0]['uid'] ?? 0
+            $feuserId[0]['uid'] ?? $feuserId
         );
 
         $positionFunction = $params['row']['position_function'];
