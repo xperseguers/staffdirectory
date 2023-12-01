@@ -16,6 +16,8 @@ declare(strict_types = 1);
 
 namespace Causal\Staffdirectory\Domain\Model;
 
+use Causal\Staffdirectory\Domain\Repository\OrganizationRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -24,6 +26,8 @@ class Organization extends AbstractEntity
     protected string $longName = '';
     protected string $shortName = '';
     protected string $description = '';
+    protected string $children = '';
+    protected array $suborganizationsArray = [];
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Member>
@@ -31,16 +35,9 @@ class Organization extends AbstractEntity
      */
     protected $members;
 
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Organization>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     */
-    protected $suborganizations;
-
     public function __construct()
     {
         $this->members = new ObjectStorage();
-        $this->suborganizations = new ObjectStorage();
     }
 
     /**
@@ -49,7 +46,6 @@ class Organization extends AbstractEntity
     public function initializeObject()
     {
         $this->members = $this->members ?? new ObjectStorage();
-        $this->suborganizations = $this->suborganizations ?? new ObjectStorage();
     }
 
     public function getLongName(): string
@@ -72,8 +68,23 @@ class Organization extends AbstractEntity
         return $this->members;
     }
 
-    public function getSuborganizations(): ObjectStorage
+    public function getSuborganizations(): array
     {
-        return $this->suborganizations;
+        // This business logic is a trick to get the suborganizations in the same order as
+        // they are defined in the TCA as Extbase doesn't seem to do it properly on its own.
+
+        if (empty($this->suborganizationsArray)
+            && !empty($this->children)) {
+
+            $organizationRepository = GeneralUtility::makeInstance(OrganizationRepository::class);
+            foreach (GeneralUtility::intExplode(',', $this->children, true) as $childUid) {
+                $child = $organizationRepository->findByUid($childUid);
+                if ($child !== null) {
+                    $this->suborganizationsArray[] = $child;
+                }
+            }
+        }
+
+        return $this->suborganizationsArray;
     }
 }

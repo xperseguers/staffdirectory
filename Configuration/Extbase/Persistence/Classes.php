@@ -1,6 +1,14 @@
 <?php
 
 return [
+    \Causal\Staffdirectory\Domain\Model\Organization::class => [
+        'properties' => [
+            'children' => [
+                'fieldName' => 'suborganizations',
+            ],
+        ],
+    ],
+
     \Causal\Staffdirectory\Domain\Model\Person::class => [
         'tableName' => 'fe_users',
         'recordType' => 'tx_staffdirectory',
@@ -16,6 +24,7 @@ return [
             ],
         ],
     ],
+
     \Causal\Staffdirectory\Domain\Model\Member::class => [
         'properties' => [
             'person' => [
