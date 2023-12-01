@@ -4,7 +4,7 @@
         <header/>
         <body>
             <trans-unit id="plugins.plugin.title">
-                <target>Staff Directory - Plugin générique</target>
+                <target>Annuaire du personnel</target>
             </trans-unit>
             <trans-unit id="plugins.plugin.settings.displayMode">
                 <target>Mode d'affichage</target>

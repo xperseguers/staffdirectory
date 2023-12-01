@@ -4,7 +4,7 @@
         <header/>
         <body>
             <trans-unit id="plugins.plugin.title">
-                <source>Staff Directory - Generic Plugin</source>
+                <source>Staff Directory</source>
             </trans-unit>
             <trans-unit id="plugins.plugin.settings.displayMode">
                 <source>Display Mode</source>
