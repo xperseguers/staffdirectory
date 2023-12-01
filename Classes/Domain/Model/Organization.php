@@ -63,6 +63,9 @@ class Organization extends AbstractEntity
         return $this->description;
     }
 
+    /**
+     * @return Member[]
+     */
     public function getMembers(): ObjectStorage
     {
         return $this->members;

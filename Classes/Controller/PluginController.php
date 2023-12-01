@@ -16,10 +16,10 @@ declare(strict_types = 1);
 
 namespace Causal\Staffdirectory\Controller;
 
+use Causal\Staffdirectory\Domain\Model\Member;
 use Causal\Staffdirectory\Domain\Model\Organization;
 use Causal\Staffdirectory\Domain\Repository\MemberRepository;
 use Causal\Staffdirectory\Domain\Repository\OrganizationRepository;
-use Causal\Staffdirectory\Tca\Member;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -167,7 +167,7 @@ class PluginController extends ActionController
      * Tags the page cache so that FAL signal operations may be listened to in
      * order to flush corresponding page cache.
      *
-     * @param Organization $organization
+     * @param Organization|null $organization
      */
     protected function addCacheTagsForOrganization(?Organization $organization): void
     {
@@ -175,32 +175,30 @@ class PluginController extends ActionController
             return;
         }
 
-        $cacheTags = [];
-
-        /*
         foreach ($organization->getMembers() as $member) {
-            $cacheTags[] = 'tx_staffdirectory_person_' . $member->getPersonUid();
+            $this->addCacheTagsForMember($member);
         }
-        */
 
-        $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
+        foreach ($organization->getSuborganizations() as $suborganization) {
+            $this->addCacheTagsForOrganization($suborganization);
+        }
     }
 
     /**
      * Tags the page cache so that FAL signal operations may be listened to in
      * order to flush corresponding page cache.
      *
-     * @param Member $member
+     * @param Member|null $member
      */
-    protected function addCacheTagsForMember(Member $member): void {
-        if ($member === null) {
+    protected function addCacheTagsForMember(?Member $member): void {
+        if ($member === null || $member->getPerson() === null) {
             return;
         }
 
         // Tag the page cache so that FAL signal operations may be listened to in
         // order to flush corresponding page cache
         $cacheTags = [
-            'tx_staffdirectory_person_' . $member->getPersonUid(),
+            'tx_staffdirectory_person_' . $member->getPerson()->getUid(),
         ];
 
         $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
