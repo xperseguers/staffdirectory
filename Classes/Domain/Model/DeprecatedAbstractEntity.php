@@ -33,6 +33,7 @@ namespace Causal\Staffdirectory\Domain\Model;
  * @author      Xavier Perseguers <xavier@causal.ch>
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
+ * @deprecated
  */
 abstract class DeprecatedAbstractEntity
 {

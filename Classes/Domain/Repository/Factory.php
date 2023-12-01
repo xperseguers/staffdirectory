@@ -36,6 +36,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author      Xavier Perseguers <xavier@causal.ch>
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
+ * @deprecated
  */
 class Factory
 {

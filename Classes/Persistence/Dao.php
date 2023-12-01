@@ -38,6 +38,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  * @author      Xavier Perseguers <xavier@causal.ch>
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
+ * @deprecated
  */
 class Dao implements \TYPO3\CMS\Core\SingletonInterface
 {
