@@ -45,4 +45,19 @@ class Member
 
         $params['title'] = $title;
     }
+
+    /**
+     * Returns the styles to be used for a IRRE block.
+     *
+     * @param array $params
+     */
+    public function getIrreHeaderStyle(array &$params = []): void
+    {
+        $feuser = $params['row']['feuser_id'][0]['row'] ?? null;
+
+        if ($feuser['disable'] ?? false) {
+            // Invalid reference
+            $params['style'] = 'background-color:#ff6265';
+        }
+    }
 }

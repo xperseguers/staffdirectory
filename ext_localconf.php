@@ -40,6 +40,17 @@ defined('TYPO3') || die ();
     @import \'EXT:staffdirectory/Configuration/TSconfig/ContentElementWizard.tsconfig\'
     ');
 
+    $versionInformation = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Information\Typo3Version::class);
+    if ($versionInformation->getMajorVersion() >= 12) {
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Backend\Form\Container\InlineRecordContainer::class] = [
+            'className' => \Causal\Staffdirectory\Xclass\V12\Backend\Form\Container\InlineRecordContainer::class,
+        ];
+    } else {
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Backend\Form\Container\InlineRecordContainer::class] = [
+            'className' => \Causal\Staffdirectory\Xclass\V11\Backend\Form\Container\InlineRecordContainer::class,
+        ];
+    }
+
     /* ===========================================================================
         Web > Page hook
     =========================================================================== */
