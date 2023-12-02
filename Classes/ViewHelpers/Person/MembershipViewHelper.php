@@ -16,12 +16,23 @@ declare(strict_types = 1);
 
 namespace Causal\Staffdirectory\ViewHelpers\Person;
 
+use Causal\Staffdirectory\Domain\Model\Organization;
 use Causal\Staffdirectory\Domain\Model\Person;
+use Causal\Staffdirectory\Domain\Repository\OrganizationRepository;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class MembershipViewHelper extends AbstractViewHelper
 {
     protected $escapeOutput = false;
+
+    protected OrganizationRepository $organizationRepository;
+
+    public function __construct(OrganizationRepository $organizationRepository)
+    {
+        $this->organizationRepository = $organizationRepository;
+    }
 
     public function initializeArguments()
     {
@@ -46,6 +57,37 @@ class MembershipViewHelper extends AbstractViewHelper
 
     protected function getMembership(Person $person): array
     {
-        return ['todo' => 'todo'];
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_staffdirectory_domain_model_member');
+
+        $statement = $queryBuilder
+            ->select('m.position_function', 'm.organization')
+            ->from('tx_staffdirectory_domain_model_member', 'm')
+            ->join(
+                'm',
+                'tx_staffdirectory_domain_model_organization',
+                'o',
+                $queryBuilder->expr()->eq('o.uid', $queryBuilder->quoteIdentifier('m.organization'))
+            )
+            ->where(
+                $queryBuilder->expr()->eq('m.feuser_id', $queryBuilder->createNamedParameter(
+                    $person->getUid(),
+                    \PDO::PARAM_INT
+                ))
+            )
+            ->orderBy('o.long_name', 'ASC')
+            ->addOrderBy('m.sorting', 'ASC')
+            ->executeQuery();
+
+        $membership = [];
+        while (($row = $statement->fetchAssociative()) !== false) {
+            $membership[] = [
+                'positionFunction' => $row['position_function'],
+                'organization' => $this->organizationRepository->findByUid((int)$row['organization']),
+                'links' => [],
+            ];
+        }
+
+        return $membership;
     }
 }

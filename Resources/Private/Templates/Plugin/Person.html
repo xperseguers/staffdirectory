@@ -40,7 +40,7 @@
         <div class="col-md-12">
             <p>
                 {person.title} {person.firstName} fait partie
-                <f:if condition="{positions -> f:count()}==1">
+                <f:if condition="{membership -> f:count()}==1">
                     <f:then>de l'équipe suivante :</f:then>
                     <f:else>des équipes suivantes :</f:else>
                 </f:if>
@@ -55,21 +55,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <f:for each="{positions}" as="position">
-                    <f:for each="{position.functions}" as="function">
-                        <tr>
-                            <th>{position.organization.name}</th>
-                            <td>{function}</td>
-                            <td>
-                                <f:for each="{position.links}" as="link" iteration="iterator">
-                                    <f:link.page pageUid="{link.pageUid}">{link.title}</f:link.page>
-                                    <f:if condition="{iterator.isLast}">
-                                        <f:else><br/></f:else>
-                                    </f:if>
-                                </f:for>
-                            </td>
-                        </tr>
-                    </f:for>
+                <f:for each="{membership}" as="member">
+                    <tr>
+                        <th>{member.organization.shortName}</th>
+                        <td>{member.positionFunction}</td>
+                        <td>
+                            <f:for each="{member.links}" as="link" iteration="iterator">
+                                <f:link.page pageUid="{link.pageUid}">{link.title}</f:link.page>
+                                <f:if condition="{iterator.isLast}">
+                                    <f:else><br/></f:else>
+                                </f:if>
+                            </f:for>
+                        </td>
+                    </tr>
                 </f:for>
                 </tbody>
             </table>
