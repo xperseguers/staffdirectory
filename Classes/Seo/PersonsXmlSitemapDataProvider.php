@@ -4,7 +4,7 @@ declare(strict_types=1);
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2020 Xavier Perseguers <xavier@causal.ch>
+ *  (c) 2020-2023 Xavier Perseguers <xavier@causal.ch>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -38,7 +38,6 @@ use TYPO3\CMS\Seo\XmlSitemap\Exception\MissingConfigurationException;
  */
 class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
 {
-
     /**
      * @param ServerRequestInterface $request
      * @param string $key
@@ -169,5 +168,4 @@ class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
 
         return $additionalParams;
     }
-
 }

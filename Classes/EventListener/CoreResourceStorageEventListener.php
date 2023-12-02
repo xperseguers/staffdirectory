@@ -36,7 +36,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CoreResourceStorageEventListener
 {
-
     /**
      * @var CacheManager
      */
@@ -75,5 +74,4 @@ class CoreResourceStorageEventListener
             $this->pageCache->flushCachesByTag('tx_staffdirectory_person_' . $row['uid_foreign']);
         }
     }
-
 }

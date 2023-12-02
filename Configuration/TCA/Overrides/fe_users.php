@@ -8,40 +8,70 @@ $GLOBALS['TCA']['fe_users']['columns']['tx_extbase_type']['config']['items'][] =
     'tx_staffdirectory'
 ];
 
-$GLOBALS['TCA']['fe_users']['columns']['name']['exclude'] = 0;
+$GLOBALS['TCA']['fe_users']['columns']['name']['exclude'] = false;
 $GLOBALS['TCA']['fe_users']['columns']['name']['config']['readOnly'] = true;
 
 $GLOBALS['TCA']['fe_users']['types']['tx_staffdirectory'] = [
     'showitem' => '
-                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:fe_users.tabs.personelData,
-                    --palette--;;sd_name, --palette--;;sd_contact, --palette--;;sd_address, image,                
-                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
-                    disable,--palette--;;timeRestriction,
-                    --palette--;LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:palettes.gdpr;gdpr,
-                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
-                    username,password,usergroup,tx_extbase_type
-            ',
+            --div--;LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tabs.personalData,
+                tx_staffdirectory_gender,
+                --palette--;;sd_name,
+                path_segment,
+                --palette--;;sd_contact,
+                --palette--;;sd_address,
+                image,
+            --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
+                disable,
+                --palette--;;timeRestriction,
+                --palette--;LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:palettes.gdpr;gdpr,
+            --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
+                username, password, usergroup, tx_extbase_type
+        ',
 ];
 $GLOBALS['TCA']['fe_users']['palettes'] += [
-    'sd_name' => ['showitem' => 'title,first_name,last_name,--linebreak--,name'],
-    'sd_contact' => ['showitem' => 'telephone,tx_staffdirectory_mobilephone,--linebreak--,email,tx_staffdirectory_email2'],
-    'sd_address' => ['showitem' => 'address,--linebreak--,zip,--linebreak--,city,--linebreak--,country'],
-    'gdpr' => ['showitem' => 'tx_staffdirectory_gdpr_date,--linebreak--,tx_staffdirectory_gdpr_proof'],
+    'sd_name' => [
+        'showitem' => '
+            title, first_name, last_name,
+            --linebreak--,
+            name'
+    ],
+    'sd_contact' => [
+        'showitem' => '
+            telephone, tx_staffdirectory_mobilephone,
+            --linebreak--,
+            email, tx_staffdirectory_email2'
+    ],
+    'sd_address' => [
+        'showitem' => '
+            address,
+            --linebreak--,
+            zip,
+            --linebreak--,
+            city,
+            --linebreak--,
+            country'
+    ],
+    'gdpr' => [
+        'showitem' => '
+            tx_staffdirectory_gdpr_date,
+            --linebreak--,
+            tx_staffdirectory_gdpr_proof'
+    ],
 ];
 
 $tempColumns = [
     'tx_staffdirectory_mobilephone' => [
-        'exclude' => 0,
+        'exclude' => false,
         'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:fe_users.tx_staffdirectory_mobilephone',
         'config' => [
             'type' => 'input',
-            'size' => '20',
-            'max' => '20',
+            'size' => 20,
+            'max' => 20,
             'eval' => 'trim',
         ]
     ],
     'tx_staffdirectory_gender' => [
-        'exclude' => 0,
+        'exclude' => false,
         'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:fe_users.tx_staffdirectory_gender',
         'config' => [
             'type' => 'select',
@@ -55,17 +85,17 @@ $tempColumns = [
         ]
     ],
     'tx_staffdirectory_email2' => [
-        'exclude' => 1,
+        'exclude' => true,
         'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:fe_users.tx_staffdirectory_email2',
         'config' => [
             'type' => 'input',
-            'size' => '20',
-            'eval' => 'trim',
-            'max' => '255'
+            'size' => 20,
+            'max' => 255,
+            'eval' => 'email',
         ]
     ],
     'tx_staffdirectory_gdpr_date' => [
-        'exclude' => 0,
+        'exclude' => false,
         'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:fe_users.tx_staffdirectory_gdpr_date',
         'config' => [
             'type' => 'input',
@@ -74,7 +104,7 @@ $tempColumns = [
         ],
     ],
     'tx_staffdirectory_gdpr_proof' => [
-        'exclude' => 0,
+        'exclude' => false,
         'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:fe_users.tx_staffdirectory_gdpr_proof',
         'config' => [
             'type' => 'text',
@@ -83,7 +113,7 @@ $tempColumns = [
         ],
     ],
     'path_segment' => [
-        'exclude' => 0,
+        'exclude' => false,
         'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:pages.slug',
         'config' => [
             'type' => 'slug',
@@ -99,11 +129,20 @@ $tempColumns = [
     ],
 ];
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tempColumns, 1);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'tx_staffdirectory_gender', '', 'before:title');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'tx_staffdirectory_mobilephone', '0', 'after:telephone');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'tx_staffdirectory_email2', '', 'after:email');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'path_segment', '', 'after:name');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tempColumns);
+
+// Configure the field country to be an actual usable country
+$GLOBALS['TCA']['fe_users']['columns']['country']['config'] = [
+    'type' => 'select',
+    'renderType' => 'selectSingle',
+    'items' => [
+        ['', ''],
+    ],
+    'itemsProcFunc' => \Causal\Staffdirectory\Tca\Country::class . '->getAll',
+    'size' => 1,
+    'minitems' => 0,
+    'maxitems' => 1
+];
 
 $GLOBALS['TCA']['fe_users']['ctrl']['label'] = 'last_name';
 // BEWARE: "title" and GDPR fields are needed for label_userFunc in the context of FlexForm

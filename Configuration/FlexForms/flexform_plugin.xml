@@ -1,0 +1,94 @@
+<T3DataStructure>
+    <meta>
+        <langDisable>1</langDisable>
+    </meta>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.displayMode>
+                        <TCEforms>
+                            <label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode</label>
+                            <onChange>reload</onChange>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectSingle</renderType>
+                                <items>
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0"></numIndex>
+                                        <numIndex index="1"></numIndex>
+                                    </numIndex>
+                                    <numIndex index="1" type="array">
+                                        <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.LIST</numIndex>
+                                        <numIndex index="1">LIST</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2" type="array">
+                                        <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.ORGANIZATION</numIndex>
+                                        <numIndex index="1">ORGANIZATION</numIndex>
+                                    </numIndex>
+                                    <numIndex index="3" type="array">
+                                        <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.PERSONS</numIndex>
+                                        <numIndex index="1">PERSONS</numIndex>
+                                    </numIndex>
+                                    <numIndex index="4" type="array">
+                                        <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.PERSON</numIndex>
+                                        <numIndex index="1">PERSON</numIndex>
+                                    </numIndex>
+                                    <numIndex index="5" type="array">
+                                        <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.DIRECTORY</numIndex>
+                                        <numIndex index="1">DIRECTORY</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.displayMode>
+                    <settings.organizations>
+                        <TCEforms>
+                            <label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.organizations</label>
+                            <displayCond>
+                                <OR>
+                                    <numIndex index="0"><![CDATA[FIELD:settings.displayMode:=:LIST]]></numIndex>
+                                    <numIndex index="1"><![CDATA[FIELD:settings.displayMode:=:ORGANIZATION]]></numIndex>
+                                    <numIndex index="2"><![CDATA[FIELD:settings.displayMode:=:DIRECTORY]]></numIndex>
+                                </OR>
+                            </displayCond>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectMultipleSideBySide</renderType>
+                                <foreign_table>tx_staffdirectory_domain_model_organization</foreign_table>
+                                <foreign_table_where>ORDER BY tx_staffdirectory_domain_model_organization.long_name</foreign_table_where>
+                                <size>8</size>
+                                <maxitems>99</maxitems>
+                                <multiple>0</multiple>
+                            </config>
+                        </TCEforms>
+                    </settings.organizations>
+                    <settings.persons>
+                        <TCEforms>
+                            <label>LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.persons</label>
+                            <displayCond>
+                                <OR>
+                                    <numIndex index="0"><![CDATA[FIELD:settings.displayMode:=:PERSON]]></numIndex>
+                                    <numIndex index="1"><![CDATA[FIELD:settings.displayMode:=:PERSONS]]></numIndex>
+                                </OR>
+                            </displayCond>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectMultipleSideBySide</renderType>
+                                <foreign_table>fe_users</foreign_table>
+                                <foreign_table_where>AND fe_users.disable=0 AND fe_users.tx_extbase_type='tx_staffdirectory' ORDER BY fe_users.last_name</foreign_table_where>
+                                <size>8</size>
+                                <maxitems>99</maxitems>
+                                <multiple>0</multiple>
+                            </config>
+                        </TCEforms>
+                    </settings.persons>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

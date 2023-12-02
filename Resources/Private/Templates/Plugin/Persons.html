@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:section name="Main">
+    <f:if condition="{persons}">
+        <f:then>
+            <div class="row">
+                <f:for each="{persons}" as="person">
+                    <f:render partial="Member/Item" arguments="{
+                        plugin: plugin,
+                        person: person
+                    }"/>
+                </f:for>
+            </div>
+        </f:then>
+        <f:else>
+            <div class="alert alert-warning" role="alert">
+                <f:translate key="label_empty_directory_list"/>
+            </div>
+        </f:else>
+    </f:if>
+</f:section>
+
+</html>

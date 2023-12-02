@@ -16,6 +16,9 @@ declare(strict_types = 1);
 
 namespace Causal\Staffdirectory\Hooks;
 
+use libphonenumber\NumberParseException;
+use libphonenumber\PhoneNumberFormat;
+use libphonenumber\PhoneNumberUtil;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
@@ -34,7 +37,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class DataHandler
 {
-
     /**
      * Hooks into \TYPO3\CMS\Core\DataHandling\DataHandler before records get actually saved to the database.
      *
@@ -43,9 +45,14 @@ class DataHandler
      * @param int|string $id
      * @param array $fieldArray
      * @param \TYPO3\CMS\Core\DataHandling\DataHandler $pObj
-     * @return void
      */
-    public function processDatamap_postProcessFieldArray(string $operation, string $table, $id, array &$fieldArray, \TYPO3\CMS\Core\DataHandling\DataHandler $pObj): void
+    public function processDatamap_postProcessFieldArray(
+        string $operation,
+        string $table,
+        $id,
+        array &$fieldArray,
+        \TYPO3\CMS\Core\DataHandling\DataHandler $pObj
+    ): void
     {
         if ($table !== 'fe_users') {
             return;
@@ -68,6 +75,8 @@ class DataHandler
             $record['name'] = $fieldArray['name'] = trim(implode(' ', $fullNameParts));
         }
 
+        $this->cleanupPhoneNumbers($record, $fieldArray);
+
         if ($record['tx_extbase_type'] === 'tx_staffdirectory') {
             $fieldArray['username'] = strtolower(GeneralUtility::makeInstance(CharsetConverter::class)->specCharsToASCII('utf-8', str_replace(' ', '.', $record['name'])));
             if ($operation === 'new') {
@@ -76,4 +85,26 @@ class DataHandler
         }
     }
 
+    protected function cleanupPhoneNumbers(array $record, array &$fieldArray): void
+    {
+        $country = $fieldArray['country'] ?? $record['country'] ?? 'CH';
+        $phoneNumberUtil = PhoneNumberUtil::getInstance();
+
+        foreach (['telephone', 'tx_staffdirectory_mobilephone'] as $field) {
+            $value = $fieldArray[$field] ?? $record[$field];
+            if (!empty($value)) {
+                try {
+                    $phoneNumber = $phoneNumberUtil->parse($value, $country);
+                    if ($phoneNumberUtil->isValidNumber($phoneNumber)) {
+                        $fieldArray[$field] = $phoneNumberUtil->format($phoneNumber, PhoneNumberFormat::NATIONAL);
+                    } else {
+                        // Invalid telephone number
+                        $fieldArray[$field] = '';
+                    }
+                } catch (NumberParseException $e) {
+                    // Nothing to do
+                }
+            }
+        }
+    }
 }

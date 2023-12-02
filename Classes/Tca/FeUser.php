@@ -18,15 +18,12 @@ namespace Causal\Staffdirectory\Tca;
 
 class FeUser
 {
-
     /**
      * Returns the label to be used for a MemberStatus.
      *
      * @param array $params
-     * @param null $pObj
-     * @return void
      */
-    public function getLabel(array &$params, $pObj = null): void
+    public function getLabel(array &$params): void
     {
         if (!$params['row']) {
             return;
@@ -48,5 +45,4 @@ class FeUser
 
         $params['title'] = $displayName;
     }
-
 }

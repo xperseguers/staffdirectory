@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      xmlns:sd="http://typo3.org/ns/Causal/Staffdirectory/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:section name="Main">
+    <f:if condition="{person}">
+        <f:then>
+            <f:render section="Information" arguments="{_all}"/>
+        </f:then>
+        <f:else>
+            <div class="alert alert-warning" role="alert">
+                <f:translate key="label_empty_directory_list"/>
+            </div>
+        </f:else>
+    </f:if>
+</f:section>
+
+<f:section name="Information">
+    <div class="row">
+        <f:render partial="Member/Item" arguments="{
+            offset: 3,
+            plugin: plugin,
+            person: person
+        }"/>
+    </div>
+
+    <sd:person.membership person="{person}" name="membership">
+        <f:if condition="{membership}">
+            <f:render section="Membership" arguments="{_all}"/>
+        </f:if>
+    </sd:person.membership>
+</f:section>
+
+<f:section name="Membership">
+    <h3>Groupes et équipes</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                {person.title} {person.firstName} fait partie
+                <f:if condition="{membership -> f:count()}==1">
+                    <f:then>de l'équipe suivante :</f:then>
+                    <f:else>des équipes suivantes :</f:else>
+                </f:if>
+            </p>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Groupe / Équipe</th>
+                    <th>Fonction</th>
+                    <th>Page sur le site</th>
+                </tr>
+                </thead>
+                <tbody>
+                <f:for each="{membership}" as="member">
+                    <tr>
+                        <th>{member.organization.shortName}</th>
+                        <td>{member.positionFunction}</td>
+                        <td>
+                            <f:for each="{member.links}" as="link" iteration="iterator">
+                                <f:link.page pageUid="{link.pageUid}">{link.title}</f:link.page>
+                                <f:if condition="{iterator.isLast}">
+                                    <f:else><br/></f:else>
+                                </f:if>
+                            </f:for>
+                        </td>
+                    </tr>
+                </f:for>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</f:section>
+
+</html>

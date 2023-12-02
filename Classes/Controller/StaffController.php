@@ -4,7 +4,7 @@ declare(strict_types = 1);
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2011-2020 Xavier Perseguers <xavier@causal.ch>
+ *  (c) 2011-2023 Xavier Perseguers <xavier@causal.ch>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,19 +26,21 @@ declare(strict_types = 1);
 
 namespace Causal\Staffdirectory\Controller;
 
-use Causal\Staffdirectory\Domain\Model\Member;
+use Causal\Staffdirectory\Domain\Model\DeprecatedMember;
 use Causal\Staffdirectory\Domain\Model\Staff;
 use Causal\Staffdirectory\Domain\Repository\Factory;
-use Causal\Staffdirectory\Domain\Repository\MemberRepository;
+use Causal\Staffdirectory\Domain\Repository\DeprecatedMemberRepository;
 use Causal\Staffdirectory\Domain\Repository\StaffRepository;
 use Causal\Staffdirectory\Persistence\Dao;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
+/**
+ * @deprecated
+ */
 class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-
     public function initializeAction()
     {
         /** @var Dao $dao */
@@ -152,8 +154,8 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
 
-        /** @var MemberRepository $memberRepository */
-        $memberRepository = Factory::getRepository('Member');
+        /** @var DeprecatedMemberRepository $memberRepository */
+        $memberRepository = Factory::getRepository('DeprecatedMember');
         $member = null;
 
         if (!empty($this->settings['person'])) {
@@ -169,7 +171,7 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         $this->addCacheTagsForMember($member);
 
-        // Disable link to ourself
+        // Disable link to ourselves
         $this->settings['targets']['person'] = null;
 
         $this->view->assignMultiple([
@@ -265,8 +267,8 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     protected function personsAction()
     {
-        /** @var MemberRepository $memberRepository */
-        $memberRepository = Factory::getRepository('Member');
+        /** @var DeprecatedMemberRepository $memberRepository */
+        $memberRepository = Factory::getRepository('DeprecatedMember');
         $members = [];
 
         $uids = GeneralUtility::intExplode(',', $this->settings['persons'], true);
@@ -297,8 +299,8 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     protected function directoryAction(): void
     {
-        /** @var MemberRepository $memberRepository */
-        $memberRepository = Factory::getRepository('Member');
+        /** @var DeprecatedMemberRepository $memberRepository */
+        $memberRepository = Factory::getRepository('DeprecatedMember');
 
         if (!empty($this->settings['staffs'])) {
             $members = $memberRepository->findByStaffs($this->settings['staffs']);
@@ -357,9 +359,9 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * Tags the page cache so that FAL signal operations may be listened to in
      * order to flush corresponding page cache.
      *
-     * @param Member $member
+     * @param DeprecatedMember $member
      */
-    protected function addCacheTagsForMember(Member $member): void {
+    protected function addCacheTagsForMember(DeprecatedMember $member): void {
         if ($member === null) {
             return;
         }
@@ -430,5 +432,4 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         return $GLOBALS['TSFE'];
     }
-
 }

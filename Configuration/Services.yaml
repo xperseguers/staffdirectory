@@ -4,6 +4,9 @@ services:
     autoconfigure: true
     public: false
 
+  Causal\Staffdirectory\:
+    resource: '../Classes/*'
+
   Causal\Staffdirectory\EventListener\CoreResourceStorageEventListener:
     tags:
       - name: event.listener

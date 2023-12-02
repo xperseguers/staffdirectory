@@ -3,57 +3,14 @@
     <file source-language="en" datatype="plaintext" original="messages" date="2020-04-02T16:24:07Z" product-name="staffdirectory">
         <header/>
         <body>
-            <trans-unit id="pi_flexform.sheet_general">
-                <source>General</source>
-            </trans-unit>
-            <trans-unit id="pi_flexform.displayMode">
-                <source>Display Mode</source>
-            </trans-unit>
-            <trans-unit id="pi_flexform.displayMode.LIST">
-                <source>List view (LIST)</source>
-            </trans-unit>
-            <trans-unit id="pi_flexform.displayMode.STAFF">
-                <source>Staff view (STAFF)</source>
-            </trans-unit>
-            <trans-unit id="pi_flexform.displayMode.PERSONS">
-                <source>Single or multiple persons view (PERSONS)</source>
-            </trans-unit>
-            <trans-unit id="pi_flexform.displayMode.PERSON">
-                <source>Single person view (PERSON)</source>
-            </trans-unit>
-            <trans-unit id="pi_flexform.displayMode.DIRECTORY">
-                <source>Person listing (DIRECTORY)</source>
-            </trans-unit>
-            <trans-unit id="pi_flexform.staffs">
-                <source>Staffs</source>
-            </trans-unit>
-            <trans-unit id="pi_flexform.person">
-                <source>Person</source>
-            </trans-unit>
-            <trans-unit id="pi_flexform.persons">
-                <source>Persons</source>
-            </trans-unit>
-            <trans-unit id="pi_flexform.layout">
-                <source>Layout</source>
-            </trans-unit>
-            <trans-unit id="pi_flexform.layout.Normal">
-                <source>Normal</source>
-            </trans-unit>
-            <trans-unit id="pi_flexform.layout.Condensed">
-                <source>Condensed</source>
-            </trans-unit>
-
-            <trans-unit id="label_empty_staff_list">
-                <source>No staffs</source>
+            <trans-unit id="label_empty_organization_list">
+                <source>No organizations</source>
             </trans-unit>
             <trans-unit id="label_empty_directory_list">
                 <source>No persons</source>
             </trans-unit>
             <trans-unit id="label_contact">
                 <source>Contact</source>
-            </trans-unit>
-            <trans-unit id="label_member_staffs">
-                <source>Membership</source>
             </trans-unit>
             <trans-unit id="label_member_address">
                 <source>Address</source>

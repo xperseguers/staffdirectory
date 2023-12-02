@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:section name="Main">
+    <f:if condition="{organization}">
+        <f:then>
+            <h2>{organization.shortName}</h2>
+            <f:render partial="Organization/Item" arguments="{
+                plugin: plugin,
+                level: 1,
+                organization: organization
+            }"/>
+        </f:then>
+        <f:else>
+            <div class="alert alert-warning" role="alert">
+                <f:translate key="label_empty_organization_list"/>
+            </div>
+        </f:else>
+    </f:if>
+</f:section>
+
+</html>

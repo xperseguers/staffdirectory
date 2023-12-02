@@ -9,10 +9,13 @@ plugin.tx_staffdirectory {
     }
 
     settings {
-        # cat=plugin.tx_filelist; type=int; label=Uid of the detail page for a staff
-        targets.staff =
+        # cat=plugin.tx_staffdirectory; type=int; label=Uid of the detail page for an organization
+        targets.organization =
 
-        # cat=plugin.tx_filelist; type=int; label=Uid of the detail page for a person
+        # cat=plugin.tx_staffdirectory; type=int; label=Uid of the detail page for a person
         targets.person =
+
+        # cat=plugin.tx_staffdirectory; type=int; label=Uid of the detail page for a staff (deprecated)
+        targets.staff =
     }
 }
