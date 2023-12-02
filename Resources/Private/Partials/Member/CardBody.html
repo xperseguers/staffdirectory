@@ -10,10 +10,10 @@
     <h5 class="card-title">
         <f:if condition="{settings.targets.person}">
             <f:then>
-                <f:link.action action="person" arguments="{person: person}" pageUid="{settings.targets.person}">{person.title} {person.name}</f:link.action>
+                <f:link.action action="person" arguments="{person: person}" pageUid="{settings.targets.person}">{person.name}</f:link.action>
             </f:then>
             <f:else>
-                {person.title} {person.name}
+                {person.name}
             </f:else>
         </f:if>
     </h5>
