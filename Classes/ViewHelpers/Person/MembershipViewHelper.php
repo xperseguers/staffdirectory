@@ -20,6 +20,7 @@ use Causal\Staffdirectory\Domain\Model\Organization;
 use Causal\Staffdirectory\Domain\Model\Person;
 use Causal\Staffdirectory\Domain\Repository\OrganizationRepository;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -81,13 +82,65 @@ class MembershipViewHelper extends AbstractViewHelper
 
         $membership = [];
         while (($row = $statement->fetchAssociative()) !== false) {
+            $organization = $this->organizationRepository->findByUid((int)$row['organization']);
             $membership[] = [
                 'positionFunction' => $row['position_function'],
-                'organization' => $this->organizationRepository->findByUid((int)$row['organization']),
-                'links' => [],
+                'organization' => $organization,
+                'links' => $this->findPagesWithPlugin($person, $organization)
             ];
         }
 
         return $membership;
+    }
+
+    /**
+     * @param Person $person
+     * @param Organization $organization
+     * @return array
+     */
+    protected function findPagesWithPlugin(Person $person, ?Organization $organization): array
+    {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tt_content');
+        $rows = $queryBuilder
+            ->select('c.pid', 'c.pi_flexform', 'p.title')
+            ->from('tt_content', 'c')
+            ->join(
+                'c',
+                'pages',
+                'p',
+                $queryBuilder->expr()->eq('p.uid', $queryBuilder->quoteIdentifier('c.pid'))
+            )
+            ->where(
+                $queryBuilder->expr()->eq('CType', $queryBuilder->quote('staffdirectory_plugin')),
+                $queryBuilder->expr()->eq('p.doktype', PageRepository::DOKTYPE_DEFAULT)
+            )
+            ->execute()
+            ->fetchAllAssociative();
+
+        $data = [];
+        foreach ($rows as $row) {
+            $flexform = GeneralUtility::xml2array($row['pi_flexform'])['data']['sDEF']['lDEF'];
+            if ($flexform['settings.displayMode']['vDEF'] === 'ORGANIZATION' && $organization !== null) {
+                $organizations = GeneralUtility::intExplode(',', $flexform['settings.organizations']['vDEF'], true);
+                // TODO: find relation through the hierarchy of organizations as well
+                if (in_array($organization->getUid(), $organizations, true)) {
+                    $data[$row['pid']] = [
+                        'pageUid' => $row['pid'],
+                        'title' => $row['title'],
+                    ];
+                }
+            } elseif ($flexform['settings.displayMode']['vDEF'] === 'PERSONS') {
+                $persons = GeneralUtility::intExplode(',', $flexform['settings.persons']['vDEF'], true);
+                if (in_array($person->getUid(), $persons, true)) {
+                    $data[$row['pid']] = [
+                        'pageUid' => $row['pid'],
+                        'title' => $row['title'],
+                    ];
+                }
+            }
+        }
+
+        return $data;
     }
 }

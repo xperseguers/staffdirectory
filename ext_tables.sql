@@ -13,6 +13,13 @@ CREATE TABLE fe_users (
 );
 
 #
+# Table structure for table 'tt_content'
+#
+CREATE TABLE tt_content (
+    KEY CType (CType(250)),
+);
+
+#
 # Table structure for table 'tx_staffdirectory_domain_model_organization'
 #
 CREATE TABLE tx_staffdirectory_domain_model_organization (
