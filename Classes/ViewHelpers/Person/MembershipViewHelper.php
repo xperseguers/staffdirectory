@@ -100,6 +100,12 @@ class MembershipViewHelper extends AbstractViewHelper
      */
     protected function findPagesWithPlugin(Person $person, ?Organization $organization): array
     {
+        $organizationUids = [];
+        if ($organization !== null) {
+            $organizationUids[] = $organization->getUid();
+            $this->addParentOrganizations($organization->getUid(), $organizationUids);
+        }
+
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tt_content');
         $rows = $queryBuilder
@@ -122,17 +128,16 @@ class MembershipViewHelper extends AbstractViewHelper
         foreach ($rows as $row) {
             $flexform = GeneralUtility::xml2array($row['pi_flexform'])['data']['sDEF']['lDEF'];
             if ($flexform['settings.displayMode']['vDEF'] === 'ORGANIZATION' && $organization !== null) {
-                $organizations = GeneralUtility::intExplode(',', $flexform['settings.organizations']['vDEF'], true);
-                // TODO: find relation through the hierarchy of organizations as well
-                if (in_array($organization->getUid(), $organizations, true)) {
+                $selectedOrganizations = GeneralUtility::intExplode(',', $flexform['settings.organizations']['vDEF'], true);
+                if (array_intersect($selectedOrganizations, $organizationUids)) {
                     $data[$row['pid']] = [
                         'pageUid' => $row['pid'],
                         'title' => $row['title'],
                     ];
                 }
             } elseif ($flexform['settings.displayMode']['vDEF'] === 'PERSONS') {
-                $persons = GeneralUtility::intExplode(',', $flexform['settings.persons']['vDEF'], true);
-                if (in_array($person->getUid(), $persons, true)) {
+                $selectedPersons = GeneralUtility::intExplode(',', $flexform['settings.persons']['vDEF'], true);
+                if (in_array($person->getUid(), $selectedPersons, true)) {
                     $data[$row['pid']] = [
                         'pageUid' => $row['pid'],
                         'title' => $row['title'],
@@ -142,5 +147,27 @@ class MembershipViewHelper extends AbstractViewHelper
         }
 
         return $data;
+    }
+
+    protected function addParentOrganizations(int $organizationUid, array &$organizations): void
+    {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_staffdirectory_domain_model_organization');
+        $parentOrganisations = $queryBuilder
+            ->select('uid')
+            ->from('tx_staffdirectory_domain_model_organization')
+            ->where(
+                $queryBuilder->expr()->inSet(
+                    'suborganizations',
+                    $queryBuilder->createNamedParameter($organizationUid, \PDO::PARAM_INT)
+                )
+            )
+            ->executeQuery()
+            ->fetchAllAssociative();
+
+        foreach ($parentOrganisations as $parentOrganisation) {
+            $organizations[] = (int)$parentOrganisation['uid'];
+            $this->addParentOrganizations((int)$parentOrganisation['uid'], $organizations);
+        }
     }
 }
