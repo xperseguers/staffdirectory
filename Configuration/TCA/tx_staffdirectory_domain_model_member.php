@@ -23,7 +23,7 @@ $tca = [
     'types' => [
         '1' => [
             'showitem' => '
-                    feuser_id, position_function,
+                    organization, feuser_id, position_function,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
                     hidden, starttime, endtime'
         ],
@@ -44,6 +44,28 @@ $tca = [
                         1 => '',
                     ]
                 ],
+            ],
+        ],
+        'organization' => [
+            'exclude' => false,
+            'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tx_staffdirectory_domain_model_member.organization',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => $typo3Version >= 12
+                    ? [
+                        [
+                            'label' => '',
+                            'value' => 0,
+                        ],
+                    ]
+                    : [
+                        ['', 0],
+                    ],
+                'foreign_table' => 'tx_staffdirectory_domain_model_organization',
+                'foreign_table_where' => 'AND tx_staffdirectory_domain_model_organization.pid=###CURRENT_PID### AND tx_staffdirectory_domain_model_organization.sys_language_uid IN (0,-1) ORDER BY tx_staffdirectory_domain_model_organization.long_name',
+                'minitems' => 1,
+                'maxitems' => 1,
             ],
         ],
         'feuser_id' => [

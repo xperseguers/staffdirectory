@@ -28,13 +28,13 @@ CREATE TABLE tx_staffdirectory_domain_model_organization (
 # Table structure for table 'tx_staffdirectory_domain_model_member'
 #
 CREATE TABLE tx_staffdirectory_domain_model_member (
+    organization int(10) unsigned DEFAULT '0' NOT NULL,
     feuser_id int(10) unsigned DEFAULT '0' NOT NULL,
     position_function varchar(255) DEFAULT '' NOT NULL,
-    organization int(10) unsigned DEFAULT '0' NOT NULL,
     sorting int(10) unsigned DEFAULT '0' NOT NULL,
 
-    KEY feuser_id (feuser_id),
-    KEY organization (organization)
+    KEY organization (organization),
+    KEY feuser_id (feuser_id)
 );
 
 #

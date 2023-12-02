@@ -129,11 +129,14 @@
             <trans-unit id="tx_staffdirectory_domain_model_member">
                 <source>Member</source>
             </trans-unit>
-            <trans-unit id="tx_staffdirectory_domain_model_member.position_function">
-                <source>Function</source>
+            <trans-unit id="tx_staffdirectory_domain_model_member.organization">
+                <source>Organization</source>
             </trans-unit>
             <trans-unit id="tx_staffdirectory_domain_model_member.feuser_id">
                 <source>Person</source>
+            </trans-unit>
+            <trans-unit id="tx_staffdirectory_domain_model_member.position_function">
+                <source>Function</source>
             </trans-unit>
 
             <trans-unit id="palettes.gdpr">
