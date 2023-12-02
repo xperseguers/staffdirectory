@@ -32,13 +32,17 @@ class Member
         }
 
         $feuserId = $params['row']['feuser_id'] ?? 0;
+        if (is_array($feuserId)) {
+            // Happens in TYPO3 v12, in IRRE context only
+            $feuserId = $feuserId[0]['uid'] ?? 0;
+        }
         $title = BackendUtility::getProcessedValue(
             $params['table'],
             'feuser_id',
             $feuserId[0]['uid'] ?? $feuserId
         );
 
-        $positionFunction = $params['row']['position_function'];
+        $positionFunction = $params['row']['position_function'] ?? null;
         if (!empty($positionFunction)) {
             $title .= ' (' . $positionFunction . ')';
         }
