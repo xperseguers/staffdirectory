@@ -3,58 +3,14 @@
     <file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2020-04-02T16:24:07Z" product-name="staffdirectory">
         <header/>
         <body>
-            <!-- pi_flexform.* are all deprecated -->
-            <trans-unit id="pi_flexform.displayMode">
-                <target>Mode d'affichage</target>
-            </trans-unit>
-            <trans-unit id="pi_flexform.displayMode.LIST">
-                <target>Vue liste (LIST)</target>
-            </trans-unit>
-            <trans-unit id="pi_flexform.displayMode.STAFF">
-                <target>Vue fiche de l'équipe (STAFF)</target>
-            </trans-unit>
-            <trans-unit id="pi_flexform.displayMode.PERSONS">
-                <target>Vue fiche d'une ou plusieurs personnes (PERSONS)</target>
-            </trans-unit>
-            <trans-unit id="pi_flexform.displayMode.PERSON">
-                <target>Vue fiche d'une seule personne (PERSON)</target>
-            </trans-unit>
-            <trans-unit id="pi_flexform.displayMode.DIRECTORY">
-                <target>Liste des personnes (DIRECTORY)</target>
-            </trans-unit>
-            <trans-unit id="pi_flexform.staffs">
-                <target>Équipes</target>
-            </trans-unit>
-            <trans-unit id="pi_flexform.person">
-                <target>Personne</target>
-            </trans-unit>
-            <trans-unit id="pi_flexform.persons">
-                <target>Personnes</target>
-            </trans-unit>
-            <trans-unit id="pi_flexform.layout">
-                <target>Mise en page</target>
-            </trans-unit>
-            <trans-unit id="pi_flexform.layout.Normal">
-                <target>Normale</target>
-            </trans-unit>
-            <trans-unit id="pi_flexform.layout.Condensed">
-                <target>Condensée</target>
-            </trans-unit>
-
             <trans-unit id="label_empty_organization_list">
                 <target>Aucune organisation</target>
-            </trans-unit>
-            <trans-unit id="label_empty_staff_list">
-                <target>Aucune équipe</target>
             </trans-unit>
             <trans-unit id="label_empty_directory_list">
                 <target>Aucune personne</target>
             </trans-unit>
             <trans-unit id="label_contact">
                 <target>Contact</target>
-            </trans-unit>
-            <trans-unit id="label_member_staffs">
-                <target>Membre de</target>
             </trans-unit>
             <trans-unit id="label_member_address">
                 <target>Adresse</target>

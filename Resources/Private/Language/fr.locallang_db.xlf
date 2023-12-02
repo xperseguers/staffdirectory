@@ -97,35 +97,6 @@
                 <target>Aucune</target>
             </trans-unit>
 
-            <trans-unit id="tx_staffdirectory_staffs">
-                <target>Groupe (obsolète)</target>
-            </trans-unit>
-            <trans-unit id="tx_staffdirectory_staffs.staff_name">
-                <target>Nom du groupe</target>
-            </trans-unit>
-            <trans-unit id="tx_staffdirectory_staffs.description">
-                <target>Description</target>
-            </trans-unit>
-            <trans-unit id="tx_staffdirectory_staffs.departments">
-                <target>Départements</target>
-            </trans-unit>
-            <trans-unit id="tx_staffdirectory_staffs.parent_staff">
-                <target>Groupe parent</target>
-            </trans-unit>
-
-            <trans-unit id="tx_staffdirectory_departments">
-                <target>Département</target>
-            </trans-unit>
-            <trans-unit id="tx_staffdirectory_departments.position_title">
-                <target>Titre</target>
-            </trans-unit>
-            <trans-unit id="tx_staffdirectory_departments.position_description">
-                <target>Description</target>
-            </trans-unit>
-            <trans-unit id="tx_staffdirectory_departments.members">
-                <target>Membres</target>
-            </trans-unit>
-
             <trans-unit id="tx_staffdirectory_domain_model_member">
                 <target>Membre</target>
             </trans-unit>
