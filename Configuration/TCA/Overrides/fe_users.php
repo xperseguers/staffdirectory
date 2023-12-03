@@ -142,6 +142,59 @@ $GLOBALS['TCA']['fe_users']['columns']['country']['config'] = [
     'maxitems' => 1
 ];
 
+// Configure the field image to support cropping
+/**
+ * @see \TYPO3\CMS\Backend\Form\Element\ImageManipulationElement::$defaultConfig
+ */
+$photoCropVariants = [
+    'default' => [
+        'title' => 'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.crop_variant.default',
+        'allowedAspectRatios' => [
+            '1:1' => [
+                'title' => 'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.1_1',
+                'value' => 1.0
+            ],
+            'NaN' => [
+                'title' => 'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.free',
+                'value' => 0.0
+            ],
+        ],
+        'selectedRatio' => '1:1',
+        'cropArea' => [
+            'x' => 0.0,
+            'y' => 0.0,
+            'width' => 1.0,
+            'height' => 1.0,
+        ],
+    ]
+];
+$GLOBALS['TCA']['fe_users']['columns']['image']['config']
+    = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+        'image',
+        [
+            // Use the imageoverlayPalette instead of the basicoverlayPalette
+            'overrideChildTca' => [
+                'types' => [
+                    \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                        'showitem' => '
+                                    crop,
+                                --palette--;;filePalette'
+                    ],
+                ],
+                'columns' => [
+                    'crop' => [
+                        'config' => [
+                            'cropVariants' => $photoCropVariants,
+                        ],
+                    ],
+                ],
+            ],
+            'maxitems' => 1,
+            'minitems'=> 0,
+        ],
+        'jpg,jpeg'
+    );
+
 $GLOBALS['TCA']['fe_users']['ctrl']['label'] = 'last_name';
 // BEWARE: "title" and GDPR fields are needed for label_userFunc in the context of FlexForm
 $GLOBALS['TCA']['fe_users']['ctrl']['label_alt'] = 'first_name, title, tx_staffdirectory_gdpr_date, tx_staffdirectory_gdpr_proof';
