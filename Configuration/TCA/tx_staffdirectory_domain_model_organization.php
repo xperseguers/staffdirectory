@@ -19,6 +19,7 @@ $tca = [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
+        'searchFields' => 'long_name, short_name',
         'iconfile' => 'EXT:staffdirectory/Resources/Public/Icons/tx_staffdirectory_domain_model_organization.svg',
     ],
     'types' => [
