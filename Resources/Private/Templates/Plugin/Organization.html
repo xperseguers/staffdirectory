@@ -7,7 +7,12 @@
 <f:section name="Main">
     <f:if condition="{organization}">
         <f:then>
-            <h2>{organization.shortName}</h2>
+            <h2>
+                <f:if condition="{plugin.subheader}">
+                    <f:then>{plugin.subheader}</f:then>
+                    <f:else>{organization.shortName}</f:else>
+                </f:if>
+            </h2>
             <f:render partial="Organization/Item" arguments="{
                 plugin: plugin,
                 level: 1,
