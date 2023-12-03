@@ -45,9 +45,7 @@ $GLOBALS['TCA']['fe_users']['palettes'] += [
         'showitem' => '
             address,
             --linebreak--,
-            zip,
-            --linebreak--,
-            city,
+            zip, city,
             --linebreak--,
             country'
     ],
