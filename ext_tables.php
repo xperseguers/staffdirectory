@@ -10,4 +10,7 @@ defined('TYPO3') || die ();
     $iconRegistry->registerIcon('staffdirectory-default', \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class, [
         'source' => 'EXT:' . $_EXTKEY . '/Resources/Public/Icons/Extension.svg',
     ]);
+    $iconRegistry->registerIcon('staffdirectory-persons', \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class, [
+        'source' => 'EXT:' . $_EXTKEY . '/Resources/Public/Icons/content-persons.svg',
+    ]);
 })('staffdirectory');

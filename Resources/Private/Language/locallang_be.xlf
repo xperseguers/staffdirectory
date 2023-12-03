@@ -3,11 +3,24 @@
     <file source-language="en" datatype="plaintext" original="messages" date="2023-11-30T18:51:53Z" product-name="staffdirectory">
         <header/>
         <body>
-            <trans-unit id="plugin.staffdirectory_plugin.title">
-                <source>Staff Directory</source>
+            <trans-unit id="plugin.staffdirectory_plugin.organization.title">
+                <source>Organization</source>
             </trans-unit>
-            <trans-unit id="plugin.staffdirectory_plugin.description">
-                <source>Display one or more organizations, persons and detail page.</source>
+            <trans-unit id="plugin.staffdirectory_plugin.organization.description">
+                <source>Display the structure of one organization with its members.</source>
+            </trans-unit>
+            <trans-unit id="plugin.staffdirectory_plugin.organization.header">
+                <source>Staff of persons</source>
+            </trans-unit>
+
+            <trans-unit id="plugin.staffdirectory_plugin.persons.title">
+                <source>One or more persons</source>
+            </trans-unit>
+            <trans-unit id="plugin.staffdirectory_plugin.persons.description">
+                <source>Display the card for one or more persons.</source>
+            </trans-unit>
+            <trans-unit id="plugin.staffdirectory_plugin.persons.header">
+                <source>Person(s)</source>
             </trans-unit>
         </body>
     </file>

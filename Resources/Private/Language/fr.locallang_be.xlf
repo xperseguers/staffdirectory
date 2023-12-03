@@ -3,11 +3,24 @@
     <file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2023-12-01T20:45:11Z" product-name="staffdirectory">
         <header/>
         <body>
-            <trans-unit id="plugin.staffdirectory_plugin.title">
-                <target>Annuaire du personnel</target>
+            <trans-unit id="plugin.staffdirectory_plugin.organization.title">
+                <target>Organisation</target>
             </trans-unit>
-            <trans-unit id="plugin.staffdirectory_plugin.description">
-                <target>Affiche une ou plusieurs organisations, personnes et page de détail.</target>
+            <trans-unit id="plugin.staffdirectory_plugin.organization.description">
+                <target>Affiche la structure d'une organisation avec ses membres.</target>
+            </trans-unit>
+            <trans-unit id="plugin.staffdirectory_plugin.organization.header">
+                <target>Équipe de personnes</target>
+            </trans-unit>
+
+            <trans-unit id="plugin.staffdirectory_plugin.persons.title">
+                <target>Une ou plusieurs personnes</target>
+            </trans-unit>
+            <trans-unit id="plugin.staffdirectory_plugin.persons.description">
+                <target>Affiche la carte d'une ou plusieurs personnes.</target>
+            </trans-unit>
+            <trans-unit id="plugin.staffdirectory_plugin.persons.header">
+                <target>Personne(s)</target>
             </trans-unit>
         </body>
     </file>
