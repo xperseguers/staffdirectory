@@ -26,7 +26,7 @@
 ## Routing configuration
 
 Nice URL can be configured by editing your site configuration (stored in
-:file:`config/sites/<site>/config.yaml`):
+file `config/sites/<site>/config.yaml`):
 
 ```
 routeEnhancers:
@@ -39,12 +39,12 @@ routeEnhancers:
     plugin: Plugin
     routes:
       -
-        routePath: '/{person-name}'
+        routePath: '/p/{person-name}'
         _controller: 'Plugin::person'
         _arguments:
           person-name: person
       -
-        routePath: '/{organization-name}'
+        routePath: '/o/{organization-name}'
         _controller: 'Plugin::organization'
         _arguments:
           organization-name: organization
