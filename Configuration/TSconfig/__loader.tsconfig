@@ -1,1 +1,2 @@
 @import 'EXT:staffdirectory/Configuration/TSconfig/ContentElements/*.tsconfig'
+@import 'EXT:staffdirectory/Configuration/TSconfig/Page/LinkBrowser/*.tsconfig'

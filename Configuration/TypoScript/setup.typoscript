@@ -18,9 +18,12 @@ plugin.tx_staffdirectory {
 
     settings {
         targets {
-            organization = {$plugin.tx_staffdirectory.targets.organization}
-            person = {$plugin.tx_staffdirectory.targets.person}
-            staff = {$plugin.tx_staffdirectory.targets.staff}
+            organization = {$plugin.tx_staffdirectory.settings.targets.organization}
+            person = {$plugin.tx_staffdirectory.settings.targets.person}
+            staff = {$plugin.tx_staffdirectory.settings.targets.staff}
         }
     }
 }
+
+# Configuration for the link handler
+@import 'EXT:staffdirectory/Configuration/TypoScript/RecordLinks/*.typoscript'

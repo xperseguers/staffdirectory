@@ -22,6 +22,13 @@
             <trans-unit id="plugin.staffdirectory_plugin.persons.header">
                 <target>Personne(s)</target>
             </trans-unit>
+
+            <trans-unit id="linkbrowser.organization">
+                <target>Organisation</target>
+            </trans-unit>
+            <trans-unit id="linkbrowser.person">
+                <target>Personne</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -1,0 +1,10 @@
+config.recordLinks.person {
+    // Do not force link generation when the record is hidden
+    forceLink = 0
+
+    typolink {
+        parameter = {$plugin.tx_staffdirectory.settings.targets.person}
+        additionalParams.data = field:uid
+        additionalParams.wrap = &tx_staffdirectory_plugin[action]=person&tx_staffdirectory_plugin[controller]=Plugin&tx_staffdirectory_plugin[person]=|
+    }
+}
