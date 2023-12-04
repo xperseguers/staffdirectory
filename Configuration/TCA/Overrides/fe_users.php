@@ -121,7 +121,7 @@ $tempColumns = [
                 'fieldSeparator' => '/',
             ],
             'fallbackCharacter' => '-',
-            'eval' => 'unique',
+            'eval' => 'uniqueInSite',
             'default' => ''
         ]
     ],

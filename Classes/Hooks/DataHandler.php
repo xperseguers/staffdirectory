@@ -23,6 +23,8 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Crypto\Random;
+use TYPO3\CMS\Core\DataHandling\Model\RecordStateFactory;
+use TYPO3\CMS\Core\DataHandling\SlugHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -73,6 +75,13 @@ class DataHandler
             $fullNameParts[] = $fieldArray['last_name'] ?? $record['last_name'];
 
             $record['name'] = $fieldArray['name'] = trim(implode(' ', $fullNameParts));
+
+            // Recompute the automatic path_segment
+            $fieldArray['path_segment'] = $this->regeneratePathSegment(
+                $table,
+                $operation === 'update' ? $id : -1,
+                $fieldArray
+            );
         }
 
         $this->cleanupPhoneNumbers($record, $fieldArray);
@@ -106,5 +115,51 @@ class DataHandler
                 }
             }
         }
+    }
+
+    /**
+     * Regenerates the slug.
+     *
+     * @param string $table
+     * @param int $uid
+     * @param array $fields
+     * @return string
+     */
+    protected function regeneratePathSegment(string $table, int $uid, array $fields = []): string
+    {
+        if ($uid > 0) {
+            $record = BackendUtility::getRecordWSOL($table, $uid);
+            $record = array_merge($record, $fields);
+        } else {
+            $record = $fields;
+        }
+        $fieldConfig = $GLOBALS['TCA'][$table]['columns']['path_segment']['config'];
+
+        $slugHelper = GeneralUtility::makeInstance(
+            SlugHelper::class,
+            $table,
+            'path_segment',
+            $fieldConfig
+        );
+
+        $slug = $slugHelper->generate($record, $record['pid']);
+
+        if ($uid <= 0) {
+            return $slug;
+        }
+
+        $state = RecordStateFactory::forName($table)->fromArray($record);
+
+        if (strpos($fieldConfig['eval'], 'uniqueInSite') !== false) {
+            $slug = $slugHelper->buildSlugForUniqueInSite($slug, $state);
+        }
+
+        if (strpos($fieldConfig['eval'], 'uniqueInPid') !== false) {
+            $slug = $slugHelper->buildSlugForUniqueInPid($slug, $state);
+        }
+
+        $slug = $slugHelper->sanitize($slug);
+
+        return $slug;
     }
 }
