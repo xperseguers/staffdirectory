@@ -6,6 +6,7 @@ $tca = [
         'label' => 'feuser_id',
         'label_userFunc' => \Causal\Staffdirectory\Tca\Member::class . '->getLabel',
         'irreHeaderStyle_userFunc' => \Causal\Staffdirectory\Tca\Member::class . '->getIrreHeaderStyle',
+        'hideTable' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',

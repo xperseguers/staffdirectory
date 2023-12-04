@@ -11,8 +11,6 @@
          tx_staffdirectory_domain_model_organization
      )
 
-     mod.web_list.hideTables := addToList(tx_staffdirectory_domain_model_member)
-
      # This makes adding new fe_users much easier, adapt to your needs!
      TCAdefaults.fe_users {
          usergroup = 1
