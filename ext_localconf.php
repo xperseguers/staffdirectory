@@ -26,7 +26,7 @@ defined('TYPO3') || die ();
     );
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
-    @import \'EXT:staffdirectory/Configuration/TSconfig/ContentElementWizard.tsconfig\'
+    @import \'EXT:staffdirectory/Configuration/TSconfig/__loader.tsconfig\'
     ');
 
     $typo3Version = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Information\Typo3Version::class)->getMajorVersion();

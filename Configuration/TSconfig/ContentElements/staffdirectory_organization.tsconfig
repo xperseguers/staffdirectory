@@ -24,32 +24,7 @@ mod.wizards.newContentElement.wizardItems.plugins {
                 )
             }
         }
-
-        staffdirectory_persons {
-            iconIdentifier = staffdirectory-persons
-            title = LLL:EXT:staffdirectory/Resources/Private/Language/locallang_be.xlf:plugin.staffdirectory_plugin.persons.title
-            description = LLL:EXT:staffdirectory/Resources/Private/Language/locallang_be.xlf:plugin.staffdirectory_plugin.persons.description
-            tt_content_defValues {
-                header = LLL:EXT:staffdirectory/Resources/Private/Language/locallang_be.xlf:plugin.staffdirectory_plugin.persons.header
-                header_layout = 100
-                CType = staffdirectory_plugin
-                pi_flexform (
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<T3FlexForms>
-<data>
-    <sheet index="sDEF">
-        <language index="lDEF">
-            <field index="settings.displayMode">
-                <value index="vDEF">PERSONS</value>
-            </field>
-        </language>
-    </sheet>
-</data>
-</T3FlexForms>
-                )
-            }
-        }
     }
 
-    show := addToList(staffdirectory_organization, staffdirectory_persons)
+    show := addToList(staffdirectory_organization)
 }
