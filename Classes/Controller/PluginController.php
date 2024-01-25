@@ -192,10 +192,20 @@ class PluginController extends ActionController
      *
      * @param Organization|null $organization
      */
-    protected function addCacheTagsForOrganization(?Organization $organization): void
+    protected function addCacheTagsForOrganization(?Organization $organization, int $recursion = 0): void
     {
         if ($organization === null) {
             return;
+        }
+
+        if ($recursion > 10) {
+            throw new \RuntimeException(
+                vsprintf('Recursion limit reached for organization uid=%s (%s)', [
+                    $organization->getUid(),
+                    $organization->getLongName(),
+                ]),
+                1706191961
+            );
         }
 
         foreach ($organization->getMembers() as $member) {
@@ -203,7 +213,7 @@ class PluginController extends ActionController
         }
 
         foreach ($organization->getSuborganizations() as $suborganization) {
-            $this->addCacheTagsForOrganization($suborganization);
+            $this->addCacheTagsForOrganization($suborganization, $recursion + 1);
         }
     }
 
