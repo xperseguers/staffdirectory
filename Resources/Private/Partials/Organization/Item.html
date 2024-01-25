@@ -9,14 +9,16 @@
     </div>
 </f:if>
 
-<div class="row">
-    <f:for each="{organization.members}" as="member">
-        <f:render partial="Member/Item" arguments="{
-            plugin: plugin,
-            member: member
-        }"/>
-    </f:for>
-</div>
+<f:if condition="{organization.members}">
+    <div class="row">
+        <f:for each="{organization.members}" as="member">
+            <f:render partial="Member/Item" arguments="{
+                plugin: plugin,
+                member: member
+            }"/>
+        </f:for>
+    </div>
+</f:if>
 
 <f:if condition="{level} < 2">
     <f:for each="{organization.suborganizations}" as="suborganization">
