@@ -24,6 +24,7 @@ use Causal\Staffdirectory\Domain\Repository\OrganizationRepository;
 use Causal\Staffdirectory\Domain\Repository\PersonRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\HtmlResponse;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -91,7 +92,7 @@ class PluginController extends ActionController
         $this->view->assignMultiple([
             'organizations' => $organizations,
             // Raw data for the plugin
-            'plugin' => $this->configurationManager->getContentObject()->data,
+            'plugin' => $this->getContentObjectData(),
         ]);
 
         return new HtmlResponse(
@@ -112,7 +113,7 @@ class PluginController extends ActionController
         $this->view->assignMultiple([
             'organization' => $organization,
             // Raw data for the plugin
-            'plugin' => $this->configurationManager->getContentObject()->data,
+            'plugin' => $this->getContentObjectData(),
         ]);
 
         return new HtmlResponse(
@@ -136,7 +137,7 @@ class PluginController extends ActionController
         $this->view->assignMultiple([
             'person' => $person,
             // Raw data for the plugin
-            'plugin' => $this->configurationManager->getContentObject()->data,
+            'plugin' => $this->getContentObjectData(),
         ]);
 
         return new HtmlResponse(
@@ -168,7 +169,7 @@ class PluginController extends ActionController
         $this->view->assignMultiple([
             'persons' => $persons,
             // Raw data for the plugin
-            'plugin' => $this->configurationManager->getContentObject()->data,
+            'plugin' => $this->getContentObjectData(),
         ]);
 
         return new HtmlResponse(
@@ -238,6 +239,16 @@ class PluginController extends ActionController
         ];
 
         $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
+    }
+
+    protected function getContentObjectData(): array
+    {
+        $typo3Version = (new Typo3Version())->getMajorVersion();
+        if ($typo3Version >= 12) {
+            return $this->request->getAttribute('currentContentObject')->data;
+        } else {
+            return $this->configurationManager->getContentObject()->data;
+        }
     }
 
     /**
