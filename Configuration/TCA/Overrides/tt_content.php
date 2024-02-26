@@ -7,11 +7,20 @@ defined('TYPO3') || die();
     'staffdirectory-default',
 ], 'CType', 'staffdirectory');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    '*',
-    'FILE:EXT:staffdirectory/Configuration/FlexForms/flexform_plugin.xml',
-    'staffdirectory_plugin'
-);
+$typo3Branch = (new \TYPO3\CMS\Core\Information\Typo3Version())->getBranch();
+if (version_compare($typo3Branch, '12.0', '>=')) {
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+        '*',
+        'FILE:EXT:staffdirectory/Configuration/FlexForms/flexform_plugin_v12.xml',
+        'staffdirectory_plugin'
+    );
+} else {
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+        '*',
+        'FILE:EXT:staffdirectory/Configuration/FlexForms/flexform_plugin.xml',
+        'staffdirectory_plugin'
+    );
+}
 
 $GLOBALS['TCA']['tt_content']['types']['staffdirectory_plugin']['showitem'] = '
         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
