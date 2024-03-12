@@ -100,7 +100,7 @@ class DataHandler
         $phoneNumberUtil = PhoneNumberUtil::getInstance();
 
         foreach (['telephone', 'tx_staffdirectory_mobilephone'] as $field) {
-            $value = $fieldArray[$field] ?? $record[$field];
+            $value = $fieldArray[$field] ?? $record[$field] ?? null;
             if (!empty($value)) {
                 try {
                     $phoneNumber = $phoneNumberUtil->parse($value, $country);
