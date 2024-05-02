@@ -72,6 +72,9 @@ class PluginPreviewRenderer extends AbstractFlexFormPreviewRenderer
         $out = [];
         foreach ($organizations as $organizationUid) {
             $row = BackendUtility::getRecord($table, $organizationUid);
+            if (empty($row)) {
+                continue;
+            }
             $description = $iconFactory->getIconForRecord($table, $row, Icon::SIZE_SMALL)->render();
             $description .= ' ' . BackendUtility::getRecordTitle($table, $row);
             $out[] = $description;
