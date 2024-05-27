@@ -19,6 +19,7 @@ namespace Causal\Staffdirectory\Backend\Form\Element;
 use TYPO3\CMS\Backend\Form\Element\AbstractFormElement;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
@@ -43,7 +44,7 @@ class ParentOrganizations extends AbstractFormElement
             ->where(
                 $queryBuilder->expr()->inSet(
                     'suborganizations',
-                    $queryBuilder->createNamedParameter($organizationUid, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter($organizationUid, Connection::PARAM_INT)
                 )
             )
             ->orderBy('long_name')

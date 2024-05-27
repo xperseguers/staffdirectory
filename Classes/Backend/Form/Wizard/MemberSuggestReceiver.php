@@ -17,6 +17,7 @@ declare(strict_types = 1);
 namespace Causal\Staffdirectory\Backend\Form\Wizard;
 
 use TYPO3\CMS\Backend\Form\Wizard\SuggestWizardDefaultReceiver;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 
@@ -36,7 +37,7 @@ class MemberSuggestReceiver extends SuggestWizardDefaultReceiver
         $query = trim($this->params['value']);
 
         if (MathUtility::canBeInterpretedAsInteger($query)) {
-            $whereClause = $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter((int)$query, \PDO::PARAM_INT));
+            $whereClause = $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter((int)$query, Connection::PARAM_INT));
         } else {
             // Transform into a FULLTEXT query with leading + operator so that each word must be present
             // and trailing * to get partial match

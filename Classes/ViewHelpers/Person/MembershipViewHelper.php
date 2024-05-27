@@ -19,6 +19,7 @@ namespace Causal\Staffdirectory\ViewHelpers\Person;
 use Causal\Staffdirectory\Domain\Model\Organization;
 use Causal\Staffdirectory\Domain\Model\Person;
 use Causal\Staffdirectory\Domain\Repository\OrganizationRepository;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -159,7 +160,7 @@ class MembershipViewHelper extends AbstractViewHelper
             ->where(
                 $queryBuilder->expr()->inSet(
                     'suborganizations',
-                    $queryBuilder->createNamedParameter($organizationUid, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter($organizationUid, Connection::PARAM_INT)
                 )
             )
             ->executeQuery()

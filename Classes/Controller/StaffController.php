@@ -32,6 +32,7 @@ use Causal\Staffdirectory\Domain\Repository\Factory;
 use Causal\Staffdirectory\Domain\Repository\DeprecatedMemberRepository;
 use Causal\Staffdirectory\Domain\Repository\StaffRepository;
 use Causal\Staffdirectory\Persistence\Dao;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -207,12 +208,12 @@ class StaffController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 $queryBuilder->expr()->eq('s.uid', $queryBuilder->quoteIdentifier('d.staff'))
             )
             ->where(
-                $queryBuilder->expr()->eq('m.feuser_id', $queryBuilder->createNamedParameter($person, \PDO::PARAM_INT))
+                $queryBuilder->expr()->eq('m.feuser_id', $queryBuilder->createNamedParameter($person, Connection::PARAM_INT))
             )
             ->orderBy('staff_name')
             ->addOrderBy('d.sorting')
             ->addOrderBy('m.sorting')
-            ->execute()
+            ->executeQuery()
             ->fetchAllAssociative();
 
         $positions = [];
