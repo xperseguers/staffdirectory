@@ -136,7 +136,7 @@ $GLOBALS['TCA']['fe_users']['columns']['country']['config'] = [
     'items' => [
         ['', ''],
     ],
-    'itemsProcFunc' => \Causal\Staffdirectory\Tca\Country::class . '->getAll',
+    'itemsProcFunc' => \Causal\Staffdirectory\Backend\Tca\Country::class . '->getAll',
     'size' => 1,
     'minitems' => 0,
     'maxitems' => 1
@@ -199,5 +199,5 @@ $GLOBALS['TCA']['fe_users']['ctrl']['label'] = 'last_name';
 // BEWARE: "title" and GDPR fields are needed for label_userFunc in the context of FlexForm
 $GLOBALS['TCA']['fe_users']['ctrl']['label_alt'] = 'first_name, title, tx_staffdirectory_gdpr_date, tx_staffdirectory_gdpr_proof';
 $GLOBALS['TCA']['fe_users']['ctrl']['label_alt_force'] = 1;
-$GLOBALS['TCA']['fe_users']['ctrl']['label_userFunc'] = \Causal\Staffdirectory\Tca\FeUser::class . '->getLabel';
+$GLOBALS['TCA']['fe_users']['ctrl']['label_userFunc'] = \Causal\Staffdirectory\Backend\Tca\FeUser::class . '->getLabel';
 $GLOBALS['TCA']['fe_users']['ctrl']['default_sortby'] = 'ORDER BY last_name, first_name';
