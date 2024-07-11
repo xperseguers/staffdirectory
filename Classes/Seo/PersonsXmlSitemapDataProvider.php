@@ -65,6 +65,8 @@ class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable($table);
 
+        $constraints = [];
+
         if (!empty($pids)) {
             $recursiveLevel = isset($this->config['recursive']) ? (int)$this->config['recursive'] : 0;
             if ($recursiveLevel) {
@@ -78,11 +80,25 @@ class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
                 $pids = array_merge($pids, ...$subPids);
             }
 
-            $constraints[] = $queryBuilder->expr()->in('pid', $pids);
+            $constraints[] = $queryBuilder->expr()->in('u.pid', $pids);
         }
 
-        $queryBuilder->select('*')
-            ->from($table);
+        $queryBuilder
+            ->selectLiteral('DISTINCT ' . $queryBuilder->quoteIdentifier('u') . '.*')
+            ->addSelect('u.tstamp AS lastmod')
+            ->from('fe_users', 'u')
+            ->join(
+                'u',
+                'tx_staffdirectory_domain_model_member',
+                'm',
+                $queryBuilder->expr()->eq('m.feuser_id', $queryBuilder->quoteIdentifier('u.uid'))
+            )
+            ->join(
+                'm',
+                'tx_staffdirectory_domain_model_organization',
+                'o',
+                $queryBuilder->expr()->eq('o.uid', $queryBuilder->quoteIdentifier('m.organization'))
+            );
 
         if (!empty($constraints)) {
             $queryBuilder->where(
@@ -90,16 +106,14 @@ class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
             );
         }
 
-        $rows = $queryBuilder->execute()->fetchAllAssociative();
+        $statement = $queryBuilder->executeQuery();
 
-        foreach ($rows as $row) {
-            if (!empty(\Causal\Staffdirectory\Controller\StaffController::getPersonPositions($row['uid']))) {
-                $this->items[] = [
-                    'data' => $row,
-                    'lastMod' => (int)$row[$lastModifiedField],
-                    'priority' => 0.25
-                ];
-            }
+        while (($row = $statement->fetchAssociative()) !== false) {
+            $this->items[] = [
+                'data' => $row,
+                'lastMod' => (int)$row['lastmod'],
+                'priority' => 0.25
+            ];
         }
     }
 
