@@ -32,6 +32,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class PluginController extends ActionController
 {
+    private const ORGANIZATION_RECURSION_LIMIT = 10;
+
     protected OrganizationRepository $organizationRepository;
     protected MemberRepository $memberRepository;
     protected PersonRepository $personRepository;
@@ -97,6 +99,8 @@ class PluginController extends ActionController
             $organization = $this->organizationRepository->findByUid($uids[0] ?? 0);
         }
 
+        // Tag the page cache so that FAL signal operations may be listened to in
+        // order to flush corresponding page cache
         $this->addCacheTagsForOrganization($organization);
 
         $this->view->assignMultiple([
@@ -118,6 +122,8 @@ class PluginController extends ActionController
             $person = $this->personRepository->findByUid($uids[0] ?? 0);
         }
 
+        // Tag the page cache so that FAL signal operations may be listened to in
+        // order to flush corresponding page cache
         $this->addCacheTagsForPerson($person);
 
         // Disable link to ourselves
@@ -157,7 +163,22 @@ class PluginController extends ActionController
 
     public function directoryAction(): ResponseInterface
     {
-        // TODO
+        $organizations = $this->fetchSelectedOrganizations();
+
+        $organizationPersons = [];
+        foreach ($organizations as $organization) {
+            $organizationPersons[] = $this->fetchPersonsRecursive($organization);
+            // Tag the page cache so that FAL signal operations may be listened to in
+            // order to flush corresponding page cache
+            $this->addCacheTagsForOrganization($organization);
+        }
+
+        $persons = array_merge([], ...$organizationPersons);
+        $this->view->assignMultiple([
+            'persons' => array_values($persons),
+            // Raw data for the plugin
+            'plugin' => $this->getContentObjectData(),
+        ]);
 
         return new HtmlResponse(
             $this->view->render()
@@ -200,11 +221,53 @@ class PluginController extends ActionController
         return $persons;
     }
 
+    protected function fetchPersonsRecursive(?Organization $organization, int $recursion = 0): array
+    {
+        if ($organization === null) {
+            return [];
+        }
+
+        if ($recursion > static::ORGANIZATION_RECURSION_LIMIT) {
+            throw new \RuntimeException(
+                vsprintf('Recursion limit reached for organization uid=%s (%s)', [
+                    $organization->getUid(),
+                    $organization->getLongName(),
+                ]),
+                1720682694
+            );
+        }
+
+        $persons = [];
+        foreach ($organization->getMembers() as $member) {
+            $person = $member->getPerson();
+            if ($person !== null) {
+                $personKey = vsprintf('%s-%s-%s-%d', [
+                    $person->getLastName(),
+                    $person->getFirstName(),
+                    $person->getMiddleName(),   // Middle name is less important than first name
+                    $person->getUid(),
+                ]);
+                $persons[$personKey] = $person;
+            }
+        }
+
+        $suborganizationPersons = [];
+        foreach ($organization->getSuborganizations() as $suborganization) {
+            $suborganizationPersons[] = $this->fetchPersonsRecursive($suborganization, $recursion + 1);
+        }
+
+        $combinedPersons = array_merge($persons, ...$suborganizationPersons);
+        ksort($combinedPersons);
+
+        return $combinedPersons;
+    }
+
     /**
      * Tags the page cache so that FAL signal operations may be listened to in
      * order to flush corresponding page cache.
      *
      * @param Organization|null $organization
+     * @param int $recursion internal recursion counter
      */
     protected function addCacheTagsForOrganization(?Organization $organization, int $recursion = 0): void
     {
@@ -212,7 +275,7 @@ class PluginController extends ActionController
             return;
         }
 
-        if ($recursion > 10) {
+        if ($recursion > static::ORGANIZATION_RECURSION_LIMIT) {
             throw new \RuntimeException(
                 vsprintf('Recursion limit reached for organization uid=%s (%s)', [
                     $organization->getUid(),
