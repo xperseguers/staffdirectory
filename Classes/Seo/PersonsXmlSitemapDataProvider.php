@@ -77,7 +77,7 @@ class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
                         $subPids[] = GeneralUtility::intExplode(',', $list, true);
                     }
                 }
-                $pids = array_merge($pids, ...$subPids);
+                $pids = array_unique(array_merge($pids, ...$subPids));
             }
 
             $constraints[] = $queryBuilder->expr()->in('u.pid', $pids);

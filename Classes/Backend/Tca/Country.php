@@ -27,7 +27,7 @@ class Country
      * @param array $conf
      * @return array
      */
-    public function getAll(array $conf = [])
+    public function getAll(array $conf = []): array
     {
         if (!$conf) {
             $conf = ['items' => []];
