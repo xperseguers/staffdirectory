@@ -54,8 +54,7 @@
                         <config>
                             <type>select</type>
                             <renderType>selectMultipleSideBySide</renderType>
-                            <foreign_table>tx_staffdirectory_domain_model_organization</foreign_table>
-                            <foreign_table_where>ORDER BY tx_staffdirectory_domain_model_organization.long_name</foreign_table_where>
+                            <itemsProcFunc>Causal\Staffdirectory\Backend\Tca\Organization->fetchAvailable</itemsProcFunc>
                             <size>8</size>
                             <maxitems>99</maxitems>
                             <multiple>0</multiple>
