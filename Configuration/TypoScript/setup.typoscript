@@ -20,7 +20,6 @@ plugin.tx_staffdirectory {
         targets {
             organization = {$plugin.tx_staffdirectory.settings.targets.organization}
             person = {$plugin.tx_staffdirectory.settings.targets.person}
-            staff = {$plugin.tx_staffdirectory.settings.targets.staff}
         }
     }
 }

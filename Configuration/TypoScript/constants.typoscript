@@ -14,8 +14,5 @@ plugin.tx_staffdirectory {
 
         # cat=plugin.tx_staffdirectory; type=int; label=Uid of the detail page for a person
         targets.person =
-
-        # cat=plugin.tx_staffdirectory; type=int; label=Uid of the detail page for a staff (deprecated)
-        targets.staff =
     }
 }
