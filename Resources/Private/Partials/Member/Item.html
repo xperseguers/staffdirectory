@@ -32,9 +32,9 @@
     <div class="col-md-3">
         <div class="card card-profile card-plain">
             <div class="card-header card-avatar">
-                <f:render partial="Member/Photo" arguments="{member: member}"/>
+                <f:render partial="Member/Photo" arguments="{member: member, person:person}"/>
             </div>
-            <f:render partial="Member/CardBody" arguments="{member:member}"/>
+            <f:render partial="Member/CardBody" arguments="{member:member, person:person}"/>
         </div>
     </div>
 </f:section>
