@@ -4,7 +4,7 @@ declare(strict_types=1);
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2020-2023 Xavier Perseguers <xavier@causal.ch>
+ *  (c) 2020-2024 Xavier Perseguers <xavier@causal.ch>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -68,14 +68,14 @@ class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
         if (!empty($pids)) {
             $recursiveLevel = isset($this->config['recursive']) ? (int)$this->config['recursive'] : 0;
             if ($recursiveLevel) {
-                $newList = [];
+                $subPids = [];
                 foreach ($pids as $pid) {
                     $list = $this->cObj->getTreeList($pid, $recursiveLevel);
                     if ($list) {
-                        $newList = array_merge($newList, explode(',', $list));
+                        $subPids[] = GeneralUtility::intExplode(',', $list, true);
                     }
                 }
-                $pids = array_merge($pids, $newList);
+                $pids = array_merge($pids, ...$subPids);
             }
 
             $constraints[] = $queryBuilder->expr()->in('pid', $pids);
