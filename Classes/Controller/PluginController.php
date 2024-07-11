@@ -197,7 +197,7 @@ class PluginController extends ActionController
                 }
             }
         } else {
-            $organizations = $this->organizationRepository->findAll();
+            $organizations = $this->organizationRepository->findAll()->toArray();
         }
 
         return $organizations;
@@ -215,7 +215,7 @@ class PluginController extends ActionController
                 }
             }
         } else {
-            $persons = $this->personRepository->findAll();
+            $persons = $this->personRepository->findAll()->toArray();
         }
 
         return $persons;
