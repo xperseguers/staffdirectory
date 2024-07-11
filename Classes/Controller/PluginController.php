@@ -70,18 +70,7 @@ class PluginController extends ActionController
 
     public function listAction(): ResponseInterface
     {
-        if (!empty($this->settings['organizations'])) {
-            $uids = GeneralUtility::intExplode(',', $this->settings['organizations'], true);
-            $organizations = [];
-            foreach ($uids as $uid) {
-                $organization = $this->organizationRepository->findByUid($uid);
-                if ($organization !== null) {
-                    $organizations[] = $organization;
-                }
-            }
-        } else {
-            $organizations = $this->organizationRepository->findAll();
-        }
+        $organizations = $this->fetchSelectedOrganizations();
 
         foreach ($organizations as $organization) {
             // Tag the page cache so that FAL signal operations may be listened to in
@@ -147,18 +136,7 @@ class PluginController extends ActionController
 
     public function personsAction(): ResponseInterface
     {
-        if (!empty($this->settings['persons'])) {
-            $uids = GeneralUtility::intExplode(',', $this->settings['persons'], true);
-            $persons = [];
-            foreach ($uids as $uid) {
-                $person = $this->personRepository->findByUid($uid);
-                if ($person !== null) {
-                    $persons[] = $person;
-                }
-            }
-        } else {
-            $persons = $this->personRepository->findAll();
-        }
+        $persons = $this->fetchSelectedPersons();
 
         foreach ($persons as $person) {
             // Tag the page cache so that FAL signal operations may be listened to in
@@ -184,6 +162,42 @@ class PluginController extends ActionController
         return new HtmlResponse(
             $this->view->render()
         );
+    }
+
+    protected function fetchSelectedOrganizations(): array
+    {
+        if (!empty($this->settings['organizations'])) {
+            $uids = GeneralUtility::intExplode(',', $this->settings['organizations'], true);
+            $organizations = [];
+            foreach ($uids as $uid) {
+                $organization = $this->organizationRepository->findByUid($uid);
+                if ($organization !== null) {
+                    $organizations[] = $organization;
+                }
+            }
+        } else {
+            $organizations = $this->organizationRepository->findAll();
+        }
+
+        return $organizations;
+    }
+
+    protected function fetchSelectedPersons(): array
+    {
+        if (!empty($this->settings['persons'])) {
+            $uids = GeneralUtility::intExplode(',', $this->settings['persons'], true);
+            $persons = [];
+            foreach ($uids as $uid) {
+                $person = $this->personRepository->findByUid($uid);
+                if ($person !== null) {
+                    $persons[] = $person;
+                }
+            }
+        } else {
+            $persons = $this->personRepository->findAll();
+        }
+
+        return $persons;
     }
 
     /**
