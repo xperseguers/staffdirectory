@@ -5,7 +5,11 @@
   "keywords": [
     "TYPO3 CMS"
   ],
-  "homepage": "https://git.causal.ch/parish/staffdirectory",
+  "homepage": "https://github.com/xperseguers/staffdirectory.git",
+  "support": {
+    "issues": "https://github.com/xperseguers/staffdirectory/issues",
+    "source": "https://github.com/xperseguers/staffdirectory"
+  },
   "authors": [
     {
       "name": "Xavier Perseguers",
