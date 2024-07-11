@@ -16,13 +16,22 @@ declare(strict_types = 1);
 
 namespace Causal\Staffdirectory\Backend\Tca;
 
-class Organization extends AbstractRecordFetcher
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+
+class Person extends AbstractRecordFetcher
 {
     public function fetchAvailable(array $conf = []): array
     {
-        $this->table = 'tx_staffdirectory_domain_model_organization';
-        $this->orderBy = 'long_name';
+        $this->table = 'fe_users';
+        $this->orderBy = 'last_name';
 
         return $this->fetchRecords($conf);
+    }
+
+    protected function getAdditionalConditions(QueryBuilder $queryBuilder): array
+    {
+        return [
+            $queryBuilder->expr()->eq('tx_extbase_type', $queryBuilder->quote('tx_staffdirectory'))
+        ];
     }
 }
