@@ -28,7 +28,8 @@ CREATE TABLE tx_staffdirectory_domain_model_organization (
     description text,
     members int(10) unsigned DEFAULT '0' NOT NULL,
     suborganizations varchar(255) DEFAULT '' NOT NULL,
-    path_segment varchar(2048)
+    path_segment varchar(2048),
+    sorting int(10) unsigned DEFAULT '0' NOT NULL
 );
 
 #
