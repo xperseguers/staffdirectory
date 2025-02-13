@@ -34,7 +34,7 @@ class InlineRecordContainer extends \TYPO3\CMS\Backend\Form\Container\InlineReco
      * @return array As defined in initializeResultArray() of AbstractNode
      * @throws AccessDeniedContentEditException
      */
-    public function render()
+    public function render(): array
     {
         $data = $this->data;
         $this->inlineData = $data['inlineData'];
