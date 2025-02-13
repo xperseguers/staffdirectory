@@ -29,7 +29,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ParentOrganizations extends AbstractFormElement
 {
-    public function render()
+    public function render(): array
     {
         $table = 'tx_staffdirectory_domain_model_organization';
         $resultArray = $this->initializeResultArray();
