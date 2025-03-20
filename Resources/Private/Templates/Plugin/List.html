@@ -5,8 +5,22 @@
 <f:layout name="Default"/>
 
 <f:section name="Main">
-    LIST goes here...
-    <f:debug>{_all}</f:debug>
+    <f:if condition="{organizations}">
+        <f:then>
+            <div id="list-{plugin.uid}" class="row organization-list">
+                <f:for each="{organizations}" as="organization">
+                    <div id="organization-{organization.uid}" class="col-sm-6 col-xl-4 mb-4 organization-item">
+                        <f:render partial="Organization/ListItem" arguments="{plugin: plugin, level:1,organization: organization}"/>
+                    </div>
+                </f:for>
+            </div>
+        </f:then>
+        <f:else>
+            <div class="alert alert-warning" role="alert">
+                <f:translate key="label_empty_organization_list"/>
+            </div>
+        </f:else>
+    </f:if>
 </f:section>
 
 </html>

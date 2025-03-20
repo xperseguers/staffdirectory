@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<div class="card h-100">
+    <div class="card-body">
+        <h3 class="card-title">{organization.shortName}</h3>
+        <f:if condition="{organization.description}">
+            <div class="card-text">
+                {organization.description -> f:format.crop(maxCharacters: 120, respectWordBoundaries: 1) -> f:format.html()}
+            </div>
+        </f:if>
+
+    </div>
+    <f:if condition="{settings.targets.organization}">
+        <div class="card-footer">
+            <f:link.page class="btn btn-primary" pageUid="{settings.targets.organization}" title="{organization.shortName}">{f:translate(id: 'read-more')}</f:link.page>
+        </div>
+    </f:if>
+</div>
+
+</html>

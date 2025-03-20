@@ -30,6 +30,10 @@
             <trans-unit id="label_back">
                 <target>Retour à la page précédente</target>
             </trans-unit>
+			<trans-unit id="read-more">
+				<source>Read more</source>
+				<target>En savoir plus</target>
+			</trans-unit>
         </body>
     </file>
 </xliff>
