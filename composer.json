@@ -20,10 +20,10 @@
   ],
   "license": "GPL-2.0-or-later",
   "require": {
-    "php": ">=8.1.0 <=8.3.99",
+    "php": ">=8.1.0 <=8.4.99",
     "typo3/cms-core": "^11 || ^12 || ^13",
-    "sjbr/static-info-tables": "^11.5 || ^12.4 || ^13.0",
-    "giggsey/libphonenumber-for-php": "^8.12"
+    "sjbr/static-info-tables": "^11.5 || ^12.4 || ^13.4",
+    "giggsey/libphonenumber-for-php": "^8.13"
   },
   "autoload": {
     "psr-4": {
