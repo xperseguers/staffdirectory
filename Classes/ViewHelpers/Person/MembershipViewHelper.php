@@ -19,6 +19,7 @@ namespace Causal\Staffdirectory\ViewHelpers\Person;
 use Causal\Staffdirectory\Domain\Model\Organization;
 use Causal\Staffdirectory\Domain\Model\Person;
 use Causal\Staffdirectory\Domain\Repository\OrganizationRepository;
+use Doctrine\DBAL\Exception;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
@@ -57,6 +58,9 @@ class MembershipViewHelper extends AbstractViewHelper
         return $html;
     }
 
+    /**
+     * @throws Exception
+     */
     protected function getMembership(Person $person): array
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
@@ -74,7 +78,7 @@ class MembershipViewHelper extends AbstractViewHelper
             ->where(
                 $queryBuilder->expr()->eq('m.feuser_id', $queryBuilder->createNamedParameter(
                     $person->getUid(),
-                    \PDO::PARAM_INT
+                    Connection::PARAM_INT
                 ))
             )
             ->orderBy('o.long_name', 'ASC')
@@ -96,8 +100,9 @@ class MembershipViewHelper extends AbstractViewHelper
 
     /**
      * @param Person $person
-     * @param Organization $organization
+     * @param Organization|null $organization
      * @return array
+     * @throws Exception
      */
     protected function findPagesWithPlugin(Person $person, ?Organization $organization): array
     {
@@ -122,7 +127,7 @@ class MembershipViewHelper extends AbstractViewHelper
                 $queryBuilder->expr()->eq('CType', $queryBuilder->quote('staffdirectory_plugin')),
                 $queryBuilder->expr()->eq('p.doktype', PageRepository::DOKTYPE_DEFAULT)
             )
-            ->execute()
+            ->executeQuery()
             ->fetchAllAssociative();
 
         $data = [];
@@ -150,6 +155,9 @@ class MembershipViewHelper extends AbstractViewHelper
         return $data;
     }
 
+    /**
+     * @throws Exception
+     */
     protected function addParentOrganizations(int $organizationUid, array &$organizations): void
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)

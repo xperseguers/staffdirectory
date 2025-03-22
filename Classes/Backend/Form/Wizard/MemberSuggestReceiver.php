@@ -23,7 +23,7 @@ use TYPO3\CMS\Core\Utility\MathUtility;
 
 class MemberSuggestReceiver extends SuggestWizardDefaultReceiver
 {
-    protected function checkRecordAccess($row, $uid)
+    protected function checkRecordAccess($row, $uid): bool
     {
         $table = $this->mmForeignTable ?: $this->table;
 
@@ -31,7 +31,7 @@ class MemberSuggestReceiver extends SuggestWizardDefaultReceiver
         return $table === 'fe_users';
     }
 
-    protected function prepareSelectStatement()
+    protected function prepareSelectStatement(): void
     {
         $queryBuilder = $this->queryBuilder;
         $query = trim($this->params['value']);
