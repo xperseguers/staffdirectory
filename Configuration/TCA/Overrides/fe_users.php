@@ -28,6 +28,7 @@ $GLOBALS['TCA']['fe_users']['types']['tx_staffdirectory'] = [
                 username, password, usergroup, tx_extbase_type
         ',
 ];
+
 $GLOBALS['TCA']['fe_users']['palettes'] += [
     'sd_name' => [
         'showitem' => '
@@ -168,13 +169,32 @@ $photoCropVariants = [
         ],
     ]
 ];
+
 $typo3Version = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Information\Typo3Version::class)->getMajorVersion();
-if ($typo3Version < 12) {
+if ($typo3Version >= 12) {
+    $GLOBALS['TCA']['fe_users']['columns']['image']['config'] = [
+        'type' => 'file',
+        'allowed' => 'jpeg,jpg,png,webp',
+        'maxitems' => 1,
+        'minitems' => 0,
+        'overrideChildTca' => [
+            'columns' => [
+                'crop' => [
+                    'config' => [
+                        'cropVariants' => $photoCropVariants,
+                    ],
+                ],
+            ],
+        ],
+    ];
+} else {
     $GLOBALS['TCA']['fe_users']['columns']['image']['config']
         = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
         'image',
         [
-            // Use the imageoverlayPalette instead of the basicoverlayPalette
+            'jpg,jpeg,png,webp',
+            'maxitems' => 1,
+            'minitems' => 0,
             'overrideChildTca' => [
                 'types' => [
                     \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
@@ -191,37 +211,9 @@ if ($typo3Version < 12) {
                     ],
                 ],
             ],
-            'maxitems' => 1,
-            'minitems' => 0,
         ],
-        'jpg,jpeg'
     );
-} else {
-    $GLOBALS['TCA']['fe_users']['columns']['image']['config'] = [
-        'type' => 'file',
-        'allowed' => 'jpg,jpeg',
-        'maxitems' => 1,
-        'minitems' => 0,
-        'overrideChildTca' => [
-            'types' => [
-                TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                    'showitem' => '
-                    crop,
-                    --palette--;;filePalette'
-                ],
-            ],
-            'columns' => [
-                'crop' => [
-                    'config' => [
-                        'type' => 'cropConfig',
-                        'cropVariants' => $photoCropVariants,
-                    ],
-                ],
-            ],
-        ],
-    ];
 }
-
 
 $GLOBALS['TCA']['fe_users']['ctrl']['label'] = 'last_name';
 // BEWARE: "title" and GDPR fields are needed for label_userFunc in the context of FlexForm
