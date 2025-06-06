@@ -1,6 +1,6 @@
 TCEMAIN.linkHandler {
     person {
-        handler = TYPO3\CMS\Recordlist\LinkHandler\RecordLinkHandler
+        handler = TYPO3\CMS\Backend\LinkHandler\RecordLinkHandler
         label = LLL:EXT:staffdirectory/Resources/Private/Language/locallang_be.xlf:linkbrowser.person
         configuration {
             table = fe_users
