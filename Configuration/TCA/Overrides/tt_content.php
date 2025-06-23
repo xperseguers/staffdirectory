@@ -7,8 +7,8 @@ defined('TYPO3') || die();
     'staffdirectory-default',
 ], 'CType', 'staffdirectory');
 
-$typo3Branch = (new \TYPO3\CMS\Core\Information\Typo3Version())->getBranch();
-if (version_compare($typo3Branch, '12.0', '>=')) {
+$typo3Version = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Information\Typo3Version::class)->getMajorVersion();
+if ($typo3Version >= 12) {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
         '*',
         'FILE:EXT:staffdirectory/Configuration/FlexForms/flexform_plugin_v12.xml',
@@ -46,14 +46,21 @@ $GLOBALS['TCA']['tt_content']['types']['staffdirectory_plugin']['showitem'] = '
 $GLOBALS['TCA']['tt_content']['types']['staffdirectory_plugin']['columnsOverrides'] = [
     'layout' => [
         'config' => [
-            'items' => [
-                [
-                    'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tt_content.layout.0', 0
-                ],
-                [
-                    'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tt_content.layout.1', 1
+            'items' => $typo3Version >= 12
+                ? [
+                    [
+                        'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tt_content.layout.0',
+                        'value' => 0,
+                    ],
+                    [
+                        'label' => 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tt_content.layout.1',
+                        'value' >= 1,
+                    ]
                 ]
-            ],
+                : [
+                    ['LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tt_content.layout.0', 0],
+                    ['LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:tt_content.layout.1', 1]
+                ],
         ],
     ],
 ];
