@@ -206,7 +206,7 @@ $photoCropVariants = [
 if ($typo3Version >= 12) {
     $GLOBALS['TCA']['fe_users']['columns']['image']['config'] = [
         'type' => 'file',
-        'allowed' => 'jpeg,jpg',
+        'allowed' => 'jpeg,jpg,webp',
         'maxitems' => 1,
         'minitems' => 0,
         'overrideChildTca' => [
@@ -244,7 +244,7 @@ if ($typo3Version >= 12) {
                 ],
             ],
         ],
-        'jpg,jpeg'
+        'jpg,jpeg,webp'
     );
 }
 
