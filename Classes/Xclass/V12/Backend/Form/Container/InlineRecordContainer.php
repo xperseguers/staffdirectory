@@ -23,7 +23,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @category    XCLASS
  * @author      Xavier Perseguers <xavier@causal.ch>
- * @copyright   2017-2023 Causal Sàrl
+ * @copyright   2017-2025 Causal Sàrl
  * @license     https://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
 class InlineRecordContainer extends \TYPO3\CMS\Backend\Form\Container\InlineRecordContainer
