@@ -202,11 +202,30 @@ $photoCropVariants = [
         ],
     ]
 ];
-if ($typo3Version < 12) {
+
+if ($typo3Version >= 12) {
+    $GLOBALS['TCA']['fe_users']['columns']['image']['config'] = [
+        'type' => 'file',
+        'allowed' => 'jpeg,jpg',
+        'maxitems' => 1,
+        'minitems' => 0,
+        'overrideChildTca' => [
+            'columns' => [
+                'crop' => [
+                    'config' => [
+                        'cropVariants' => $photoCropVariants,
+                    ],
+                ],
+            ],
+        ],
+    ];
+} else {
     $GLOBALS['TCA']['fe_users']['columns']['image']['config']
         = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
         'image',
         [
+            'maxitems' => 1,
+            'minitems' => 0,
             // Use the imageoverlayPalette instead of the basicoverlayPalette
             'overrideChildTca' => [
                 'types' => [
@@ -224,37 +243,10 @@ if ($typo3Version < 12) {
                     ],
                 ],
             ],
-            'maxitems' => 1,
-            'minitems' => 0,
         ],
         'jpg,jpeg'
     );
-} else {
-    $GLOBALS['TCA']['fe_users']['columns']['image']['config'] = [
-        'type' => 'file',
-        'allowed' => 'jpg,jpeg',
-        'maxitems' => 1,
-        'minitems' => 0,
-        'overrideChildTca' => [
-            'types' => [
-                TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                    'showitem' => '
-                    crop,
-                    --palette--;;filePalette'
-                ],
-            ],
-            'columns' => [
-                'crop' => [
-                    'config' => [
-                        'type' => 'cropConfig',
-                        'cropVariants' => $photoCropVariants,
-                    ],
-                ],
-            ],
-        ],
-    ];
 }
-
 
 $GLOBALS['TCA']['fe_users']['ctrl']['label'] = 'last_name';
 // BEWARE: "title" and GDPR fields are needed for label_userFunc in the context of FlexForm
