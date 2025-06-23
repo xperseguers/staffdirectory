@@ -1,6 +1,6 @@
 TCEMAIN.linkHandler {
     organization {
-        handler = TYPO3\CMS\Backend\LinkHandler\RecordLinkHandler
+        handler = TYPO3\CMS\Recordlist\LinkHandler\RecordLinkHandler
         label = LLL:EXT:staffdirectory/Resources/Private/Language/locallang_be.xlf:linkbrowser.organization
         configuration {
             table = tx_staffdirectory_domain_model_organization

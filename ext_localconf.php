@@ -29,11 +29,18 @@ defined('TYPO3') || die ();
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
-    @import \'EXT:staffdirectory/Configuration/TSconfig/__loader.tsconfig\'
-    ');
-
     $typo3Version = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Information\Typo3Version::class)->getMajorVersion();
+
+    if ($typo3Version >= 12) {
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
+            @import \'EXT:staffdirectory/Configuration/TSconfig/__loader.tsconfig\'
+        ');
+    } else {
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
+            @import \'EXT:staffdirectory/Configuration/TSconfig/__loader_v11.tsconfig\'
+        ');
+    }
+
     if ($typo3Version >= 12) {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Backend\Form\Container\InlineRecordContainer::class] = [
             'className' => \Causal\Staffdirectory\Xclass\V12\Backend\Form\Container\InlineRecordContainer::class,
