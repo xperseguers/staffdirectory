@@ -31,14 +31,20 @@ defined('TYPO3') || die ();
 
     $typo3Version = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Information\Typo3Version::class)->getMajorVersion();
 
-    if ($typo3Version >= 12) {
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
-            @import \'EXT:staffdirectory/Configuration/TSconfig/__loader.tsconfig\'
-        ');
-    } else {
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
-            @import \'EXT:staffdirectory/Configuration/TSconfig/__loader_v11.tsconfig\'
-        ');
+    switch ($typo3Version) {
+        case 11:
+            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
+                @import \'EXT:staffdirectory/Configuration/TSconfig/__loader_v11.tsconfig\'
+            ');
+            break;
+        case 12:
+            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
+                @import \'EXT:staffdirectory/Configuration/TSconfig/__loader_v12.tsconfig\'
+            ');
+            break;
+        default:
+            // As of TYPO3 v13, the TSconfig is loaded automatically from
+            // the extension's Configuration/page.tsconfig file.
     }
 
     if ($typo3Version >= 12) {
