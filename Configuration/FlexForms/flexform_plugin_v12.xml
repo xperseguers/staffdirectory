@@ -16,28 +16,28 @@
                             <renderType>selectSingle</renderType>
                             <items>
                                 <numIndex index="0" type="array">
-                                    <numIndex index="0"></numIndex>
-                                    <numIndex index="1"></numIndex>
+                                    <numIndex index="label"></numIndex>
+                                    <numIndex index="value"></numIndex>
                                 </numIndex>
                                 <numIndex index="1" type="array">
-                                    <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.LIST</numIndex>
-                                    <numIndex index="1">LIST</numIndex>
+                                    <numIndex index="label">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.LIST</numIndex>
+                                    <numIndex index="value">LIST</numIndex>
                                 </numIndex>
                                 <numIndex index="2" type="array">
-                                    <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.ORGANIZATION</numIndex>
-                                    <numIndex index="1">ORGANIZATION</numIndex>
+                                    <numIndex index="label">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.ORGANIZATION</numIndex>
+                                    <numIndex index="value">ORGANIZATION</numIndex>
                                 </numIndex>
                                 <numIndex index="3" type="array">
-                                    <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.PERSONS</numIndex>
-                                    <numIndex index="1">PERSONS</numIndex>
+                                    <numIndex index="label">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.PERSONS</numIndex>
+                                    <numIndex index="value">PERSONS</numIndex>
                                 </numIndex>
                                 <numIndex index="4" type="array">
-                                    <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.PERSON</numIndex>
-                                    <numIndex index="1">PERSON</numIndex>
+                                    <numIndex index="label">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.PERSON</numIndex>
+                                    <numIndex index="value">PERSON</numIndex>
                                 </numIndex>
                                 <numIndex index="5" type="array">
-                                    <numIndex index="0">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.DIRECTORY</numIndex>
-                                    <numIndex index="1">DIRECTORY</numIndex>
+                                    <numIndex index="label">LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.plugin.settings.displayMode.DIRECTORY</numIndex>
+                                    <numIndex index="value">DIRECTORY</numIndex>
                                 </numIndex>
                             </items>
                         </config>
