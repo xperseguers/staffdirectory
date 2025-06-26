@@ -47,7 +47,11 @@ defined('TYPO3') || die ();
             // the extension's Configuration/page.tsconfig file.
     }
 
-    if ($typo3Version >= 12) {
+    if ($typo3Version >= 13) {
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Backend\Form\Container\InlineRecordContainer::class] = [
+            'className' => \Causal\Staffdirectory\Xclass\V13\Backend\Form\Container\InlineRecordContainer::class,
+        ];
+    } elseif ($typo3Version === 12) {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Backend\Form\Container\InlineRecordContainer::class] = [
             'className' => \Causal\Staffdirectory\Xclass\V12\Backend\Form\Container\InlineRecordContainer::class,
         ];
