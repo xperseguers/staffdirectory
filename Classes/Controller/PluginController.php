@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -42,8 +43,7 @@ class PluginController extends ActionController
         OrganizationRepository $organizationRepository,
         MemberRepository $memberRepository,
         PersonRepository $personRepository
-    )
-    {
+    ) {
         $this->organizationRepository = $organizationRepository;
         $this->memberRepository = $memberRepository;
         $this->personRepository = $personRepository;
@@ -300,7 +300,8 @@ class PluginController extends ActionController
      *
      * @param Member|null $member
      */
-    protected function addCacheTagsForMember(?Member $member): void {
+    protected function addCacheTagsForMember(?Member $member): void
+    {
         if ($member === null) {
             return;
         }
@@ -314,7 +315,8 @@ class PluginController extends ActionController
      *
      * @param Person|null $person
      */
-    protected function addCacheTagsForPerson(?Person $person): void {
+    protected function addCacheTagsForPerson(?Person $person): void
+    {
         if ($person === null) {
             return;
         }
@@ -333,9 +335,9 @@ class PluginController extends ActionController
         $typo3Version = (new Typo3Version())->getMajorVersion();
         if ($typo3Version >= 12) {
             return $this->request->getAttribute('currentContentObject')->data;
-        } else {
-            return $this->configurationManager->getContentObject()->data;
         }
+        return $this->configurationManager->getContentObject()->data;
+
     }
 
     /**

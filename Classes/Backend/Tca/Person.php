@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -31,7 +32,7 @@ class Person extends AbstractRecordFetcher
     protected function getAdditionalConditions(QueryBuilder $queryBuilder): array
     {
         return [
-            $queryBuilder->expr()->eq('tx_extbase_type', $queryBuilder->quote('tx_staffdirectory'))
+            $queryBuilder->expr()->eq('tx_extbase_type', $queryBuilder->quote('tx_staffdirectory')),
         ];
     }
 }

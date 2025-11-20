@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /***************************************************************
@@ -45,7 +46,7 @@ class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
      * @param ContentObjectRenderer|null $cObj
      * @throws MissingConfigurationException
      */
-    public function __construct(ServerRequestInterface $request, string $key, array $config = [], ContentObjectRenderer $cObj = null)
+    public function __construct(ServerRequestInterface $request, string $key, array $config = [], ?ContentObjectRenderer $cObj = null)
     {
         parent::__construct($request, $key, $config, $cObj);
 
@@ -112,7 +113,7 @@ class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
             $this->items[] = [
                 'data' => $row,
                 'lastMod' => (int)$row['lastmod'],
-                'priority' => 0.25
+                'priority' => 0.25,
             ];
         }
     }
@@ -140,7 +141,7 @@ class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
             'parameter' => $pageId,
             'additionalParams' => $additionalParamsString ? '&' . $additionalParamsString : '',
             'forceAbsoluteUrl' => 1,
-            'useCacheHash' => $this->config['url']['useCacheHash'] ?? 0
+            'useCacheHash' => $this->config['url']['useCacheHash'] ?? 0,
         ];
 
         $data['loc'] = $this->cObj->typoLink_URL($typoLinkConfig);

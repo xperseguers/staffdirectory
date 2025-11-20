@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -91,7 +92,7 @@ class MembershipViewHelper extends AbstractViewHelper
             $membership[] = [
                 'positionFunction' => $row['position_function'],
                 'organization' => $organization,
-                'links' => $this->findPagesWithPlugin($person, $organization)
+                'links' => $this->findPagesWithPlugin($person, $organization),
             ];
         }
 

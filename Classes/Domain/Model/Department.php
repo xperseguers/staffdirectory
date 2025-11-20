@@ -1,4 +1,5 @@
 <?php
+
 /***************************************************************
  *  Copyright notice
  *
@@ -30,15 +31,12 @@ use Causal\Staffdirectory\Domain\Repository\Factory;
  * Department.
  *
  * @category    Model
- * @package     TYPO3
- * @subpackage  tx_staffdirectory
  * @author      Xavier Perseguers <xavier@causal.ch>
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
 class Department extends DeprecatedAbstractEntity
 {
-
     /**
      * @var Staff
      */

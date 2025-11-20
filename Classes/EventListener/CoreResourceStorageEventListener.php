@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -18,20 +19,7 @@ namespace Causal\Staffdirectory\EventListener;
 
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Resource\Event\AfterFileAddedEvent;
-use TYPO3\CMS\Core\Resource\Event\AfterFileContentsSetEvent;
-use TYPO3\CMS\Core\Resource\Event\AfterFileCopiedEvent;
-use TYPO3\CMS\Core\Resource\Event\AfterFileCreatedEvent;
-use TYPO3\CMS\Core\Resource\Event\AfterFileDeletedEvent;
-use TYPO3\CMS\Core\Resource\Event\AfterFileMovedEvent;
-use TYPO3\CMS\Core\Resource\Event\AfterFileRenamedEvent;
 use TYPO3\CMS\Core\Resource\Event\AfterFileReplacedEvent;
-use TYPO3\CMS\Core\Resource\Event\AfterFolderAddedEvent;
-use TYPO3\CMS\Core\Resource\Event\AfterFolderCopiedEvent;
-use TYPO3\CMS\Core\Resource\Event\AfterFolderDeletedEvent;
-use TYPO3\CMS\Core\Resource\Event\AfterFolderMovedEvent;
-use TYPO3\CMS\Core\Resource\Event\AfterFolderRenamedEvent;
-use TYPO3\CMS\Core\Resource\FolderInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CoreResourceStorageEventListener

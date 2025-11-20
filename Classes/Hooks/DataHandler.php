@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -31,8 +32,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * Hooks into \TYPO3\CMS\Core\DataHandling\DataHandler.
  *
  * @category    Hooks
- * @package     TYPO3
- * @subpackage  tx_staffdirectory
  * @author      Xavier Perseguers <xavier@causal.ch>
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
@@ -54,8 +53,7 @@ class DataHandler
         $id,
         array &$fieldArray,
         \TYPO3\CMS\Core\DataHandling\DataHandler $pObj
-    ): void
-    {
+    ): void {
         if ($table !== 'fe_users') {
             return;
         }

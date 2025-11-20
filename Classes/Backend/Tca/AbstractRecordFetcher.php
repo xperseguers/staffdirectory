@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -71,7 +72,7 @@ abstract class AbstractRecordFetcher
             $title = BackendUtility::getRecordTitle($this->table, $row);
             $items[] = [
                 $title,
-                $row['uid']
+                $row['uid'],
             ];
         }
 

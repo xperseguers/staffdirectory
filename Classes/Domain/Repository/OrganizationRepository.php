@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -18,7 +19,4 @@ namespace Causal\Staffdirectory\Domain\Repository;
 
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
-class OrganizationRepository extends Repository
-{
-
-}
+class OrganizationRepository extends Repository {}
