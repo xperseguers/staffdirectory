@@ -41,7 +41,7 @@ class Person extends AbstractEntity
     /**
      * @var ObjectStorage<FileReference>
      */
-    protected $image;
+    protected ObjectStorage $image;
 
     public function __construct()
     {
@@ -51,9 +51,9 @@ class Person extends AbstractEntity
     /**
      * Called again with initialize object, as fetching an entity from the DB does not use the constructor
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
-        $this->image = $this->image ?? new ObjectStorage();
+        $this->image ??= new ObjectStorage();
     }
 
     public function getName(): string

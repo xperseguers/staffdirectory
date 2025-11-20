@@ -35,7 +35,7 @@ class MemberSuggestReceiver extends SuggestWizardDefaultReceiver
     protected function prepareSelectStatement(): void
     {
         $queryBuilder = $this->queryBuilder;
-        $query = trim($this->params['value']);
+        $query = trim((string) $this->params['value']);
 
         if (MathUtility::canBeInterpretedAsInteger($query)) {
             $whereClause = $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter((int)$query, Connection::PARAM_INT));
@@ -44,17 +44,13 @@ class MemberSuggestReceiver extends SuggestWizardDefaultReceiver
             // and trailing * to get partial match
             $queryParts = GeneralUtility::trimExplode(' ', $query, true);
             $queryPartsFullText = array_map(
-                function (string $q) {
-                    return '+' . $q . '*';
-                },
+                fn(string $q): string => '+' . $q . '*',
                 $queryParts
             );
             $queryFullText = $queryBuilder->quote(implode(' ', $queryPartsFullText));
 
             $fulltextColumns = array_map(
-                function (string $col) use ($queryBuilder) {
-                    return $queryBuilder->quoteIdentifier($col);
-                },
+                $queryBuilder->quoteIdentifier(...),
                 ['first_name', 'middle_name', 'last_name']
             );
 

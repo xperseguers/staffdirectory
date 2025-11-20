@@ -40,10 +40,6 @@ use TYPO3\CMS\Seo\XmlSitemap\Exception\MissingConfigurationException;
 class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
 {
     /**
-     * @param ServerRequestInterface $request
-     * @param string $key
-     * @param array $config
-     * @param ContentObjectRenderer|null $cObj
      * @throws MissingConfigurationException
      */
     public function __construct(ServerRequestInterface $request, string $key, array $config = [], ?ContentObjectRenderer $cObj = null)
@@ -60,17 +56,16 @@ class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
     {
         $table = 'fe_users';
 
-        $pids = !empty($this->config['pid']) ? GeneralUtility::intExplode(',', $this->config['pid']) : [];
-        $lastModifiedField = 'tstamp';
+        $pids = empty($this->config['pid']) ? [] : GeneralUtility::intExplode(',', $this->config['pid']);
 
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable($table);
 
         $constraints = [];
 
-        if (!empty($pids)) {
+        if ($pids !== []) {
             $recursiveLevel = isset($this->config['recursive']) ? (int)$this->config['recursive'] : 0;
-            if ($recursiveLevel) {
+            if ($recursiveLevel !== 0) {
                 $subPids = [];
                 foreach ($pids as $pid) {
                     $list = $this->cObj->getTreeList($pid, $recursiveLevel);
@@ -118,10 +113,6 @@ class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
         }
     }
 
-    /**
-     * @param array $data
-     * @return array
-     */
     protected function defineUrl(array $data): array
     {
         $pageId = $this->config['url']['pageId'] ?? $GLOBALS['TSFE']->id;
@@ -149,11 +140,6 @@ class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
         return $data;
     }
 
-    /**
-     * @param array $additionalParams
-     * @param array $data
-     * @return array
-     */
     protected function getUrlFieldParameterMap(array $additionalParams, array $data): array
     {
         if (!empty($this->config['url']['fieldToParameterMap']) &&
@@ -166,10 +152,6 @@ class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
         return $additionalParams;
     }
 
-    /**
-     * @param array $additionalParams
-     * @return array
-     */
     protected function getUrlAdditionalParams(array $additionalParams): array
     {
         if (!empty($this->config['url']['additionalGetParameters']) &&

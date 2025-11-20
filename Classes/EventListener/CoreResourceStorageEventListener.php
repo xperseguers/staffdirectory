@@ -25,24 +25,14 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class CoreResourceStorageEventListener
 {
     /**
-     * @var CacheManager
-     */
-    protected $pageCache;
-
-    /**
      * CoreResourceStorageEventListener constructor.
-     *
-     * @param CacheManager $cacheManager
      */
-    public function __construct(CacheManager $cacheManager)
+    public function __construct(protected CacheManager $pageCache)
     {
-        $this->pageCache = $cacheManager;
     }
 
     /**
      * A file has been added as a *replacement* of an existing one.
-     *
-     * @param AfterFileReplacedEvent $event
      */
     public function afterFileReplaced(AfterFileReplacedEvent $event): void
     {

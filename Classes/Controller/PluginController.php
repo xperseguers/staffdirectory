@@ -35,39 +35,23 @@ class PluginController extends ActionController
 {
     private const ORGANIZATION_RECURSION_LIMIT = 10;
 
-    protected OrganizationRepository $organizationRepository;
-    protected MemberRepository $memberRepository;
-    protected PersonRepository $personRepository;
-
-    public function __construct(
-        OrganizationRepository $organizationRepository,
-        MemberRepository $memberRepository,
-        PersonRepository $personRepository
-    ) {
-        $this->organizationRepository = $organizationRepository;
-        $this->memberRepository = $memberRepository;
-        $this->personRepository = $personRepository;
+    public function __construct(protected OrganizationRepository $organizationRepository, protected MemberRepository $memberRepository, protected PersonRepository $personRepository)
+    {
     }
 
     public function dispatchAction(): ResponseInterface
     {
-        switch ($this->settings['displayMode']) {
-            case 'LIST':
-                return new ForwardResponse('list');
-            case 'ORGANIZATION':
-                return new ForwardResponse('organization');
-            case 'PERSON':
-                return new ForwardResponse('person');
-            case 'PERSONS':
-                return new ForwardResponse('persons');
-            case 'DIRECTORY':
-                return new ForwardResponse('directory');
-            default:
-                throw new \RuntimeException(
-                    sprintf('Invalid display mode "%s"', $this->settings['displayMode']),
-                    1701367726
-                );
-        }
+        return match ($this->settings['displayMode']) {
+            'LIST' => new ForwardResponse('list'),
+            'ORGANIZATION' => new ForwardResponse('organization'),
+            'PERSON' => new ForwardResponse('person'),
+            'PERSONS' => new ForwardResponse('persons'),
+            'DIRECTORY' => new ForwardResponse('directory'),
+            default => throw new \RuntimeException(
+                sprintf('Invalid display mode "%s"', $this->settings['displayMode']),
+                1701367726
+            ),
+        };
     }
 
     public function listAction(): ResponseInterface
@@ -93,7 +77,7 @@ class PluginController extends ActionController
 
     public function organizationAction(?Organization $organization = null): ResponseInterface
     {
-        if ($organization === null) {
+        if (!$organization instanceof Organization) {
             // Get first selected organization in the list
             $uids = GeneralUtility::intExplode(',', $this->settings['organizations'], true);
             $organization = $this->organizationRepository->findByUid($uids[0] ?? 0);
@@ -116,7 +100,7 @@ class PluginController extends ActionController
 
     public function personAction(?Person $person = null): ResponseInterface
     {
-        if ($person === null) {
+        if (!$person instanceof Person) {
             // Get first selected person in the list
             $uids = GeneralUtility::intExplode(',', $this->settings['persons'], true);
             $person = $this->personRepository->findByUid($uids[0] ?? 0);
@@ -223,11 +207,11 @@ class PluginController extends ActionController
 
     protected function fetchPersonsRecursive(?Organization $organization, int $recursion = 0): array
     {
-        if ($organization === null) {
+        if (!$organization instanceof Organization) {
             return [];
         }
 
-        if ($recursion > static::ORGANIZATION_RECURSION_LIMIT) {
+        if ($recursion > self::ORGANIZATION_RECURSION_LIMIT) {
             throw new \RuntimeException(
                 vsprintf('Recursion limit reached for organization uid=%s (%s)', [
                     $organization->getUid(),
@@ -266,16 +250,15 @@ class PluginController extends ActionController
      * Tags the page cache so that FAL signal operations may be listened to in
      * order to flush corresponding page cache.
      *
-     * @param Organization|null $organization
      * @param int $recursion internal recursion counter
      */
     protected function addCacheTagsForOrganization(?Organization $organization, int $recursion = 0): void
     {
-        if ($organization === null) {
+        if (!$organization instanceof Organization) {
             return;
         }
 
-        if ($recursion > static::ORGANIZATION_RECURSION_LIMIT) {
+        if ($recursion > self::ORGANIZATION_RECURSION_LIMIT) {
             throw new \RuntimeException(
                 vsprintf('Recursion limit reached for organization uid=%s (%s)', [
                     $organization->getUid(),
@@ -297,12 +280,10 @@ class PluginController extends ActionController
     /**
      * Tags the page cache so that FAL signal operations may be listened to in
      * order to flush corresponding page cache.
-     *
-     * @param Member|null $member
      */
     protected function addCacheTagsForMember(?Member $member): void
     {
-        if ($member === null) {
+        if (!$member instanceof Member) {
             return;
         }
 
@@ -312,12 +293,10 @@ class PluginController extends ActionController
     /**
      * Tags the page cache so that FAL signal operations may be listened to in
      * order to flush corresponding page cache.
-     *
-     * @param Person|null $person
      */
     protected function addCacheTagsForPerson(?Person $person): void
     {
-        if ($person === null) {
+        if (!$person instanceof Person) {
             return;
         }
 
@@ -340,9 +319,6 @@ class PluginController extends ActionController
 
     }
 
-    /**
-     * @return TypoScriptFrontendController
-     */
     protected function getTypoScriptFrontendController(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];

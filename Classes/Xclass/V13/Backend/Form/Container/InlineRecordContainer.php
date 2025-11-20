@@ -108,7 +108,7 @@ class InlineRecordContainer extends AbstractContainer
             if ($isNewRecord) {
                 // Add pid of record as hidden field
                 $html .= '<input type="hidden" name="data' . htmlspecialchars($appendFormFieldNames)
-                    . '[pid]" value="' . htmlspecialchars($record['pid']) . '"/>';
+                    . '[pid]" value="' . htmlspecialchars((string) $record['pid']) . '"/>';
                 // Tell DataHandler this record is expanded
                 $ucFieldName = 'uc[inlineView]'
                     . '[' . $data['inlineTopMostParentTableName'] . ']'
@@ -121,12 +121,12 @@ class InlineRecordContainer extends AbstractContainer
                 $html .= '<input type="hidden" name="cmd' . htmlspecialchars($appendFormFieldNames)
                     . '[delete]" value="1" disabled="disabled" />';
                 if (!empty($hiddenField) && (!$data['isInlineChildExpanded'] || !in_array($hiddenField, $data['columnsToProcess'], true))) {
-                    $checked = !empty($record[$hiddenField]) ? ' checked="checked"' : '';
+                    $checked = empty($record[$hiddenField]) ? '' : ' checked="checked"';
                     $html .= '<input type="checkbox" class="d-none" data-formengine-input-name="data'
                         . htmlspecialchars($appendFormFieldNames)
-                        . '[' . htmlspecialchars($hiddenField) . ']" value="1"' . $checked . ' />';
+                        . '[' . htmlspecialchars((string) $hiddenField) . ']" value="1"' . $checked . ' />';
                     $html .= '<input type="input" class="d-none" name="data' . htmlspecialchars($appendFormFieldNames)
-                        . '[' . htmlspecialchars($hiddenField) . ']" value="' . htmlspecialchars($record[$hiddenField]) . '" />';
+                        . '[' . htmlspecialchars((string) $hiddenField) . ']" value="' . htmlspecialchars((string) $record[$hiddenField]) . '" />';
                 }
             }
             // If this record should be shown collapsed
@@ -197,7 +197,7 @@ class InlineRecordContainer extends AbstractContainer
 
             $html = '
                 <div ' . GeneralUtility::implodeAttributes($containerAttributes, true) . '>
-                    <div class="panel-heading" style="' . trim($parameters['style']) . '" data-bs-toggle="formengine-inline" id="' . htmlspecialchars($hashedObjectId, ENT_QUOTES | ENT_HTML5) . '_header" data-expandSingle="' . (($inlineConfig['appearance']['expandSingle'] ?? false) ? 1 : 0) . '">
+                    <div class="panel-heading" style="' . trim((string) $parameters['style']) . '" data-bs-toggle="formengine-inline" id="' . htmlspecialchars($hashedObjectId, ENT_QUOTES | ENT_HTML5) . '_header" data-expandSingle="' . (($inlineConfig['appearance']['expandSingle'] ?? false) ? 1 : 0) . '">
                         <div class="form-irre-header">
                             <div class="form-irre-header-cell form-irre-header-icon">
                                 <span class="caret"></span>
@@ -218,8 +218,9 @@ class InlineRecordContainer extends AbstractContainer
      * Render inner child
      *
      * @return array Result array
+     * @param array<string, mixed> $data
      */
-    protected function renderChild(array $data)
+    protected function renderChild(array $data): array
     {
         $domObjectId = $this->inlineStackProcessor->getCurrentStructureDomObjectIdPrefix($data['inlineFirstPid']);
         $data['tabAndInlineStack'][] = [
@@ -239,11 +240,11 @@ class InlineRecordContainer extends AbstractContainer
      * so two tables are combined (the intermediate table with attributes and the sub-embedded table).
      * -> This is a direct embedding over two levels!
      *
-     * @param array $data
      * @param string $appendFormFieldNames The [<table>][<uid>] of the parent record (the intermediate table)
      * @return array Result array
+     * @param array<string, mixed> $data
      */
-    protected function renderCombinationChild(array $data, $appendFormFieldNames)
+    protected function renderCombinationChild(array $data, string $appendFormFieldNames): array
     {
         $childData = $data['combinationChild'];
         $parentConfig = $data['inlineParentConfig'];
@@ -288,12 +289,12 @@ class InlineRecordContainer extends AbstractContainer
         // If this is a new record, add a pid value to store this record and the pointer value for the intermediate table
         if ($childData['command'] === 'new') {
             $comboFormFieldName = 'data[' . $childData['tableName'] . '][' . $childData['databaseRow']['uid'] . '][pid]';
-            $resultArray['html'] .= '<input type="hidden" name="' . htmlspecialchars($comboFormFieldName) . '" value="' . htmlspecialchars($childData['databaseRow']['pid']) . '" />';
+            $resultArray['html'] .= '<input type="hidden" name="' . htmlspecialchars($comboFormFieldName) . '" value="' . htmlspecialchars((string) $childData['databaseRow']['pid']) . '" />';
         }
         // If the foreign_selector field is also responsible for uniqueness, tell the browser the uid of the "other" side of the relation
         if ($childData['command'] === 'new' || $parentConfig['foreign_unique'] === $parentConfig['foreign_selector']) {
             $parentFormFieldName = 'data' . $appendFormFieldNames . '[' . $parentConfig['foreign_selector'] . ']';
-            $resultArray['html'] .= '<input type="hidden" name="' . htmlspecialchars($parentFormFieldName) . '" value="' . htmlspecialchars($childData['databaseRow']['uid']) . '" />';
+            $resultArray['html'] .= '<input type="hidden" name="' . htmlspecialchars($parentFormFieldName) . '" value="' . htmlspecialchars((string) $childData['databaseRow']['uid']) . '" />';
         }
 
         return $resultArray;
@@ -303,7 +304,7 @@ class InlineRecordContainer extends AbstractContainer
      * Renders the HTML header for a foreign record, such as the title, toggle-function, drag'n'drop, etc.
      * Later on the command-icons are inserted here.
      *
-     * @param array $data Current data
+     * @param array<string, mixed> $data Current data
      * @param string $ariaAttributesString HTML aria attributes for the collapse button
      * @return string The HTML code of the header
      */
@@ -328,7 +329,7 @@ class InlineRecordContainer extends AbstractContainer
         if (empty($data['processedTca']['ctrl']['formattedLabel_userFunc'])
             && $this->getBackendUserAuthentication()->shallDisplayDebugInformation()
         ) {
-            $recordTitle .= ' <code>[' . htmlspecialchars($foreignTable) . ']</code>';
+            $recordTitle .= ' <code>[' . htmlspecialchars((string) $foreignTable) . ']</code>';
         }
 
         $objectId = htmlspecialchars($domObjectId . '-' . $foreignTable . '-' . ($record['uid'] ?? 0));
@@ -349,10 +350,10 @@ class InlineRecordContainer extends AbstractContainer
      * Most of the parts are copy&paste from TYPO3\CMS\Backend\RecordList\DatabaseRecordList and
      * modified for the JavaScript calls here
      *
-     * @param array $data Current data
+     * @param array<string, mixed> $data Current data
      * @return string The HTML code with the control-icons
      */
-    protected function renderForeignRecordHeaderControl(array $data)
+    protected function renderForeignRecordHeaderControl(array $data): string
     {
         $rec = $data['databaseRow'];
         $rec += [
@@ -374,7 +375,7 @@ class InlineRecordContainer extends AbstractContainer
             'localize' => '',
             'locked' => '',
         ];
-        $isNewItem = str_starts_with($rec['uid'], 'NEW');
+        $isNewItem = str_starts_with((string) $rec['uid'], 'NEW');
         $isParentReadOnly = isset($inlineConfig['readOnly']) && $inlineConfig['readOnly'];
         $isParentExisting = MathUtility::canBeInterpretedAsInteger($data['inlineParentUid']);
         $tcaTableCtrl = $GLOBALS['TCA'][$foreignTable]['ctrl'];
@@ -406,7 +407,7 @@ class InlineRecordContainer extends AbstractContainer
                 $cells['info'] = '<span class="btn btn-default disabled">' . $this->iconFactory->getIcon('empty-empty', IconSize::SMALL)->render() . '</span>';
             } else {
                 $cells['info'] = '
-				<button type="button" class="btn btn-default" data-action="infowindow" data-info-table="' . htmlspecialchars($foreignTable) . '" data-info-uid="' . htmlspecialchars($rec['uid']) . '" title="' . htmlspecialchars($languageService->sL('LLL:EXT:core/Resources/Private/Language/locallang_mod_web_list.xlf:showInfo')) . '">
+				<button type="button" class="btn btn-default" data-action="infowindow" data-info-table="' . htmlspecialchars((string) $foreignTable) . '" data-info-uid="' . htmlspecialchars((string) $rec['uid']) . '" title="' . htmlspecialchars($languageService->sL('LLL:EXT:core/Resources/Private/Language/locallang_mod_web_list.xlf:showInfo')) . '">
 					' . $this->iconFactory->getIcon('actions-document-info', IconSize::SMALL)->render() . '
 				</button>';
             }
@@ -414,17 +415,15 @@ class InlineRecordContainer extends AbstractContainer
         // If the table is NOT a read-only table, then show these links:
         if (!$isParentReadOnly && !($tcaTableCtrl['readOnly'] ?? false) && !($data['isInlineDefaultLanguageRecordInLocalizedParentContext'] ?? false)) {
             // "New record after" link (ONLY if the records in the table are sorted by a "sortby"-row or if default values can depend on previous record):
-            if ($event->isControlEnabled('new') && ($enableManualSorting || ($tcaTableCtrl['useColumnsForDefaultValues'] ?? false))) {
-                if ((!$isPagesTable && $calcPerms->editContentPermissionIsGranted()) || ($isPagesTable && $calcPerms->createPagePermissionIsGranted())) {
-                    $style = '';
-                    if ($inlineConfig['inline']['inlineNewButtonStyle'] ?? false) {
-                        $style = ' style="' . $inlineConfig['inline']['inlineNewButtonStyle'] . '"';
-                    }
-                    $cells['new'] = '
-                        <button type="button" class="btn btn-default t3js-create-new-button" data-record-uid="' . htmlspecialchars($rec['uid']) . '" title="' . htmlspecialchars($languageService->sL('LLL:EXT:core/Resources/Private/Language/locallang_mod_web_list.xlf:new' . ($isPagesTable ? 'Page' : 'Record'))) . '" ' . $style . '>
+            if ($event->isControlEnabled('new') && ($enableManualSorting || ($tcaTableCtrl['useColumnsForDefaultValues'] ?? false)) && (!$isPagesTable && $calcPerms->editContentPermissionIsGranted() || $isPagesTable && $calcPerms->createPagePermissionIsGranted())) {
+                $style = '';
+                if ($inlineConfig['inline']['inlineNewButtonStyle'] ?? false) {
+                    $style = ' style="' . $inlineConfig['inline']['inlineNewButtonStyle'] . '"';
+                }
+                $cells['new'] = '
+                        <button type="button" class="btn btn-default t3js-create-new-button" data-record-uid="' . htmlspecialchars((string) $rec['uid']) . '" title="' . htmlspecialchars($languageService->sL('LLL:EXT:core/Resources/Private/Language/locallang_mod_web_list.xlf:new' . ($isPagesTable ? 'Page' : 'Record'))) . '" ' . $style . '>
                             ' . $this->iconFactory->getIcon('actions-' . ($isPagesTable ? 'page-new' : 'add'), IconSize::SMALL)->render() . '
                         </button>';
-                }
             }
             // "Up/Down" links
             if ($event->isControlEnabled('sort') && $permsEdit && $enableManualSorting) {
@@ -468,7 +467,7 @@ class InlineRecordContainer extends AbstractContainer
                 }
 
                 $cells['delete'] = '
-                    <button type="button" class="btn btn-default t3js-editform-delete-inline-record" data-record-info="' . htmlspecialchars(trim($recordInfo)) . '" title="' . $title . '">
+                    <button type="button" class="btn btn-default t3js-editform-delete-inline-record" data-record-info="' . htmlspecialchars(trim((string) $recordInfo)) . '" title="' . $title . '">
                         ' . $icon . '
                     </button>';
             }
@@ -484,13 +483,13 @@ class InlineRecordContainer extends AbstractContainer
                 if ($rec[$hiddenField]) {
                     $title = htmlspecialchars($languageService->sL('LLL:EXT:core/Resources/Private/Language/locallang_mod_web_list.xlf:unHide' . ($isPagesTable ? 'Page' : '')));
                     $cells['hide'] = '
-                        <button type="button" class="btn btn-default t3js-toggle-visibility-button" data-hidden-field="' . htmlspecialchars($hiddenField) . '" title="' . $title . '">
+                        <button type="button" class="btn btn-default t3js-toggle-visibility-button" data-hidden-field="' . htmlspecialchars((string) $hiddenField) . '" title="' . $title . '">
                             ' . $this->iconFactory->getIcon('actions-edit-unhide', IconSize::SMALL)->render() . '
                         </button>';
                 } else {
                     $title = htmlspecialchars($languageService->sL('LLL:EXT:core/Resources/Private/Language/locallang_mod_web_list.xlf:hide' . ($isPagesTable ? 'Page' : '')));
                     $cells['hide'] = '
-                        <button type="button" class="btn btn-default t3js-toggle-visibility-button" data-hidden-field="' . htmlspecialchars($hiddenField) . '" title="' . $title . '">
+                        <button type="button" class="btn btn-default t3js-toggle-visibility-button" data-hidden-field="' . htmlspecialchars((string) $hiddenField) . '" title="' . $title . '">
                             ' . $this->iconFactory->getIcon('actions-edit-hide', IconSize::SMALL)->render() . '
                         </button>';
                 }
@@ -498,14 +497,14 @@ class InlineRecordContainer extends AbstractContainer
             // Drag&Drop Sorting: Sortable handler for script.aculo.us
             if ($event->isControlEnabled('dragdrop') && $permsEdit && $enableManualSorting && ($inlineConfig['appearance']['useSortable'] ?? false)) {
                 $cells['dragdrop'] = '
-                    <span class="btn btn-default sortableHandle" data-id="' . htmlspecialchars($rec['uid']) . '" title="' . htmlspecialchars($languageService->sL('LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.move')) . '">
+                    <span class="btn btn-default sortableHandle" data-id="' . htmlspecialchars((string) $rec['uid']) . '" title="' . htmlspecialchars($languageService->sL('LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.move')) . '">
                         ' . $this->iconFactory->getIcon('actions-move-move', IconSize::SMALL)->render() . '
                     </span>';
             }
         } elseif (($data['isInlineDefaultLanguageRecordInLocalizedParentContext'] ?? false) && $isParentExisting) {
             if ($event->isControlEnabled('localize') && ($data['isInlineDefaultLanguageRecordInLocalizedParentContext'] ?? false)) {
                 $cells['localize'] = '
-                    <button type="button" class="btn btn-default t3js-synchronizelocalize-button" data-type="' . htmlspecialchars($rec['uid']) . '" title="' . htmlspecialchars($languageService->sL('LLL:EXT:core/Resources/Private/Language/locallang_misc.xlf:localize')) . '">
+                    <button type="button" class="btn btn-default t3js-synchronizelocalize-button" data-type="' . htmlspecialchars((string) $rec['uid']) . '" title="' . htmlspecialchars($languageService->sL('LLL:EXT:core/Resources/Private/Language/locallang_misc.xlf:localize')) . '">
                         ' . $this->iconFactory->getIcon('actions-document-localize', IconSize::SMALL)->render() . '
                     </button>';
             }
@@ -513,7 +512,7 @@ class InlineRecordContainer extends AbstractContainer
         // If the record is edit-locked by another user, we will show a little warning sign:
         if ($lockInfo = BackendUtility::isRecordLocked($foreignTable, $rec['uid'])) {
             $cells['locked'] = '
-				<button type="button" class="btn btn-default" title="' . htmlspecialchars($lockInfo['msg']) . '">
+				<button type="button" class="btn btn-default" title="' . htmlspecialchars((string) $lockInfo['msg']) . '">
 					' . $this->iconFactory->getIcon('status-user-backend', IconSize::SMALL, 'overlay-edit')->render() . '
 				</button>';
         }

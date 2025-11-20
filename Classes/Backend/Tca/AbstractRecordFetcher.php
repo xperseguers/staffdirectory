@@ -29,9 +29,12 @@ abstract class AbstractRecordFetcher
     protected string $table;
     protected string $orderBy;
 
+    /**
+     * @param array<string, mixed> $conf
+     */
     protected function fetchRecords(array $conf): array
     {
-        if (!$conf) {
+        if ($conf === []) {
             $conf = ['items' => []];
         }
         $items = [];
@@ -59,10 +62,10 @@ abstract class AbstractRecordFetcher
             ->orderBy($this->orderBy);
 
         $conditions = $this->getAdditionalConditions($queryBuilder);
-        if (!empty($pages)) {
+        if ($pages !== []) {
             $conditions[] = $queryBuilder->expr()->in('pid', $pages);
         }
-        if (!empty($conditions)) {
+        if ($conditions !== []) {
             $queryBuilder->where(...$conditions);
         }
 
@@ -81,6 +84,9 @@ abstract class AbstractRecordFetcher
         return $conf;
     }
 
+    /**
+     * @return array{}
+     */
     protected function getAdditionalConditions(QueryBuilder $queryBuilder): array
     {
         return [];
@@ -88,22 +94,13 @@ abstract class AbstractRecordFetcher
 
     /**
      * Get tree list
-     *
-     * @param int $id
-     * @param int $depth
-     * @param int $begin
-     * @return string
      */
     protected function getTreeList(int $id, int $depth, int $begin = 0): string
     {
         if ($id < 0) {
-            $id = (int)abs($id);
+            $id = abs($id);
         }
-        if ($begin === 0) {
-            $theList = $id;
-        } else {
-            $theList = '';
-        }
+        $theList = $begin === 0 ? $id : '';
         if ($id && $depth > 0) {
             $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('pages');
             $queryBuilder

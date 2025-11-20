@@ -22,7 +22,7 @@ class FeUser
     /**
      * Returns the label to be used for a MemberStatus.
      *
-     * @param array $params
+     * @param array<string, mixed> $params
      */
     public function getLabel(array &$params): void
     {
@@ -38,7 +38,7 @@ class FeUser
             $displayName = '✅ ';
         }
 
-        $displayName .= !empty($feUser['last_name']) ? $feUser['last_name'] . ', ' : '';
+        $displayName .= empty($feUser['last_name']) ? '' : $feUser['last_name'] . ', ';
         $displayName .= $feUser['first_name'];
         if (!empty($feUser['title'])) {
             $displayName .= ' (' . $feUser['title'] . ')';

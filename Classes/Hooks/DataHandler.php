@@ -41,11 +41,8 @@ class DataHandler
     /**
      * Hooks into \TYPO3\CMS\Core\DataHandling\DataHandler before records get actually saved to the database.
      *
-     * @param string $operation
-     * @param string $table
      * @param int|string $id
-     * @param array $fieldArray
-     * @param \TYPO3\CMS\Core\DataHandling\DataHandler $pObj
+     * @param array<string, mixed> $fieldArray
      */
     public function processDatamap_postProcessFieldArray(
         string $operation,
@@ -92,6 +89,10 @@ class DataHandler
         }
     }
 
+    /**
+     * @param array<string, mixed> $record
+     * @param array<string, mixed> $fieldArray
+     */
     protected function cleanupPhoneNumbers(array $record, array &$fieldArray): void
     {
         $country = $fieldArray['country'] ?? $record['country'] ?? 'CH';
@@ -108,7 +109,7 @@ class DataHandler
                         // Invalid telephone number
                         $fieldArray[$field] = '';
                     }
-                } catch (NumberParseException $e) {
+                } catch (NumberParseException) {
                     // Nothing to do
                 }
             }
@@ -117,11 +118,6 @@ class DataHandler
 
     /**
      * Regenerates the slug.
-     *
-     * @param string $table
-     * @param int $uid
-     * @param array $fields
-     * @return string
      */
     protected function regeneratePathSegment(string $table, int $uid, array $fields = []): string
     {
@@ -148,16 +144,14 @@ class DataHandler
 
         $state = RecordStateFactory::forName($table)->fromArray($record);
 
-        if (str_contains($fieldConfig['eval'], 'uniqueInSite')) {
+        if (str_contains((string) $fieldConfig['eval'], 'uniqueInSite')) {
             $slug = $slugHelper->buildSlugForUniqueInSite($slug, $state);
         }
 
-        if (str_contains($fieldConfig['eval'], 'uniqueInPid')) {
+        if (str_contains((string) $fieldConfig['eval'], 'uniqueInPid')) {
             $slug = $slugHelper->buildSlugForUniqueInPid($slug, $state);
         }
 
-        $slug = $slugHelper->sanitize($slug);
-
-        return $slug;
+        return $slugHelper->sanitize($slug);
     }
 }

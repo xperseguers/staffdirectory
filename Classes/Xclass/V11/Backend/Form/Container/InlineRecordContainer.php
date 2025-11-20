@@ -29,6 +29,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class InlineRecordContainer extends \TYPO3\CMS\Backend\Form\Container\InlineRecordContainer
 {
+    public $inlineStackProcessor;
     /**
      * Entry method
      *
@@ -87,7 +88,7 @@ class InlineRecordContainer extends \TYPO3\CMS\Backend\Form\Container\InlineReco
             if ($isNewRecord) {
                 // Add pid of record as hidden field
                 $html .= '<input type="hidden" name="data' . htmlspecialchars($appendFormFieldNames)
-                    . '[pid]" value="' . htmlspecialchars($record['pid']) . '"/>';
+                    . '[pid]" value="' . htmlspecialchars((string) $record['pid']) . '"/>';
                 // Tell DataHandler this record is expanded
                 $ucFieldName = 'uc[inlineView]'
                     . '[' . $data['inlineTopMostParentTableName'] . ']'
@@ -100,12 +101,12 @@ class InlineRecordContainer extends \TYPO3\CMS\Backend\Form\Container\InlineReco
                 $html .= '<input type="hidden" name="cmd' . htmlspecialchars($appendFormFieldNames)
                     . '[delete]" value="1" disabled="disabled" />';
                 if (!empty($hiddenField) && (!$data['isInlineChildExpanded'] || !in_array($hiddenField, $data['columnsToProcess'], true))) {
-                    $checked = !empty($record[$hiddenField]) ? ' checked="checked"' : '';
+                    $checked = empty($record[$hiddenField]) ? '' : ' checked="checked"';
                     $html .= '<input type="checkbox" class="d-none" data-formengine-input-name="data'
                         . htmlspecialchars($appendFormFieldNames)
-                        . '[' . htmlspecialchars($hiddenField) . ']" value="1"' . $checked . ' />';
+                        . '[' . htmlspecialchars((string) $hiddenField) . ']" value="1"' . $checked . ' />';
                     $html .= '<input type="input" class="d-none" name="data' . htmlspecialchars($appendFormFieldNames)
-                        . '[' . htmlspecialchars($hiddenField) . ']" value="' . htmlspecialchars($record[$hiddenField]) . '" />';
+                        . '[' . htmlspecialchars((string) $hiddenField) . ']" value="' . htmlspecialchars((string) $record[$hiddenField]) . '" />';
                 }
             }
             // If this record should be shown collapsed
@@ -177,7 +178,7 @@ class InlineRecordContainer extends \TYPO3\CMS\Backend\Form\Container\InlineReco
             $html = '
 				<div ' . GeneralUtility::implodeAttributes($containerAttributes, true) . '>
 					<div class="panel-heading" data-bs-toggle="formengine-inline" id="' . htmlspecialchars($hashedObjectId, ENT_QUOTES | ENT_HTML5) . '_header" data-expandSingle="' . (($inlineConfig['appearance']['expandSingle'] ?? false) ? 1 : 0) . '">
-						<div class="form-irre-header" style="' . trim($parameters['style']) . '">
+						<div class="form-irre-header" style="' . trim((string) $parameters['style']) . '">
 							<div class="form-irre-header-cell form-irre-header-icon">
 								<span class="caret"></span>
 							</div>

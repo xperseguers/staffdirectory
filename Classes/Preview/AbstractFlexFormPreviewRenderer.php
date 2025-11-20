@@ -34,7 +34,7 @@ abstract class AbstractFlexFormPreviewRenderer extends StandardContentPreviewRen
     {
         $out = [];
         $languageService = $this->getLanguageService();
-        $this->labelPrefix = 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.' . strtolower(static::PLUGIN_NAME) . '.';
+        $this->labelPrefix = 'LLL:EXT:staffdirectory/Resources/Private/Language/locallang_db.xlf:plugins.' . strtolower((string) static::PLUGIN_NAME) . '.';
 
         $pluginTitle = $languageService->sL($this->labelPrefix . 'title');
         $out[] = '<strong>' . htmlspecialchars($pluginTitle) . '</strong>';
@@ -50,6 +50,9 @@ abstract class AbstractFlexFormPreviewRenderer extends StandardContentPreviewRen
         return implode(LF, $out);
     }
 
+    /**
+     * @param string[] $out
+     */
     abstract protected function renderFlexFormPreviewContent(array $record, array &$out): void;
 
     protected function showError(string $text): string

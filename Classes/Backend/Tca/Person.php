@@ -29,6 +29,9 @@ class Person extends AbstractRecordFetcher
         return $this->fetchRecords($conf);
     }
 
+    /**
+     * @return array<int, string>
+     */
     protected function getAdditionalConditions(QueryBuilder $queryBuilder): array
     {
         return [

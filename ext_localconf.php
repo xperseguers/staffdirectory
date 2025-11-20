@@ -1,22 +1,31 @@
 <?php
+use Causal\Staffdirectory\Backend\Form\Element\ParentOrganizations;
+use Causal\Staffdirectory\Hooks\DataHandler;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use Causal\Staffdirectory\Controller\PluginController;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Backend\Form\Container\InlineRecordContainer;
+
 defined('TYPO3') || die ();
 
-(static function (string $_EXTKEY) {
+(static function (string $_EXTKEY): void {
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1701340648] = [
         'nodeName' => 'staffdirectoryParentOrganizations',
         'priority' => 70,
-        'class' => \Causal\Staffdirectory\Backend\Form\Element\ParentOrganizations::class,
+        'class' => ParentOrganizations::class,
     ];
 
     // Register hooks for \TYPO3\CMS\Core\DataHandling\DataHandler
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] =
-        \Causal\Staffdirectory\Hooks\DataHandler::class;
+        DataHandler::class;
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         $_EXTKEY,
         'Plugin',
         [
-            \Causal\Staffdirectory\Controller\PluginController::class => implode(',', [
+            PluginController::class => implode(',', [
                 'dispatch',
                 'list',
                 'organization',
@@ -26,19 +35,19 @@ defined('TYPO3') || die ();
             ]),
         ],
         [],
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
-    $typo3Version = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Information\Typo3Version::class)->getMajorVersion();
+    $typo3Version = GeneralUtility::makeInstance(Typo3Version::class)->getMajorVersion();
 
     switch ($typo3Version) {
         case 11:
-            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
+            ExtensionManagementUtility::addPageTSConfig('
                 @import \'EXT:staffdirectory/Configuration/TSconfig/__loader_v11.tsconfig\'
             ');
             break;
         case 12:
-            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
+            ExtensionManagementUtility::addPageTSConfig('
                 @import \'EXT:staffdirectory/Configuration/TSconfig/__loader_v12.tsconfig\'
             ');
             break;
@@ -48,15 +57,15 @@ defined('TYPO3') || die ();
     }
 
     if ($typo3Version >= 13) {
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Backend\Form\Container\InlineRecordContainer::class] = [
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][InlineRecordContainer::class] = [
             'className' => \Causal\Staffdirectory\Xclass\V13\Backend\Form\Container\InlineRecordContainer::class,
         ];
     } elseif ($typo3Version === 12) {
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Backend\Form\Container\InlineRecordContainer::class] = [
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][InlineRecordContainer::class] = [
             'className' => \Causal\Staffdirectory\Xclass\V12\Backend\Form\Container\InlineRecordContainer::class,
         ];
     } else {
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Backend\Form\Container\InlineRecordContainer::class] = [
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][InlineRecordContainer::class] = [
             'className' => \Causal\Staffdirectory\Xclass\V11\Backend\Form\Container\InlineRecordContainer::class,
         ];
     }

@@ -35,7 +35,7 @@ use Causal\Staffdirectory\Domain\Repository\Factory;
  * @copyright   Causal Sàrl
  * @license     http://www.gnu.org/copyleft/gpl.html
  */
-class Department extends DeprecatedAbstractEntity
+class Department extends DeprecatedAbstractEntity implements \Stringable
 {
     /**
      * @var Staff
@@ -59,14 +59,10 @@ class Department extends DeprecatedAbstractEntity
 
     /**
      * Default constructor.
-     *
-     * @param int $uid
      */
     public function __construct(int $uid)
     {
         parent::__construct($uid);
-        $this->staff = null;
-        $this->members = null;
     }
 
     /**
@@ -77,46 +73,28 @@ class Department extends DeprecatedAbstractEntity
         return $this->staff;
     }
 
-    /**
-     * @param Staff $staff
-     * @return Department
-     */
     public function setStaff(Staff $staff): Department
     {
         $this->staff = $staff;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     * @return Department
-     */
     public function setName(string $name): Department
     {
         $this->name = $name;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     * @return Department
-     */
     public function setDescription(string $description): Department
     {
         $this->description = $description;
@@ -129,7 +107,6 @@ class Department extends DeprecatedAbstractEntity
     public function getMembers(): array
     {
         if ($this->members === null) {
-            /** @var \Causal\Staffdirectory\Domain\Repository\DepartmentRepository $departmentRepository */
             $departmentDirectoryRepository = Factory::getRepository('Department');
             $departmentDirectoryRepository->loadMembers($this);
         }
@@ -138,7 +115,6 @@ class Department extends DeprecatedAbstractEntity
 
     /**
      * @param DeprecatedMember[] $members
-     * @return Department
      */
     public function setMembers(array $members): Department
     {
@@ -146,9 +122,6 @@ class Department extends DeprecatedAbstractEntity
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return $this->name;

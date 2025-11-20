@@ -26,12 +26,11 @@ class Country
     /**
      * Returns the list of available countries.
      *
-     * @param array $conf
-     * @return array
+     * @param array<string, mixed> $conf
      */
     public function getAll(array $conf = []): array
     {
-        if (!$conf) {
+        if ($conf === []) {
             $conf = ['items' => []];
         }
 

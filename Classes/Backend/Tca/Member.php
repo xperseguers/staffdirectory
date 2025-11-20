@@ -24,7 +24,7 @@ class Member
     /**
      * Returns the label to be used for a MemberStatus.
      *
-     * @param array $params
+     * @param array<string, mixed> $params
      */
     public function getLabel(array &$params): void
     {
@@ -54,7 +54,7 @@ class Member
     /**
      * Returns the styles to be used for a IRRE block.
      *
-     * @param array $params
+     * @param array<string, mixed> $params
      */
     public function getIrreHeaderStyle(array &$params = []): void
     {

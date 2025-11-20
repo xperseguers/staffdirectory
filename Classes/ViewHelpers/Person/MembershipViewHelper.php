@@ -31,14 +31,11 @@ class MembershipViewHelper extends AbstractViewHelper
 {
     protected $escapeOutput = false;
 
-    protected OrganizationRepository $organizationRepository;
-
-    public function __construct(OrganizationRepository $organizationRepository)
+    public function __construct(protected OrganizationRepository $organizationRepository)
     {
-        $this->organizationRepository = $organizationRepository;
     }
 
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('person', Person::class, 'Person to instantiate the memberships for', true);
         $this->registerArgument('name', 'string', 'Name of variable to create', true);
@@ -100,15 +97,12 @@ class MembershipViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @param Person $person
-     * @param Organization|null $organization
-     * @return array
      * @throws Exception
      */
     protected function findPagesWithPlugin(Person $person, ?Organization $organization): array
     {
         $organizationUids = [];
-        if ($organization !== null) {
+        if ($organization instanceof Organization) {
             $organizationUids[] = $organization->getUid();
             $this->addParentOrganizations($organization->getUid(), $organizationUids);
         }
@@ -134,7 +128,7 @@ class MembershipViewHelper extends AbstractViewHelper
         $data = [];
         foreach ($rows as $row) {
             $flexform = GeneralUtility::xml2array($row['pi_flexform'])['data']['sDEF']['lDEF'];
-            if ($flexform['settings.displayMode']['vDEF'] === 'ORGANIZATION' && $organization !== null) {
+            if ($flexform['settings.displayMode']['vDEF'] === 'ORGANIZATION' && $organization instanceof Organization) {
                 $selectedOrganizations = GeneralUtility::intExplode(',', $flexform['settings.organizations']['vDEF'], true);
                 if (array_intersect($selectedOrganizations, $organizationUids)) {
                     $data[$row['pid']] = [
@@ -158,6 +152,7 @@ class MembershipViewHelper extends AbstractViewHelper
 
     /**
      * @throws Exception
+     * @param int[]|null[] $organizations
      */
     protected function addParentOrganizations(int $organizationUid, array &$organizations): void
     {

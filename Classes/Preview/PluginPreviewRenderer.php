@@ -43,7 +43,7 @@ class PluginPreviewRenderer extends AbstractFlexFormPreviewRenderer
         if (in_array($displayMode, ['LIST', 'ORGANIZATION', 'DIRECTORY'])) {
             $label = $languageService->sL($this->labelPrefix . 'settings.organizations');
             $organizations = GeneralUtility::intExplode(',', $this->getFieldFromFlexForm('settings.organizations'), true);
-            if (empty($organizations)) {
+            if ($organizations === []) {
                 $info = $languageService->sL($this->labelPrefix . 'settings.organizations.empty');
                 $description = $this->showInfo(htmlspecialchars($info));
             } else {
@@ -55,7 +55,7 @@ class PluginPreviewRenderer extends AbstractFlexFormPreviewRenderer
         if (in_array($displayMode, ['PERSON', 'PERSONS'])) {
             $label = $languageService->sL($this->labelPrefix . 'settings.persons');
             $persons = GeneralUtility::intExplode(',', $this->getFieldFromFlexForm('settings.persons'), true);
-            if (empty($persons)) {
+            if ($persons === []) {
                 $info = $languageService->sL($this->labelPrefix . 'settings.persons.empty');
                 $description = $this->showInfo(htmlspecialchars($info));
             } else {
