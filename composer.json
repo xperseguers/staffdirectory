@@ -25,6 +25,11 @@
     "sjbr/static-info-tables": "^11.5 || ^12.4 || ^13.4",
     "giggsey/libphonenumber-for-php": "^8.13"
   },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "~3.89.2",
+    "phpstan/phpstan": "2.1.32",
+    "rector/rector": "2.2.7"
+  },
   "autoload": {
     "psr-4": {
       "Causal\\Staffdirectory\\": "Classes/"
@@ -36,6 +41,34 @@
     },
     "typo3/cms": {
       "extension-key": "staffdirectory"
+    }
+  },
+  "scripts": {
+    "all": [
+      "@cs",
+      "@stan",
+      "@rector-check"
+    ],
+    "cs": [
+      "./vendor/bin/php-cs-fixer fix -v --dry-run --config .php-cs-fixer.php"
+    ],
+    "csfix": [
+      "./vendor/bin/php-cs-fixer fix -v --config .php-cs-fixer.php"
+    ],
+    "rector": [
+      "./vendor/bin/rector"
+    ],
+    "rector-check": [
+      "./vendor/bin/rector --dry-run"
+    ],
+    "stan": [
+      "./vendor/bin/phpstan"
+    ]
+  },
+  "config": {
+    "allow-plugins": {
+      "typo3/cms-composer-installers": true,
+      "typo3/class-alias-loader": true
     }
   }
 }

@@ -1,0 +1,6 @@
+parameters:
+    phpVersion: 80300
+    level: 6
+    paths:
+        - Classes/
+    treatPhpDocTypesAsCertain: false
