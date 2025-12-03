@@ -20,10 +20,10 @@
   ],
   "license": "GPL-2.0-or-later",
   "require": {
-    "php": ">=8.1.0 <=8.4.99",
-    "typo3/cms-core": "^11 || ^12 || ^13",
+    "php": ">=8.1.0 <=8.5.99",
+    "typo3/cms-core": "^11 || ^12 || ^13 || 14.*.*@dev",
     "sjbr/static-info-tables": "^11.5 || ^12.4 || ^13.4",
-    "giggsey/libphonenumber-for-php": "^8.13"
+    "giggsey/libphonenumber-for-php": "^9.0"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "~3.89.2",
@@ -37,7 +37,8 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-main": "2.1.x-dev"
+      "dev-main": "2.1.x-dev",
+      "dev-features/TYPO3v14": "2.2.x-dev"
     },
     "typo3/cms": {
       "extension-key": "staffdirectory"
