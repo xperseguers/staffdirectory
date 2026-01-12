@@ -29,6 +29,8 @@ namespace Causal\Staffdirectory\Seo;
 
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Seo\XmlSitemap\AbstractXmlSitemapDataProvider;
@@ -67,10 +69,17 @@ class PersonsXmlSitemapDataProvider extends AbstractXmlSitemapDataProvider
             $recursiveLevel = isset($this->config['recursive']) ? (int)$this->config['recursive'] : 0;
             if ($recursiveLevel !== 0) {
                 $subPids = [];
-                foreach ($pids as $pid) {
-                    $list = $this->cObj->getTreeList($pid, $recursiveLevel);
-                    if ($list) {
-                        $subPids[] = GeneralUtility::intExplode(',', $list, true);
+                $typo3Version = (new Typo3Version())->getMajorVersion();
+
+                if ($typo3Version >= 13) {
+                    $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
+                    $subPids[] = $pageRepository->getPageIdsRecursive($pids, $recursiveLevel);
+                } else {
+                    foreach ($pids as $pid) {
+                        $list = $this->cObj->getTreeList($pid, $recursiveLevel);
+                        if ($list) {
+                            $subPids[] = GeneralUtility::intExplode(',', $list, true);
+                        }
                     }
                 }
                 $pids = array_unique(array_merge($pids, ...$subPids));
