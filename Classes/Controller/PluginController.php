@@ -24,12 +24,12 @@ use Causal\Staffdirectory\Domain\Repository\MemberRepository;
 use Causal\Staffdirectory\Domain\Repository\OrganizationRepository;
 use Causal\Staffdirectory\Domain\Repository\PersonRepository;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Cache\CacheTag;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class PluginController extends ActionController
 {
@@ -300,13 +300,14 @@ class PluginController extends ActionController
             return;
         }
 
-        // Tag the page cache so that FAL signal operations may be listened to in
-        // order to flush corresponding page cache
-        $cacheTags = [
-            'tx_staffdirectory_person_' . $person->getUid(),
-        ];
+        $cacheTag = 'tx_staffdirectory_person_' . $person->getUid();
+        $cacheCollector = $this->request->getAttribute('frontend.cache.collector');
 
-        $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
+        if ($cacheCollector !== null) {
+            $cacheCollector->addCacheTags(new CacheTag($cacheTag));
+        } else {
+            $GLOBALS['TSFE']->addCacheTags([$cacheTag]);
+        }
     }
 
     protected function getContentObjectData(): array
@@ -315,12 +316,7 @@ class PluginController extends ActionController
         if ($typo3Version >= 12) {
             return $this->request->getAttribute('currentContentObject')->data;
         }
+
         return $this->configurationManager->getContentObject()->data;
-
-    }
-
-    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
-    {
-        return $GLOBALS['TSFE'];
     }
 }
